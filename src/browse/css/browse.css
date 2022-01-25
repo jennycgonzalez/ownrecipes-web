@@ -1,0 +1,31 @@
+.search-bar {
+  margin-top: 20px;
+}
+.search-bar .search-clear {
+  background-color: #fff;
+}
+.search-bar .search-clear:hover {
+  background-color: #eee;
+  cursor: pointer;
+}
+.no-results {
+  margin-top: 100px;
+  text-align: center;
+}
+.spinner {
+  text-align: center;
+}
+.spinner .spinner-obj {
+  height: 100px !important;
+  width: 100px !important;
+  margin-top: 30px;
+  display: inline-block;
+}
+@media (max-width: 767px) {
+  .search-bar .input-group-addon {
+    border-top-left-radius: 0;
+ }
+  .search-bar .form-control {
+    border-top-right-radius: 0;
+ }
+}

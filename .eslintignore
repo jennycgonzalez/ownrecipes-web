@@ -1,0 +1,30 @@
+# Logs
+logs
+*.log
+
+# Compiled binary addons (http://nodejs.org/api/addons.html)
+build/Release
+.eslintcache
+
+# Dependency directory
+node_modules
+
+# App packaged
+build
+release
+docs
+
+.idea
+npm-debug.log.*
+
+# Package.json
+package-lock.json
+package.json
+
+# auto generated
+src/serviceWorker.ts
+src/react-app-env.d.ts
+src/setupTests.ts
+
+# Tests
+__snapshots__
