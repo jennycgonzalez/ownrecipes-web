@@ -1,5 +1,0 @@
-export default {
-  LOGIN_USER: 'LOGIN_USER',
-  LOGIN_ERROR: 'LOGIN_ERROR',
-  LOGOUT_USER: 'LOGOUT_USER',
-};
