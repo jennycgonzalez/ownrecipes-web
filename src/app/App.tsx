@@ -13,16 +13,18 @@ import './css/print.css';
 
 import Routes from './components/Routes';
 import { CombinedStore } from './Store';
+import AutoLogin from './components/AutoLogin';
 
 const App = () => {
-  const accountState = useSelector((state: CombinedStore) => state.account);
-  const isAuthenticated = accountState.item != null && accountState.item.id !== 0;
+  const account = useSelector((state: CombinedStore) => state.account.item);
+  const isAuthenticated = account != null && account.id !== 0;
 
   const main = (
     <ErrorBoundary verbose printStack>
       <div>
         <div id='content'>
           <div>
+            <AutoLogin />
             <Header />
             { isDemoMode() ? <Demo /> : '' }
             <Routes isAuthenticated={isAuthenticated} />

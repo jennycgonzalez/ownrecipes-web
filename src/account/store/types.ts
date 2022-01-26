@@ -2,7 +2,7 @@ import { Dispatch as ReduxDispatch } from 'redux';
 import ItemReducerType from '../../common/store/ItemReducerType';
 import { GenericErrorAction } from '../../common/store/ReduxHelper';
 
-type User = {
+export type UserAccount = {
   id: number;
   token: string;
 }
@@ -13,11 +13,12 @@ export enum AccountActionTypes {
 }
 
 export const ACCOUNT_STORE = '@@account';
+export const ACCOUNT_TOKEN_STORAGE_KEY = 'openeats-token';
 
 export interface IAccountLoginAction {
   store: typeof ACCOUNT_STORE;
   type: typeof AccountActionTypes.LOGIN;
-  user: User;
+  user: UserAccount;
 }
 
 export interface IAccountLogoutAction {
@@ -26,6 +27,6 @@ export interface IAccountLogoutAction {
 }
 
 // TODO Wrap generic item
-export type AccountState    = ItemReducerType<User>;
+export type AccountState    = ItemReducerType<UserAccount>;
 export type AccountAction   = IAccountLoginAction | IAccountLogoutAction | GenericErrorAction;
 export type AccountDispatch = ReduxDispatch<AccountAction>;

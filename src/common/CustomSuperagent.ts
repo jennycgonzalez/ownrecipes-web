@@ -9,7 +9,7 @@ import { serverURLs } from './config';
 import { AccountAction, AccountActionTypes, ACCOUNT_STORE } from '../account/store/types';
 import { getResourcePath } from './utility';
 
-const refreshToken = (() => {
+export const refreshToken = (() => {
   let blocking = false;
 
   const refresh = (token: string) => {
