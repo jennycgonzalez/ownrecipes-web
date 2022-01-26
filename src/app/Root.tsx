@@ -1,9 +1,10 @@
 import { Suspense } from 'react';
 import { IntlProvider } from 'react-intl';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
 import Spinner from './components/Spinner';
-
+import store from '../common/store/store';
 import App from './App';
 
 import localeDe from '../locale/de.json';
@@ -25,11 +26,13 @@ if (!['de', 'en'].includes(language)) {
 
 const Root = () => (
   <Suspense fallback={<Spinner />}>
-    <IntlProvider locale={language} defaultLocale='en' messages={locales[language]}>
-      <Router>
-        <App />
-      </Router>
-    </IntlProvider>
+    <Provider store={store}>
+      <IntlProvider locale={language} defaultLocale='en' messages={locales[language]}>
+        <Router>
+          <App />
+        </Router>
+      </IntlProvider>
+    </Provider>
   </Suspense>
 );
 

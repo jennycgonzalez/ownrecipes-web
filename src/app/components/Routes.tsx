@@ -10,6 +10,7 @@ import Login from '../../account/containers/Login';
 // import List from '../../list/containers/List';
 // import Menu from '../../menu/containers/Menu';
 import NotFound from './NotFound';
+import { getResourcePath } from '../../common/utility';
 
 export type IRouteType = {
   /** URL path. Should start with a slash. */
@@ -77,22 +78,22 @@ const Routes: React.FC<IRoutesProps> = (props: IRoutesProps) => {
     routesList = PrivateRoutes.map(r => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const PageComponent = r.component as any;
-      return <Route path={`${process.env.PUBLIC_URL}${r.path}`} key={r.path} element={<PageComponent />} />;
+      return <Route path={getResourcePath(r.path)} key={r.path} element={<PageComponent />} />;
     });
     routesList.push(
-      <Route path='/' key='/' element={<Navigate replace to={`${process.env.PUBLIC_URL}/home`} />} />
+      <Route path='/' key='/' element={<Navigate replace to={getResourcePath('/home')} />} />
     );
     routesList.push(
-      <Route path='*' key='*' element={<Navigate replace to={`${process.env.PUBLIC_URL}/NotFound`} />} />
+      <Route path='*' key='*' element={<Navigate replace to={getResourcePath('/NotFound')} />} />
     );
   } else {
     routesList = PublicRoutes.map(r => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const PageComponent = r.component as any;
-      return <Route path={`${process.env.PUBLIC_URL}${r.path}`} key={r.path} element={<PageComponent />} />;
+      return <Route path={getResourcePath(r.path)} key={r.path} element={<PageComponent />} />;
     });
     routesList.push(
-      <Route path='*' key='*' element={<Navigate replace to={`${process.env.PUBLIC_URL}/login`} />} />
+      <Route path='*' key='*' element={<Navigate replace to={getResourcePath('/login')} />} />
     );
   }
 

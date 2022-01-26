@@ -2,6 +2,9 @@ let apiHost = window.location.origin;
 if (process.env.NODE_API_URL) {
   apiHost = process.env.NODE_API_URL;
 }
+if (process.env.REACT_APP_API_URL) {
+  apiHost = process.env.REACT_APP_API_URL;
+}
 
 const apiUrl = `${apiHost}/api/v1`;
 

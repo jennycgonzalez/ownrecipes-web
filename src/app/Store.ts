@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 
-import account from '../../account/store/reducer';
-import { AccountState } from '../../account/store/types';
+import account from '../account/store/reducer';
+import { AccountState } from '../account/store/types';
+import error from '../error/store/reducer';
+import { ErrorState } from '../error/store/types';
 // import browse from '../../browse/reducers/Reducer';
 // import list from '../../list/reducers/GroceryListReducer';
 // import recipe from '../../recipe/reducers/Reducer';
@@ -14,6 +16,7 @@ import { AccountState } from '../../account/store/types';
 export type CombinedStore = {
   account:    AccountState;
   // browser:    BrowseState;
+  error:      ErrorState;
   // list:       ListState;
   // menu:       MenuState;
   // news:       NewsState;
@@ -25,6 +28,7 @@ export type CombinedStore = {
 const reducer = combineReducers({
   account,
   // browse,
+  error,
   // list,
   // menu,
   // news,

@@ -1,8 +1,6 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import reducer from './reducer';
-
-// TODO initialize user token
+import reducer from '../../app/Store';
 
 let data;
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment

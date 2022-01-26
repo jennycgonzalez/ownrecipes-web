@@ -3,12 +3,12 @@
   padding: 15px;
   margin: 0 auto;
 }
-.form-signin .form-signin-heading, .form-signin .checkbox {
-  margin-bottom: 10px;
+.form-signin .form-signin-heading {
+  font-size: 1.2em;
+  margin-bottom: 1em;
+  text-align: center;
 }
-.form-signin .checkbox {
-  font-weight: normal;
-}
+
 .form-signin .form-control {
   position: relative;
   height: auto;
@@ -30,4 +30,8 @@
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.form-signin button {
+  margin-top: 20px;
 }

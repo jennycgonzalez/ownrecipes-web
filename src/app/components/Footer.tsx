@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import '../css/footer.css';
 
 const Footer = () => (
-  <footer className='footer print-hidden'>
+  <footer className='footer print-hidden bg-dark'>
     <div className='container'>
       <p className='text-muted'>
         <FormattedMessage

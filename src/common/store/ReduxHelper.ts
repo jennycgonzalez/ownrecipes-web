@@ -15,6 +15,13 @@ export type GenericErrorAction = {
   data?: Error | undefined;
 }
 
+export type GenericResetAction = {
+  store: string;
+  type:  typeof ACTION.RESET;
+}
+
+export type GenericReducerAction = GenericErrorAction | GenericResetAction;
+
 export default class ReduxHelper {
   static getItemReducerDefaultState = <T>(ident: string): ItemReducerType<T> => {
     const newState: ItemReducerType<T> = {

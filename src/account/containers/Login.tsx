@@ -4,8 +4,9 @@ import { useIntl } from 'react-intl';
 
 import * as AuthActions from '../store/actions';
 import LoginForm from '../components/LoginForm';
-import { CombinedStore } from '../../common/store/reducer';
+import { CombinedStore } from '../../app/Store';
 import PageWrapper from '../../common/components/PageWrapper';
+import { Modal } from 'react-bootstrap';
 
 const Login: React.FC = () => {
   const dispatch = useDispatch();
@@ -19,9 +20,17 @@ const Login: React.FC = () => {
 
   return (
     <PageWrapper title={intl.messages['nav.login.title'] as string}>
-      <LoginForm
-          accountState={accountState}
-          onLogin={handleLogin} />
+      <Modal.Dialog>
+        <Modal.Header>
+          <Modal.Title>OpenEats</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <LoginForm
+              accountState={accountState}
+              onLogin={handleLogin} />
+        </Modal.Body>
+      </Modal.Dialog>
     </PageWrapper>
   );
 };

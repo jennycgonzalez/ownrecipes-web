@@ -6,6 +6,7 @@ import Alert from './Alert';
 import '../css/login.css';
 import { AccountState } from '../store/types';
 import { useState } from 'react';
+import { Button } from 'react-bootstrap';
 
 export interface ILoginFormProps {
   accountState: AccountState;
@@ -39,9 +40,9 @@ const LoginForm: React.FC<ILoginFormProps> = (props: ILoginFormProps) => {
   const { formatMessage } = intl;
   const messages = defineMessages({
     please_sign_in: {
-      id: 'login.please_sign_in',
+      id: 'login.sign_in',
       description: 'Please sign in header',
-      defaultMessage: 'Please sign in',
+      defaultMessage: 'Sign In',
     },
     username: {
       id: 'login.username',
@@ -63,7 +64,7 @@ const LoginForm: React.FC<ILoginFormProps> = (props: ILoginFormProps) => {
   return (
     <form className='form-signin' onSubmit={handleSubmit}>
       {props.accountState.error && <Alert />}
-      <h2 className='form-signin-heading'>{formatMessage(messages.please_sign_in)}</h2>
+      <h2 className='form-signin-heading'>{formatMessage(messages.sign_in)}</h2>
       <input
           type='text'
           id='username'
@@ -78,9 +79,9 @@ const LoginForm: React.FC<ILoginFormProps> = (props: ILoginFormProps) => {
           className='form-control'
           placeholder={formatMessage(messages.password)}
           onChange={event => handleChange('password', event)} />
-      <button className='btn btn-lg btn-primary btn-block' type='submit'>
+      <Button variant='primary' type='submit' className='btn-block'>
         { formatMessage(messages.sign_in) }
-      </button>
+      </Button>
     </form>
   );
 };

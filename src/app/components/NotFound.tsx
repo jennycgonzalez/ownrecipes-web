@@ -1,4 +1,5 @@
 import { defineMessages, useIntl } from 'react-intl';
+import { getResourcePath } from '../../common/utility';
 
 import '../css/404.css';
 
@@ -21,7 +22,7 @@ const NotFound = () => {
   return (
     <div className='not-found'>
       <h3>{ intl.formatMessage(messages.header) }</h3>
-      <img className='img-responsive' src='/images/404.png' alt='404' />
+      <img className='img-responsive' src={getResourcePath('/images/404.png')} alt='404' />
       <p>{ intl.formatMessage(messages.message) }</p>
     </div>
   );
