@@ -1,8 +1,9 @@
 import { Route, Routes as RouterRoutes, Navigate } from 'react-router-dom';
 
 import { AnyComponent } from '../../types/Types';
+import { getResourcePath } from '../../common/utility';
 
-// import News from '../../news/components/News';
+import News from '../../news/components/News';
 import Login from '../../account/containers/Login';
 // import Browse from '../../browse/containers/Browse';
 // import RecipeForm from '../../recipe_form/containers/Form';
@@ -10,7 +11,6 @@ import Login from '../../account/containers/Login';
 // import List from '../../list/containers/List';
 // import Menu from '../../menu/containers/Menu';
 import NotFound from './NotFound';
-import { getResourcePath } from '../../common/utility';
 
 export type IRouteType = {
   /** URL path. Should start with a slash. */
@@ -20,11 +20,11 @@ export type IRouteType = {
 }
 
 const PrivateRoutes: Array<IRouteType> = [
-  /*
   {
     path:      '/home',
     component: News,
   },
+  /*
   {
     path:      '/browse',
     component: Browse,
@@ -50,6 +50,10 @@ const PrivateRoutes: Array<IRouteType> = [
     component: Menu,
   }, */
   {
+    path:      '/login',
+    component: Login,
+  },
+  {
     path:      '/NotFound',
     component: NotFound,
   },
@@ -59,10 +63,6 @@ const PublicRoutes: Array<IRouteType> = [
   {
     path:      '/login',
     component: Login,
-  },
-  {
-    path:      '/NotFound',
-    component: NotFound,
   },
 ];
 

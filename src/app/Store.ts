@@ -9,8 +9,8 @@ import { ErrorState } from '../error/store/types';
 // import recipe from '../../recipe/reducers/Reducer';
 // import recipeForm from '../../recipe_form/reducers/Reducer';
 // import menu from '../../menu/reducers/reducer';
-// import news from '../../news/reducers/NewsReducer';
-// import { NewsState } from '../news/store/types';
+import news from '../news/store/reducer';
+import { NewsState } from '../news/store/types';
 // import rating from '../../rating/reducers/Reducer';
 
 export type CombinedStore = {
@@ -19,7 +19,7 @@ export type CombinedStore = {
   error:      ErrorState;
   // list:       ListState;
   // menu:       MenuState;
-  // news:       NewsState;
+  news:       NewsState;
   // rating:     RatingState;
   // recipe:     RecipeState;
   // recipeForm: RecipeFormState;
@@ -31,7 +31,7 @@ const reducer = combineReducers({
   error,
   // list,
   // menu,
-  // news,
+  news,
   // rating,
   // recipe,
   // recipeForm,

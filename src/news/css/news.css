@@ -1,0 +1,52 @@
+/* Carousel base class */
+/* Declare heights because of positioning of img element */
+.carousel {
+  height: 300px;
+}
+.carousel .item {
+  height: 300px;
+  background-color: #777;
+}
+.carousel .item img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 300px;
+}
+.carousel .item .carousel-caption {
+  z-index: 10;
+ /* Bump up size of carousel content */
+}
+.carousel .item .carousel-caption p {
+  margin-bottom: 20px;
+  font-size: 21px;
+  line-height: 1.4;
+}
+.home-buttons {
+  margin-bottom: 20px;
+}
+.home-buttons .home-browse-button {
+  width: 100%;
+  font-size: 18px !important;
+}
+.menu-items .recipe-card-news-footer {
+  width: 100%;
+}
+@media (max-width: 767px) {
+  .carousel {
+    height: 210px;
+ }
+  .carousel .item {
+    height: 210px;
+ }
+  .carousel .item .carousel-caption {
+    padding-bottom: 10px !important;
+ }
+  .carousel .item .carousel-caption p {
+    font-size: 14px;
+ }
+  .carousel .item img {
+    height: 210px;
+ }
+}

@@ -3,13 +3,20 @@ import { connect } from 'react-redux';
 import { AnyAction } from 'redux';
 import { AccountState } from '../../account/store/types';
 import { ThunkDispatch } from 'redux-thunk';
+import { NavigateFunction } from 'react-router';
+import { Location } from 'history';
 
 import { getResourcePath } from '../../common/utility';
 import { CombinedStore } from '../Store';
 import * as AccountActions from '../../account/store/actions';
 
 import '../css/404.css';
-import history from '../../common/history';
+
+interface IAutoLoginProps {
+  nav: NavigateFunction;
+  loc: Location;
+  children: React.ReactNode;
+}
 
 interface IDispatchProps {
   tryAutoLogin: () => void;
@@ -23,14 +30,14 @@ interface IAutoLoginState {
   originUrl: string;
 }
 
-type IProps = IStateProps & IDispatchProps;
+type IProps = IStateProps & IDispatchProps & IAutoLoginProps;
 
 class AutoLogin extends Component<IProps, IAutoLoginState> {
   constructor(props: IProps) {
     super(props);
 
     this.state = {
-      originUrl: history.location.pathname,
+      originUrl: this.props.loc.pathname,
     };
   }
 
@@ -47,22 +54,20 @@ class AutoLogin extends Component<IProps, IAutoLoginState> {
 
     if (prevToken == null && currToken != null) {
       if (originUrl === '/' || originUrl === '/login') {
-        history.replace(getResourcePath('/home'));
+        this.props.nav(getResourcePath('/home'));
       } else {
-        history.replace(originUrl);
+        this.props.nav(originUrl);
       }
-    }
-
-    if (prevToken != null && currToken == null) {
+    } else if (prevToken != null && currToken == null) {
       setTimeout(() => {
-        history.push(getResourcePath('/login'));
-        history.go(0);
+        this.props.nav(getResourcePath('/login'));
+        this.props.nav(0);
       }, 500);
     }
   }
 
   render() {
-    return null;
+    return this.props.children;
   }
 }
 

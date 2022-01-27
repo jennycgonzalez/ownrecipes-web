@@ -1,4 +1,5 @@
 import { AnyAction } from 'redux';
+import ArrayReducerType from './ArrayReducerType';
 
 import GenericReducerType from './GenericReducerType';
 import ItemReducerType from './ItemReducerType';
@@ -28,6 +29,18 @@ export default class ReduxHelper {
       ident: ident,
 
       item: undefined,
+
+      error: undefined,
+    };
+
+    return newState;
+  };
+
+  static getArrayReducerDefaultState = <T>(ident: string): ArrayReducerType<T> => {
+    const newState: ArrayReducerType<T> = {
+      ident: ident,
+
+      items: undefined,
 
       error: undefined,
     };

@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router';
 
 // Load components
 import Header from '../header/containers/Header';
@@ -19,19 +20,23 @@ const App = () => {
   const account = useSelector((state: CombinedStore) => state.account.item);
   const isAuthenticated = account != null && account.id !== 0;
 
+  const nav = useNavigate();
+  const location = useLocation();
+
   const main = (
     <ErrorBoundary verbose printStack>
-      <div>
-        <div id='content'>
-          <div>
-            <AutoLogin />
-            <Header />
-            { isDemoMode() ? <Demo /> : '' }
-            <Routes isAuthenticated={isAuthenticated} />
+      <AutoLogin nav={nav} loc={location}>
+        <div>
+          <div id='content'>
+            <div>
+              <Header />
+              { isDemoMode() ? <Demo /> : '' }
+              <Routes isAuthenticated={isAuthenticated} />
+            </div>
           </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
+      </AutoLogin>
     </ErrorBoundary>
   );
 

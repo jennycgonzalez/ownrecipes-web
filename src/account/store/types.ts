@@ -1,6 +1,6 @@
 import { Dispatch as ReduxDispatch } from 'redux';
 import ItemReducerType from '../../common/store/ItemReducerType';
-import { GenericErrorAction } from '../../common/store/ReduxHelper';
+import { GenericReducerAction } from '../../common/store/ReduxHelper';
 
 export type UserAccount = {
   id: number;
@@ -28,5 +28,5 @@ export interface IAccountLogoutAction {
 
 // TODO Wrap generic item
 export type AccountState    = ItemReducerType<UserAccount>;
-export type AccountAction   = IAccountLoginAction | IAccountLogoutAction | GenericErrorAction;
+export type AccountAction   = IAccountLoginAction | IAccountLogoutAction | GenericReducerAction;
 export type AccountDispatch = ReduxDispatch<AccountAction>;

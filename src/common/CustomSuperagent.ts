@@ -4,10 +4,8 @@ import jwtDecode, { JwtPayload } from 'jwt-decode';
 import moment from 'moment';
 
 import store from './store/store';
-import history from './history';
 import { serverURLs } from './config';
 import { AccountAction, AccountActionTypes, ACCOUNT_STORE } from '../account/store/types';
-import { getResourcePath } from './utility';
 
 export const refreshToken = (() => {
   let blocking = false;
@@ -24,7 +22,6 @@ export const refreshToken = (() => {
       .catch(() => {
         blocking = false;
         store.dispatch({ store: ACCOUNT_STORE, type: AccountActionTypes.LOGOUT } as AccountAction);
-        history.push(getResourcePath('/login'));
       });
   };
 
@@ -55,7 +52,6 @@ export const request = (): SuperAgentStatic => {
       // If the token is undefined.
       // Log the user out and direct them to the login page.
       store.dispatch({ store: ACCOUNT_STORE, type: AccountActionTypes.LOGOUT });
-      history.push(getResourcePath('/login'));
     } else if (moment(new Date()).add(10, 'days') > moment.unix(decodedToken.exp)) {
       // If it is then call for a refreshed token.
       // If the token is to old, the request will fail and

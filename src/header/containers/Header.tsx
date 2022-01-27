@@ -1,5 +1,6 @@
 // import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 import NavBar from '../components/NavBar';
 import * as AuthActions from '../../account/store/actions';
@@ -10,6 +11,7 @@ import { ListItemType } from '../components/GroceryListMenuItem';
 
 const Header: React.FC = () => {
   const dispatch = useDispatch();
+  const nav = useNavigate();
 
   const accountState = useSelector((state: CombinedStore) => state.account);
   // const listState = useSelector((state: CombinedStore) => state.list.lists);
@@ -25,7 +27,7 @@ const Header: React.FC = () => {
   };
 
   const handleRandomRecipe = () => {
-    dispatch(RandomRecipeActions.randomRecipe());
+    dispatch(RandomRecipeActions.randomRecipe(nav));
   };
 
   return (
