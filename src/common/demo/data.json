@@ -115,8 +115,8 @@
   "news": [
     {
       "id": 1,
-      "title": "OpenEats",
-      "content": "OpenEats is an open source recipe management site. You can share recipes with friends, rate recipes, store your favorite recipes to find easily, and more. If you want to run your own personal OpenEats site visit the <a href=\"https://github.com/open-eats/OpenEats\" target=\"_blank\">Github page</a>",
+      "title": "OwnRecipes",
+      "content": "OwnRecipes is an open source recipe management site. You can share recipes with friends, rate recipes, store your favorite recipes to find easily, and more. If you want to run your own personal OwnRecipes site visit the <a href=\"https://github.com/OwnRecipes/OwnRecipes\" target=\"_blank\">Github page</a>",
       "frontpage": true,
       "image": null
     }

@@ -11,7 +11,7 @@ const Footer = () => (
             description='Footer credit'
             defaultMessage='Created with {link}'
             values={{
-              link: <a href='https://github.com/open-eats/OpenEats'>OpenEats</a>,
+              link: <a href='https://github.com/OwnRecipes/OwnRecipes'>OwnRecipes</a>,
             }} />
         &nbsp;-&nbsp;
         <FormattedMessage

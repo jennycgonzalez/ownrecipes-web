@@ -22,7 +22,7 @@ const Login: React.FC = () => {
     <PageWrapper title={intl.messages['nav.login.title'] as string}>
       <Modal.Dialog>
         <Modal.Header>
-          <Modal.Title>OpenEats</Modal.Title>
+          <Modal.Title>OwnRecipes</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>

@@ -22,8 +22,6 @@ const News: React.FC = () => {
   const accountState = useSelector((state: CombinedStore) => state.account);
   const newsList = news.items;
   const user = accountState.item;
-  const loadNews = useCallback(() => dispatch(NewsActions.load()), [dispatch]);
-  useSingle(loadNews, newsList);
 
   const { formatMessage } = intl;
   const messages = defineMessages({
@@ -34,24 +32,10 @@ const News: React.FC = () => {
     },
   });
 
-  const carouselItems = newsList?.map(entry => (
-    <Carousel.Item key={entry.id}>
-      { entry.image ? <img src={entry.image} alt={entry.title} /> : ''}
-      <Carousel.Caption>
-        <h3>{ entry.title }</h3>
-        <p dangerouslySetInnerHTML={{ __html: entry.content }} />
-      </Carousel.Caption>
-    </Carousel.Item>
-    ));
-
   return (
     <PageWrapper title={intl.messages['nav.news'] as string}>
-      {!carouselItems && ''}
-      {carouselItems && (
-        <Carousel>
-          { carouselItems }
-        </Carousel>
-      )}
+      <h2>OwnRecipes</h2>
+      <p>OwnRecipes is an open source recipe management site. You can share recipes with friends, rate recipes, store your favorite recipes to find easily, and more!</p>
       {/*
       <div className='container'>
         <div className='row'>
@@ -65,7 +49,7 @@ const News: React.FC = () => {
         </div>
         <div className='row home-buttons'>
           <div className='col-md-4 col-md-push-4 col-sm-6 col-sm-push-3 col-xs-12'>
-            <Link to='/browse' className='btn btn-primary home-browse-button'>
+            <Link to='/browser' className='btn btn-primary home-browse-button'>
               { formatMessage(messages.browseRecipeButton) }
             </Link>
           </div>

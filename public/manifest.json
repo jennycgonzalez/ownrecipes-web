@@ -1,6 +1,6 @@
 {
-  "short_name": "OpenEats",
-  "name": "OpenEats",
+  "short_name": "OwnRecipes",
+  "name": "OwnRecipes Web Frontend",
   "icons": [
     {
       "src": "images/favicon.ico",

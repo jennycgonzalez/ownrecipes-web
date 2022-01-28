@@ -10,7 +10,7 @@ const Demo = () => (
 &nbsp;
             <span>DEMO NOTICE:</span>
 &nbsp;
-            Everything is Read-Only! This is a demo version of the OpenEats and has no API connected to it.
+            Everything is Read-Only! This is a demo version of the OwnRecipes and has no API connected to it.
           </div>
         </div>
       </div>

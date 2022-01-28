@@ -48,7 +48,9 @@ export const AccountMenuMenuItem: React.FC<IAccountMenuMenuItemProps> = (props: 
     <NavDropdown
         title={formatMessage(messages.title)}
         id='basic-nav-dropdown'>
-      <NavDropdown.Item href={getResourcePath('/admin')}>{formatMessage(messages.admin)}</NavDropdown.Item>
+      {/* // admin is private for admin only. There is no "My account" page, it is all fake.
+      <NavDropdown.Item href={'/admin'}>{formatMessage(messages.admin)}</NavDropdown.Item>
+      */}
       <NavDropdown.Divider />
       <NavDropdown.Item onClick={props.onLogoutClick}>{formatMessage(messages.logout)}</NavDropdown.Item>
     </NavDropdown>
