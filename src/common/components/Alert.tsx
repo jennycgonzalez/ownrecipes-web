@@ -1,16 +1,18 @@
-import classNames from 'classnames';
+import { Alert as BootstrapAlert } from 'react-bootstrap';
 
 export interface IAlertProps {
-  severity: 'danger';
+  severity: 'danger' | 'info';
   title: string;
-  message: React.ReactNode;
+  className?: string;
+
+  children: React.ReactNode;
 }
 
 const Alert: React.FC<IAlertProps> = (props: IAlertProps) => (
-  <div className={classNames('alert', `alert-${props.severity}`)}>
-    <p><strong>{props.title}</strong></p>
-    {props.message}
-  </div>
+  <BootstrapAlert variant={props.severity}>
+    <BootstrapAlert.Heading>{props.title}</BootstrapAlert.Heading>
+    <p>{props.children}</p>
+  </BootstrapAlert>
 );
 
 export default Alert;

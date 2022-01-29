@@ -1,21 +1,18 @@
-import React, { useCallback } from 'react';
-import { Link } from 'react-router-dom';
-import { Carousel } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { Container } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 import { defineMessages, useIntl } from 'react-intl';
 
 // import MiniBrowse from '../../browse/containers/MiniBrowse';
 // import UpComingRecipes from '../../menu/components/UpComingRecipes';
 // import Menu from '../../menu/containers/Menu';
-import * as NewsActions from '../store/actions';
 
-import '../css/news.css';
 import PageWrapper from '../../common/components/PageWrapper';
-import useSingle from '../../common/hooks/useSingle';
 import { CombinedStore } from '../../app/Store';
 
+import '../css/news.css';
+
 const News: React.FC = () => {
-  const dispatch = useDispatch();
   const intl = useIntl();
 
   const news = useSelector((state: CombinedStore) => state.news);
@@ -37,24 +34,22 @@ const News: React.FC = () => {
       <h2>OwnRecipes</h2>
       <p>OwnRecipes is an open source recipe management site. You can share recipes with friends, rate recipes, store your favorite recipes to find easily, and more!</p>
       {/*
-      <div className='container'>
-        <div className='row'>
+        <Row>
           { user && user.id !== 0
             ? <Menu SimpleLayout={UpComingRecipes} public />
             : ''}
-        </div>
-        <div className='row'>
+        </Row>
+        <Row>
           <h3 className='page-header'>Recommended Recipes</h3>
           <MiniBrowse format='col-xs-12 col-sm-6 col-md-3' qs='?limit=4' />
-        </div>
-        <div className='row home-buttons'>
-          <div className='col-md-4 col-md-push-4 col-sm-6 col-sm-push-3 col-xs-12'>
-            <Link to='/browser' className='btn btn-primary home-browse-button'>
-              { formatMessage(messages.browseRecipeButton) }
-            </Link>
+        </Row>
+        <Row className='home-buttons'>
+          <Col md={4} sm={6} xs={12} className='col-md-push-4 col-sm-push-3'>
+            <Button href={${getResourcePath(/browser)} variant='primary' className='home-browse-button'>
+              {formatMessage(messages.browseRecipeButton)}
+            </Button>
           </div>
-        </div>
-      </div> */}
+        </Row> */}
     </PageWrapper>
   );
 };

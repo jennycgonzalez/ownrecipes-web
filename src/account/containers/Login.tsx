@@ -20,9 +20,9 @@ const Login: React.FC = () => {
 
   return (
     <PageWrapper title={intl.messages['nav.login.title'] as string}>
-      <Modal.Dialog>
-        <Modal.Header>
-          <Modal.Title>OwnRecipes</Modal.Title>
+      <Modal.Dialog className='form-signin'>
+        <Modal.Header className='form-header'>
+          <h1>OwnRecipes</h1>
         </Modal.Header>
 
         <Modal.Body>

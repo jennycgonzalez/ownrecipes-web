@@ -1,24 +1,32 @@
-import React from 'react';
+import classNames from 'classnames';
+import { Component } from 'react';
 import { injectIntl, defineMessages } from 'react-intl';
 
 import '../css/checkbox.css';
 
+interface IInputProps extends IBaseComponentProps {
+  label?: string;
+  type?: 'text' | 'number';
+  placeholder?: string;
+
+  value?: string | number;
+
+  size?: string;
+
+  change: (name: string, newValue: string) => void;
+}
+
 export interface IBaseComponentProps {
-  errors: any;
+  id:         string;
+  name:       string;
+  errors?:    any;
+  className?: string;
   change: (name: string, newValue: any) => void;
 }
 
-export interface IBaseComponentState {
-  errors: any;
-}
-
-export class BaseComponent<P extends IBaseComponentProps, S extends IBaseComponentState> extends React.Component<P, S> {
+export class BaseComponent<P extends IBaseComponentProps, S = {}> extends Component<P, S> {
   constructor(props: P) {
     super(props);
-
-    this.state = {
-      errors: this.props.errors || false,
-    } as S;
 
     this.handleChange = this.handleChange.bind(this);
   }
@@ -29,72 +37,76 @@ export class BaseComponent<P extends IBaseComponentProps, S extends IBaseCompone
     }
   }
 
-  hasErrors() {
-    return !!this.state.errors;
+  hasErrors(): boolean {
+    return !!this.props.errors;
   }
 
   // eslint-disable-next-line react/no-unused-class-component-methods
   getErrorMessage() {
     if (this.hasErrors()) {
       return (
-        <span className='help-inline'>{this.state.errors}</span>
+        <span className='help-inline'>{this.props.errors}</span>
       );
     }
 
     return null;
   }
+}
 
-  // eslint-disable-next-line camelcase
-  UNSAFE_componentWillReceiveProps(nextProps: P) {
-    if ('errors' in nextProps) {
-      this.setState({
-        errors: nextProps.errors,
-      });
-    }
+export class Input extends BaseComponent<IInputProps> {
+  render() {
+    return (
+      <div className={classNames(this.props.size, this.props.className)} key={this.props.id}>
+        <div className={`form-group ${this.hasErrors() ? 'has-error' : null}`}>
+          {this.props.label && <label htmlFor={this.props.name}>{this.props.label}</label>}
+          <input
+              type={this.props.type ?? 'text'}
+              name={this.props.name}
+              className='form-control'
+              placeholder={this.props.placeholder}
+              value={this.props.value}
+              onChange={this.handleChange} />
+          { this.getErrorMessage() }
+        </div>
+      </div>
+    );
+  }
+}
+
+export interface ITextAreaProps extends IBaseComponentProps {
+  label?: string;
+  type?: 'text';
+  placeholder?: string;
+
+  value?: string | number;
+
+  size?: string;
+  rows?: number;
+
+  change: (name: string, newValue: string) => void;
+}
+
+export class TextArea extends BaseComponent<ITextAreaProps> {
+  render() {
+    return (
+      <div className={classNames(this.props.size, this.props.className)} key={this.props.id}>
+        <div className={`form-group ${this.hasErrors() ? 'has-error' : null}`}>
+          {this.props.label && <label htmlFor={this.props.name}>{this.props.label}</label>}
+          <textarea
+              name={this.props.name}
+              rows={this.props.rows ?? 2}
+              className='form-control'
+              placeholder={this.props.placeholder}
+              value={this.props.value}
+              onChange={this.handleChange} />
+          {this.getErrorMessage()}
+        </div>
+      </div>
+    );
   }
 }
 
 /*
-export class Input extends BaseComponent<IInputProps> {
-  render() {
-    return (
-      <div className={this.props.size} key={this.props.id}>
-        <div className={`form-group ${this.hasErrors() ? 'has-error' : null}`}>
-          { this.props.label ? <label>{this.props.label}</label> : null }
-          <input
-              type={this.props.type}
-              name={this.props.name}
-              className='form-control'
-              placeholder={this.props.placeholder}
-              value={this.state.value}
-              onChange={this.handleChange} />
-          { this.getErrorMessage() }
-        </div>
-      </div>
-    );
-  }
-}
-
-export class TextArea extends BaseComponent {
-  render() {
-    return (
-      <div className={this.props.size} key={this.props.id}>
-        <div className={`form-group ${this.hasErrors() ? 'has-error' : null}`}>
-          { this.props.label ? <label>{this.props.label}</label> : null }
-          <textarea
-              type={this.props.type}
-              name={this.props.name}
-              rows={this.props.rows}
-              className='form-control'
-              placeholder={this.props.placeholder}
-              value={this.state.value}
-              onChange={this.handleChange} />
-          { this.getErrorMessage() }
-        </div>
-      </div>
-    );
-  }
-}
 
 export class FileBase extends BaseComponent {
   handleChange(event) {
@@ -141,53 +153,39 @@ export class FileBase extends BaseComponent {
     );
   }
 }
+*/
 
-export class Checkbox extends BaseComponent {
-  constructor(props) {
-    super(props);
+export interface ICheckboxProps extends IBaseComponentProps {
+  checked: boolean;
+  label?:  string;
+}
 
-    this.state = {
-      checked: !!this.props.checked,
-    };
-  }
-
-  handleChange(event) {
-    const checked = !this.state.checked;
-    this.setState({
-      checked: checked,
-    });
-
+export class Checkbox extends BaseComponent<ICheckboxProps> {
+  handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     if (this.props.change) {
+      const checked = Boolean(event.target.value);
       this.props.change(event.target.name, checked);
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.checked !== nextProps.checked) {
-      this.setState({
-        checked: nextProps.checked,
-      });
     }
   }
 
   render() {
     return (
-      <div className={this.props.size} key={this.props.id}>
-        <label className={this.props.label ? 'checkbox-control' : 'check-container'}>
+      <div>
+        <label htmlFor={this.props.name} className={this.props.label ? 'checkbox-control' : 'check-container'}>
           <input
               type='checkbox'
               name={this.props.name}
-              checked={this.state.checked}
-              onChange={this.handleChange}
-          />
+              checked={this.props.checked}
+              onChange={this.handleChange} />
           <span className='checkmark' />
-          { this.props.label ? <div className='checklabel'>{ this.props.label }</div> : null }
+          {this.props.label && <div className='checklabel'>{this.props.label}</div>}
         </label>
       </div>
     );
   }
 }
 
+/*
 export class SelectBase extends BaseComponent {
   render() {
     const options = this.props.data.map(option => (
@@ -213,6 +211,7 @@ export class SelectBase extends BaseComponent {
   }
 }
 
+/*
 export const File = injectIntl(FileBase);
 export const Select = injectIntl(SelectBase);
 */

@@ -1,13 +1,16 @@
 import { AnyAction } from 'redux';
-import ArrayReducerType from './ArrayReducerType';
+import * as _ from 'lodash';
 
-import GenericReducerType from './GenericReducerType';
+import GenericReducerType, { PendingState } from './GenericReducerType';
+import ArrayReducerType from './ArrayReducerType';
 import ItemReducerType from './ItemReducerType';
+import MapReducerType from './MapReducerType';
 
 export enum ACTION {
   ERROR = 'ERROR',
 
   RESET = 'RESET',
+  SOFT_RESET = 'SOFT_RESET',
 }
 
 export type GenericErrorAction = {
@@ -21,9 +24,18 @@ export type GenericResetAction = {
   type:  typeof ACTION.RESET;
 }
 
-export type GenericReducerAction = GenericErrorAction | GenericResetAction;
+export type GenericSoftResetAction = {
+  store: string;
+  type:  typeof ACTION.SOFT_RESET;
+}
+
+export type GenericReducerAction = GenericErrorAction | GenericResetAction | GenericSoftResetAction;
 
 export default class ReduxHelper {
+  static transformEntities<TDto, TEntity>(arr: Array<TDto>, toEntity: (dto: TDto) => TEntity): Array<TEntity> {
+    return arr.map(it => toEntity(it));
+  }
+
   static getItemReducerDefaultState = <T>(ident: string): ItemReducerType<T> => {
     const newState: ItemReducerType<T> = {
       ident: ident,
@@ -31,6 +43,7 @@ export default class ReduxHelper {
       item: undefined,
 
       error: undefined,
+      pending: PendingState.INITIAL,
     };
 
     return newState;
@@ -43,6 +56,20 @@ export default class ReduxHelper {
       items: undefined,
 
       error: undefined,
+      pending: PendingState.INITIAL,
+    };
+
+    return newState;
+  };
+
+  static getMapReducerDefaultState = <T>(ident: string): MapReducerType<T> => {
+    const newState: MapReducerType<T> = {
+      ident: ident,
+
+      items: undefined,
+
+      error: undefined,
+      pending: PendingState.INITIAL,
     };
 
     return newState;
@@ -52,6 +79,7 @@ export default class ReduxHelper {
     const newState = { ...state };
 
     newState.error = error;
+    newState.pending = PendingState.ABORTED;
 
     return newState;
   };
@@ -61,8 +89,44 @@ export default class ReduxHelper {
     const newState = { ...state } as any;
 
     newState.error = undefined;
+    newState.pending = PendingState.COMPLETED;
 
     newState.item  = item;
+
+    return newState;
+  };
+
+  static setMapItem<T>(state: MapReducerType<T>, id: string, item: T): MapReducerType<T> {
+    const updState = _.clone(state);
+    const map = updState.items;
+    const updMap = map ? _.clone(map) : new Map();
+
+    updMap.set(id, item);
+
+    updState.error = undefined;
+    updState.pending = PendingState.COMPLETED;
+    updState.items = updMap;
+    return updState;
+  }
+
+  static deleteMapItem<T>(state: MapReducerType<T>, id: string): MapReducerType<T> {
+    const updState = _.clone(state);
+    const map = updState.items;
+    const updMap = map ? _.clone(map) : new Map();
+
+    updMap.delete(id);
+    updState.error = undefined;
+    updState.pending = PendingState.COMPLETED;
+    updState.items = updMap;
+    return updState;
+  }
+
+  static setSoftReset = <T>(state: T): T => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const newState = { ...state } as any;
+
+    newState.error = undefined;
+    newState.pending = PendingState.INITIAL;
 
     return newState;
   };
@@ -76,6 +140,7 @@ export default class ReduxHelper {
       case ACTION.ERROR: return ReduxHelper.setError(state, action.data);
 
       case ACTION.RESET: return defaultState;
+      case ACTION.SOFT_RESET: return ReduxHelper.setSoftReset(state);
 
       default: return state;
     }

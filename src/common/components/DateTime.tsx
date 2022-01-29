@@ -1,11 +1,10 @@
 import Datetime from 'react-datetime';
 import moment from 'moment';
-import { BaseComponent, IBaseComponentProps, IBaseComponentState } from './FormComponents';
+import { BaseComponent, IBaseComponentProps } from './FormComponents';
 
 require('react-datetime/css/react-datetime.css');
 
 interface IDateTimeProps extends IBaseComponentProps {
-  id: string;
   name: string;
   label: string;
   timeFormat?: string;
@@ -14,7 +13,7 @@ interface IDateTimeProps extends IBaseComponentProps {
   class: string;
 }
 
-interface IDateTimeState extends IBaseComponentState {
+interface IDateTimeState {
   value: moment.MomentInput,
 }
 
@@ -33,7 +32,7 @@ export default class DateTime extends BaseComponent<IDateTimeProps, IDateTimeSta
     return (
       <div className={this.props.class} key={this.props.id}>
         <div className={`form-group ${this.hasErrors() ? 'has-error' : null}`}>
-          { this.props.label ? <label>{this.props.label}</label> : null }
+          {this.props.label && <label htmlFor={this.props.name}>{this.props.label}</label>}
           <Datetime
               inputProps={{ name: this.props.name, className: 'form-control' }}
               onChange={this.handleChange}

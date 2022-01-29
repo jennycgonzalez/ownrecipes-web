@@ -57,6 +57,7 @@
   "dependencies": {
     "@types/superagent": "^4.1.14",
     "@webscopeio/react-textarea-autocomplete": "^4.9.1",
+    "bootstrap-icons": "^1.7.2",
     "classnames": "^2.3.1",
     "full-icu": "^1.4.0",
     "history": "^5.2.0",

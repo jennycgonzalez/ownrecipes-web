@@ -64,7 +64,7 @@
         "ts": "never",
         "tsx": "never"
     }],
-    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.ts", "**/*.test.tsx"]}],
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.ts", "**/*.test.tsx", "src/test/**"]}],
     "import/order": 0,
     "indent": 0,
     "jsx-a11y/no-access-key": 0,

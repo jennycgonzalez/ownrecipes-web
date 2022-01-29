@@ -1,0 +1,9 @@
+.rating-stars {
+  color: #d17581;
+  margin-bottom: 0;
+}
+
+.rating-panel .card-body .rating-username {
+  color: green;
+  margin-bottom: 5px;
+}

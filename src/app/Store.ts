@@ -6,12 +6,15 @@ import error from '../error/store/reducer';
 import { ErrorState } from '../error/store/types';
 // import browse from '../../browse/reducers/Reducer';
 // import list from '../../list/reducers/GroceryListReducer';
-// import recipe from '../../recipe/reducers/Reducer';
+import recipe from '../recipe/store/RecipeReducer';
+import recipes from '../recipe/store/RecipesReducer';
+import { RecipeState, RecipesState } from '../recipe/store/types';
 // import recipeForm from '../../recipe_form/reducers/Reducer';
 // import menu from '../../menu/reducers/reducer';
 import news from '../news/store/reducer';
 import { NewsState } from '../news/store/types';
-// import rating from '../../rating/reducers/Reducer';
+import ratings from '../rating/store/reducer';
+import { RatingsState } from '../rating/store/types';
 
 export type CombinedStore = {
   account:    AccountState;
@@ -20,8 +23,9 @@ export type CombinedStore = {
   // list:       ListState;
   // menu:       MenuState;
   news:       NewsState;
-  // rating:     RatingState;
-  // recipe:     RecipeState;
+  ratings:    RatingsState;
+  recipe:     RecipeState;
+  recipes:    RecipesState;
   // recipeForm: RecipeFormState;
 }
 
@@ -32,8 +36,9 @@ const reducer = combineReducers({
   // list,
   // menu,
   news,
-  // rating,
-  // recipe,
+  ratings,
+  recipe,
+  recipes,
   // recipeForm,
 });
 

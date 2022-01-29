@@ -6,6 +6,7 @@ import GroceryListMenuItem, { ListItemType } from './GroceryListMenuItem';
 import MenuMenuItem from './MenuMenuItem';
 import { AccountMenuMenuItem, AccountLoginMenuItem } from './MyAccountMenuItem';
 import { getResourcePath } from '../../common/utility';
+import { Link } from 'react-router-dom';
 
 export interface INavBarProps {
   isAuthenticated: boolean;
@@ -36,10 +37,12 @@ const NavBar: React.FC<INavBarProps> = (props: INavBarProps) => {
   });
 
   return (
-    <Navbar bg='dark' collapseOnSelect>
+    <Navbar bg='light' collapseOnSelect>
       <Container>
-        <Navbar.Brand href={getResourcePath('/home')}>
-          <Image alt='Brand' src={getResourcePath('/images/chef.png')} width='30' height='30' className='d-inline-block align-top' />
+        <Navbar.Brand>
+          <Link to={getResourcePath('/home')}>
+            <Image alt='Brand' src={getResourcePath('/images/chef.png')} width='30' height='30' className='d-inline-block align-top' />
+          </Link>
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse>

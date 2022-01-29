@@ -18,7 +18,9 @@ const LoginAlert: React.FC = () => {
   });
 
   return (
-    <Alert severity='danger' title={intl.formatMessage(messages.title)} message={intl.formatMessage(messages.message)} />
+    <Alert severity='danger' title={intl.formatMessage(messages.title)}>
+      {intl.formatMessage(messages.message)}
+    </Alert>
   );
 };
 

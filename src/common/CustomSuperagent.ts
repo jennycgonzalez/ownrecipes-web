@@ -6,6 +6,7 @@ import moment from 'moment';
 import store from './store/store';
 import { serverURLs } from './config';
 import { AccountAction, AccountActionTypes, ACCOUNT_STORE } from '../account/store/types';
+import { ACTION } from './store/ReduxHelper';
 
 export const refreshToken = (() => {
   let blocking = false;
@@ -65,6 +66,15 @@ export const request = (): SuperAgentStatic => {
   customRequest.set('Accept', 'application/json');
 
   return customRequest;
+};
+
+export const handleError = (error: Error, storeIdent: string): any => (dispatch: any): any => {
+  debugger;
+  dispatch({
+    store:   store,
+    type:    ACTION.ERROR,
+    data:    error,
+  });
 };
 
 export default request;

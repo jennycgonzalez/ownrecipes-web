@@ -17,8 +17,9 @@ body {
 .navbar-brand img {
   height: 100%;
 }
-#content {
-  margin-bottom: 20px;
+#content > .container {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 /* Custom page CSS -------------------------------------------------- */
 /* Not required for template or sticky footer method. */

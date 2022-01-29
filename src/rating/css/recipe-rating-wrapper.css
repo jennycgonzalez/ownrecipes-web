@@ -1,0 +1,15 @@
+.rating-panel {
+  margin-top: 2rem;
+}
+.rating-panel .card-header {
+  padding-bottom: 0;
+}
+.rating-panel .card-header h2 {
+  font-size: 1.1em;
+}
+.rating-panel .card-footer {
+  padding-bottom: 0;
+}
+.rating-panel .card-footer .row {
+  margin-bottom: 15px;
+}

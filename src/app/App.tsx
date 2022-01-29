@@ -11,6 +11,7 @@ import { isDemoMode } from '../common/utility';
 
 import './css/core.css';
 import './css/print.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 import Routes from './components/Routes';
 import { CombinedStore } from './Store';
@@ -26,16 +27,12 @@ const App = () => {
   const main = (
     <ErrorBoundary verbose printStack>
       <AutoLogin nav={nav} loc={location}>
-        <div>
-          <div id='content'>
-            <div>
-              <Header />
-              { isDemoMode() ? <Demo /> : '' }
-              <Routes isAuthenticated={isAuthenticated} />
-            </div>
-          </div>
-          <Footer />
+        <div id='content'>
+          <Header />
+          { isDemoMode() ? <Demo /> : '' }
+          <Routes isAuthenticated={isAuthenticated} />
         </div>
+        <Footer />
       </AutoLogin>
     </ErrorBoundary>
   );

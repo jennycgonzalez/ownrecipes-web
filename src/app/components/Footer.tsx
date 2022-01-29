@@ -1,10 +1,11 @@
+import { Container } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
 import '../css/footer.css';
 
 const Footer = () => (
-  <footer className='footer print-hidden bg-dark'>
-    <div className='container'>
+  <footer className='footer print-hidden bg-light'>
+    <Container>
       <p className='text-muted'>
         <FormattedMessage
             id='footer.credit'
@@ -23,7 +24,7 @@ const Footer = () => (
               ccLink: <a href='http://creativecommons.org/licenses/by/3.0/' title='Creative Commons'>CC BY 3.0</a>,
             }} />
       </p>
-    </div>
+    </Container>
   </footer>
 );
 

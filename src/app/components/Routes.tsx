@@ -7,7 +7,7 @@ import News from '../../news/components/News';
 import Login from '../../account/containers/Login';
 // import Browse from '../../browse/containers/Browse';
 // import RecipeForm from '../../recipe_form/containers/Form';
-// import RecipeView from '../../recipe/components/RecipeView';
+import RecipeView from '../../recipe/containers/RecipeView';
 // import List from '../../list/containers/List';
 // import Menu from '../../menu/containers/Menu';
 import NotFound from './NotFound';
@@ -33,10 +33,12 @@ const PrivateRoutes: Array<IRouteType> = [
     path:      '/recipe/edit/:recipe',
     component: RecipeForm,
   },
+  */
   {
     path:      '/recipe/:recipe',
     component: RecipeView,
   },
+  /*
   {
     path:      '/list/:list',
     component: List,
