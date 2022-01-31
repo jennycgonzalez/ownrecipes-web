@@ -14,6 +14,21 @@ OwnRecipes comes with several, but not exclusively, improvements:
 
 ## Dev Tips
 
+### Running tests
+
+To run the (offline) unit tests:
+
+```npm run test```
+
+To run tests locally:
+
+```bash
+cd openeats-api
+docker-compose -f test.yml -p test build
+docker-compose -f test.yml -p test run --rm --entrypoint sh web
+./node_modules/.bin/jest --coverage
+```
+
 ### Generating locale files
 
 After adding new `defineMessages` you'll need to update the locale files. Instead of doing it manually you can run this script to do it for you.
@@ -22,3 +37,24 @@ After adding new `defineMessages` you'll need to update the locale files. Instea
 docker-compose run --rm web sh
 ./node_modules/.bin/babel-node scripts/merge-locale.js
 ```
+
+#### Building the demo site
+
+The demo site is built using pure js and relies on populating the redux store when the app starts. If more data needs to be added be sure to update [the demo json](https://github.com/OwnRecipes/OwnRecipes-web/tree/master/modules/common/demo)
+
+To Build the demo site, update the dev env file ```.env.development.local``` (or create one) with the below.
+
+```bash
+# Node config
+REACT_APP_DEMO=demo
+REACT_APP_API_URL=
+REACT_APP_LOCALE=en
+```
+
+Then Run:
+
+```bash
+docker-compose up node
+```
+
+This will generate all the require files in the public folder. These files can be copied directly into the demo repo.
