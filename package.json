@@ -16,10 +16,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OwnRecipes/OwnRecipes-web.git"
+    "url": "git+https://github.com/ownrecipes/ownrecipes-web.git"
   },
   "bugs": {
-    "url": "https://github.com/OwnRecipes/OwnRecipes-web/issues"
+    "url": "https://github.com/ownrecipes/ownrecipes-web/issues"
   },
   "keywords": [
     "openeats",

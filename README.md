@@ -40,7 +40,7 @@ docker-compose run --rm web sh
 
 #### Building the demo site
 
-The demo site is built using pure js and relies on populating the redux store when the app starts. If more data needs to be added be sure to update [the demo json](https://github.com/OwnRecipes/OwnRecipes-web/tree/master/modules/common/demo)
+The demo site is built using pure js and relies on populating the redux store when the app starts. If more data needs to be added be sure to update [the demo json](https://github.com/ownrecipes/ownrecipes-web/tree/master/modules/common/demo)
 
 To Build the demo site, update the dev env file ```.env.development.local``` (or create one) with the below.
 
