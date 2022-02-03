@@ -1,15 +1,18 @@
 import { defineMessages, useIntl } from 'react-intl';
 import { Image, Navbar, Nav, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 import CreateRecipeMenuItem from './CreateRecipeMenuItem';
 import GroceryListMenuItem, { ListItemType } from './GroceryListMenuItem';
 import MenuMenuItem from './MenuMenuItem';
 import { AccountMenuMenuItem, AccountLoginMenuItem } from './MyAccountMenuItem';
 import { getResourcePath } from '../../common/utility';
-import { Link } from 'react-router-dom';
+import { UserAccount } from '../../account/store/types';
+
+import '../css/header.css';
 
 export interface INavBarProps {
-  isAuthenticated: boolean;
+  account: UserAccount | undefined;
   lists: Array<ListItemType> | undefined;
 
   onLogoutClick: () => void;
@@ -36,8 +39,11 @@ const NavBar: React.FC<INavBarProps> = (props: INavBarProps) => {
     },
   });
 
+  const { account } = props;
+  const isAuthenticated = account != null && account.id !== 0;
+
   return (
-    <Navbar bg='light' collapseOnSelect>
+    <Navbar bg='light' collapseOnSelect className='header'>
       <Container>
         <Navbar.Brand>
           <Link to={getResourcePath('/home')}>
@@ -49,13 +55,13 @@ const NavBar: React.FC<INavBarProps> = (props: INavBarProps) => {
           <Nav>
             <Nav.Link href={getResourcePath('/browser')}>{formatMessage(messages.recipes)}</Nav.Link>
             <Nav.Link onClick={props.onRandomRecipeClick}>{formatMessage(messages.randomRecipe)}</Nav.Link>
-            {props.isAuthenticated && <MenuMenuItem />}
-            {props.isAuthenticated && <CreateRecipeMenuItem />}
-            {props.isAuthenticated && <GroceryListMenuItem data={props.lists} />}
+            {isAuthenticated && <MenuMenuItem />}
+            {isAuthenticated && <CreateRecipeMenuItem />}
+            {isAuthenticated && <GroceryListMenuItem data={props.lists} />}
           </Nav>
-          <Nav className=''>
-            {(props.isAuthenticated
-                ? <AccountMenuMenuItem onLogoutClick={props.onLogoutClick} />
+          <Nav className='my-account-nav'>
+            {(isAuthenticated
+                ? <AccountMenuMenuItem account={account} onLogoutClick={props.onLogoutClick} />
                 : <AccountLoginMenuItem />
             )}
           </Nav>

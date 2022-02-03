@@ -32,7 +32,7 @@ const Header: React.FC = () => {
 
   return (
     <NavBar
-        isAuthenticated={accountState.item != null && accountState.item.id !== 0}
+        account={accountState.item}
         lists={listState}
 
         onLogoutClick={handleLogoutClick}

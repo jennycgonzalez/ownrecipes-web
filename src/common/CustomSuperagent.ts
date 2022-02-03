@@ -68,10 +68,11 @@ export const request = (): SuperAgentStatic => {
   return customRequest;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const handleError = (error: Error, storeIdent: string): any => (dispatch: any): any => {
-  debugger;
+  // debugger; // TODO Test error handling
   dispatch({
-    store:   store,
+    store:   storeIdent,
     type:    ACTION.ERROR,
     data:    error,
   });

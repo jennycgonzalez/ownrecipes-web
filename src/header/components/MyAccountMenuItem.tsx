@@ -2,6 +2,7 @@ import { defineMessages, useIntl } from 'react-intl';
 import { NavDropdown, Dropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { getResourcePath } from '../../common/utility';
+import { UserAccount } from '../../account/store/types';
 
 export const AccountLoginMenuItem: React.FC = () => {
   const { formatMessage } = useIntl();
@@ -21,12 +22,18 @@ export const AccountLoginMenuItem: React.FC = () => {
 };
 
 export interface IAccountMenuMenuItemProps {
+  account: UserAccount;
   onLogoutClick: () => void;
 }
 
 export const AccountMenuMenuItem: React.FC<IAccountMenuMenuItemProps> = (props: IAccountMenuMenuItemProps) => {
   const { formatMessage } = useIntl();
   const messages = defineMessages({
+    hello: {
+      id: 'nav.accountmenu.hello',
+      description: 'Account menu greeting',
+      defaultMessage: 'Hello, {name}',
+    },
     title: {
       id: 'nav.accountmenu.title',
       description: 'Account menu title',
@@ -46,12 +53,16 @@ export const AccountMenuMenuItem: React.FC<IAccountMenuMenuItemProps> = (props: 
 
   return (
     <NavDropdown
-        title={formatMessage(messages.title)}
+        title={(
+          <>
+            <div className='subtitle'>{formatMessage(messages.hello, { name: props.account.username })}</div>
+            <span>{formatMessage(messages.title)}</span>
+          </>
+        )}
         id='basic-nav-dropdown'>
       {/* // admin is private for admin only. There is no "My account" page, it is all fake.
       <NavDropdown.Item href={'/admin'}>{formatMessage(messages.admin)}</NavDropdown.Item>
       */}
-      <NavDropdown.Divider />
       <NavDropdown.Item onClick={props.onLogoutClick}>{formatMessage(messages.logout)}</NavDropdown.Item>
     </NavDropdown>
   );

@@ -3,7 +3,7 @@ import { Route, Routes as RouterRoutes, Navigate } from 'react-router-dom';
 import { AnyComponent } from '../../types/Types';
 import { getResourcePath } from '../../common/utility';
 
-import News from '../../news/components/News';
+import News from '../../news/container/News';
 import Login from '../../account/containers/Login';
 // import Browse from '../../browse/containers/Browse';
 // import RecipeForm from '../../recipe_form/containers/Form';

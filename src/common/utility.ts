@@ -1,8 +1,7 @@
 import * as _ from 'lodash';
 
 export function isDemoMode(): boolean {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return (process.env.NODE_ENV as any) === 'demo';
+  return process.env.REACT_APP_DEMO === 'demo';
 }
 
 export function getResourcePath(path: string): string {

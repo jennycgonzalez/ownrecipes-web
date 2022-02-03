@@ -1,11 +1,41 @@
+import jwtDecode, { JwtPayload } from 'jwt-decode';
 import { Dispatch as ReduxDispatch } from 'redux';
 import ItemReducerType from '../../common/store/ItemReducerType';
 import { GenericReducerAction } from '../../common/store/ReduxHelper';
 
-export type UserAccount = {
-  id: number;
+export type LoginDto = {
+  id:    number;
   token: string;
 }
+
+export type UserAccount = {
+  id:       number;
+  token:    string;
+  username: string;
+  email:    string;
+}
+
+export type OwnrecipesPayload = {
+  username: string;
+  email:    string;
+  user_id:  number;
+} & JwtPayload;
+
+export const toUserAccount = (loginDto: LoginDto): UserAccount => {
+  const { token } = loginDto;
+  if (token == null) throw new Error('Invalid response: token may not be null');
+  const decodedToken: OwnrecipesPayload | undefined = jwtDecode<OwnrecipesPayload>(token);
+
+  if (decodedToken.username == null) throw new Error('Invalid response: The token is incomplete (username is missing)');
+  if (decodedToken.email == null)    throw new Error('Invalid response: The token is incomplete (email is missing)');
+
+  return {
+    id:       loginDto.id,
+    token:    token,
+    username: decodedToken.username,
+    email:    decodedToken.email,
+  };
+};
 
 export enum AccountActionTypes {
   LOGIN  = 'LOGIN',

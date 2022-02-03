@@ -1,0 +1,12 @@
+nav.header {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+nav.header .my-account-nav {
+  margin-left: auto;
+}
+
+nav.header .subtitle {
+  font-size: 0.875em;
+}

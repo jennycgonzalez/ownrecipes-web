@@ -7,8 +7,8 @@ const reducer = (state = defaultState, action: AccountAction): AccountState => {
   switch (action.type) {
     case AccountActionTypes.LOGIN:
       {
-        const user = JSON.stringify(action.user);
-        localStorage.setItem(ACCOUNT_TOKEN_STORAGE_KEY, user);
+        const user = action.user;
+        localStorage.setItem(ACCOUNT_TOKEN_STORAGE_KEY, JSON.stringify(user));
         return ReduxHelper.setItem(state, action.user);
       }
     case AccountActionTypes.LOGOUT:
