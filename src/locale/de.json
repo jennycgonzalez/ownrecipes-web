@@ -9,7 +9,7 @@
   "login.please_sign_in": "Bitte einloggen.",
   "login.sign_in": "Einloggen",
   "login.username": "Benutzername",
-  "nav.accountmenu.admin": "Mein Benutzerkonto",
+  "nav.accountmenu.admin": "Administration",
   "nav.accountmenu.hello": "Hallo, {name}",
   "nav.accountmenu.logout": "Ausloggen",
   "nav.accountmenu.title": "Mein Benutzerkonto",

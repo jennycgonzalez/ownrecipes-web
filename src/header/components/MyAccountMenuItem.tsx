@@ -46,8 +46,8 @@ export const AccountMenuMenuItem: React.FC<IAccountMenuMenuItemProps> = (props: 
     },
     admin: {
       id: 'nav.accountmenu.admin',
-      description: 'My Account',
-      defaultMessage: 'My Account',
+      description: 'Djanog Admin Page',
+      defaultMessage: 'Administration',
     },
   });
 
@@ -60,9 +60,8 @@ export const AccountMenuMenuItem: React.FC<IAccountMenuMenuItemProps> = (props: 
           </>
         )}
         id='basic-nav-dropdown'>
-      {/* // admin is private for admin only. There is no "My account" page, it is all fake.
-      <NavDropdown.Item href={'/admin'}>{formatMessage(messages.admin)}</NavDropdown.Item>
-      */}
+      <NavDropdown.Item href={process.env.REACT_APP_ADMIN_URL ?? '/admin'}>{formatMessage(messages.admin)}</NavDropdown.Item>
+      <NavDropdown.Divider />
       <NavDropdown.Item onClick={props.onLogoutClick}>{formatMessage(messages.logout)}</NavDropdown.Item>
     </NavDropdown>
   );
