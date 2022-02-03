@@ -31,7 +31,7 @@ export default (servings: number, customServings: number, numerator: number, den
   numerator /= gcd;
   denominator /= gcd;
 
-  // TODO: We should do some math to try and
+  // OPT: We should do some math to try and
   // round weird fractions to smaller ones.
   // For Example, 23/64 -> 3/8
 

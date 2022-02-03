@@ -15,6 +15,8 @@ import news from '../news/store/reducer';
 import { NewsState } from '../news/store/types';
 import ratings from '../rating/store/reducer';
 import { RatingsState } from '../rating/store/types';
+import settings from '../account/store/settings/reducer';
+import { SettingsState } from '../account/store/settings/types';
 
 export type CombinedStore = {
   account:    AccountState;
@@ -27,6 +29,7 @@ export type CombinedStore = {
   recipe:     RecipeState;
   recipes:    RecipesState;
   // recipeForm: RecipeFormState;
+  settings:   SettingsState;
 }
 
 const reducer = combineReducers({
@@ -40,6 +43,7 @@ const reducer = combineReducers({
   recipe,
   recipes,
   // recipeForm,
+  settings,
 });
 
 export default reducer;

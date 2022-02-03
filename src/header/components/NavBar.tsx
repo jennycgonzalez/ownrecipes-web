@@ -10,11 +10,15 @@ import { getResourcePath } from '../../common/utility';
 import { UserAccount } from '../../account/store/types';
 
 import '../css/header.css';
+import { LanguageCode, Settings, ThemeMode } from '../../account/store/settings/types';
 
 export interface INavBarProps {
-  account: UserAccount | undefined;
-  lists: Array<ListItemType> | undefined;
+  account:  UserAccount | undefined;
+  settings: Settings;
+  lists:    Array<ListItemType> | undefined;
 
+  onChangeLanguage: (language: LanguageCode) => void;
+  onChangeTheme: (theme: ThemeMode) => void;
   onLogoutClick: () => void;
   onRandomRecipeClick: () => void;
 }
@@ -39,7 +43,7 @@ const NavBar: React.FC<INavBarProps> = (props: INavBarProps) => {
     },
   });
 
-  const { account } = props;
+  const { account, settings } = props;
   const isAuthenticated = account != null && account.id !== 0;
 
   return (
@@ -61,8 +65,16 @@ const NavBar: React.FC<INavBarProps> = (props: INavBarProps) => {
           </Nav>
           <Nav className='my-account-nav'>
             {(isAuthenticated
-                ? <AccountMenuMenuItem account={account} onLogoutClick={props.onLogoutClick} />
-                : <AccountLoginMenuItem />
+                ? (
+                  <AccountMenuMenuItem
+                      account  = {account}
+                      settings = {settings}
+                      onChangeLanguage = {props.onChangeLanguage}
+                      onChangeTheme = {props.onChangeTheme}
+                      onLogoutClick = {props.onLogoutClick} />
+                ) : (
+                  <AccountLoginMenuItem />
+                )
             )}
           </Nav>
         </Navbar.Collapse>
