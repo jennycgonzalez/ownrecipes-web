@@ -1,6 +1,12 @@
+import classNames from 'classnames';
+import '../css/icon.css';
+
 export interface IIconProps {
-  icon: string;
+  icon:     string;
   variant?: 'filled' | 'light';
+  size?:    '1x' | '2x';
+
+  className?: string;
 }
 
 function toVariantAffix(variant?: 'filled' | 'light'): string {
@@ -12,7 +18,7 @@ function toVariantAffix(variant?: 'filled' | 'light'): string {
 }
 
 const Icon: React.FC<IIconProps> = (props: IIconProps) => (
-  <i className={`bi bi-${props.icon}${toVariantAffix(props.variant)}`} />
+  <i className={classNames('bi', `bi-${props.icon}${toVariantAffix(props.variant)}`, `size-${props.size ?? '1x'}`, props.className)} />
 );
 
 export default Icon;

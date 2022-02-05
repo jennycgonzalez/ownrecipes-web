@@ -114,40 +114,38 @@
   appearance: none;
 }
 .recipe-details .recipe-schema .ingredients li .checkbox-style:after {
-  content: url('data:image/svg+xml;
- utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#dddddd" stroke-width="3"/></svg>');
+  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#dddddd" stroke-width="3"/></svg>');
 }
 .recipe-details .recipe-schema .ingredients li .checkbox-style:checked:after {
-  content: url('data:image/svg+xml;
- utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#bbbbbb" stroke-width="3"/><path fill="#1dc2af" d="M72 25L42 71 27 56l-4 4 20 20 34-52z"/></svg>');
+  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#bbbbbb" stroke-width="3"/><path fill="#1dc2af" d="M72 25L42 71 27 56l-4 4 20 20 34-52z"/></svg>');
 }
 .recipe-details .recipe-schema .ingredients li .checkbox-style:focus {
   outline: 0;
 }
-.recipe-details .recipe-schema .ingredients-save {
+.recipe-details .recipe-schema .ingredients-buttons {
   display: block;
   margin-top: 15px;
 }
-.recipe-details .recipe-schema .ingredients-save .btn-group {
+.recipe-details .recipe-schema .ingredients-buttons .btn-group {
   display: block;
 }
-.recipe-details .recipe-schema .ingredients-save .recipe-list-spinner {
+.recipe-details .recipe-schema .ingredients-buttons .recipe-list-spinner {
   display: inline-block;
   margin-top: 5px;
   margin-left: 12px;
 }
-.recipe-details .recipe-schema .ingredients-save .recipe-list-spinner .sk-circle:before {
+.recipe-details .recipe-schema .ingredients-buttons .recipe-list-spinner .sk-circle:before {
   background-color: #555;
 }
-.recipe-details .recipe-schema .ingredients-save .glyphicon {
+.recipe-details .recipe-schema .ingredients-buttons .glyphicon {
   margin-top: 5px;
   margin-left: 12px;
   font-size: 18px;
 }
-.recipe-details .recipe-schema .ingredients-save .glyphicon.glyphicon-ok {
+.recipe-details .recipe-schema .ingredients-buttons .glyphicon.glyphicon-ok {
   color: #3f9c35;
 }
-.recipe-details .recipe-schema .ingredients-save .glyphicon.glyphicon-remove {
+.recipe-details .recipe-schema .ingredients-buttons .glyphicon.glyphicon-remove {
   color: #a33f1f;
 }
 .recipe-details .ratings img {

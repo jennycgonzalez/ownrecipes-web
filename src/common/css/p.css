@@ -1,0 +1,10 @@
+p {
+  margin-bottom: 1em;
+}
+p.body2 {
+  font-size: 0.875rem;
+  margin-bottom: 0.3em;
+}
+p.placeholder {
+  color: var(--secondaryText);
+}

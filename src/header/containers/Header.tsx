@@ -1,6 +1,6 @@
 // import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 import NavBar from '../components/NavBar';
 import * as AuthActions from '../../account/store/actions';
@@ -14,6 +14,7 @@ import { LanguageCode, ThemeMode } from '../../account/store/settings/types';
 const Header: React.FC = () => {
   const dispatch = useDispatch();
   const nav = useNavigate();
+  const location = useLocation();
 
   const accountState = useSelector((state: CombinedStore) => state.account);
   const settings = useSelector((state: CombinedStore) => state.settings);
@@ -46,6 +47,8 @@ const Header: React.FC = () => {
         account  = {accountState.item}
         settings = {settings}
         lists    = {listState}
+
+        isLoginPage = {location.pathname.endsWith('login')}
 
         onChangeLanguage={handleChangeLanguage}
         onChangeTheme={handleChangeTheme}

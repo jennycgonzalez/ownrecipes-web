@@ -14,7 +14,6 @@ export const deleteRecipe = (recipeSlug: string) => (dispatch: RecipeDispatch) =
     .get(`${serverURLs.recipe}${recipeSlug}/`)
     .then(() => {
       dispatch({ store: RECIPE_STORE, type: RecipeActionTypes.RECIPE_DELETE, data: recipeSlug });
-      // TODO history.push('/browse');
     })
     .catch(err => handleError(err, RECIPE_STORE));
 };

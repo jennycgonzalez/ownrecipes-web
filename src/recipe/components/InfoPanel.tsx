@@ -1,8 +1,9 @@
 import { Button } from 'react-bootstrap';
 import { defineMessages, useIntl } from 'react-intl';
 
-import { Input } from '../../common/components/FormComponents';
+import Input from '../../common/components/Input';
 import Icon from '../../common/components/Icon';
+import P from '../../common/components/P';
 
 export interface IInfoPanelProps {
   cookTime: number;
@@ -16,7 +17,7 @@ export interface IInfoPanelProps {
 }
 
 const InfoPanel: React.FC<IInfoPanelProps> = ({ cookTime, prepTime, servings, customServings, info, updateServings, clearServings }: IInfoPanelProps) => {
-  const intl = useIntl();
+  const { formatMessage } = useIntl();
 
   const messages = defineMessages({
     servings: {
@@ -57,9 +58,9 @@ const InfoPanel: React.FC<IInfoPanelProps> = ({ cookTime, prepTime, servings, cu
       <table className='table table-bordered'>
         <thead>
           <tr className='active'>
-            <th>{ intl.formatMessage(messages.servings) }</th>
-            <th>{ intl.formatMessage(messages.prep_time) }</th>
-            <th>{ intl.formatMessage(messages.cooking_time) }</th>
+            <th>{ formatMessage(messages.servings) }</th>
+            <th>{ formatMessage(messages.prep_time) }</th>
+            <th>{ formatMessage(messages.cooking_time) }</th>
           </tr>
         </thead>
         <tbody>
@@ -67,7 +68,6 @@ const InfoPanel: React.FC<IInfoPanelProps> = ({ cookTime, prepTime, servings, cu
             <td>
               <div className='input-group print-hidden'>
                 <Input
-                    id='servings'
                     name='servings'
                     type='number'
                     className='servings-textbox'
@@ -80,18 +80,18 @@ const InfoPanel: React.FC<IInfoPanelProps> = ({ cookTime, prepTime, servings, cu
             <td>
               { prepTime }
               {' '}
-              { intl.formatMessage(messages.minutes) }
+              { formatMessage(messages.minutes) }
             </td>
             <td>
               { cookTime }
               {' '}
-              { intl.formatMessage(messages.minutes) }
+              { formatMessage(messages.minutes) }
             </td>
           </tr>
         </tbody>
       </table>
       <div className='panel-body'>
-        <p>{ info }</p>
+        <P>{info}</P>
       </div>
     </div>
   );

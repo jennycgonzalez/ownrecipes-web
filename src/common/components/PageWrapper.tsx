@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Container } from 'react-bootstrap';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 import { AnyComponent } from '../../types/Types';
 import ArrayReducerType from '../store/ArrayReducerType';
@@ -23,6 +23,7 @@ interface IPageWrapperProps {
  */
  const PageWrapper: React.FC<IPageWrapperProps> = (props: IPageWrapperProps) => {
   const nav = useNavigate();
+  const location = useLocation();
   const { title, id, state } = props;
   const error = state?.error;
 
@@ -39,7 +40,7 @@ interface IPageWrapperProps {
 
   return (
     <ErrorBoundary verbose printStack>
-      <Container>
+      <Container className={location.pathname.substring(1)}>
         {props.children}
       </Container>
     </ErrorBoundary>

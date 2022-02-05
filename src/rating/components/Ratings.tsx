@@ -21,7 +21,7 @@ const Ratings: React.FC<IRatingsProps> = ({ stars }: IRatingsProps) => {
   }
   if (starss < 5) {
     for (let i = 0; i < (5 - starss); ++i) {
-      starsList.push(<Icon key={i} icon='star' variant='light' />);
+      starsList.push(<Icon key={5 - i} icon='star' variant='light' />);
     }
   }
 

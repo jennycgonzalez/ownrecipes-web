@@ -1,9 +1,12 @@
+import { useState } from 'react';
+import { Card } from 'react-bootstrap';
+
+import { Rating, RatingCreate } from '../store/types';
 import RatingComments from './RatingComments';
 import NewRating from './NewRating';
 
 import '../css/recipe-rating-wrapper.css';
-import { Rating, RatingCreate } from '../store/types';
-import { Card } from 'react-bootstrap';
+import RatingsHeader from './RatingsHeader';
 
 export interface IRatingsWrapperProps {
   recipeSlug: string;
@@ -14,20 +17,23 @@ export interface IRatingsWrapperProps {
   removeRating: (recipeSlug: string, ratingId: number) => void;
 }
 
-const RatingsWrapper: React.FC<IRatingsWrapperProps> = ({ recipeSlug, userId, ratings, addRating, removeRating }: IRatingsWrapperProps) => (
-  <Card className='rating-panel'>
-    <Card.Header>
-      <h2>Comments</h2>
-    </Card.Header>
-    <Card.Body>
-      <RatingComments recipeSlug={recipeSlug} ratings={ratings} userId={userId} removeRating={removeRating} />
-    </Card.Body>
-    {userId > 0 && (
-      <Card.Footer>
-        <NewRating recipeSlug={recipeSlug} userId={userId} addRating={addRating} />
-      </Card.Footer>
-    )}
-  </Card>
-);
+const RatingsWrapper: React.FC<IRatingsWrapperProps> = ({ recipeSlug, userId, ratings, addRating, removeRating }: IRatingsWrapperProps) => {
+  const [showNewRating, setShowNewRating] = useState<boolean>(false);
+
+  const handleAddRating = (rec: string, rating: RatingCreate) => {
+    setShowNewRating(false);
+    addRating(rec, rating);
+  };
+
+  return (
+    <Card className='rating-panel'>
+      <RatingsHeader userId={userId} showNewRating={showNewRating} onShowNewRating={() => setShowNewRating(true)} />
+      <Card.Body>
+        <NewRating show={showNewRating} recipeSlug={recipeSlug} userId={userId} addRating={handleAddRating} />
+        <RatingComments recipeSlug={recipeSlug} ratings={ratings} userId={userId} removeRating={removeRating} />
+      </Card.Body>
+    </Card>
+  );
+};
 
 export default RatingsWrapper;

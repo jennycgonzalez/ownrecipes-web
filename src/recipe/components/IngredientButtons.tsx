@@ -1,8 +1,6 @@
-import Spinner from 'react-spinkit';
 import { DropdownButton, Dropdown, ButtonGroup, Button } from 'react-bootstrap';
 import { defineMessages, useIntl } from 'react-intl';
 import { PendingState } from '../../common/store/GenericReducerType';
-import Icon from '../../common/components/Icon';
 
 export type IListsListType = {
   id:    number;
@@ -11,7 +9,7 @@ export type IListsListType = {
 
 export interface IIngredientButtonsProps {
   lists: Array<IListsListType>;
-  pending: keyof typeof PendingState;
+  pending: PendingState;
 
   bulkAdd: (listId: number) => void;
   checkAll: () => void;
@@ -19,7 +17,7 @@ export interface IIngredientButtonsProps {
 }
 
 const IngredientButtons: React.FC<IIngredientButtonsProps> = ({ lists, pending, bulkAdd, checkAll, unCheckAll }: IIngredientButtonsProps) => {
-  const intl = useIntl();
+  const { formatMessage } = useIntl();
 
   const messages = defineMessages({
     save: {
@@ -39,50 +37,49 @@ const IngredientButtons: React.FC<IIngredientButtonsProps> = ({ lists, pending, 
     },
   });
 
-  const listTitles: Array<React.ReactNode> = lists?.map(list => (
+  const listTitles: Array<React.ReactNode> = lists.map(list => (
     <Dropdown.Item
         key={list.id}
         eventKey={list.id}
         onClick={() => bulkAdd(list.id)}>
       { list.title }
     </Dropdown.Item>
-  )) ?? [];
-
-  const listStatus = pending;
-
-  let checkmark: React.ReactNode = '';
-  if (listStatus === PendingState.LOADING) {
-    checkmark = (
-      <Spinner name='circle' className='recipe-list-spinner' fadeIn='none' />
-    );
-  } else if (listStatus === PendingState.COMPLETED) {
-    checkmark = (
-      <Icon icon='check' variant='light' />
-    );
-  } else if (listStatus === PendingState.ABORTED) {
-    checkmark = (
-      <Icon icon='x' variant='light' />
-    );
-  }
+  ));
 
   const dropdown = (
-    <DropdownButton title={intl.formatMessage(messages.save)} id='ing-save'>
+    <DropdownButton title={formatMessage(messages.save)} id='ing-save'>
       {listTitles}
     </DropdownButton>
   );
 
+  /* TODO Lists
+  let checkmark = '';
+  if (pending === PendingState.LOADING) {
+    checkmark = (
+      <Spinner spinnerName="circle" className="recipe-list-spinner" noFadeIn />
+    )
+  } else if (pending === PendingState.COMPLETED) {
+    checkmark = (
+      <div className="glyphicon glyphicon-ok"/>
+    );
+  } else if (pending === PendingState.ABORTED) {
+    checkmark = (
+      <div className="glyphicon glyphicon-remove"/>
+    );
+  } */
+
   return (
-    <div className='ingredients-save'>
+    <div className='ingredients-buttons'>
       <ButtonGroup>
         <Button onClick={checkAll} variant='outline-primary'>
-          {intl.formatMessage(messages.check_all)}
+          {formatMessage(messages.check_all)}
         </Button>
         <Button onClick={unCheckAll} variant='outline-primary'>
-          {intl.formatMessage(messages.clear)}
+          {formatMessage(messages.clear)}
         </Button>
         {listTitles.length > 0 && dropdown}
+        {/* pending && checkmark */}
       </ButtonGroup>
-      { checkmark }
     </div>
   );
 };

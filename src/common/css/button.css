@@ -1,0 +1,82 @@
+.btn-primary {
+  background-color: var(--primaryMain);
+  border-color: var(--primaryMain);
+  color: var(--primaryContrast);
+}
+.btn-primary:hover {
+  background-color: var(--primaryLight);
+  border-color: var(--primaryLight);
+  color: var(--primaryContrast);
+}
+.btn-check:focus + .btn-primary, .btn-primary:focus {
+  background-color: var(--primaryLight);
+  border-color: var(--primaryLight);
+  color: var(--primaryContrast);
+  box-shadow: 0 0 0 .15rem var(--primaryShadow);
+}
+.btn-check:active + .btn-primary, .btn-check:checked + .btn-primary, .btn-primary.active, .btn-primary:active, .show > .btn-primary.dropdown-toggle {
+  color: var(--primaryContrast);
+  background-color: var(--primaryLight);
+  border-color: var(--primaryLight);
+}
+.btn-check:active + .btn-primary:focus, .btn-check:checked + .btn-primary:focus, .btn-primary.active:focus, .btn-primary:active:focus, .show > .btn-primary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 .15rem var(--primaryShadow);
+}
+
+.btn-outline-primary {
+  color: var(--primaryMain);
+  border-color: var(--primaryMain);
+}
+.btn-outline-primary:hover {
+  color: var(--primaryContrast);
+  background-color: var(--primaryMain);
+  border-color: var(--primaryMain);
+}
+.btn-check:focus + .btn-outline-primary, .btn-outline-primary:focus {
+  color: var(--primaryContrast);
+  background-color: var(--primaryLight);
+  border-color: var(--primaryLight);
+  box-shadow: 0 0 0 .15rem var(--primaryShadow);
+}
+.btn-check:active + .btn-outline-primary, .btn-check:checked + .btn-outline-primary, .btn-outline-primary.active, .btn-outline-primary.dropdown-toggle.show, .btn-outline-primary:active {
+  color: var(--primaryContrast);
+  background-color: var(--primaryLight);
+  border-color: var(--primaryLight);
+}
+.btn-check:active + .btn-outline-primary:focus, .btn-check:checked + .btn-outline-primary:focus, .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus, .btn-outline-primary:active:focus {
+  box-shadow: 0 0 0 .15rem var(--primaryShadow);
+}
+.btn-outline-primary.disabled, .btn-outline-primary:disabled {
+  color: var(--disabledText);
+  background-color: var(--inputBgDisabled);
+  border-color: var(--disabledText);
+}
+
+.btn-outline-danger {
+  color: var(--errorText);
+  border-color: var(--errorText);
+}
+.btn-outline-danger:hover {
+  color: var(--primaryContrast);
+  background-color: var(--errorText);
+  border-color: var(--errorText);
+}
+.btn-check:focus + .btn-outline-danger, .btn-outline-danger:focus {
+  color: var(--primaryContrast);
+  background-color: var(--errorText);
+  border-color: var(--errorText);
+  box-shadow: 0 0 0 .15rem rgba(255, 92, 92, 0.3);
+}
+.btn-check:active + .btn-outline-danger, .btn-check:checked + .btn-outline-danger, .btn-outline-danger.active, .btn-outline-danger.dropdown-toggle.show, .btn-outline-danger:active {
+  color: var(--primaryContrast);
+  background-color: var(--errorText);
+  border-color: var(--errorText);
+}
+.btn-check:active + .btn-outline-danger:focus, .btn-check:checked + .btn-outline-danger:focus, .btn-outline-danger.active:focus, .btn-outline-danger.dropdown-toggle.show:focus, .btn-outline-danger:active:focus {
+  box-shadow: 0 0 0 .15rem rgba(255, 92, 92, 0.3);
+}
+.btn-outline-danger.disabled, .btn-outline-danger:disabled {
+  color: var(--disabledText);
+  background-color: var(--inputBgDisabled);
+  border-color: var(--disabledText);
+}

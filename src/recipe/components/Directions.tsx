@@ -6,11 +6,11 @@ const Directions: React.FC<IDirectionsProps> = ({ data }: IDirectionsProps) => {
   let directions: Array<React.ReactNode> = [];
   const directionsGroups = [];
 
-  data.split('\n').map((direction, i) => {
+  data.split('\n').forEach(direction => {
     if (direction.length > 0) {
       if (direction.endsWith(':')) {
         directionsGroups.push(
-          <div key={i}>
+          <div key={direction}>
             <ol className='directions'>
               {directions}
             </ol>
@@ -20,7 +20,7 @@ const Directions: React.FC<IDirectionsProps> = ({ data }: IDirectionsProps) => {
         directions = [];
       } else {
         directions.push(
-          <li className='direction' key={i}>
+          <li className='direction' key={direction}>
             {direction}
           </li>
         );

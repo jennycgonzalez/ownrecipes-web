@@ -2,7 +2,7 @@
 
 exports[`Test Header 1`] = `
 <div
-  className="panel-heading hero-image"
+  className="hero-image card-header"
   style={
     Object {
       "backgroundImage": "url(1)",
@@ -10,56 +10,59 @@ exports[`Test Header 1`] = `
   }
 >
   <div
-    className="row title"
+    className="title row"
   >
     <div
-      className="col-xs-12"
+      className="col-12"
     >
-      <h3>
+      <h2>
         Tasty Chili
-      </h3>
+      </h2>
       <p
         className="rating-stars"
       >
-        <span
-          className="glyphicon glyphicon-star"
+        <i
+          className="bi bi-star-fill size-1x"
         />
-        <span
-          className="glyphicon glyphicon-star"
+        <i
+          className="bi bi-star-fill size-1x"
         />
-        <span
-          className="glyphicon glyphicon-star"
+        <i
+          className="bi bi-star-fill size-1x"
         />
-        <span
-          className="glyphicon glyphicon-star-empty"
+        <i
+          className="bi bi-star size-1x"
         />
-        <span
-          className="glyphicon glyphicon-star-empty"
+        <i
+          className="bi bi-star size-1x"
         />
       </p>
     </div>
   </div>
   <div
-    className="row options print-hidden"
+    className="options print-hidden row"
   >
     <div
-      className="col-xs-12"
+      className="col-12"
     >
       <button
         className="btn btn-primary"
+        disabled={false}
+        onClick={[MockFunction]}
+        type="button"
       >
-        <span
-          aria-hidden="true"
-          className="glyphicon glyphicon-calendar"
+        <i
+          className="bi bi-calendar-fill size-1x"
         />
       </button>
       <button
         className="btn btn-primary"
+        disabled={false}
         onClick={[Function]}
+        type="button"
       >
-        <span
-          aria-hidden="true"
-          className="glyphicon glyphicon-print"
+        <i
+          className="bi bi-printer-fill size-1x"
         />
       </button>
     </div>
@@ -69,34 +72,34 @@ exports[`Test Header 1`] = `
 
 exports[`Test Header w/ bad rating 1`] = `
 <div
-  className="panel-heading"
+  className="card-header"
 >
   <div
     className="row"
   >
     <div
-      className="col-xs-12"
+      className="col-12"
     >
-      <h3>
+      <h2>
         Tasty Chili
-      </h3>
+      </h2>
       <p
         className="rating-stars"
       >
-        <span
-          className="glyphicon glyphicon-star-empty"
+        <i
+          className="bi bi-star size-1x"
         />
-        <span
-          className="glyphicon glyphicon-star-empty"
+        <i
+          className="bi bi-star size-1x"
         />
-        <span
-          className="glyphicon glyphicon-star-empty"
+        <i
+          className="bi bi-star size-1x"
         />
-        <span
-          className="glyphicon glyphicon-star-empty"
+        <i
+          className="bi bi-star size-1x"
         />
-        <span
-          className="glyphicon glyphicon-star-empty"
+        <i
+          className="bi bi-star size-1x"
         />
       </p>
     </div>
@@ -106,34 +109,34 @@ exports[`Test Header w/ bad rating 1`] = `
 
 exports[`Test Header w/ no Photo 1`] = `
 <div
-  className="panel-heading"
+  className="card-header"
 >
   <div
     className="row"
   >
     <div
-      className="col-xs-12"
+      className="col-12"
     >
-      <h3>
+      <h2>
         Tasty Chili
-      </h3>
+      </h2>
       <p
         className="rating-stars"
       >
-        <span
-          className="glyphicon glyphicon-star"
+        <i
+          className="bi bi-star-fill size-1x"
         />
-        <span
-          className="glyphicon glyphicon-star"
+        <i
+          className="bi bi-star-fill size-1x"
         />
-        <span
-          className="glyphicon glyphicon-star"
+        <i
+          className="bi bi-star-fill size-1x"
         />
-        <span
-          className="glyphicon glyphicon-star-empty"
+        <i
+          className="bi bi-star size-1x"
         />
-        <span
-          className="glyphicon glyphicon-star-empty"
+        <i
+          className="bi bi-star size-1x"
         />
       </p>
     </div>

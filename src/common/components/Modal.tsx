@@ -1,6 +1,8 @@
 import { defineMessages, useIntl } from 'react-intl';
 import { Button, Modal as BootstrapModal } from 'react-bootstrap';
 
+import '../css/modal.css';
+
 export interface IModalProps {
   show: boolean;
   title: string;

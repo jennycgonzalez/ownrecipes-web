@@ -7,10 +7,9 @@ export interface IIngredientsProps {
 }
 
 const Ingredients: React.FC<IIngredientsProps> = ({ data, checkIngredient }: IIngredientsProps) => {
-  const ingredients = data.map((ingredient, i) => (
-    <li className='ingredient' key={i}>
+  const ingredients = data.map(ingredient => (
+    <li className='ingredient' key={String(ingredient.id)}>
       <Checkbox
-          id      = {String(ingredient.id)}
           name    = {String(ingredient.id)}
           checked = {ingredient.checked ?? false}
           change  = {(name, newValue) => checkIngredient(parseInt(name), newValue)} />

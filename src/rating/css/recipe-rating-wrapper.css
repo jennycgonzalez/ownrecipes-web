@@ -1,15 +1,21 @@
 .rating-panel {
   margin-top: 2rem;
 }
-.rating-panel .card-header {
-  padding-bottom: 0;
+.rating-panel .card-header .ratings-heading-col {
+  display: flex;
+  align-items: center;
 }
 .rating-panel .card-header h2 {
   font-size: 1.1em;
+  margin-bottom: 0;
 }
-.rating-panel .card-footer {
-  padding-bottom: 0;
+
+.rating-panel .new-rating-heading {
+  font-size: 1.1em;
 }
-.rating-panel .card-footer .row {
+.rating-panel .new-rating {
+  margin-bottom: 30px;
+}
+.rating-panel .new-rating .row {
   margin-bottom: 15px;
 }

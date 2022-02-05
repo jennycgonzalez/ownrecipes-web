@@ -11,12 +11,19 @@ export enum ACTION {
 
   RESET = 'RESET',
   SOFT_RESET = 'SOFT_RESET',
+
+  NO_CONNECTION = 'NO_CONNECTION',
 }
 
 export type GenericErrorAction = {
   store: string;
   type:  typeof ACTION.ERROR;
   data?: Error | undefined;
+}
+
+export type GenericNoConnectionAction = {
+  store: string;
+  type:  typeof ACTION.NO_CONNECTION;
 }
 
 export type GenericResetAction = {
@@ -29,7 +36,7 @@ export type GenericSoftResetAction = {
   type:  typeof ACTION.SOFT_RESET;
 }
 
-export type GenericReducerAction = GenericErrorAction | GenericResetAction | GenericSoftResetAction;
+export type GenericReducerAction = GenericErrorAction | GenericNoConnectionAction | GenericResetAction | GenericSoftResetAction;
 
 export default class ReduxHelper {
   static transformEntities<TDto, TEntity>(arr: Array<TDto>, toEntity: (dto: TDto) => TEntity): Array<TEntity> {
@@ -44,6 +51,7 @@ export default class ReduxHelper {
 
       error: undefined,
       pending: PendingState.INITIAL,
+      hasConnection: true,
     };
 
     return newState;
@@ -57,6 +65,7 @@ export default class ReduxHelper {
 
       error: undefined,
       pending: PendingState.INITIAL,
+      hasConnection: true,
     };
 
     return newState;
@@ -70,6 +79,7 @@ export default class ReduxHelper {
 
       error: undefined,
       pending: PendingState.INITIAL,
+      hasConnection: true,
     };
 
     return newState;
@@ -80,6 +90,7 @@ export default class ReduxHelper {
 
     newState.error = error;
     newState.pending = PendingState.ABORTED;
+    newState.hasConnection = true;
 
     return newState;
   };
@@ -90,6 +101,7 @@ export default class ReduxHelper {
 
     newState.error = undefined;
     newState.pending = PendingState.COMPLETED;
+    newState.hasConnection = true;
 
     newState.item  = item;
 
@@ -105,6 +117,7 @@ export default class ReduxHelper {
 
     updState.error = undefined;
     updState.pending = PendingState.COMPLETED;
+    updState.hasConnection = true;
     updState.items = updMap;
     return updState;
   }
@@ -117,6 +130,7 @@ export default class ReduxHelper {
     updMap.delete(id);
     updState.error = undefined;
     updState.pending = PendingState.COMPLETED;
+    updState.hasConnection = true;
     updState.items = updMap;
     return updState;
   }
@@ -127,6 +141,18 @@ export default class ReduxHelper {
 
     newState.error = undefined;
     newState.pending = PendingState.INITIAL;
+    newState.hasConnection = true;
+
+    return newState;
+  };
+
+  static setNoConnection = <T>(state: T): T => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const newState = { ...state } as any;
+
+    newState.error = undefined;
+    newState.pending = PendingState.INITIAL;
+    newState.hasConnection = false;
 
     return newState;
   };
@@ -141,6 +167,8 @@ export default class ReduxHelper {
 
       case ACTION.RESET: return defaultState;
       case ACTION.SOFT_RESET: return ReduxHelper.setSoftReset(state);
+
+      case ACTION.NO_CONNECTION: return ReduxHelper.setNoConnection(state);
 
       default: return state;
     }

@@ -1,30 +1,37 @@
 import { defineMessages, useIntl } from 'react-intl';
+import P from '../../common/components/P';
+import PageWrapper from '../../common/components/PageWrapper';
 import { getResourcePath } from '../../common/utility';
 
 import '../css/404.css';
 
 const NotFound = () => {
-  const intl = useIntl();
+  const { formatMessage } = useIntl();
 
   const messages = defineMessages({
+    not_found: {
+      id: '404.title',
+      description: '404 site title',
+      defaultMessage: 'Not Found',
+    },
     header: {
       id: '404.header',
       description: '404 Header',
-      defaultMessage: 'Our chef\'s ruined this recipe in the test kitchen, we suggest you try something else',
+      defaultMessage: 'Site not found',
     },
     message: {
       id: '404.message',
       description: '404 Message',
-      defaultMessage: 'Sorry the page came back with a 404 error we can\'t find what you are looking for',
+      defaultMessage: 'The page you\'re looking for does not exist.',
     },
   });
 
   return (
-    <div className='not-found'>
-      <h3>{ intl.formatMessage(messages.header) }</h3>
+    <PageWrapper title={formatMessage(messages.not_found)}>
+      <h3>{formatMessage(messages.header)}</h3>
       <img className='img-responsive' src={getResourcePath('/images/404.png')} alt='404' />
-      <p>{ intl.formatMessage(messages.message) }</p>
-    </div>
+      <P>{formatMessage(messages.message)}</P>
+    </PageWrapper>
   );
 };
 

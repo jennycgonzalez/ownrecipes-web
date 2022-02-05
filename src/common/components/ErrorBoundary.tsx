@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { AnyComponent } from '../../types/Types';
+import P from './P';
 
 interface IErrorBoundaryProps {
   /** Print message? */
@@ -63,13 +64,13 @@ const ErrorBoundaryContainer: React.FC<IErrorBoundaryContainerProps> = (props: I
           {this.props.verbose && (
             <>
               <h2>Message:</h2>
-              <p>{this.state.error.message}</p>
+              <P>{this.state.error.message}</P>
             </>
           )}
           {this.props.printStack && (
             <>
               <h2>Stack:</h2>
-              <p>{this.state.error.stack}</p>
+              <P>{this.state.error.stack}</P>
             </>
           )}
         </ErrorBoundaryContainer>

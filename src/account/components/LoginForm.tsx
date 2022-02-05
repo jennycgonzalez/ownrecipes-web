@@ -7,6 +7,8 @@ import '../css/login.css';
 import { AccountState } from '../store/types';
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
+import Icon from '../../common/components/Icon';
+import Input from '../../common/components/Input';
 
 export interface ILoginFormProps {
   accountState: AccountState;
@@ -24,10 +26,10 @@ const LoginForm: React.FC<ILoginFormProps> = (props: ILoginFormProps) => {
 
   const [formData, setFormData] = useState<ILoginFormData>({ username: '', password: '' });
 
-  const handleChange = (attr: string, event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (attr: string, value: string) => {
     setFormData(prev => {
       const newState = _.cloneDeep(prev);
-      _.set(newState, attr, event.target.value);
+      _.set(newState, attr, value);
       return newState;
     });
   };
@@ -63,24 +65,29 @@ const LoginForm: React.FC<ILoginFormProps> = (props: ILoginFormProps) => {
 
   return (
     <form className='form-signin' onSubmit={handleSubmit}>
-      {props.accountState.error && <Alert />}
+      <Alert reducerState={props.accountState} />
       <h2 className='form-signin-heading'>{formatMessage(messages.please_sign_in)}</h2>
-      <input
-          type='text'
-          id='username'
-          className='form-control'
-          placeholder={formatMessage(messages.username)}
-          onChange={event => handleChange('username', event)}
-          // eslint-disable-next-line jsx-a11y/no-autofocus
-          autoFocus />
-      <input
-          type='password'
-          id='password'
-          className='form-control'
-          placeholder={formatMessage(messages.password)}
-          onChange={event => handleChange('password', event)} />
-      <Button variant='primary' type='submit' className='btn-block'>
-        { formatMessage(messages.sign_in) }
+      <Input
+          name  = 'username'
+          value = {formData.username}
+          placeholder = {formatMessage(messages.username)}
+          autoComplete = 'username'
+          autoFocus
+          required
+          inputAdornmentStart = {<Icon icon='person' size='2x' />}
+          change = {handleChange} />
+      <Input
+          name  = 'password'
+          value = {formData.password}
+          type  = 'password'
+          placeholder = {formatMessage(messages.password)}
+          autoComplete = 'password'
+          required
+          inputAdornmentStart = {<Icon icon='key' size='2x' />}
+          change = {handleChange} />
+
+      <Button variant='primary' type='submit'>
+        {formatMessage(messages.sign_in)}
       </Button>
     </form>
   );

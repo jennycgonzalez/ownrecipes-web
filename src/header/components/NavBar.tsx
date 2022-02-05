@@ -17,6 +17,8 @@ export interface INavBarProps {
   settings: Settings;
   lists:    Array<ListItemType> | undefined;
 
+  isLoginPage: boolean;
+
   onChangeLanguage: (language: LanguageCode) => void;
   onChangeTheme: (theme: ThemeMode) => void;
   onLogoutClick: () => void;
@@ -26,10 +28,10 @@ export interface INavBarProps {
 const NavBar: React.FC<INavBarProps> = (props: INavBarProps) => {
   const { formatMessage } = useIntl();
   const messages = defineMessages({
-    brand: {
-      id: 'nav.brand',
-      description: 'Open Eats title',
-      defaultMessage: 'Open Eats',
+    home: {
+      id: 'nav.home',
+      description: 'Home',
+      defaultMessage: 'Home',
     },
     recipes: {
       id: 'nav.recipes',
@@ -47,10 +49,10 @@ const NavBar: React.FC<INavBarProps> = (props: INavBarProps) => {
   const isAuthenticated = account != null && account.id !== 0;
 
   return (
-    <Navbar bg='light' collapseOnSelect className='header'>
+    <Navbar collapseOnSelect className='header'>
       <Container>
         <Navbar.Brand>
-          <Link to={getResourcePath('/home')}>
+          <Link to={getResourcePath('/home')} title={formatMessage(messages.home)}>
             <Image alt='Brand' src={getResourcePath('/images/chef.png')} width='30' height='30' className='d-inline-block align-top' />
           </Link>
         </Navbar.Brand>
@@ -64,17 +66,16 @@ const NavBar: React.FC<INavBarProps> = (props: INavBarProps) => {
             {isAuthenticated && <GroceryListMenuItem data={props.lists} />}
           </Nav>
           <Nav className='my-account-nav'>
-            {(isAuthenticated
-                ? (
-                  <AccountMenuMenuItem
-                      account  = {account}
-                      settings = {settings}
-                      onChangeLanguage = {props.onChangeLanguage}
-                      onChangeTheme = {props.onChangeTheme}
-                      onLogoutClick = {props.onLogoutClick} />
-                ) : (
-                  <AccountLoginMenuItem />
-                )
+            {isAuthenticated && (
+              <AccountMenuMenuItem
+                  account  = {account}
+                  settings = {settings}
+                  onChangeLanguage = {props.onChangeLanguage}
+                  onChangeTheme = {props.onChangeTheme}
+                  onLogoutClick = {props.onLogoutClick} />
+            )}
+            {!isAuthenticated && !props.isLoginPage && (
+              <AccountLoginMenuItem />
             )}
           </Nav>
         </Navbar.Collapse>

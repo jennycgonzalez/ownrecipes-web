@@ -23,7 +23,7 @@ function deleteRating(state: RatingsState, recipe: string, ratingId: number): Ra
 
   let ratings = updMap.get(recipe);
   if (ratings == null) return state;
-  ratings = ratings.filter(r => r.id === ratingId);
+  ratings = ratings.filter(r => r.id !== ratingId);
 
   updMap.set(recipe, ratings);
   updState.items = updMap;

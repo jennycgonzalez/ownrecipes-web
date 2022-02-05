@@ -1,6 +1,3 @@
-.not-found {
+#content .container.NotFound {
   text-align: center;
-}
-.not-found .img-responsive {
-  display: inline-block;
 }

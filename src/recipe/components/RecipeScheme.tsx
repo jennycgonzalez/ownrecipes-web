@@ -11,7 +11,7 @@ import InfoPanel from './InfoPanel';
 import '../css/recipe.css';
 import { Recipe } from '../store/types';
 import GenericReducerType from '../../common/store/GenericReducerType';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 
 interface IRecipeSchemeProps {
   recipe: Recipe;
@@ -87,7 +87,8 @@ const RecipeScheme: React.FC<IRecipeSchemeProps> = (props: IRecipeSchemeProps) =
                   subRecipes = {recipe.subrecipes}
                   checkSubRecipe = {props.checkSubRecipe} />
               <IngredientGroups
-                  groups = {recipe.ingredient_groups}
+                  groups  = {recipe.ingredient_groups}
+                  pending = {props.recipesState.pending}
                   checkIngredient = {props.checkIngredient} />
               <IngredientButtons
                   pending    = {props.recipesState.pending}

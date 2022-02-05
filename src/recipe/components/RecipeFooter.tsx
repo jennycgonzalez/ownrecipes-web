@@ -3,6 +3,7 @@ import { defineMessages, useIntl } from 'react-intl';
 import { Button, ButtonGroup, Card, Col, Row } from 'react-bootstrap';
 import { getResourcePath } from '../../common/utility';
 import Icon from '../../common/components/Icon';
+import P from '../../common/components/P';
 
 export interface IRecipeFooterProps {
   slug:         string,
@@ -14,7 +15,7 @@ export interface IRecipeFooterProps {
 }
 
 const RecipeFooter: React.FC<IRecipeFooterProps> = ({ slug, source, username, updateDate, showEditLink, deleteRecipe }: IRecipeFooterProps) => {
-  const intl = useIntl();
+  const { formatMessage } = useIntl();
 
   const messages = defineMessages({
     source: {
@@ -48,14 +49,15 @@ const RecipeFooter: React.FC<IRecipeFooterProps> = ({ slug, source, username, up
   }
 
   const handleDelete = () => {
-    if (window.confirm(intl.formatMessage(messages.confirm_delete))) {
+    if (window.confirm(formatMessage(messages.confirm_delete))) {
       deleteRecipe(slug);
+      // TODO navigate to /browse
     }
   };
 
   const sourceLink = (
     <div>
-      {`${intl.formatMessage(messages.source)}: `}
+      {`${formatMessage(messages.source)}: `}
       <a href={source}>{hostname}</a>
     </div>
   );
@@ -79,8 +81,8 @@ const RecipeFooter: React.FC<IRecipeFooterProps> = ({ slug, source, username, up
       <Row>
         <Col>
           {source && sourceLink}
-          <div>{`${intl.formatMessage(messages.created_by)}: ${username}`}</div>
-          <div>{`${intl.formatMessage(messages.last_updated)}: ${updateDate}`}</div>
+          <P variant='body2'>{`${formatMessage(messages.created_by)}: ${username}`}</P>
+          <P variant='body2'>{`${formatMessage(messages.last_updated)}: ${updateDate}`}</P>
         </Col>
         {showEditLink && (
           <Col xs='auto'>

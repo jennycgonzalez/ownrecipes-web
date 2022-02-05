@@ -1,8 +1,11 @@
+#content > .container.login {
+  background-color: transparent;
+}
+
 .form-signin .form-header {
   font-size: 1.2em;
   justify-content: center;
-  color: green;
-  background-color: rgba(128, 128, 128, 0.15);
+  background-color: rgba(128, 128, 128, 0.12);
 }
 
 .form-signin h1, .form-signin h2 {
@@ -23,12 +26,18 @@
   font-size: 16px;
 }
 .form-signin input[type="text"] {
-  margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 .form-signin input[type="password"] {
-  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.form-signin .form-group:first-of-type .input-group-text {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin .form-group:last-of-type .input-group-text {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }

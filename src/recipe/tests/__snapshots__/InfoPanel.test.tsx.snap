@@ -29,13 +29,14 @@ exports[`Long Info Panel 1`] = `
             className="input-group print-hidden"
           >
             <div
-              className="servings-textbox"
+              className="form-group"
             >
               <div
-                className="form-group null"
+                className="input-group"
               >
                 <input
                   className="form-control"
+                  id="servings"
                   name="servings"
                   onChange={[Function]}
                   type="number"
@@ -47,13 +48,13 @@ exports[`Long Info Panel 1`] = `
               className="input-group-btn"
             >
               <button
-                className="btn btn-default"
-                onClick={[Function]}
+                className="btn btn-outline-primary"
+                disabled={false}
+                onClick={[MockFunction]}
                 type="button"
               >
-                <span
-                  aria-hidden="true"
-                  className="glyphicon glyphicon-remove"
+                <i
+                  className="bi bi-x-square-fill size-1x"
                 />
               </button>
             </span>
@@ -80,7 +81,9 @@ exports[`Long Info Panel 1`] = `
   <div
     className="panel-body"
   >
-    <p>
+    <p
+      className="body1"
+    >
       Lorem ipsum dolor sit amet, odio sem vel nulla aliquam, vestibulum pellentesque at risus eros, at leo mi urna quam, magna nunc vestibulum nibh condimentum arcu. Eu nunc blandit arcu magna, morbi eleifend dolor, nam ratione justo ullamcorper platea malesuada donec, fusce luctus varius. Vel ipsum nunc in justo, pulvinar magna interdum ut nunc vestibulum. Lorem dui vitae. Lectus elit vel lorem purus, in tortor, mi diam mus venenatis sit bibendum eu. Odio nec lectus quisquam ac eleifend sem, arcu congue neque neque nunc, nam maecenas, nec mauris pede erat dignissim, in gravida tempor. In amet mauris odio vitae montes. Nec vitae nostrud vestibulum, at in tincidunt justo varius wisi ut, nullam wisi erat lorem tempor ac. Lorem ipsum dolor sit amet, odio sem vel nulla aliquam, vestibulum pellentesque at risus eros, at leo mi urna quam, magna nunc vestibulum nibh condimentum arcu. Eu nunc blandit arcu magna, morbi eleifend dolor, nam ratione justo ullamcorper platea malesuada donec, fusce luctus varius. Vel ipsum nunc in justo, pulvinar magna interdum ut nunc vestibulum. Lorem dui vitae. Lectus elit vel lorem purus, in tortor, mi diam mus venenatis sit bibendum eu. Odio nec lectus quisquam ac eleifend sem, arcu congue neque neque nunc, nam maecenas, nec mauris pede erat dignissim, in gravida tempor. In amet mauris odio vitae montes. Nec vitae nostrud vestibulum, at in tincidunt justo varius wisi ut, nullam wisi erat lorem tempor ac.
     </p>
   </div>
@@ -116,13 +119,14 @@ exports[`Short Info Panel 1`] = `
             className="input-group print-hidden"
           >
             <div
-              className="servings-textbox"
+              className="form-group"
             >
               <div
-                className="form-group null"
+                className="input-group"
               >
                 <input
                   className="form-control"
+                  id="servings"
                   name="servings"
                   onChange={[Function]}
                   type="number"
@@ -134,13 +138,13 @@ exports[`Short Info Panel 1`] = `
               className="input-group-btn"
             >
               <button
-                className="btn btn-default"
-                onClick={[Function]}
+                className="btn btn-outline-primary"
+                disabled={false}
+                onClick={[MockFunction]}
                 type="button"
               >
-                <span
-                  aria-hidden="true"
-                  className="glyphicon glyphicon-remove"
+                <i
+                  className="bi bi-x-square-fill size-1x"
                 />
               </button>
             </span>
@@ -167,7 +171,9 @@ exports[`Short Info Panel 1`] = `
   <div
     className="panel-body"
   >
-    <p>
+    <p
+      className="body1"
+    >
       This is a test!
     </p>
   </div>

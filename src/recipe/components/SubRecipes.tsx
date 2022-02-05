@@ -14,7 +14,6 @@ const SubRecipes: React.FC<ISubRecipesProps> = ({ subRecipes, checkSubRecipe }: 
   const subRecipesList = subRecipes.map(subRecipe => (
     <li className='ingredient' key={subRecipe.child_recipe_id}>
       <Checkbox
-          id={String(subRecipe.child_recipe_id)}
           name={String(subRecipe.child_recipe_id)}
           checked={subRecipe.checked ?? false}
           change={(_id, checked) => checkSubRecipe(subRecipe.child_recipe_id, checked)} />
@@ -35,6 +34,8 @@ const SubRecipes: React.FC<ISubRecipesProps> = ({ subRecipes, checkSubRecipe }: 
       )}
     </li>
   ));
+
+  if (subRecipesList.length === 0) return null;
 
   return (
     <ul className='ingredients'>

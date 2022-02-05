@@ -19,10 +19,11 @@ exports[`Ingredient Group component test 1`] = `
         <div>
           <label
             className="check-container"
+            htmlFor="1"
           >
             <input
               checked={false}
-              name={1}
+              name="1"
               onChange={[Function]}
               type="checkbox"
             />
@@ -34,14 +35,12 @@ exports[`Ingredient Group component test 1`] = `
         <span
           className="quantity"
         >
-          1
-           
+          1 
         </span>
         <span
           className="measurement"
         >
-          dash
-           
+          dash 
         </span>
         <span
           className="title"
@@ -66,10 +65,11 @@ exports[`Ingredient Group component test 1`] = `
         <div>
           <label
             className="check-container"
+            htmlFor="1"
           >
             <input
               checked={false}
-              name={1}
+              name="1"
               onChange={[Function]}
               type="checkbox"
             />
@@ -81,14 +81,12 @@ exports[`Ingredient Group component test 1`] = `
         <span
           className="quantity"
         >
-          1
-           
+          1 
         </span>
         <span
           className="measurement"
         >
-          dash
-           
+          dash 
         </span>
         <span
           className="title"
@@ -101,6 +99,7 @@ exports[`Ingredient Group component test 1`] = `
   <div
     className="ingredient-group"
   >
+    
     <ul
       className="ingredients"
     >
@@ -110,10 +109,11 @@ exports[`Ingredient Group component test 1`] = `
         <div>
           <label
             className="check-container"
+            htmlFor="1"
           >
             <input
               checked={false}
-              name={1}
+              name="1"
               onChange={[Function]}
               type="checkbox"
             />
@@ -125,14 +125,12 @@ exports[`Ingredient Group component test 1`] = `
         <span
           className="quantity"
         >
-          1
-           
+          1 
         </span>
         <span
           className="measurement"
         >
-          dash
-           
+          dash 
         </span>
         <span
           className="title"

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { defineMessages, useIntl } from 'react-intl';
-import { NavDropdown, Dropdown, ListGroup } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { NavDropdown, ListGroup, Button } from 'react-bootstrap';
 import { getResourcePath } from '../../common/utility';
 import { UserAccount } from '../../account/store/types';
 import Modal from '../../common/components/Modal';
@@ -18,9 +17,7 @@ export const AccountLoginMenuItem: React.FC = () => {
   });
 
   return (
-    <LinkContainer to={getResourcePath('/login')}>
-      <Dropdown.Item>{formatMessage(messages.label)}</Dropdown.Item>
-    </LinkContainer>
+    <Button variant='primary' href={getResourcePath('/login')}>{formatMessage(messages.label)}</Button>
   );
 };
 
@@ -133,6 +130,7 @@ export const AccountMenuMenuItem: React.FC<IAccountMenuMenuItemProps> = (props: 
               <span>{formatMessage(messages.title)}</span>
             </>
           )}
+          align = 'end'
           id='basic-nav-dropdown'>
         <NavDropdown.Item onClick={handleChangeLanguageClick}>{`${formatMessage(messages.language)} …`}</NavDropdown.Item>
         <NavDropdown.Item onClick={handleChangeThemeClick}>{`${formatMessage(messages.theme)} …`}</NavDropdown.Item>

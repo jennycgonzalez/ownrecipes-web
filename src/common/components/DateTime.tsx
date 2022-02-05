@@ -1,6 +1,7 @@
 import Datetime from 'react-datetime';
 import moment from 'moment';
 import { BaseComponent, IBaseComponentProps } from './FormComponents';
+import { Form } from 'react-bootstrap';
 
 require('react-datetime/css/react-datetime.css');
 
@@ -30,18 +31,16 @@ export default class DateTime extends BaseComponent<IDateTimeProps, IDateTimeSta
 
   render() {
     return (
-      <div className={this.props.class} key={this.props.id}>
-        <div className={`form-group ${this.hasErrors() ? 'has-error' : null}`}>
-          {this.props.label && <label htmlFor={this.props.name}>{this.props.label}</label>}
-          <Datetime
-              inputProps={{ name: this.props.name, className: 'form-control' }}
-              onChange={this.handleChange}
-              value={!this.props.timeFormat ? moment(this.state.value).format('ddd, ll') : moment(this.state.value).format('llll')}
-              dateFormat={this.props.dateFormat || 'ddd, ll'}
-              timeFormat={this.props.timeFormat} />
-          {this.getErrorMessage()}
-        </div>
-      </div>
+      <Form.Group controlId={this.props.name} className='form-group'>
+        {this.props.label && <Form.Label>{this.props.label}</Form.Label>}
+        <Datetime
+            value = {!this.props.timeFormat ? moment(this.state.value).format('ddd, ll') : moment(this.state.value).format('llll')}
+            inputProps = {{ name: this.props.name, className: 'form-control' }}
+            dateFormat ={this.props.dateFormat || 'ddd, ll'}
+            timeFormat ={this.props.timeFormat}
+            onChange   = {this.handleChange} />
+        {this.getErrorMessage()}
+      </Form.Group>
     );
   }
 }

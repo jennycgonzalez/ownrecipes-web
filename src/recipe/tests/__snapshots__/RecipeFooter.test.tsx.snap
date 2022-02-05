@@ -2,56 +2,65 @@
 
 exports[`Test Footer with Edit Link 1`] = `
 <div
-  className="panel-footer"
+  className="card-footer"
 >
   <div
     className="row"
   >
     <div
-      className="col-xs-6"
+      className="col"
     >
       <div>
-        Source
-        :
+        Source: 
         <a
           href="google.com"
         >
           localhost
         </a>
       </div>
-      <div>
-        Created by
-        : 
-      </div>
-      <div>
-        Last Updated
-        : 
-        2017-01-01
-      </div>
+      <p
+        className="body2"
+      >
+        Created by: Ryan Noelk
+      </p>
+      <p
+        className="body2"
+      >
+        Last Updated: 2017-01-01
+      </p>
     </div>
     <div
-      className="col-xs-6 pull-right text-right"
+      className="col-auto"
     >
-      <a
-        href="/recipe/edit/undefined"
-        onClick={[Function]}
+      <div
+        className="btn-group"
+        role="group"
       >
-        <button
-          className="btn btn-primary btn-sm"
+        <a
+          href="/recipe/edit/123"
+          onClick={[Function]}
         >
-          <span
-            className="glyphicon glyphicon-pencil"
+          <button
+            className="btn btn-primary btn-sm"
+            disabled={false}
+            type="button"
+          >
+            <i
+              className="bi bi-pencil-fill"
+            />
+          </button>
+        </a>
+        <button
+          className="btn btn-danger btn-sm"
+          disabled={false}
+          onClick={[Function]}
+          type="button"
+        >
+          <i
+            className="bi bi-trash-fill size-1x"
           />
         </button>
-      </a>
-      <button
-        className="btn btn-danger btn-sm"
-        onClick={[Function]}
-      >
-        <span
-          className="glyphicon glyphicon-trash"
-        />
-      </button>
+      </div>
     </div>
   </div>
 </div>
@@ -59,36 +68,33 @@ exports[`Test Footer with Edit Link 1`] = `
 
 exports[`Test Footer without Edit Link 1`] = `
 <div
-  className="panel-footer"
+  className="card-footer"
 >
   <div
     className="row"
   >
     <div
-      className="col-xs-6"
+      className="col"
     >
       <div>
-        Source
-        :
+        Source: 
         <a
           href="google.com"
         >
           localhost
         </a>
       </div>
-      <div>
-        Created by
-        : 
-      </div>
-      <div>
-        Last Updated
-        : 
-        2017-01-01
-      </div>
+      <p
+        className="body2"
+      >
+        Created by: Ryan Noelk
+      </p>
+      <p
+        className="body2"
+      >
+        Last Updated: 2017-01-01
+      </p>
     </div>
-    <div
-      className="col-xs-6 pull-right text-right"
-    />
   </div>
 </div>
 `;

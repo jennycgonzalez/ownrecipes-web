@@ -42,11 +42,11 @@ const RecipeContainer: React.FC = () => {
   const recipeSlug = params.recipe ?? '';
   const showEditLink = (account != null && account.id === recipe?.author);
 
-  const menuItemSave = useCallback(() => {} /* dispatch(MenuItemActions.save() */, [dispatch]);
+  const menuItemSave = useCallback(() => { /* dispatch(MenuItemActions.save() */ }, [dispatch]);
   const deleteRecipe = useCallback(() => dispatch(RecipeActions.deleteRecipe(recipeSlug)), [dispatch]);
 
   // TODO
-  const bulkAdd = useCallback((listId: number) => {} /* RecipeActions.bulkAdd(recipe, listId) */, [dispatch]);
+  const bulkAdd = useCallback((listId: number) => { /* RecipeActions.bulkAdd(recipe, listId) */ }, [dispatch]);
   const checkAllIngredients = useCallback(() => RecipeActions.checkAll(recipeSlug), [dispatch]);
   const uncheckAllIngredients = useCallback(() => RecipeActions.unCheckAll(recipeSlug), [dispatch]);
 

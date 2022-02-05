@@ -11,7 +11,9 @@ type GenericReducerType = {
   readonly ident: string;
 
   error: Error | undefined;
-  pending: keyof typeof PendingState;
+  pending: PendingState;
+
+  hasConnection: boolean;
 };
 
 export default GenericReducerType;

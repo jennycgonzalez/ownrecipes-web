@@ -2,25 +2,32 @@
 html {
   position: relative;
   min-height: 100%;
+  background-color: var(--background);
 }
 body {
- /* Margin bottom by footer height */
-  margin-bottom: 80px;
+  color: var(--primaryText);
 }
-.navbar {
- /* Margin bottom by footer height */
-  margin-bottom: 0px;
-}
-.navbar-brand {
-  padding: 5px 15px;
-}
-.navbar-brand img {
-  height: 100%;
+#content {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 2.75rem;
+  background-color: var(--background);
 }
 #content > .container {
+  flex: 1;
+  background-color: var(--midground);
+
   padding-top: 20px;
   padding-bottom: 20px;
 }
+@media screen and (max-width: 81rem) {
+  .container,
+  .container-sm {
+   max-width: none;
+  }
+}
+
 /* Custom page CSS -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
 .container .text-muted {
@@ -28,4 +35,69 @@ body {
 }
 code {
   font-size: 80%;
+}
+
+
+h1, .h1 {
+  font-size:     2.4rem;
+}
+h2, .h2 {
+  font-size:     1.8rem;
+  margin-bottom: 0.5em;
+}
+h3, .h3 {
+  font-size:     1.3rem;
+  font-weight:   bold;
+  margin-bottom: 0.7em;
+}
+h4, .h4 {
+  font-size:     1.15rem;
+  font-weight:   bold;
+  margin-bottom: 0.5em;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  color: var(--hoverText);
+}
+
+
+.dropdown-menu.show {
+  background-color: var(--elevation);
+}
+.dropdown-item {
+  color: var(--primaryText);
+}
+.dropdown-item:hover {
+  background-color: var(--hoverBg);
+  color: var(--hoverText);
+}
+
+
+.list-group-item {
+  background-color: var(--midground);
+  color: var(--primaryText);
+}
+.list-group-item:not(.disabled):hover {
+  background-color: var(--hoverBg);
+  color: var(--hoverText);
+}
+.list-group-item.disabled, .list-group-item:disabled {
+  background-color: var(--inputBgDisabled);
+  color: var(--disabledText);
+}
+
+
+.card {
+  background-color: var(--migdround);
+  border-color: var(--elevationBorder);
+}
+.card-header {
+  background-color: rgba(128, 128, 128, 0.12);
+}
+.card-footer {
+  background-color: rgba(128, 128, 128, 0.12);
+  color: var(--secondaryText);
+}
+
+.table {
+  color: var(--primaryText);
 }

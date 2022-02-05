@@ -1,9 +1,8 @@
 import jwtDecode, { JwtPayload } from 'jwt-decode';
 import moment from 'moment';
-import { refreshToken, request } from '../../common/CustomSuperagent';
+import { handleError, refreshToken, request } from '../../common/CustomSuperagent';
 import { serverURLs } from '../../common/config';
 import { AccountActionTypes, ACCOUNT_STORE, AccountDispatch, ACCOUNT_TOKEN_STORAGE_KEY, UserAccount, LoginDto, toUserAccount } from './types';
-import { ACTION, GenericErrorAction } from '../../common/store/ReduxHelper';
 
 export const getToken = (username: string, pass: string) => (dispatch: AccountDispatch) => {
   const url = serverURLs.auth_token;
@@ -14,12 +13,7 @@ export const getToken = (username: string, pass: string) => (dispatch: AccountDi
       const data: LoginDto = res.body;
       dispatch({ store: ACCOUNT_STORE, type: AccountActionTypes.LOGIN, user: toUserAccount(data) });
     })
-    .catch(err => {
-      const errorAction: GenericErrorAction = { store: ACCOUNT_STORE, type: ACTION.ERROR, data: err };
-      dispatch(errorAction);
-      // TODO properly handle error
-      // dispatch(setError(ACCOUNT_STORE, err));
-    });
+    .catch(err => dispatch(handleError(err, ACCOUNT_STORE)));
 };
 
 export const tryAutoLogin = () => (dispatch: AccountDispatch) => {

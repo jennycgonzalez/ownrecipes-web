@@ -1,26 +1,20 @@
-import classNames from 'classnames';
 import { Component } from 'react';
-import { injectIntl, defineMessages } from 'react-intl';
+// import { injectIntl, defineMessages } from 'react-intl';
+import { Form } from 'react-bootstrap';
 
+import '../css/button.css';
 import '../css/checkbox.css';
 
-interface IInputProps extends IBaseComponentProps {
-  label?: string;
-  type?: 'text' | 'number';
-  placeholder?: string;
-
-  value?: string | number;
-
-  size?: string;
-
-  change: (name: string, newValue: string) => void;
-}
-
 export interface IBaseComponentProps {
-  id:         string;
   name:       string;
-  errors?:    any;
+
+  autoFocus?: boolean;
+  required?:  boolean;
+
+  errors?:    React.ReactNode;
+
   className?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   change: (name: string, newValue: any) => void;
 }
 
@@ -31,6 +25,7 @@ export class BaseComponent<P extends IBaseComponentProps, S = {}> extends Compon
     this.handleChange = this.handleChange.bind(this);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   handleChange(event: any) {
     if (this.props.change) {
       this.props.change(event.target.name, event.target.value);
@@ -45,64 +40,11 @@ export class BaseComponent<P extends IBaseComponentProps, S = {}> extends Compon
   getErrorMessage() {
     if (this.hasErrors()) {
       return (
-        <span className='help-inline'>{this.props.errors}</span>
+        <Form.Text>{this.props.errors}</Form.Text>
       );
     }
 
     return null;
-  }
-}
-
-export class Input extends BaseComponent<IInputProps> {
-  render() {
-    return (
-      <div className={classNames(this.props.size, this.props.className)} key={this.props.id}>
-        <div className={`form-group ${this.hasErrors() ? 'has-error' : null}`}>
-          {this.props.label && <label htmlFor={this.props.name}>{this.props.label}</label>}
-          <input
-              type={this.props.type ?? 'text'}
-              name={this.props.name}
-              className='form-control'
-              placeholder={this.props.placeholder}
-              value={this.props.value}
-              onChange={this.handleChange} />
-          { this.getErrorMessage() }
-        </div>
-      </div>
-    );
-  }
-}
-
-export interface ITextAreaProps extends IBaseComponentProps {
-  label?: string;
-  type?: 'text';
-  placeholder?: string;
-
-  value?: string | number;
-
-  size?: string;
-  rows?: number;
-
-  change: (name: string, newValue: string) => void;
-}
-
-export class TextArea extends BaseComponent<ITextAreaProps> {
-  render() {
-    return (
-      <div className={classNames(this.props.size, this.props.className)} key={this.props.id}>
-        <div className={`form-group ${this.hasErrors() ? 'has-error' : null}`}>
-          {this.props.label && <label htmlFor={this.props.name}>{this.props.label}</label>}
-          <textarea
-              name={this.props.name}
-              rows={this.props.rows ?? 2}
-              className='form-control'
-              placeholder={this.props.placeholder}
-              value={this.props.value}
-              onChange={this.handleChange} />
-          {this.getErrorMessage()}
-        </div>
-      </div>
-    );
   }
 }
 

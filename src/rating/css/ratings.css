@@ -4,6 +4,6 @@
 }
 
 .rating-panel .card-body .rating-username {
-  color: green;
+  color: var(--primaryMain);
   margin-bottom: 5px;
 }

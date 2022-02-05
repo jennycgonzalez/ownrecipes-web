@@ -10,10 +10,11 @@ exports[`Test Sub Recipes 1`] = `
     <div>
       <label
         className="check-container"
+        htmlFor="1"
       >
         <input
           checked={false}
-          name={1}
+          name="1"
           onChange={[Function]}
           type="checkbox"
         />
@@ -48,10 +49,11 @@ exports[`Test Sub Recipes 1`] = `
     <div>
       <label
         className="check-container"
+        htmlFor="2"
       >
         <input
           checked={false}
-          name={2}
+          name="2"
           onChange={[Function]}
           type="checkbox"
         />

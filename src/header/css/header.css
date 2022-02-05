@@ -1,12 +1,62 @@
+.navbar {
+  /* Margin bottom by footer height */
+  margin-bottom: 0px;
+}
+.navbar-brand {
+  padding: 5px 15px;
+}
+.navbar-brand img {
+  height: 100%;
+}
 nav.header {
-  padding-top: 2px;
-  padding-bottom: 2px;
+  padding: 0;
+  height: 3.75rem;
+  border-bottom: 5px solid var(--primaryMain);
+  background-color: var(--primaryMain);
+}
+@media screen and (min-width:720px) {
+  nav.header {
+    background-color: var(--elevation);
+    box-shadow: 0 0 5px 1px var(--primaryMain);
+  }
+}
+nav.header > .container {
+  height: 100%;
+}
+nav.header > .container > .navbar-collapse {
+  height: 100%;
+}
+nav.header > .container > .navbar-collapse > .navbar-nav {
+  height: 100%;
+  align-items: center;
 }
 
-nav.header .my-account-nav {
-  margin-left: auto;
+nav.header .navbar-nav .nav-link {
+  color: var(--primaryContrast);
+  border-radius: .25rem;
 }
-
+@media screen and (min-width:720px) {
+  nav.header .navbar-nav .nav-link {
+    color: inherit;
+  }
+}
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .show > .nav-link,
+.navbar-light .navbar-nav .nav-link:focus,
+.navbar-light .navbar-nav .nav-link:hover {
+  color: var(--hoverText);
+}
+nav.header .navbar-nav .nav-link:hover {
+  color: var(--hoverText);
+  background-color: var(--hoverBg);
+}
+nav.header .navbar-nav .nav-link:focus {
+  outline: 0;
+  box-shadow: 0 0 0 .1rem var(--primaryText) inset;
+}
 nav.header .subtitle {
   font-size: 0.875em;
+}
+nav.header .my-account-nav {
+  margin-left: auto;
 }

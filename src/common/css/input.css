@@ -1,0 +1,22 @@
+.form-control {
+  background-color: var(--midground);
+  border-color: var(--inputBorder);
+  color: var(--primaryText);
+}
+.form-control:hover {
+  border-color: var(--primaryText);
+  box-shadow: 0 0 0 .05rem var(--primaryText);
+}
+.form-control:focus {
+  background-color: var(--inputBgActive);
+  border-color: var(--primaryText);
+  box-shadow: 0 0 0 .05rem var(--primaryText);
+  color: var(--primaryText);
+}
+.input-group-text {
+  background-color: var(--hoverBg);
+  color: var(--primaryText);
+  padding: .35em;
+  line-height: 1;
+  border: 1px solid var(--inputBorder);
+}

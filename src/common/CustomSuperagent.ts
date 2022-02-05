@@ -70,7 +70,16 @@ export const request = (): SuperAgentStatic => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const handleError = (error: Error, storeIdent: string): any => (dispatch: any): any => {
-  // debugger; // TODO Test error handling
+  // debugger; // TODO test error handling
+
+  if (error.message.includes('network is offline')) {
+    dispatch({
+      store:   storeIdent,
+      type:    ACTION.NO_CONNECTION,
+    });
+    return;
+  }
+
   dispatch({
     store:   storeIdent,
     type:    ACTION.ERROR,

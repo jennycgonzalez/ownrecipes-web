@@ -2,6 +2,7 @@ import { CombinedStore } from '../../app/Store';
 import { ACTION } from '../../common/store/ReduxHelper';
 import { ErrorActionTypes, ErrorDispatch, ERROR_STORE } from './types';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const setErrorAction = (store: string, type: ACTION.ERROR | ErrorActionTypes.SET_APP_ERROR, error: Error): any => ({
   store: store,
   type: type,
@@ -16,6 +17,7 @@ export const setErrorAction = (store: string, type: ACTION.ERROR | ErrorActionTy
   },
 });
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const setError = (store: string, error: Error): any => (dispatch: ErrorDispatch) => {
   dispatch(setErrorAction(ERROR_STORE , ErrorActionTypes.SET_APP_ERROR, error));
   dispatch(setErrorAction(store, ACTION.ERROR, error));
