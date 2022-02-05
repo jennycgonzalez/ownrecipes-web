@@ -18,7 +18,12 @@ const Alert: React.FC<IAlertProps> = (props: IAlertProps) => (
       {props.severity === 'danger' && <Icon icon='exclamation-diamond' size='2x' className='alert-icon' />}
       {props.title}
     </BootstrapAlert.Heading>
-    <p className='mb-0'>{props.children}</p>
+    {typeof props.children === 'string' && (
+      <p className='alert-message mb-0'>{props.children}</p>
+    )}
+    {typeof props.children !== 'string' && (
+      <div className='alert-message'>{props.children}</div>
+    )}
   </BootstrapAlert>
 );
 

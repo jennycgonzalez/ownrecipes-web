@@ -2,7 +2,7 @@ html {
   /* light */
   --primaryLight: #3cb42a;
   --primaryMain: #349b25;
-  --primaryShadow: rgba(49, 253, 132, .5);
+  --primaryShadow: rgba(49, 255, 132, .25);
   --primaryContrast: #fff;
   --disabledTheme: #727f8b;
 
@@ -17,7 +17,8 @@ html {
   --secondaryText: #3f3f3f;
   --disabledText: #7b7b7b;
   --hoverText: #000;
-  --errorText: #d40c0c;
+  --errorText: #b60d0d;
+  --infoText: #0d0db6;
 
   --inputBgActive: #fff;
   --inputBgDisabled: #d5d5d5;
@@ -30,7 +31,7 @@ html[data-theme="dark"] {
   /* dark */
   --primaryLight: #3cb42a;
   --primaryMain: #349b25;
-  --primaryShadow: rgba(49, 253, 132, .5);
+  --primaryShadow: rgba(49, 255, 132, .2);
   --primaryContrast: #fff;
 
   --disabledTheme: #8b8d8e;
@@ -46,7 +47,8 @@ html[data-theme="dark"] {
   --secondaryText: #d0d0d0;
   --disabledText: #bababa;
   --hoverText: #fff;
-  --errorText: #d40c0c;
+  --errorText: #f01616;
+  --infoText: #3676ff;
 
   --inputBgActive: #2a333a;
   --inputBgDisabled: #2a2d30;
