@@ -23,6 +23,14 @@ function toSupportedLanguage(lang: string | undefined): LanguageCode {
   }
 }
 
+export function toLanguageName(lang: LanguageCode): string {
+  switch (lang) {
+    case LanguageCode.DE: return 'Deutsch';
+    case LanguageCode.EN: return 'English';
+    default: throw new Error(`Invalid argument: lang "${lang}" is not supported.`);
+  }
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function getMessagesFromLang(lang: LanguageCode): any {
   switch (lang) {

@@ -5,6 +5,7 @@ import { getResourcePath } from '../../common/utility';
 import { UserAccount } from '../../account/store/types';
 import Modal from '../../common/components/Modal';
 import { LanguageCode, Settings, ThemeMode } from '../../account/store/settings/types';
+import { toLanguageName } from '../../app/components/IntlProvider';
 
 export const AccountLoginMenuItem: React.FC = () => {
   const { formatMessage } = useIntl();
@@ -52,16 +53,6 @@ export const AccountMenuMenuItem: React.FC<IAccountMenuMenuItemProps> = (props: 
       id: 'nav.accountmenu.language_modal_title',
       description: 'Change language dialog title',
       defaultMessage: 'Choose language',
-    },
-    language_de: {
-      id: 'language.code.de',
-      description: 'German',
-      defaultMessage: 'Deutsch (German)',
-    },
-    language_en: {
-      id: 'language.code.en',
-      description: 'English',
-      defaultMessage: 'English',
     },
     theme: {
       id: 'nav.accountmenu.theme',
@@ -114,7 +105,7 @@ export const AccountMenuMenuItem: React.FC<IAccountMenuMenuItemProps> = (props: 
   };
 
   const languageButtons = Object.values(LanguageCode).map(l => (
-    <ListGroup.Item key={l} action disabled={props.settings.language === l} onClick={() => handleChangeLanguage(l)}>{formatMessage(messages[`language_${l}`])}</ListGroup.Item>
+    <ListGroup.Item key={l} action disabled={props.settings.language === l} onClick={() => handleChangeLanguage(l)}>{toLanguageName(l)}</ListGroup.Item>
   ));
 
   const themeButtons = Object.values(ThemeMode).map(t => (

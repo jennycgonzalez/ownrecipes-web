@@ -6,8 +6,6 @@
   "alert.no_connection_title": "No connection",
   "footer.credit": "Created with {link}",
   "footer.icon_credit": "Icons by {link} ({ccLink})",
-  "language.code.de": "Deutsch (German)",
-  "language.code.en": "English",
   "login.alert.error_title": "Login failed",
   "login.alert.incorrect_credentials": "Incorrect username or password.",
   "login.password": "Password",

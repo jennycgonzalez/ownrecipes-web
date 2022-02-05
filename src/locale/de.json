@@ -6,8 +6,6 @@
   "alert.no_connection_title": "Verbindungsfehler",
   "footer.credit": "Erstellt mit {link}",
   "footer.icon_credit": "Symbole von {link} ({ccLink})",
-  "language.code.de": "Deutsch",
-  "language.code.en": "Englisch (English)",
   "login.alert.error_title": "Anmeldung fehlgeschlagen",
   "login.alert.incorrect_credentials": "Benutzername oder Passwort stimmen nicht überein",
   "login.password": "Passwort",
