@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Alert component info test 1`] = `
+<div
+  className="fade alert alert-info show"
+  role="alert"
+>
+  <div
+    className="alert-heading h4"
+  >
+    <i
+      className="bi bi-info-circle-fill size-2x alert-icon"
+    />
+    This is some alert
+  </div>
+  <p
+    className="alert-message mb-0"
+  >
+    This is some message
+  </p>
+</div>
+`;
+
+exports[`Alert component jsx test 1`] = `
+<div
+  className="fade alert alert-danger show"
+  role="alert"
+>
+  <div
+    className="alert-heading h4"
+  >
+    <i
+      className="bi bi-exclamation-diamond-fill size-2x alert-icon"
+    />
+    This is some alert
+  </div>
+  <div
+    className="alert-message"
+  >
+    <span
+      className="some-span-class"
+    >
+      <p
+        className="some-p-class"
+      >
+        This is some message
+      </p>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Alert component test 1`] = `
+<div
+  className="fade alert alert-danger show"
+  role="alert"
+>
+  <div
+    className="alert-heading h4"
+  >
+    <i
+      className="bi bi-exclamation-diamond-fill size-2x alert-icon"
+    />
+    This is some alert
+  </div>
+  <p
+    className="alert-message mb-0"
+  >
+    This is some message
+  </p>
+</div>
+`;

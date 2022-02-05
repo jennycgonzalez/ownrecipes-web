@@ -10,12 +10,13 @@ export interface IBaseComponentProps {
 
   autoFocus?: boolean;
   required?:  boolean;
+  readOnly?:  boolean;
 
   errors?:    React.ReactNode;
 
   className?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  change: (name: string, newValue: any) => void;
+  change?: (name: string, newValue: any) => void;
 }
 
 export class BaseComponent<P extends IBaseComponentProps, S = {}> extends Component<P, S> {

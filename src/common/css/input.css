@@ -1,22 +1,34 @@
+.form-group.required:not(:read-only) .form-control {
+  background-color: var(--primaryShadow);
+}
+
 .form-control {
   background-color: var(--midground);
   border-color: var(--inputBorder);
   color: var(--primaryText);
 }
+
 .form-control:hover {
   border-color: var(--primaryText);
   box-shadow: 0 0 0 .05rem var(--primaryText);
 }
+.form-control:read-only:hover {
+  cursor: not-allowed;
+}
+
 .form-control:focus {
-  background-color: var(--inputBgActive);
   border-color: var(--primaryText);
   box-shadow: 0 0 0 .05rem var(--primaryText);
   color: var(--primaryText);
 }
+.form-control:not(:read-only):focus {
+  background-color: var(--inputBgActive);
+}
+
 .input-group-text {
   background-color: var(--hoverBg);
   color: var(--primaryText);
-  padding: .35em;
+  padding: .35em .75em;
   line-height: 1;
   border: 1px solid var(--inputBorder);
 }

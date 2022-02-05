@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Icon component complex test 1`] = `
+<i
+  className="bi bi-pen size-2x my-class"
+/>
+`;
+
+exports[`Icon component size=2x test 1`] = `
+<i
+  className="bi bi-calendar-fill size-2x"
+/>
+`;
+
+exports[`Icon component test 1`] = `
+<i
+  className="bi bi-user-fill size-1x"
+/>
+`;
+
+exports[`Icon component variant=dark test 1`] = `
+<i
+  className="bi bi-calendar-fill size-1x"
+/>
+`;
+
+exports[`Icon component variant=light test 1`] = `
+<i
+  className="bi bi-calendar size-1x"
+/>
+`;

@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input inputAdornmentStart 1`] = `
+<div
+  className="form-group"
+>
+  <label
+    className="form-label"
+    htmlFor="myInput"
+  >
+    My Input
+  </label>
+  <div
+    className="input-group"
+  >
+    <span
+      className="input-group-text"
+    >
+      <span
+        className="some span"
+      >
+        some span
+      </span>
+    </span>
+    <input
+      className="form-control"
+      id="myInput"
+      name="myInput"
+      onChange={[Function]}
+      type="text"
+      value="Some value"
+    />
+  </div>
+</div>
+`;
+
+exports[`Input readOnly 1`] = `
+<div
+  className="form-group readonly"
+>
+  <label
+    className="form-label"
+    htmlFor="myInput"
+  >
+    My Input
+  </label>
+  <div
+    className="input-group"
+  >
+    <input
+      className="form-control"
+      id="myInput"
+      name="myInput"
+      onChange={[Function]}
+      readOnly={true}
+      type="text"
+      value="Some value"
+    />
+  </div>
+</div>
+`;
+
+exports[`Input required 1`] = `
+<div
+  className="form-group required"
+>
+  <label
+    className="form-label"
+    htmlFor="myInput"
+  >
+    My Input
+  </label>
+  <div
+    className="input-group"
+  >
+    <input
+      className="form-control"
+      id="myInput"
+      name="myInput"
+      onChange={[Function]}
+      required={true}
+      type="text"
+      value="Some value"
+    />
+  </div>
+</div>
+`;
+
+exports[`Input type number 1`] = `
+<div
+  className="form-group"
+>
+  <label
+    className="form-label"
+    htmlFor="myInput"
+  >
+    My Input
+  </label>
+  <div
+    className="input-group"
+  >
+    <input
+      autoComplete="Some autocomplete"
+      className="form-control"
+      id="myInput"
+      name="myInput"
+      onChange={[Function]}
+      placeholder="Some placeholder"
+      type="number"
+      value={17}
+    />
+  </div>
+</div>
+`;
+
+exports[`Input type text 1`] = `
+<div
+  className="form-group"
+>
+  <label
+    className="form-label"
+    htmlFor="myInput"
+  >
+    My Input
+  </label>
+  <div
+    className="input-group"
+  >
+    <input
+      autoComplete="Some autocomplete"
+      className="form-control"
+      id="myInput"
+      name="myInput"
+      onChange={[Function]}
+      placeholder="Some placeholder"
+      type="text"
+      value="Some value"
+    />
+  </div>
+</div>
+`;
+
+exports[`Input type text multirow 1`] = `
+<div
+  className="form-group"
+>
+  <label
+    className="form-label"
+    htmlFor="myInput"
+  >
+    My Input
+  </label>
+  <div
+    className="input-group"
+  >
+    <textarea
+      autoComplete="Some autocomplete"
+      className="form-control"
+      id="myInput"
+      name="myInput"
+      onChange={[Function]}
+      placeholder="Some placeholder"
+      rows={4}
+      type="text"
+      value="Some value"
+    />
+  </div>
+</div>
+`;

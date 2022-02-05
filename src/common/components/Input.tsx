@@ -2,6 +2,7 @@ import { Form, InputGroup } from 'react-bootstrap';
 import { BaseComponent, IBaseComponentProps } from './FormComponents';
 
 import '../css/input.css';
+import classNames from 'classnames';
 
 interface IInputProps extends IBaseComponentProps {
   label?: string;
@@ -17,14 +18,19 @@ interface IInputProps extends IBaseComponentProps {
 
   size?: string;
 
-  change: (name: string, newValue: string) => void;
+  change?: (name: string, newValue: string) => void;
 }
 
 export default class Input extends BaseComponent<IInputProps> {
   render() {
     const type = this.props.type ?? 'text';
     return (
-      <Form.Group controlId={this.props.name} className='form-group'>
+      <Form.Group
+          controlId = {this.props.name}
+          className = {classNames('form-group', {
+            readonly: this.props.readOnly,
+            required: this.props.required && !this.props.readOnly,
+          })}>
         {this.props.label && <Form.Label>{this.props.label}</Form.Label>}
         {this.getErrorMessage()}
         <InputGroup>
@@ -36,12 +42,14 @@ export default class Input extends BaseComponent<IInputProps> {
               value = {this.props.value}
               rows  = {type === 'text' && this.props.rows != null ? this.props.rows : undefined}
 
+              required  = {this.props.required}
+              readOnly  = {this.props.readOnly}
               autoComplete = {this.props.autoComplete}
               placeholder  = {this.props.placeholder}
+              autoFocus = {this.props.autoFocus}
 
               onChange={this.handleChange}
-              autoFocus = {this.props.autoFocus}
-              required  = {this.props.required} />
+               />
         </InputGroup>
       </Form.Group>
     );
