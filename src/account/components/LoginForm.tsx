@@ -1,14 +1,14 @@
+import { useState } from 'react';
+import { Button } from 'react-bootstrap';
 import { defineMessages, useIntl } from 'react-intl';
 import * as _ from 'lodash';
 
-import Alert from './Alert';
-
 import '../css/login.css';
+
 import { AccountState } from '../store/types';
-import { useState } from 'react';
-import { Button } from 'react-bootstrap';
 import Icon from '../../common/components/Icon';
 import Input from '../../common/components/Input';
+import Alert from './Alert';
 
 export interface ILoginFormProps {
   accountState: AccountState;
@@ -66,6 +66,7 @@ const LoginForm: React.FC<ILoginFormProps> = (props: ILoginFormProps) => {
   return (
     <form className='form-signin' onSubmit={handleSubmit}>
       <Alert reducerState={props.accountState} />
+
       <h2 className='form-signin-heading'>{formatMessage(messages.please_sign_in)}</h2>
       <Input
           name  = 'username'

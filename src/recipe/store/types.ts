@@ -6,9 +6,11 @@ import { GenericReducerAction } from '../../common/store/ReduxHelper';
 export type Ingredient = {
   id:          number;
   title:       string;
-  quantity:    number;
   measurement: string;
+  numerator:   number;
+  denominator: number;
 
+  quantity?:   string;
   checked?:    boolean;
 }
 
@@ -18,26 +20,28 @@ export type IngredientGroup = {
 }
 
 export type SubRecipe = {
-  child_recipe_id: number;
-  quantity:    number;
-  measurement: string;
   title:       string;
-
   slug?:       string;
+  child_recipe_id: number;
+  measurement: string;
+  numerator:   number;
+  denominator: number;
+
+  quantity:    string;
   checked?:    boolean;
 }
 
 export type Course = {
   id: number;
-  title: string; // 'Entry'
+  title: string;
 }
 
 export type Cuisine = {
   id: number;
-  title: string; // 'American'
+  title: string;
 }
 
-export type Recipe = {
+export type RecipeDto = {
   id:    number;
   title: string; // Tasty Chili 24
   slug:  string; // tasty-werwerchili-4
@@ -53,8 +57,8 @@ export type Recipe = {
   course: Course;
   cuisine: Cuisine;
 
-  photo?: string;
-  photo_thumbnail?: string;
+  photo?: string | null;
+  photo_thumbnail?: string | null;
 
   subrecipes: Array<SubRecipe>;
   ingredient_groups: Array<IngredientGroup>;
@@ -70,6 +74,74 @@ export type Recipe = {
 
   customServings: number;
 }
+
+export type Recipe = {
+  id:    number;
+  title: string; // Tasty Chili 24
+  slug:  string; // tasty-werwerchili-4
+
+  username:    string;
+  author:      number;
+  source:      string;
+
+  cookTime: number;
+  prepTime: number;
+  servings:  number;
+
+  course: Course;
+  cuisine: Cuisine;
+
+  photo?: string;
+  photoThumbnail?: string;
+
+  subrecipes: Array<SubRecipe>;
+  ingredientGroups: Array<IngredientGroup>;
+  tags: Array<string>;
+
+  directions: string;
+  info:       string;
+
+  rating: number;
+  public: boolean;
+  pubDate: Date; // 2011-05-20
+  updateDate: Date;
+
+  customServings: number;
+}
+
+export const toRecipe = (dto: RecipeDto): Recipe => ({
+  id:    dto.id,
+  title: dto.title,
+  slug:  dto.slug,
+
+  username: dto.username,
+  author:   dto.author,
+  source:   dto.source,
+
+  cookTime: dto.cook_time,
+  prepTime: dto.prep_time,
+  servings: dto.servings,
+
+  course:  dto.course,
+  cuisine: dto.cuisine,
+
+  photo: dto.photo ?? undefined,
+  photoThumbnail: dto.photo_thumbnail ?? undefined,
+
+  subrecipes: dto.subrecipes,
+  ingredientGroups: dto.ingredient_groups,
+  tags: dto.tags,
+
+  directions: dto.directions,
+  info: dto.info,
+
+  rating: dto.rating,
+  public: dto.public,
+  pubDate: new Date(dto.pub_date),
+  updateDate: new Date(dto.update_date),
+
+  customServings: dto.servings,
+});
 
 export enum RecipeActionTypes {
   RECIPE_LOAD = 'RECIPE_LOAD',
@@ -138,9 +210,9 @@ export type RecipeAction    = IRecipeDataAction | IRecipeSlugAction | IRecipeIng
 export type RecipeDispatch  = ReduxDispatch<RecipeAction>;
 
 export enum RecipesActionTypes {
-  LOADING = 'loading',
+  LOADING  = 'loading',
   COMPLETE = 'complete',
-  ERROR = 'error',
+  ERROR    = 'error',
 }
 
 export const RECIPES_STORE = '@@recipes';

@@ -1,0 +1,76 @@
+.ingredients-panel h2 {
+  display: inline-block;
+}
+
+.ingredients-panel .ingredient-group {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.ingredients-panel .custom-servings {
+  margin-left: 10px;
+  display: inline-block;
+}
+
+.ingredients-panel .custom-servings form {
+  display: flex;
+}
+.ingredients-panel .custom-servings form input {
+  max-width: 4rem;
+  border-top-left-radius: 1em;
+  border-bottom-left-radius: 1em;
+
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.ingredients-panel .custom-servings form button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+
+  border-top-right-radius: 1em;
+  border-bottom-right-radius: 1em;
+}
+.ingredients-panel .custom-servings form button .bi {
+  margin-right: 5px;
+}
+
+.ingredients-panel .ingredient-groups {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  margin-left: -20px;
+  margin-right: -20px;
+}
+.ingredients-panel .ingredient-groups .ingredient-group {
+  flex: 1;
+  margin: 20px;
+  min-width: 20rem;
+}
+@media print {
+  .ingredients-panel .ingredient-groups .ingredient-group {
+    margin: 10px;
+    min-width: 18rem;
+  }
+}
+.ingredients-panel .ingredient-group .subheading {
+  margin-left: 33%;
+}
+.ingredients-panel .ingredients-table {
+  border-color: transparent;
+}
+.ingredients-panel .ingredients-table > tbody > tr > td {
+  padding: 0 10px;
+}
+.ingredients-panel .ingredients-table > tbody > tr > td:first-of-type {
+  width: 33%;
+  text-align: right;
+}
+.ingredients-panel .ingredients-table > tbody > tr > td:last-of-type {
+  width: 66%;
+  text-align: left;
+}
+.ingredients-panel .ingredients-table > tbody > tr > td > span {
+  padding: 5px 0;
+  display: inline-block;
+}

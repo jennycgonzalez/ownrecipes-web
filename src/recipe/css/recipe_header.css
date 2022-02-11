@@ -1,0 +1,11 @@
+.recipe-header .recipe-header-chips .chip {
+  margin: 0.5em;
+  max-width: max-content;
+}
+
+.recipe-header .options {
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+}
+

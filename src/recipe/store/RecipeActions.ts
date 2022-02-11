@@ -1,12 +1,14 @@
 import { handleError, request } from '../../common/CustomSuperagent';
 import { serverURLs } from '../../common/config';
-import { Ingredient, Recipe, RecipeActionTypes, RecipeDispatch, RECIPE_STORE } from './types';
+import { RecipeActionTypes, RecipeDispatch, RECIPE_STORE, toRecipe } from './types';
 
 export const load = (recipeSlug: string) => (dispatch: RecipeDispatch) => {
   request()
     .get(`${serverURLs.recipe}${recipeSlug}/`)
-    .then(res => dispatch({ store: RECIPE_STORE, type: RecipeActionTypes.RECIPE_LOAD, data: res.body }))
-    .catch(err => handleError(err, RECIPE_STORE));
+    .then(res => {
+      dispatch({ store: RECIPE_STORE, type: RecipeActionTypes.RECIPE_LOAD, data: toRecipe(res.body) });
+    })
+    .catch(err => dispatch(handleError(err, RECIPE_STORE)));
 };
 
 export const deleteRecipe = (recipeSlug: string) => (dispatch: RecipeDispatch) => {
@@ -15,7 +17,7 @@ export const deleteRecipe = (recipeSlug: string) => (dispatch: RecipeDispatch) =
     .then(() => {
       dispatch({ store: RECIPE_STORE, type: RecipeActionTypes.RECIPE_DELETE, data: recipeSlug });
     })
-    .catch(err => handleError(err, RECIPE_STORE));
+    .catch(err => dispatch(handleError(err, RECIPE_STORE)));
 };
 
 export const updateServings = (recipeSlug: string, value: number) => (dispatch: RecipeDispatch) => {

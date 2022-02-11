@@ -8,7 +8,7 @@ import * as AuthActions from '../../account/store/actions';
 import * as RandomRecipeActions from '../actions/RandomRecipeActions';
 import * as SettingsActions from '../../account/store/settings/actions';
 import { CombinedStore } from '../../app/Store';
-import { ListItemType } from '../components/GroceryListMenuItem';
+// import { ListItemType } from '../components/GroceryListMenuItem';
 import { LanguageCode, ThemeMode } from '../../account/store/settings/types';
 
 const Header: React.FC = () => {
@@ -19,7 +19,7 @@ const Header: React.FC = () => {
   const accountState = useSelector((state: CombinedStore) => state.account);
   const settings = useSelector((state: CombinedStore) => state.settings);
   // const listState = useSelector((state: CombinedStore) => state.list.lists);
-  const listState: Array<ListItemType> = [];
+  // const listState: Array<ListItemType> = [];
 
   /* TODO
   useEffect(() => {
@@ -46,7 +46,7 @@ const Header: React.FC = () => {
     <NavBar
         account  = {accountState.item}
         settings = {settings}
-        lists    = {listState}
+        // lists    = {listState}
 
         isLoginPage = {location.pathname.endsWith('login')}
 

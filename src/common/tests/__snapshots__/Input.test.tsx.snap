@@ -107,7 +107,7 @@ exports[`Input type number 1`] = `
       onChange={[Function]}
       placeholder="Some placeholder"
       type="number"
-      value={17}
+      value="17"
     />
   </div>
 </div>

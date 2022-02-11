@@ -1,23 +1,24 @@
 import { Link } from 'react-router-dom';
 
-import { Checkbox } from '../../common/components/FormComponents';
+// import { Checkbox } from '../../common/components/FormComponents';
 import { getResourcePath } from '../../common/utility';
 import { SubRecipe } from '../store/types';
 
 export interface ISubRecipesProps {
   subRecipes: Array<SubRecipe>;
 
-  checkSubRecipe: (id: number, checked: boolean) => void;
+  // checkSubRecipe: (id: number, checked: boolean) => void;
 }
 
-const SubRecipes: React.FC<ISubRecipesProps> = ({ subRecipes, checkSubRecipe }: ISubRecipesProps) => {
+const SubRecipes: React.FC<ISubRecipesProps> = ({ subRecipes /* , checkSubRecipe */ }: ISubRecipesProps) => {
   const subRecipesList = subRecipes.map(subRecipe => (
     <li className='ingredient' key={subRecipe.child_recipe_id}>
+      {/*
       <Checkbox
           name={String(subRecipe.child_recipe_id)}
           checked={subRecipe.checked ?? false}
-          change={(_id, checked) => checkSubRecipe(subRecipe.child_recipe_id, checked)} />
-      {subRecipe.quantity !== 0 && (
+          change={(_id, checked) => checkSubRecipe(subRecipe.child_recipe_id, checked)} /> */}
+      {subRecipe.quantity != null && subRecipe.quantity.length > 0 && (
         <span className='quantity'>
           {subRecipe.quantity}
           {' '}

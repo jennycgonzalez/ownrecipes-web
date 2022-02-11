@@ -11,11 +11,13 @@ export interface IModalProps {
   closeTitle?: React.ReactNode;
 
   onAccept?: () => void;
-  onClose?: () => void;
+  onClose?: (autoClose: boolean) => void;
   noCloseButton?: boolean;
 
   size?: 'sm' | 'lg';
 
+  className?: string;
+  acceptButtonProps?: Partial<unknown>;
   children: React.ReactNode;
 }
 
@@ -34,15 +36,18 @@ const Modal: React.FC<IModalProps> = (props: IModalProps) => {
     },
   });
 
-  const { show, title, acceptTitle, closeTitle, onAccept, onClose, noCloseButton, children } = props;
+  const { show, title, acceptTitle, closeTitle, onAccept, onClose, noCloseButton, className, acceptButtonProps, children } = props;
 
   const handleClose = () => {
     if (onClose) {
-      onClose();
+      onClose(false);
     }
   };
 
   const handleAccept = () => {
+    if (onClose) {
+      onClose(true);
+    }
     if (onAccept) {
       onAccept();
     }
@@ -56,8 +61,9 @@ const Modal: React.FC<IModalProps> = (props: IModalProps) => {
         backdrop = 'static'
         size = {props.size ?? 'lg'}
         centered
-        onHide = {onClose}
-        keyboard = {false}>
+        onHide = {handleClose}
+        keyboard = {false}
+        className = {className}>
       <BootstrapModal.Header closeButton={onClose != null}>
         <BootstrapModal.Title>{title}</BootstrapModal.Title>
       </BootstrapModal.Header>
@@ -74,7 +80,7 @@ const Modal: React.FC<IModalProps> = (props: IModalProps) => {
             </Button>
           )}
           {onAccept != null && (
-            <Button variant='primary' onClick={handleAccept}>
+            <Button variant='primary' onClick={handleAccept} {...acceptButtonProps}>
               {acceptTitle ?? formatMessage(messages.accept)}
             </Button>
           )}

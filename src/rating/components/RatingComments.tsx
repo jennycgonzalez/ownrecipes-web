@@ -5,6 +5,8 @@ import Spinner from 'react-spinkit';
 import Icon from '../../common/components/Icon';
 import P from '../../common/components/P';
 import { defineMessages, useIntl } from 'react-intl';
+import Modal from '../../common/components/Modal';
+import React, { useState } from 'react';
 
 export interface IRatingCommentsProps {
   recipeSlug: string;
@@ -21,7 +23,7 @@ function getReversedArray<T>(arr: Array<T> | undefined): Array<T> | undefined {
 }
 
 const RatingComments: React.FC<IRatingCommentsProps> = ({ ratings, userId, recipeSlug, removeRating }: IRatingCommentsProps) => {
-  const { formatMessage } = useIntl();
+  const intl = useIntl();
 
   const messages = defineMessages({
     no_comments: {
@@ -29,40 +31,55 @@ const RatingComments: React.FC<IRatingCommentsProps> = ({ ratings, userId, recip
       description: 'Placeholder for no comments',
       defaultMessage: '(No comments yet. Be the first!)',
     },
+    confirm_delete_message: {
+      id: 'rating_comments.confirm_delete',
+      description: 'Are you sure you want to delete this comment?',
+      defaultMessage: 'Are you sure you want to delete this comment?',
+    },
   });
+
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState<number | undefined>();
+  const handleDeleteClick  = (rating: number) => setShowDeleteConfirm(rating);
+  const handleDeleteAccept = () => removeRating(recipeSlug, showDeleteConfirm ?? 0);
+  const handleDeleteClose  = () => setShowDeleteConfirm(undefined);
 
   const ratingsReversed = getReversedArray(ratings);
   const ratingsList = ratingsReversed?.map((rating, index) => (
-    <Row key={rating.id}>
-      {index > 0 && (
-        <Col xs={12}>
-          <hr />
-        </Col>
-      )}
-      <Col xs={11}>
-        <Ratings stars={rating.rating || 0} />
-      </Col>
-      <Col xs={1}>
-        {userId === rating.userId && (
-          <Button variant='outline-danger' size='sm' onClick={() => removeRating(recipeSlug, rating.id)}>
-            <Icon icon='trash' />
-          </Button>
+    <React.Fragment key={rating.id}>
+      <Row>
+        {index > 0 && (
+          <Col xs={12}>
+            <hr />
+          </Col>
         )}
-      </Col>
-      <Col xs={12} className='rating-username'>
-        {rating.userName}
-      </Col>
-      <Col xs={12}>
-        <span>
-          {rating.comment}
-        </span>
-      </Col>
-    </Row>
+      </Row>
+      <Row>
+        <Col xs>
+          <Ratings stars={rating.rating || 0} />
+        </Col>
+        <Col xs='auto'>
+          {userId === rating.userId && (
+            <Button variant='outline-danger' size='sm' onClick={() => handleDeleteClick(rating.id)}>
+              <Icon icon='trash' />
+            </Button>
+          )}
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={12} className='rating-username'>
+          {rating.userName}
+        </Col>
+        <Col xs={12}>
+          <span>
+            {rating.comment}
+          </span>
+        </Col>
+      </Row>
+    </React.Fragment>
   ));
 
-  // TODO color: secondaryText
   const beTheFirst = (
-    <Row key='be-the-first'><Col><P variant='body2'>{formatMessage(messages.no_comments)}</P></Col></Row>
+    <Row key='be-the-first'><Col><P className='placeholder'>{intl.formatMessage(messages.no_comments)}</P></Col></Row>
   );
 
   return (
@@ -70,6 +87,16 @@ const RatingComments: React.FC<IRatingCommentsProps> = ({ ratings, userId, recip
       {ratingsList == null && <Spinner name='three-bounce' />}
       {ratingsList?.length === 0 && beTheFirst}
       {ratingsList}
+
+      <Modal
+          show = {showDeleteConfirm != null}
+          title = {intl.messages['recipe.confirm_delete_title'] as string}
+          acceptTitle = {intl.messages['recipe.confirm_delete_accept']}
+          onAccept = {handleDeleteAccept}
+          onClose  = {handleDeleteClose}
+          acceptButtonProps = {{ variant: 'danger' }}>
+        {intl.formatMessage(messages.confirm_delete_message)}
+      </Modal>
     </>
   );
 };

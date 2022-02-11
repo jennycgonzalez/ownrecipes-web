@@ -1,37 +1,66 @@
-import ReduxHelper from '../../common/store/ReduxHelper';
-import { RecipeAction, RecipeActionTypes } from './types';
+import { Dispatch as ReduxDispatch } from 'redux';
+import { Ingredient, IngredientGroup } from './types';
 
-/*
-const ingredients = (state, cb) => state.map(ig => ({
+export const RECIPE_INGREDIENTS_STORE = '@@recipeIngredients';
+
+export enum RecipeIngredientReducerActionTypes {
+  RECIPE_INGREDIENTS_LOAD = 'RECIPE_INGREDIENTS_LOAD',
+  RECIPE_INGREDIENTS_SERVINGS_UPDATE = 'RECIPE_INGREDIENTS_SERVINGS_UPDATE',
+}
+
+export interface IRecipeIngredientLoadAction {
+  store: typeof RECIPE_INGREDIENTS_STORE;
+  type: typeof RecipeIngredientReducerActionTypes.RECIPE_INGREDIENTS_LOAD;
+  ingredientGroups: Array<IngredientGroup>;
+  formatQuantity: (numerator: number, denominator: number) => string;
+}
+
+export interface IRecipeIngredientServingsUpdateAction {
+  store: typeof RECIPE_INGREDIENTS_STORE;
+  type: typeof RecipeIngredientReducerActionTypes.RECIPE_INGREDIENTS_SERVINGS_UPDATE;
+  formatQuantity: (numerator: number, denominator: number) => string;
+}
+
+export type RecipeIngredientsState = Array<IngredientGroup>;
+export type RecipeIngredientsAction = IRecipeIngredientLoadAction | IRecipeIngredientServingsUpdateAction;
+export type RecipeIngredientsDispatch  = ReduxDispatch<RecipeIngredientsAction>;
+
+type IngredientReduceFunction = (ingr: Ingredient) => Ingredient;
+
+const ingredients = (state: RecipeIngredientsState, cb: IngredientReduceFunction): RecipeIngredientsState => state.map(ig => ({
   ...ig,
   ingredients: ig.ingredients.map(ingredient => cb(ingredient)),
 }));
 
-const merge = (state, action) => {
-  const list = [];
-  // eslint-disable-next-line
-  state.map((ig) => {
-    // eslint-disable-next-line
-    ig.ingredients.map(ingredient => {
-      if (ingredient.checked) {
-        list.push(ingredient.id);
-      }
+const merge = (state: RecipeIngredientsState, action: IRecipeIngredientLoadAction) => {
+  const list: Array<number> = [];
+  state
+    .map(ig => ig.ingredients)
+    .forEach(ingrArray => {
+      ingrArray
+        .filter(ingr => ingr.checked)
+        .forEach(ingr => list.push(ingr.id));
     });
-  });
 
-  return ingredients(action.ingredient_groups, i => {
-    const checked = list.includes(i.id);
-    const custom = action.formatQuantity(i.numerator, i.denominator);
-    return { ...i, quantity: custom, checked: checked };
+  return ingredients(action.ingredientGroups, ingr => {
+    const checked = list.includes(ingr.id);
+    const custom = action.formatQuantity(ingr.numerator, ingr.denominator);
+    return { ...ingr, quantity: custom, checked: checked };
   });
 };
-*/
 
-const recipes = (state = [], action: RecipeAction) => {
+const defaultState: RecipeIngredientsState = [];
+
+const recipes = (state = defaultState, action: RecipeIngredientsAction): RecipeIngredientsState => {
   switch (action.type) {
+    case RecipeIngredientReducerActionTypes.RECIPE_INGREDIENTS_LOAD:
+      return merge(state, action);
+    case RecipeIngredientReducerActionTypes.RECIPE_INGREDIENTS_SERVINGS_UPDATE:
+      return ingredients(state, i => {
+        const custom = action.formatQuantity(i.numerator, i.denominator);
+        return { ...i, quantity: custom };
+      });
     /*
-    case RecipeActionTypes.RECIPE_LOAD:
-      return state ? merge(state, action) : action;
     case RecipeActionTypes.RECIPE_INGREDIENT_CHECK_INGREDIENT:
       return ingredients(state, i => {
         if (i.id === action.id) {
@@ -43,11 +72,6 @@ const recipes = (state = [], action: RecipeAction) => {
       return ingredients(state, i => ({ ...i, checked: true }));
     case RecipeActionTypes.RECIPE_INGREDIENT_UNCHECK_ALL:
       return ingredients(state, i => ({ ...i, checked: false }));
-    case RecipeActionTypes.RECIPE_INGREDIENT_SERVINGS_UPDATE:
-      return ingredients(state, i => {
-        const custom = action.formatQuantity(i.numerator, i.denominator);
-        return { ...i, quantity: custom };
-      });
     */
     default:
       return state;

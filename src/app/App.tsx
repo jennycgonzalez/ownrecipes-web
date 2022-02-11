@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router';
 
@@ -13,9 +14,12 @@ import './css/core.css';
 import './css/print.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-import Routes from './components/Routes';
 import { CombinedStore } from './Store';
+import Routes from './components/Routes';
 import AutoLogin from './components/AutoLogin';
+import initCourses from './components/Courses';
+import initCuisines from './components/Cuisines';
+import initMeasurements from './components/Measurements';
 
 const App = () => {
   const account = useSelector((state: CombinedStore) => state.account.item);
@@ -23,6 +27,12 @@ const App = () => {
 
   const nav = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    initCourses();
+    initCuisines();
+    initMeasurements();
+  }, []);
 
   const main = (
     <ErrorBoundary verbose printStack>

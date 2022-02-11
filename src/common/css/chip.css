@@ -1,0 +1,29 @@
+.chip {
+  display: inline-block;
+  padding: 0.35em 0.65em;
+  font-size: 0.875em;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem
+}
+.chip:empty {
+  display:none
+}
+.chip .bi {
+  margin-right: 0.5em;
+}
+.btn .chip {
+  position:relative;
+  top:-1px
+}
+
+.chip.primary {
+  background-color: var(--primaryTheme);
+  color: var(--primaryContrast);
+}
+.chip.secondary {
+  background-color: rgba(128, 128, 128, 0.12);
+  color: var(--secondaryText);
+}

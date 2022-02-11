@@ -5,7 +5,6 @@ import { IntlProvider } from 'react-intl';
 // See: https://github.com/yahoo/react-intl/wiki/Testing-with-React-Intl#jest
 
 const createComponentWithIntl = (children: React.ReactNode, props = { locale: 'en' }) => renderer.create(
-  // eslint-disable-next-line react/jsx-props-no-spreading
   <IntlProvider {...props}>
     {children}
   </IntlProvider>

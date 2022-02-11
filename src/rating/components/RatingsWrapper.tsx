@@ -26,7 +26,7 @@ const RatingsWrapper: React.FC<IRatingsWrapperProps> = ({ recipeSlug, userId, ra
   };
 
   return (
-    <Card className='rating-panel'>
+    <Card className='rating-panel' as='article'>
       <RatingsHeader userId={userId} showNewRating={showNewRating} onShowNewRating={() => setShowNewRating(true)} />
       <Card.Body>
         <NewRating show={showNewRating} recipeSlug={recipeSlug} userId={userId} addRating={handleAddRating} />

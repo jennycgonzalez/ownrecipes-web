@@ -1,29 +1,56 @@
-import { RecipeActionTypes } from './types';
+import { Dispatch as ReduxDispatch } from 'redux';
+import { SubRecipe } from './types';
 
-/*
-const merge = (state, action) => {
-  const list = [];
-  // eslint-disable-next-line
-  state.map((i) => {
-    if (i.checked) {
-      list.push(i.id);
-    }
-  });
+export const RECIPE_SUBRECIPES_STORE = '@@recipeSubrecipes';
 
-  return action.subrecipes.map(i => {
-    const checked = list.includes(i.child_recipe_id);
-    const custom = action.formatQuantity(i.numerator, i.denominator);
-    return { ...i, quantity: custom, checked: checked };
+export enum RecipeSubrecipesReducerActionTypes {
+  RECIPE_SUBRECIPES_LOAD = 'RECIPE_SUBRECIPES_LOAD',
+  RECIPE_SUBRECIPES_SERVINGS_UPDATE = 'RECIPE_SUBRECIPES_SERVINGS_UPDATE',
+}
+
+export interface IRecipeSubrecipesLoadAction {
+  store: typeof RECIPE_SUBRECIPES_STORE;
+  type: typeof RecipeSubrecipesReducerActionTypes.RECIPE_SUBRECIPES_LOAD;
+  subrecipes: Array<SubRecipe>;
+  formatQuantity: (numerator: number, denominator: number) => string;
+}
+
+export interface IRecipeSubrecipesIngredientsUpdateAction {
+  store: typeof RECIPE_SUBRECIPES_STORE;
+  type: typeof RecipeSubrecipesReducerActionTypes.RECIPE_SUBRECIPES_SERVINGS_UPDATE;
+  formatQuantity: (numerator: number, denominator: number) => string;
+}
+
+export type RecipeSubrecipesState = Array<SubRecipe>;
+export type RecipeSubrecipesAction = IRecipeSubrecipesLoadAction | IRecipeSubrecipesIngredientsUpdateAction;
+export type RecipeSubrecipesDispatch  = ReduxDispatch<RecipeSubrecipesAction>;
+
+const merge = (state: RecipeSubrecipesState, action: IRecipeSubrecipesLoadAction) => {
+  const list: Array<number> = [];
+  state
+    .filter(subrecipe => subrecipe.checked)
+    .forEach(subrecipe => list.push(subrecipe.child_recipe_id));
+
+  return action.subrecipes.map(subrecipe => {
+    const checked = list.includes(subrecipe.child_recipe_id);
+    const custom = action.formatQuantity(subrecipe.numerator, subrecipe.denominator);
+    return { ...subrecipe, quantity: custom, checked: checked };
   });
 };
-*/
 
-const subRecipes = (state = [], action: any) => {
+const defaultState: RecipeSubrecipesState = [];
+
+const subRecipes = (state = defaultState, action: RecipeSubrecipesAction) => {
   switch (action.type) {
+    case RecipeSubrecipesReducerActionTypes.RECIPE_SUBRECIPES_LOAD:
+      return merge(state, action);
+    case RecipeSubrecipesReducerActionTypes.RECIPE_SUBRECIPES_SERVINGS_UPDATE:
+      return state.map(i => {
+        const custom = action.formatQuantity(i.numerator, i.denominator);
+        return { ...i, quantity: custom };
+      });
     /*
-    case RecipeActionTypes.RECIPE_LOAD:
-      return state ? merge(state, action) : action;
-    case RecipeActionTypes.RECIPE_INGREDIENT_CHECK_SUBRECIPE:
+      case RecipeActionTypes.RECIPE_INGREDIENT_CHECK_SUBRECIPE:
       return state.map(i => {
         if (i.child_recipe_id === action.id) {
           return { ...i, checked: action.value };
@@ -34,11 +61,6 @@ const subRecipes = (state = [], action: any) => {
       return state.map(i => ({ ...i, checked: true }));
     case RecipeActionTypes.RECIPE_INGREDIENT_UNCHECK_ALL:
       return state.map(i => ({ ...i, checked: false }));
-    case RecipeActionTypes.RECIPE_INGREDIENT_SERVINGS_UPDATE:
-      return state.map(i => {
-        const custom = action.formatQuantity(i.numerator, i.denominator);
-        return { ...i, quantity: custom };
-      });
       */
     default:
       return state;

@@ -19,7 +19,7 @@ export interface IFormDataProps {
   comment: string;
 }
 
-const NewRating: React.FC<INewRatingProps> = (props: INewRatingProps) => {
+const NewRating: React.FC<INewRatingProps> = ({ show, recipeSlug, userId, addRating }: INewRatingProps) => {
   const intl = useIntl();
 
   const [formData, setFormData] = useState<IFormDataProps>({ rating: '', comment: '' });
@@ -33,14 +33,19 @@ const NewRating: React.FC<INewRatingProps> = (props: INewRatingProps) => {
     const newRating: RatingCreate = {
       rating:     parseInt(formData.rating),
       comment:    formData.comment,
-      userId:     props.userId,
+      userId:     userId,
     };
-    props.addRating(props.recipeSlug, newRating);
+    addRating(recipeSlug, newRating);
     setFormData({ rating: '', comment: '' });
   };
 
   const { formatMessage } = intl;
   const messages = defineMessages({
+    new_rating_title: {
+      id: 'newRating.create.title',
+      description: 'Fieldset legend for creating a new rating',
+      defaultMessage: 'Your new rating',
+    },
     rating_placeholder: {
       id: 'newRating.create.rating_placeholder',
       description: 'Rating placeholder',
@@ -68,42 +73,44 @@ const NewRating: React.FC<INewRatingProps> = (props: INewRatingProps) => {
     },
   });
 
-  if (!props.show) return null;
+  if (!show) return null;
 
   return (
     <>
-      <h3 className='new-rating-heading'>Your new rating</h3>
       <form onSubmit={handleSubmit} className='new-rating'>
-        <Row>
-          <Col lg={4} md={5} sm={12}>
-            <Input
-                name='rating'
-                type='number'
-                label={formatMessage(messages.rating_label)}
-                placeholder={formatMessage(messages.rating_placeholder)}
-                change={handleChange}
-                value={formData.rating} />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Input
-                name='comment'
-                rows={4}
-                label={formatMessage(messages.rating_comment_label)}
-                placeholder={formatMessage(messages.rating_comment_placeholder)}
-                change={handleChange}
-                value={formData.comment}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={12}>
-            <Button type='submit' variant='outline-primary' disabled={formData.rating.length === 0 || formData.comment.length === 0}>
-              {formatMessage(messages.submit)}
-            </Button>
-          </Col>
-        </Row>
+        <fieldset>
+          <legend className='new-rating-heading'>{formatMessage(messages.new_rating_title)}</legend>
+          <Row>
+            <Col lg={4} md={5} sm={12}>
+              <Input
+                  name='rating'
+                  type='number'
+                  label={formatMessage(messages.rating_label)}
+                  placeholder={formatMessage(messages.rating_placeholder)}
+                  change={handleChange}
+                  value={formData.rating} />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Input
+                  name='comment'
+                  rows={4}
+                  label={formatMessage(messages.rating_comment_label)}
+                  placeholder={formatMessage(messages.rating_comment_placeholder)}
+                  change={handleChange}
+                  value={formData.comment}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <Button type='submit' variant='outline-primary' disabled={formData.rating.length === 0 || formData.comment.length === 0}>
+                {formatMessage(messages.submit)}
+              </Button>
+            </Col>
+          </Row>
+        </fieldset>
       </form>
       <hr />
     </>

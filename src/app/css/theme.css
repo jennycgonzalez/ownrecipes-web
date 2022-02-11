@@ -4,9 +4,13 @@ html {
   --primaryMain: #349b25;
   --primaryShadow: rgba(49, 255, 132, .25);
   --primaryContrast: #fff;
+
+  --secondaryMain: #da6575;
+  --secondaryContrast: #fff;
+
   --disabledTheme: #727f8b;
 
-  --background: #eaeaea;
+  --background: #efefef;
   --midground: #fafafa;
   --elevation: #fff;
 
@@ -14,7 +18,7 @@ html {
   --elevationBorder: rgba(0, 0, 0, 0.2);
 
   --primaryText: #1f1f1f;
-  --secondaryText: #3f3f3f;
+  --secondaryText: #444;
   --disabledText: #7b7b7b;
   --hoverText: #000;
   --errorText: #b60d0d;
@@ -34,10 +38,13 @@ html[data-theme="dark"] {
   --primaryShadow: rgba(49, 255, 132, .2);
   --primaryContrast: #fff;
 
+  --secondaryMain: #da6575;
+  --secondaryContrast: #fff;
+
   --disabledTheme: #8b8d8e;
 
-  --background: #1a1a1d;
-  --midground: #20242c;
+  --background: #151518;
+  --midground: #181c22;
   --elevation: #33373d;
 
   --elevationShadow: rgba(33, 33, 33, 0.75);

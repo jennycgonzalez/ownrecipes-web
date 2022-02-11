@@ -7,138 +7,151 @@ exports[`Ingredient Group component test 1`] = `
   <div
     className="ingredient-group"
   >
-    <b>
-      Chili
-    </b>
-    <ul
-      className="ingredients"
+    <h3
+      className="subheading"
     >
-      <li
-        className="ingredient"
+      Chili
+    </h3>
+    <table
+      className="table ingredients-table table table-sm table-striped"
+    >
+      <thead
+        className="hideme"
       >
-        <div>
-          <label
-            className="check-container"
-            htmlFor="1"
+        <tr>
+          <th>
+            <span>
+              Quantity
+            </span>
+          </th>
+          <th>
+            <span>
+              Ingredient
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          className="ingredient"
+        >
+          <td
+            className="quantity"
           >
-            <input
-              checked={false}
-              name="1"
-              onChange={[Function]}
-              type="checkbox"
-            />
-            <span
-              className="checkmark"
-            />
-          </label>
-        </div>
-        <span
-          className="quantity"
-        >
-          1 
-        </span>
-        <span
-          className="measurement"
-        >
-          dash 
-        </span>
-        <span
-          className="title"
-        >
-          black pepper
-        </span>
-      </li>
-    </ul>
+            <span>
+              1
+               
+              dash
+            </span>
+          </td>
+          <td
+            className="ingredient"
+          >
+            <span>
+              black pepper
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   <div
     className="ingredient-group"
   >
-    <b>
-      Spices
-    </b>
-    <ul
-      className="ingredients"
+    <h3
+      className="subheading"
     >
-      <li
-        className="ingredient"
+      Spices
+    </h3>
+    <table
+      className="table ingredients-table table table-sm table-striped"
+    >
+      <thead
+        className="hideme"
       >
-        <div>
-          <label
-            className="check-container"
-            htmlFor="1"
+        <tr>
+          <th>
+            <span>
+              Quantity
+            </span>
+          </th>
+          <th>
+            <span>
+              Ingredient
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          className="ingredient"
+        >
+          <td
+            className="quantity"
           >
-            <input
-              checked={false}
-              name="1"
-              onChange={[Function]}
-              type="checkbox"
-            />
-            <span
-              className="checkmark"
-            />
-          </label>
-        </div>
-        <span
-          className="quantity"
-        >
-          1 
-        </span>
-        <span
-          className="measurement"
-        >
-          dash 
-        </span>
-        <span
-          className="title"
-        >
-          black pepper
-        </span>
-      </li>
-    </ul>
+            <span>
+              1
+               
+              dash
+            </span>
+          </td>
+          <td
+            className="ingredient"
+          >
+            <span>
+              black pepper
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   <div
     className="ingredient-group"
   >
     
-    <ul
-      className="ingredients"
+    <table
+      className="table ingredients-table table table-sm table-striped"
     >
-      <li
-        className="ingredient"
+      <thead
+        className="hideme"
       >
-        <div>
-          <label
-            className="check-container"
-            htmlFor="1"
+        <tr>
+          <th>
+            <span>
+              Quantity
+            </span>
+          </th>
+          <th>
+            <span>
+              Ingredient
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          className="ingredient"
+        >
+          <td
+            className="quantity"
           >
-            <input
-              checked={false}
-              name="1"
-              onChange={[Function]}
-              type="checkbox"
-            />
-            <span
-              className="checkmark"
-            />
-          </label>
-        </div>
-        <span
-          className="quantity"
-        >
-          1 
-        </span>
-        <span
-          className="measurement"
-        >
-          dash 
-        </span>
-        <span
-          className="title"
-        >
-          black pepper
-        </span>
-      </li>
-    </ul>
+            <span>
+              1
+               
+              dash
+            </span>
+          </td>
+          <td
+            className="ingredient"
+          >
+            <span>
+              black pepper
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 `;

@@ -39,10 +39,10 @@ code {
 
 
 h1, .h1 {
-  font-size:     2.4rem;
+  font-size:     1.8rem;
 }
 h2, .h2 {
-  font-size:     1.8rem;
+  font-size:     1.6rem;
   margin-bottom: 0.5em;
 }
 h3, .h3 {
@@ -100,4 +100,38 @@ h4, .h4 {
 
 .table {
   color: var(--primaryText);
+  height: '1px'; /* HACK: Fix height issues in older browser. */
+}
+.table > thead.hideme {
+  height: 1px;
+}
+.table > thead.hideme {
+  height: 1px;
+  border: none;
+}
+.table > thead.hideme > tr {
+  height: 1px;
+  border: none !important;
+}
+.table > thead.hideme > tr > th {
+  height: 1px;
+  border: none !important;
+  width: 1px;
+  position: absolute;
+  overflow: hidden;
+  top: -10px;
+  left: -10px;
+}
+.table-striped > tbody > tr:nth-of-type(2n+1) {
+  color: var(--hoverText);
+}
+.table-striped > tbody > tr:nth-of-type(2n+1) > td {
+  background-color: var(--hoverBg);
+  box-shadow: none;
+}
+.table-striped > tbody > tr:nth-of-type(2n+1) > td:first-child {
+  border-radius: 8px 0 0 8px;
+}
+.table-striped > tbody > tr:nth-of-type(2n+1) > td:last-child {
+  border-radius: 0 8px 8px 0;
 }

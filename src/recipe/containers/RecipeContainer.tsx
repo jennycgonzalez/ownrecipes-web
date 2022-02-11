@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as _ from 'lodash';
 
@@ -6,21 +6,24 @@ import Loading from '../../common/components/Loading';
 // import MenuItemModal from '../../menu/components/modals/MenuItemModal';
 import RecipeScheme from '../components/RecipeScheme';
 import * as RecipeActions from '../store/RecipeActions';
-import * as RecipesActions from '../store/RecipesActions';
+// import * as RecipesActions from '../store/RecipesActions';
 // import * as MenuItemActions from '../../menu/actions/MenuItemActions';
 // import { fetchRecipeList } from '../../menu/actions/RecipeListActions';
 // import { menuItemValidation } from '../../menu/actions/validation';
 
 import '../css/recipe.css';
-import { useParams } from 'react-router';
-import PageWrapper from '../../common/components/PageWrapper';
+import { useNavigate, useParams } from 'react-router';
 import { CombinedStore } from '../../app/Store';
+import { Recipe } from '../store/types';
+import { getResourcePath } from '../../common/utility';
 
 const RecipeContainer: React.FC = () => {
   const dispatch = useDispatch();
+  const nav = useNavigate();
   const params = useParams();
 
-  const [showItemModal, setShowItemModal] = useState<boolean>(false);
+  // const [showItemModal, setShowItemModal] = useState<boolean>(false);
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
   useEffect(() => {
     const rec = _.get(params, 'recipe');
@@ -36,27 +39,44 @@ const RecipeContainer: React.FC = () => {
   const recipeState  = useSelector((state: CombinedStore) => state.recipe);
   const account = accountState.item;
   // TODO
-  const lists: Array<any> = []; // listsState.items;
-  const recipe  = recipeState.item;
+  // const lists: listsState.items;
+  const recipe = recipeState.item;
+  const prevRecipe = useRef<Recipe | undefined>();
+
+  useEffect(() => {
+    if (_.get(recipeState.error, 'status') === 404) {
+      nav(getResourcePath('/NotFound'));
+    }
+  }, [recipeState.error]);
 
   const recipeSlug = params.recipe ?? '';
   const showEditLink = (account != null && account.id === recipe?.author);
 
-  const menuItemSave = useCallback(() => { /* dispatch(MenuItemActions.save() */ }, [dispatch]);
-  const deleteRecipe = useCallback(() => dispatch(RecipeActions.deleteRecipe(recipeSlug)), [dispatch]);
+  // const menuItemSave = useCallback(() => { /* dispatch(MenuItemActions.save() */ }, [dispatch]);
+  const deleteRecipe = useCallback(() => {
+    setIsDeleting(true);
+    dispatch(RecipeActions.deleteRecipe(recipeSlug));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (prevRecipe.current == null) {
+      prevRecipe.current = recipe;
+    } else if (prevRecipe.current != null && recipe == null && isDeleting) {
+      nav(getResourcePath('/browse'));
+    }
+  }, [recipe]);
 
   // TODO
-  const bulkAdd = useCallback((listId: number) => { /* RecipeActions.bulkAdd(recipe, listId) */ }, [dispatch]);
-  const checkAllIngredients = useCallback(() => RecipeActions.checkAll(recipeSlug), [dispatch]);
-  const uncheckAllIngredients = useCallback(() => RecipeActions.unCheckAll(recipeSlug), [dispatch]);
+  // const bulkAdd = useCallback((listId: number) => { /* RecipeActions.bulkAdd(recipe, listId) */ }, [dispatch]);
+  // const checkAllIngredients = useCallback(() => RecipeActions.checkAll(recipeSlug), [dispatch]);
+  // const uncheckAllIngredients = useCallback(() => RecipeActions.unCheckAll(recipeSlug), [dispatch]);
 
-  const checkIngredient = useCallback((id: number, checked: boolean) => RecipeActions.checkIngredient(recipeSlug, id, checked), [dispatch]);
-  const checkSubRecipe  = useCallback((id: number, checked: boolean) => RecipeActions.checkSubRecipe(recipeSlug, id, checked), [dispatch]);
+  // const checkIngredient = useCallback((id: number, checked: boolean) => RecipeActions.checkIngredient(recipeSlug, id, checked), [dispatch]);
+  // const checkSubRecipe  = useCallback((id: number, checked: boolean) => RecipeActions.checkSubRecipe(recipeSlug, id, checked), [dispatch]);
 
-  const updateServings = useCallback((servings: number) => RecipeActions.updateServings(recipeSlug, servings), [dispatch]);
-  const resetServings  = useCallback(() => RecipeActions.resetServings(recipeSlug) , [dispatch]);
+  const updateServings = useCallback((servings: number) => dispatch(RecipeActions.updateServings(recipeSlug, servings)), [dispatch]);
 
-  if (recipe) {
+  if (recipe != null) {
     return (
       <>
         {/* TODO
@@ -70,26 +90,23 @@ const RecipeContainer: React.FC = () => {
             fetchRecipeList={fetchRecipeList}
             validation={menuItemValidation} /> */}
         <RecipeScheme
-            // eslint-disable-next-line react/jsx-props-no-spreading
             recipe={recipe}
-            // recipesState={listsState.pending} // TODO
-            recipesState={recipeState}
-            lists={lists}
+            recipeState={recipeState}
 
             showEditLink={showEditLink}
 
-            onAddToMenuClick={() => setShowItemModal(true)}
             deleteRecipe={deleteRecipe}
 
-            bulkAdd={bulkAdd}
-            checkAllIngredients={checkAllIngredients}
-            uncheckAllIngredients={uncheckAllIngredients}
+            // lists={lists}
+            // onAddToMenuClick={() => setShowItemModal(true)}
+            // bulkAdd={bulkAdd}
+            // checkAllIngredients={checkAllIngredients}
+            // uncheckAllIngredients={uncheckAllIngredients}
 
-            checkIngredient={checkIngredient}
-            checkSubRecipe={checkSubRecipe}
+            // checkIngredient={checkIngredient}
+            // checkSubRecipe={checkSubRecipe}
 
-            updateServings={updateServings}
-            resetServings={resetServings} />
+            updateServings={updateServings} />
       </>
     );
   } else {

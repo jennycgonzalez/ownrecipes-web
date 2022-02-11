@@ -1,12 +1,14 @@
-import ingredient from './IngredientReducer';
-import subrecipes from './SubRecipeReducer';
+import * as _ from 'lodash';
+
+import ingredient, { RecipeIngredientReducerActionTypes, RECIPE_INGREDIENTS_STORE } from './IngredientReducer';
+import subrecipes, { RecipeSubrecipesReducerActionTypes, RECIPE_SUBRECIPES_STORE } from './SubRecipeReducer';
 import fq from '../utilts/formatQuantity';
 import ReduxHelper from '../../common/store/ReduxHelper';
-import { Recipe, RecipeAction, RecipeActionTypes, RecipesAction, RecipeState, RECIPE_STORE } from './types';
+import { Recipe, RecipeAction, RecipeActionTypes, RecipeState, RECIPE_STORE } from './types';
 
 const defaultState: RecipeState = ReduxHelper.getItemReducerDefaultState<Recipe>(RECIPE_STORE);
 
-const recipe = (state = defaultState, action: RecipesAction): RecipeState => {
+const recipe = (state = defaultState, action: RecipeAction): RecipeState => {
   if (action.store !== RECIPE_STORE) return ReduxHelper.caseDefaultReducer(state, action, defaultState);
 
   const recipeAction = action as RecipeAction;
@@ -16,83 +18,86 @@ const recipe = (state = defaultState, action: RecipesAction): RecipeState => {
         const actionRecipe = recipeAction.data;
 
         let subRecipes, ingredients;
-        /*
-        const hasRecipe = state.items?.find(t => t.id === actionRecipe.id) != null;
-        if (state.items && hasRecipe) {
-          return state.items.map(rec => {
-            if (rec.id === recipeAction.data.id) {
-              subRecipes = subrecipes(
-                rec.subrecipes,
-                { subrecipes: actionRecipe.subrecipes,
-                  formatQuantity: fq.bind(this, rec.servings, actionRecipe.servings),
-                  type: action.type }
-              );
-              ingredients = ingredient(
-                rec.ingredient_groups,
-                { ingredient_groups: actionRecipe.ingredient_groups,
-                  formatQuantity: fq.bind(this, rec.servings, actionRecipe.servings),
-                  type: action.type }
-              );
-              return {
-                ...actionRecipe,
-                subrecipes: subRecipes,
-                ingredient_groups: ingredients,
-              };
-            }
-            return rec;
-          });
+
+        if (state.item) {
+          let updItem: Recipe = _.clone(state.item);
+          subRecipes = subrecipes(
+            updItem.subrecipes,
+            { subrecipes: actionRecipe.subrecipes,
+              formatQuantity: fq.bind(this, updItem.servings, actionRecipe.servings),
+              store: RECIPE_SUBRECIPES_STORE,
+              type: RecipeSubrecipesReducerActionTypes.RECIPE_SUBRECIPES_LOAD }
+          );
+          ingredients = ingredient(
+            updItem.ingredientGroups,
+            { ingredientGroups: actionRecipe.ingredientGroups,
+              formatQuantity: fq.bind(this, updItem.servings, actionRecipe.servings),
+              store: RECIPE_INGREDIENTS_STORE,
+              type: RecipeIngredientReducerActionTypes.RECIPE_INGREDIENTS_LOAD }
+          );
+
+          updItem = {
+            ...actionRecipe,
+            subrecipes: subRecipes,
+            ingredientGroups: ingredients,
+          };
+          return ReduxHelper.setItem(state, updItem);
         } else {
           subRecipes = subrecipes(
             [],
             { subrecipes: actionRecipe.subrecipes,
               formatQuantity: fq.bind(this, actionRecipe.servings, actionRecipe.servings),
-              type: action.type }
+              store: RECIPE_SUBRECIPES_STORE,
+              type: RecipeSubrecipesReducerActionTypes.RECIPE_SUBRECIPES_LOAD }
           );
           ingredients = ingredient(
             [],
-            { ingredient_groups: actionRecipe.ingredient_groups,
+            { ingredientGroups: actionRecipe.ingredientGroups,
               formatQuantity: fq.bind(this, actionRecipe.servings, actionRecipe.servings),
-              type: action.type }
+              store: RECIPE_INGREDIENTS_STORE,
+              type: RecipeIngredientReducerActionTypes.RECIPE_INGREDIENTS_LOAD }
           );
-          */
 
-          const updItem = {
+          const updItem: Recipe = {
             ...actionRecipe,
-            subrecipes: subRecipes ?? [],
-            ingredient_groups: ingredients ?? [],
+            subrecipes: subRecipes,
+            ingredientGroups: ingredients,
             customServings: actionRecipe.servings,
           };
 
           return ReduxHelper.setItem(state, updItem);
-        // }
+        }
       }
     case RecipeActionTypes.RECIPE_DELETE:
       return defaultState;
     case RecipeActionTypes.RECIPE_INGREDIENT_SERVINGS_UPDATE:
-      /*
-      return state.items?.map(recipe => {
-        if (recipe.slug === action.recipeSlug) {
-          action.servings = recipe.servings;
-          const subRecipes = subrecipes(
-            recipe.subrecipes,
-            { formatQuantity: fq.bind(this, recipe.servings, action.customServings),
-              type: action.type }
-          );
-          const ingredients = ingredient(
-            recipe.ingredient_groups,
-            { formatQuantity: fq.bind(this, recipe.servings, action.customServings),
-              type: action.type }
-          );
-          return {
-            ...recipe,
-            subrecipes: subRecipes,
-            ingredient_groups: ingredients,
-            customServings: action.customServings,
-          };
-        }
-        return recipe;
-      }); */
-      return state;
+      {
+        if (state.item == null) return state;
+
+        const { customServings } = recipeAction;
+        let updItem: Recipe = _.clone(state.item);
+
+        const subRecipes = subrecipes(
+          updItem.subrecipes,
+          { store: RECIPE_SUBRECIPES_STORE,
+            type: RecipeSubrecipesReducerActionTypes.RECIPE_SUBRECIPES_SERVINGS_UPDATE,
+            formatQuantity: fq.bind(this, updItem.servings, customServings) }
+        );
+        const ingredients = ingredient(
+          updItem.ingredientGroups,
+          { store: RECIPE_INGREDIENTS_STORE,
+            type: RecipeIngredientReducerActionTypes.RECIPE_INGREDIENTS_SERVINGS_UPDATE,
+            formatQuantity: fq.bind(this, updItem.servings, customServings) }
+        );
+        updItem = {
+          ...updItem,
+          subrecipes: subRecipes,
+          ingredientGroups: ingredients,
+          customServings: customServings,
+        };
+
+        return ReduxHelper.setItem(state, updItem);
+      }
     /*
     case RecipeActionTypes.RECIPE_INGREDIENT:
     case RecipeActionTypes.RECIPE_INGREDIENT_CHECK_INGREDIENT:
@@ -109,8 +114,8 @@ const recipe = (state = defaultState, action: RecipesAction): RecipeState => {
           };
         }
         return recipe;
-      }); */
-      return state;
+      });
+      return state; */
     default: return ReduxHelper.caseDefaultReducer(state, action, defaultState);
   }
 };

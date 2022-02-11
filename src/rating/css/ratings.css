@@ -1,5 +1,5 @@
 .rating-stars {
-  color: #d17581;
+  color: var(--secondaryMain);
   margin-bottom: 0;
 }
 

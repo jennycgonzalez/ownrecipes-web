@@ -5,6 +5,7 @@
 
 .modal-header {
   padding: 0.75rem 1rem;
+  border-bottom-color: rgba(128, 128, 128, 0.4);
 }
 .modal-header .h4 {
   margin: 0;
@@ -15,4 +16,8 @@
 .modal-header .btn-close:hover {
   background-color: var(--hoverBg);
   color: var(--hoverText);
+}
+
+.modal-footer {
+  border-top-color: rgba(128, 128, 128, 0.4);
 }

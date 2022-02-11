@@ -3,8 +3,8 @@ import { Image, Navbar, Nav, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import CreateRecipeMenuItem from './CreateRecipeMenuItem';
-import GroceryListMenuItem, { ListItemType } from './GroceryListMenuItem';
-import MenuMenuItem from './MenuMenuItem';
+// import GroceryListMenuItem, { ListItemType } from './GroceryListMenuItem';
+// import MenuMenuItem from './MenuMenuItem';
 import { AccountMenuMenuItem, AccountLoginMenuItem } from './MyAccountMenuItem';
 import { getResourcePath } from '../../common/utility';
 import { UserAccount } from '../../account/store/types';
@@ -15,7 +15,7 @@ import { LanguageCode, Settings, ThemeMode } from '../../account/store/settings/
 export interface INavBarProps {
   account:  UserAccount | undefined;
   settings: Settings;
-  lists:    Array<ListItemType> | undefined;
+  // lists:    Array<ListItemType> | undefined;
 
   isLoginPage: boolean;
 
@@ -61,9 +61,9 @@ const NavBar: React.FC<INavBarProps> = (props: INavBarProps) => {
           <Nav>
             <Nav.Link href={getResourcePath('/browser')}>{formatMessage(messages.recipes)}</Nav.Link>
             <Nav.Link onClick={props.onRandomRecipeClick}>{formatMessage(messages.randomRecipe)}</Nav.Link>
-            {isAuthenticated && <MenuMenuItem />}
+            {/* isAuthenticated && <MenuMenuItem /> */}
             {isAuthenticated && <CreateRecipeMenuItem />}
-            {isAuthenticated && <GroceryListMenuItem data={props.lists} />}
+            {/* isAuthenticated && <GroceryListMenuItem data={props.lists} /> */}
           </Nav>
           <Nav className='my-account-nav'>
             {isAuthenticated && (

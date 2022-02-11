@@ -1,8 +1,28 @@
+import { defineMessages, useIntl } from 'react-intl';
+
+import '../css/directions.css';
+
+import P from '../../common/components/P';
+
 export interface IDirectionsProps {
   data: string;
 }
 
 const Directions: React.FC<IDirectionsProps> = ({ data }: IDirectionsProps) => {
+  const { formatMessage } = useIntl();
+  const messages = defineMessages({
+    directions: {
+      id: 'recipe.directions',
+      description: 'Directions',
+      defaultMessage: 'Directions',
+    },
+    no_directions: {
+      id: 'recipe.directions.no_directions',
+      description: 'No directions provided message',
+      defaultMessage: '(This recipe has no directions.)',
+    },
+  });
+
   let directions: Array<React.ReactNode> = [];
   const directionsGroups = [];
 
@@ -35,9 +55,17 @@ const Directions: React.FC<IDirectionsProps> = ({ data }: IDirectionsProps) => {
   );
 
   return (
-    <div>
-      {directionsGroups}
-    </div>
+    <article className='directions'>
+      <h2>{formatMessage(messages.directions)}</h2>
+      {data.trim().length === 0 && (
+        <P className='placeholder'>{formatMessage(messages.no_directions)}</P>
+      )}
+      {data.trim().length > 0 && (
+        <div>
+          {directionsGroups}
+        </div>
+      )}
+    </article>
   );
 };
 

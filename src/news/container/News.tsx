@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { defineMessages, useIntl } from 'react-intl';
+import { /* defineMessages, */ useIntl } from 'react-intl';
 
 import * as NewsActions from '../store/actions';
 // import MiniBrowse from '../../browse/containers/MiniBrowse';
@@ -18,6 +18,7 @@ const News: React.FC = () => {
   const intl = useIntl();
   const dispatch = useDispatch();
 
+  /*
   const { formatMessage } = intl;
   const messages = defineMessages({
     browseRecipeButton: {
@@ -25,12 +26,12 @@ const News: React.FC = () => {
       description: 'Browse All Recipes',
       defaultMessage: 'Browse All Recipes',
     },
-  });
+  }); */
 
   const news = useSelector((state: CombinedStore) => state.news);
-  const accountState = useSelector((state: CombinedStore) => state.account);
   const newsList = news.items;
-  const user = accountState.item;
+  // const accountState = useSelector((state: CombinedStore) => state.account);
+  // const user = accountState.item;
 
   useEffect(() => {
     if (newsList != null && newsList.length !== 0) return;
@@ -41,7 +42,7 @@ const News: React.FC = () => {
     <Carousel.Item key={entry.id}>
       {entry.image && <img className='d-block w-100' src={entry.image} alt={entry.title} />}
       <Carousel.Caption>
-        <h3>{entry.title}</h3>
+        <h2>{entry.title}</h2>
         <P>{entry.content}</P>
       </Carousel.Caption>
     </Carousel.Item>
@@ -61,7 +62,7 @@ const News: React.FC = () => {
             : ''}
         </Row>
         <Row>
-          <h3 className='page-header'>Recommended Recipes</h3>
+          <h2 className='page-header'>Recommended Recipes</h2>
           <MiniBrowse format='col-xs-12 col-sm-6 col-md-3' qs='?limit=4' />
         </Row>
         <Row className='home-buttons'>

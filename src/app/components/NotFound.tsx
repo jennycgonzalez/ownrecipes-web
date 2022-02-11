@@ -28,7 +28,7 @@ const NotFound = () => {
 
   return (
     <PageWrapper title={formatMessage(messages.not_found)}>
-      <h3>{formatMessage(messages.header)}</h3>
+      <h1>{formatMessage(messages.header)}</h1>
       <img className='img-responsive' src={getResourcePath('/images/404.png')} alt='404' />
       <P>{formatMessage(messages.message)}</P>
     </PageWrapper>

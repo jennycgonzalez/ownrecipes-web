@@ -1,0 +1,25 @@
+.recipe-details .directions ol {
+  display: block;
+}
+.directions ol {
+  list-style: none;
+  counter-reset: cupcake;
+  padding-left: 32px;
+}
+.directions ol li {
+  counter-increment: cupcake;
+  margin-bottom: 1rem;
+}
+.directions ol li:before {
+  content: counters(cupcake, '.') ' ';
+  /* Whatever custom styles you want here */
+  color: var(--secondaryContrast);
+  background-color: var(--secondaryMain);
+  border-radius: 50%;
+  font-weight: bold;
+
+  display: inline-block;
+  width: 1.5em;
+  margin-right: 10px;
+  text-align: center;
+}

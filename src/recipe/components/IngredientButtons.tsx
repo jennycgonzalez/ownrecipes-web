@@ -8,15 +8,15 @@ export type IListsListType = {
 }
 
 export interface IIngredientButtonsProps {
-  lists: Array<IListsListType>;
   pending: PendingState;
+  lists: Array<IListsListType>;
 
   bulkAdd: (listId: number) => void;
   checkAll: () => void;
   unCheckAll: () => void;
 }
 
-const IngredientButtons: React.FC<IIngredientButtonsProps> = ({ lists, pending, bulkAdd, checkAll, unCheckAll }: IIngredientButtonsProps) => {
+const IngredientButtons: React.FC<IIngredientButtonsProps> = ({ lists /* , pending */, bulkAdd, checkAll, unCheckAll }: IIngredientButtonsProps) => {
   const { formatMessage } = useIntl();
 
   const messages = defineMessages({
