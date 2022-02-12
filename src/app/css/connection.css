@@ -1,0 +1,7 @@
+.container.no-connection {
+  margin-bottom: 1rem;
+}
+
+.container.no-connection > .alert {
+  margin-bottom: 0;
+}

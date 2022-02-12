@@ -2,6 +2,8 @@ import { combineReducers } from 'redux';
 
 import account from '../account/store/reducer';
 import { AccountState } from '../account/store/types';
+import connection from '../connection/store/reducer';
+import { ConnectionState } from '../connection/store/types';
 import error from '../error/store/reducer';
 import { ErrorState } from '../error/store/types';
 // import browse from '../../browse/reducers/Reducer';
@@ -20,7 +22,7 @@ import { SettingsState } from '../account/store/settings/types';
 
 export type CombinedStore = {
   account:    AccountState;
-  // browser:    BrowseState;
+  connection: ConnectionState;
   error:      ErrorState;
   // list:       ListState;
   // menu:       MenuState;
@@ -34,7 +36,7 @@ export type CombinedStore = {
 
 const reducer = combineReducers({
   account,
-  // browse,
+  connection,
   error,
   // list,
   // menu,

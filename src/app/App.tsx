@@ -20,6 +20,7 @@ import AutoLogin from './components/AutoLogin';
 import initCourses from './components/Courses';
 import initCuisines from './components/Cuisines';
 import initMeasurements from './components/Measurements';
+import ConnectionObserver from './components/ConnectionObserver';
 
 const App = () => {
   const account = useSelector((state: CombinedStore) => state.account.item);
@@ -39,7 +40,8 @@ const App = () => {
       <AutoLogin nav={nav} loc={location}>
         <div id='content'>
           <Header />
-          { isDemoMode() ? <Demo /> : '' }
+          {isDemoMode() && <Demo />}
+          {!isDemoMode() && <ConnectionObserver />}
           <Routes isAuthenticated={isAuthenticated} />
         </div>
         <Footer />

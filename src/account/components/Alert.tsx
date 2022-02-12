@@ -20,31 +20,16 @@ const LoginAlert: React.FC<ILoginAlert> = (props: ILoginAlert) => {
       description: 'Fail to login message',
       defaultMessage: 'Incorrect username or password.',
     },
-    noConnectionTitle: {
-      id: 'alert.no_connection_title',
-      description: 'No connection to backend title',
-      defaultMessage: 'No connection',
-    },
-    noConnectionMessage: {
-      id: 'alert.no_connection_message',
-      description: 'No connection to backend message',
-      defaultMessage: 'The service is currently unavailable. Please try again later.',
-    },
   });
 
   const { reducerState } = props;
-  const { error, hasConnection } = reducerState;
+  const { error } = reducerState;
 
   return (
     <>
       {error && (
         <Alert severity='danger' title={formatMessage(messages.errorTitle)}>
           {formatMessage(messages.errorMessage)}
-        </Alert>
-      )}
-      {!hasConnection && (
-        <Alert severity='danger' title={formatMessage(messages.noConnectionTitle)}>
-          {formatMessage(messages.noConnectionMessage)}
         </Alert>
       )}
     </>

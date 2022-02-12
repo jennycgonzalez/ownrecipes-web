@@ -2,6 +2,7 @@ import { Alert as BootstrapAlert } from 'react-bootstrap';
 
 import '../css/alert.css';
 import Icon from './Icon';
+import P from './P';
 
 export interface IAlertProps {
   severity: 'danger' | 'info';
@@ -19,7 +20,7 @@ const Alert: React.FC<IAlertProps> = (props: IAlertProps) => (
       {props.title}
     </BootstrapAlert.Heading>
     {typeof props.children === 'string' && (
-      <p className='alert-message mb-0'>{props.children}</p>
+      <P className='alert-message mb-0'>{props.children}</P>
     )}
     {typeof props.children !== 'string' && (
       <div className='alert-message'>{props.children}</div>

@@ -7,6 +7,9 @@ import ItemReducerType from './ItemReducerType';
 import MapReducerType from './MapReducerType';
 
 export enum ACTION {
+  GET_SUCCESS = 'GET_SUCCESS',
+
+  LOADING = 'LOADING',
   ERROR = 'ERROR',
 
   RESET = 'RESET',
@@ -19,6 +22,11 @@ export type GenericErrorAction = {
   store: string;
   type:  typeof ACTION.ERROR;
   data?: Error | undefined;
+}
+
+export type GenericLoadingAction = {
+  store: string;
+  type:  typeof ACTION.LOADING;
 }
 
 export type GenericNoConnectionAction = {
@@ -36,7 +44,7 @@ export type GenericSoftResetAction = {
   type:  typeof ACTION.SOFT_RESET;
 }
 
-export type GenericReducerAction = GenericErrorAction | GenericNoConnectionAction | GenericResetAction | GenericSoftResetAction;
+export type GenericReducerAction = GenericErrorAction | GenericLoadingAction | GenericNoConnectionAction | GenericResetAction | GenericSoftResetAction;
 
 export default class ReduxHelper {
   static transformEntities<TDto, TEntity>(arr: Array<TDto>, toEntity: (dto: TDto) => TEntity): Array<TEntity> {
@@ -91,6 +99,15 @@ export default class ReduxHelper {
     newState.error = error;
     newState.pending = PendingState.ABORTED;
     newState.hasConnection = true;
+
+    return newState;
+  };
+
+  static setLoading = <T extends GenericReducerType>(state: T): T => {
+    const newState = { ...state };
+
+    newState.error = undefined;
+    newState.pending = PendingState.LOADING;
 
     return newState;
   };
@@ -163,6 +180,8 @@ export default class ReduxHelper {
     }
 
     switch (action.type) {
+      case ACTION.LOADING: return ReduxHelper.setLoading(state);
+
       case ACTION.ERROR: return ReduxHelper.setError(state, action.data);
 
       case ACTION.RESET: return defaultState;
