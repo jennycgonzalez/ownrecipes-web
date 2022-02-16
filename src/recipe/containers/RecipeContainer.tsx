@@ -14,7 +14,7 @@ import * as RecipeActions from '../store/RecipeActions';
 import '../css/recipe.css';
 import { useNavigate, useParams } from 'react-router';
 import { CombinedStore } from '../../app/Store';
-import { Recipe } from '../store/types';
+import { Recipe } from '../store/RecipeTypes';
 import { getResourcePath } from '../../common/utility';
 
 const RecipeContainer: React.FC = () => {
@@ -34,12 +34,11 @@ const RecipeContainer: React.FC = () => {
   }, [params]);
 
   const accountState = useSelector((state: CombinedStore) => state.account);
-  // TODO
-  // const listsState   = useSelector((state: CombinedStore) => state.lists);
-  const recipeState  = useSelector((state: CombinedStore) => state.recipe);
   const account = accountState.item;
   // TODO
+  // const listsState   = useSelector((state: CombinedStore) => state.lists);
   // const lists: listsState.items;
+  const recipeState  = useSelector((state: CombinedStore) => state.recipe);
   const recipe = recipeState.item;
   const prevRecipe = useRef<Recipe | undefined>();
 

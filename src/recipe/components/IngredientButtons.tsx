@@ -60,11 +60,11 @@ const IngredientButtons: React.FC<IIngredientButtonsProps> = ({ lists /* , pendi
     )
   } else if (pending === PendingState.COMPLETED) {
     checkmark = (
-      <div className="glyphicon glyphicon-ok"/>
+      <Icon icon='check' variant='light />
     );
   } else if (pending === PendingState.ABORTED) {
     checkmark = (
-      <div className="glyphicon glyphicon-remove"/>
+      <Icon icon='x-square' variant='light />
     );
   } */
 

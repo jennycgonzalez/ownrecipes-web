@@ -38,6 +38,13 @@ code {
 }
 
 
+a {
+  color: var(--primaryMain);
+}
+a:hover {
+  color: var(--primaryLight);
+}
+
 h1, .h1 {
   font-size:     1.8rem;
 }

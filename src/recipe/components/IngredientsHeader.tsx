@@ -1,6 +1,6 @@
 import { defineMessages, useIntl } from 'react-intl';
 
-import { Recipe } from '../store/types';
+import { Recipe } from '../store/RecipeTypes';
 
 // import IngredientButtons from './IngredientButtons';
 import GenericReducerType, { PendingState } from '../../common/store/GenericReducerType';

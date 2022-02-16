@@ -3,8 +3,11 @@ import moment from 'moment';
 import { handleError, refreshToken, request } from '../../common/CustomSuperagent';
 import { serverURLs } from '../../common/config';
 import { AccountActionTypes, ACCOUNT_STORE, AccountDispatch, ACCOUNT_TOKEN_STORAGE_KEY, UserAccount, LoginDto, toUserAccount } from './types';
+import { ACTION } from '../../common/store/ReduxHelper';
 
 export const getToken = (username: string, pass: string) => (dispatch: AccountDispatch) => {
+  dispatch({ store: ACCOUNT_STORE, type: ACTION.GET_START });
+
   const url = serverURLs.auth_token;
   request()
     .post(url)
@@ -17,6 +20,8 @@ export const getToken = (username: string, pass: string) => (dispatch: AccountDi
 };
 
 export const tryAutoLogin = () => (dispatch: AccountDispatch) => {
+  dispatch({ store: ACCOUNT_STORE, type: ACTION.GET_START });
+
   const storageItem = localStorage.getItem(ACCOUNT_TOKEN_STORAGE_KEY);
   if (storageItem == null) return;
   const user: UserAccount = JSON.parse(storageItem);

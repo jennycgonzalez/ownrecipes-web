@@ -4,7 +4,7 @@ import { AccountAction, AccountActionTypes, AccountState, ACCOUNT_STORE, ACCOUNT
 const defaultState: AccountState = ReduxHelper.getItemReducerDefaultState(ACCOUNT_STORE);
 
 const reducer = (state = defaultState, action: AccountAction): AccountState => {
-  if (state.ident !== action.store) return ReduxHelper.caseDefaultReducer(state, action,defaultState);
+  if (state.ident !== action.store) return ReduxHelper.caseItemDefaultReducer(state, action, defaultState);
 
   switch (action.type) {
     case AccountActionTypes.LOGIN:
@@ -17,7 +17,7 @@ const reducer = (state = defaultState, action: AccountAction): AccountState => {
       localStorage.removeItem(ACCOUNT_TOKEN_STORAGE_KEY);
       return defaultState;
     default:
-      return ReduxHelper.caseDefaultReducer(state, action, defaultState);
+      return ReduxHelper.caseItemDefaultReducer(state, action, defaultState);
   }
 };
 

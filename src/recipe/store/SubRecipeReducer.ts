@@ -1,5 +1,5 @@
 import { Dispatch as ReduxDispatch } from 'redux';
-import { SubRecipe } from './types';
+import { SubRecipe } from './RecipeTypes';
 
 export const RECIPE_SUBRECIPES_STORE = '@@recipeSubrecipes';
 
@@ -41,6 +41,8 @@ const merge = (state: RecipeSubrecipesState, action: IRecipeSubrecipesLoadAction
 const defaultState: RecipeSubrecipesState = [];
 
 const subRecipes = (state = defaultState, action: RecipeSubrecipesAction) => {
+  if (action.store !== RECIPE_SUBRECIPES_STORE) return state;
+
   switch (action.type) {
     case RecipeSubrecipesReducerActionTypes.RECIPE_SUBRECIPES_LOAD:
       return merge(state, action);

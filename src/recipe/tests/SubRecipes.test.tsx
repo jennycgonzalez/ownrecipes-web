@@ -2,7 +2,7 @@ import SubRecipes from '../components/SubRecipes';
 import createComponentWithIntlAndRouter from '../../test/createComponentWithIntlAndRouter';
 
 import data from './data';
-import { SubRecipe } from '../store/types';
+import { SubRecipe } from '../store/RecipeTypes';
 
 test('Test Sub Recipes', () => {
   // const checkSubRecipe = jest.fn();

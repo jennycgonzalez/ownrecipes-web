@@ -3,8 +3,7 @@ import { defineMessages, useIntl } from 'react-intl';
 
 import '../css/ingredients_panel.css';
 
-import { Recipe } from '../store/types';
-
+import { Recipe } from '../store/RecipeTypes';
 import SubRecipes from './SubRecipes';
 import IngredientGroups from './IngredientGroups';
 // import IngredientButtons from './IngredientButtons';

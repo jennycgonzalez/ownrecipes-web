@@ -1,5 +1,5 @@
 import { Dispatch as ReduxDispatch } from 'redux';
-import { Ingredient, IngredientGroup } from './types';
+import { Ingredient, IngredientGroup } from './RecipeTypes';
 
 export const RECIPE_INGREDIENTS_STORE = '@@recipeIngredients';
 
@@ -52,6 +52,8 @@ const merge = (state: RecipeIngredientsState, action: IRecipeIngredientLoadActio
 const defaultState: RecipeIngredientsState = [];
 
 const recipes = (state = defaultState, action: RecipeIngredientsAction): RecipeIngredientsState => {
+  if (action.store !== RECIPE_INGREDIENTS_STORE) return state;
+
   switch (action.type) {
     case RecipeIngredientReducerActionTypes.RECIPE_INGREDIENTS_LOAD:
       return merge(state, action);

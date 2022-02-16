@@ -26,9 +26,9 @@ const Ratings: React.FC<IRatingsProps> = ({ stars }: IRatingsProps) => {
   }
 
   return (
-    <p className='rating-stars'>
+    <span className='rating-stars'>
       {starsList}
-    </p>
+    </span>
   );
 };
 

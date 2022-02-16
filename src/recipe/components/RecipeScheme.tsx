@@ -2,7 +2,8 @@ import Directions from './Directions';
 import RecipeHeader from './RecipeHeader';
 
 import '../css/recipe.css';
-import { Recipe } from '../store/types';
+
+import { Recipe } from '../store/RecipeTypes';
 import GenericReducerType from '../../common/store/GenericReducerType';
 import IngredientsPanel from './IngredientsPanel';
 

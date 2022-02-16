@@ -7,21 +7,43 @@ import ItemReducerType from './ItemReducerType';
 import MapReducerType from './MapReducerType';
 
 export enum ACTION {
+  CREATE_START   = 'CREATE_START',
+  CREATE_SUCCESS = 'CREATE_SUCCESS',
+
+  DELETE_START   = 'DELETE_START',
+  DELETE_SUCCESS = 'DELETE_SUCCESS',
+
+  GET_START   = 'GET_START',
   GET_SUCCESS = 'GET_SUCCESS',
 
   LOADING = 'LOADING',
-  ERROR = 'ERROR',
+  ERROR   = 'ERROR',
 
-  RESET = 'RESET',
+  RESET      = 'RESET',
   SOFT_RESET = 'SOFT_RESET',
 
   NO_CONNECTION = 'NO_CONNECTION',
+}
+
+export type CreateStartAction = {
+  store: string;
+  type:  typeof ACTION.CREATE_START;
+}
+
+export type DeleteStartAction = {
+  store: string;
+  type:  typeof ACTION.DELETE_START;
 }
 
 export type GenericErrorAction = {
   store: string;
   type:  typeof ACTION.ERROR;
   data?: Error | undefined;
+}
+
+export type GetStartAction = {
+  store: string;
+  type:  typeof ACTION.GET_START;
 }
 
 export type GenericLoadingAction = {
@@ -44,7 +66,10 @@ export type GenericSoftResetAction = {
   type:  typeof ACTION.SOFT_RESET;
 }
 
-export type GenericReducerAction = GenericErrorAction | GenericLoadingAction | GenericNoConnectionAction | GenericResetAction | GenericSoftResetAction;
+export type GenericReducerAction      = GenericErrorAction | GenericLoadingAction | GenericNoConnectionAction | GenericResetAction | GenericSoftResetAction;
+export type GenericItemReducerAction  = GetStartAction | CreateStartAction | DeleteStartAction | GenericReducerAction;
+export type GenericArrayReducerAction = GetStartAction | GenericReducerAction;
+export type GenericMapReducerAction   = GetStartAction | GenericReducerAction;
 
 export default class ReduxHelper {
   static transformEntities<TDto, TEntity>(arr: Array<TDto>, toEntity: (dto: TDto) => TEntity): Array<TEntity> {
@@ -96,18 +121,18 @@ export default class ReduxHelper {
   static setError = <T extends GenericReducerType>(state: T, error: Error | undefined): T => {
     const newState = { ...state };
 
-    newState.error = error;
+    newState.error   = error;
     newState.pending = PendingState.ABORTED;
     newState.hasConnection = true;
 
     return newState;
   };
 
-  static setLoading = <T extends GenericReducerType>(state: T): T => {
+  static setPending = <T extends GenericReducerType>(state: T, pending: PendingState): T => {
     const newState = { ...state };
 
-    newState.error = undefined;
-    newState.pending = PendingState.LOADING;
+    newState.error   = undefined;
+    newState.pending = pending;
 
     return newState;
   };
@@ -116,7 +141,7 @@ export default class ReduxHelper {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const newState = { ...state } as any;
 
-    newState.error = undefined;
+    newState.error   = undefined;
     newState.pending = PendingState.COMPLETED;
     newState.hasConnection = true;
 
@@ -174,18 +199,128 @@ export default class ReduxHelper {
     return newState;
   };
 
+  static caseItemDefaultReducer = <T>(state: ItemReducerType<T>, action: AnyAction, defaultState: ItemReducerType<T>): ItemReducerType<T> => {
+    if (state.ident !== action.store) {
+      return ReduxHelper.caseDefaultReducer(state, action, defaultState);
+    }
+
+    switch (action.type) {
+      case ACTION.CREATE_START:
+        return ReduxHelper.setPending(state, PendingState.SAVING);
+      case ACTION.DELETE_START:
+        return ReduxHelper.setPending(state, PendingState.DELETING);
+      case ACTION.GET_START:
+        return ReduxHelper.setPending(state, PendingState.LOADING);
+      default:
+        return ReduxHelper.caseDefaultReducer(state, action, defaultState);
+    }
+  };
+
+  static caseArrayDefaultReducer = <T>(state: ArrayReducerType<T>, action: AnyAction, defaultState: ArrayReducerType<T>, itemStoreIdent?: string): ArrayReducerType<T> => {
+    if (itemStoreIdent === action.store) {
+      switch (action.type) {
+        case ACTION.GET_SUCCESS:
+          {
+            if (action.data == null) return state;
+
+            const updState = { ...state };
+            const updItems = state.items != null ? [...state.items] : [];
+            updItems.push(action.data);
+            updState.items = updItems;
+            return updState;
+          }
+        case ACTION.DELETE_SUCCESS:
+          {
+            if (action.data == null || state.items == null) return state;
+
+            const updState = { ...state };
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const updItems = [...state.items].filter((item: any) => item.id === action.data);
+            if (updItems.length < state.items.length) {
+              updState.items = updItems;
+              return updState;
+            } else {
+              return state;
+            }
+          }
+        default: ReduxHelper.caseDefaultReducer(state, action, defaultState);
+      }
+    }
+
+    if (state.ident !== action.store) {
+      return ReduxHelper.caseDefaultReducer(state, action, defaultState);
+    }
+
+    switch (action.type) {
+      case ACTION.GET_START:
+        return ReduxHelper.setPending(state, PendingState.LOADING);
+      case ACTION.GET_SUCCESS:
+        {
+          if (action.data == null) return state;
+
+          const updState = { ...state };
+          updState.items = action.data;
+          return updState;
+        }
+      default:
+        return ReduxHelper.caseDefaultReducer(state, action, defaultState);
+    }
+  };
+
+  static caseMapDefaultReducer = <T>(state: MapReducerType<T>, action: AnyAction, defaultState: MapReducerType<T>, itemStoreIdent?: string): MapReducerType<T> => {
+    if (itemStoreIdent === action.store) {
+      switch (action.type) {
+        case ACTION.GET_SUCCESS:
+          {
+            if (action.data == null) return state;
+
+            const updState = { ...state };
+            const updItems = state.items != null ? new Map(state.items) : new Map();
+            updItems.set(action.data.id, action.data);
+            updState.items = updItems;
+            return updState;
+          }
+        case ACTION.DELETE_SUCCESS:
+          {
+            if (action.data == null || state.items == null) return state;
+
+            const updState = { ...state };
+            const updItems = new Map(state.items);
+            if (updItems.delete(action.data)) {
+              updState.items = updItems;
+              return updState;
+            } else {
+              return state;
+            }
+          }
+        default: ReduxHelper.caseDefaultReducer(state, action, defaultState);
+      }
+    }
+
+    if (state.ident !== action.store) {
+      return ReduxHelper.caseDefaultReducer(state, action, defaultState);
+    }
+
+    switch (action.type) {
+      case ACTION.GET_START:
+        return ReduxHelper.setPending(state, PendingState.LOADING);
+      default:
+        return ReduxHelper.caseDefaultReducer(state, action, defaultState);
+    }
+  };
+
   static caseDefaultReducer = <T extends GenericReducerType>(state: T, action: AnyAction, defaultState: T): T => {
     if (state.ident !== action.store) {
       return state;
     }
 
     switch (action.type) {
-      case ACTION.LOADING: return ReduxHelper.setLoading(state);
+      case ACTION.LOADING:       return ReduxHelper.setPending(state, PendingState.LOADING);
 
-      case ACTION.ERROR: return ReduxHelper.setError(state, action.data);
+      case ACTION.ERROR:         return ReduxHelper.setError(state, action.data);
 
-      case ACTION.RESET: return defaultState;
-      case ACTION.SOFT_RESET: return ReduxHelper.setSoftReset(state);
+      case ACTION.RESET:         return defaultState;
+      case ACTION.SOFT_RESET:    return ReduxHelper.setSoftReset(state);
 
       case ACTION.NO_CONNECTION: return ReduxHelper.setNoConnection(state);
 

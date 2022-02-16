@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 // import { Checkbox } from '../../common/components/FormComponents';
 import { getResourcePath } from '../../common/utility';
-import { SubRecipe } from '../store/types';
+import { SubRecipe } from '../store/RecipeTypes';
 
 export interface ISubRecipesProps {
   subRecipes: Array<SubRecipe>;

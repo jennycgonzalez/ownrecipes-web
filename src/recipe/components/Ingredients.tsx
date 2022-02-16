@@ -2,7 +2,7 @@
 import { Table } from 'react-bootstrap';
 import { defineMessages, useIntl } from 'react-intl';
 import { optionallyFormatMessage } from '../../common/utility';
-import { Ingredient } from '../store/types';
+import { Ingredient } from '../store/RecipeTypes';
 
 export interface IIngredientsProps {
   data: Array<Ingredient>;

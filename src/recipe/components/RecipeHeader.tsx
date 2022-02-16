@@ -11,7 +11,7 @@ import Icon from '../../common/components/Icon';
 import Chip from '../../common/components/Chip';
 import Ratings from '../../rating/components/Ratings';
 import P from '../../common/components/P';
-import { Recipe } from '../store/types';
+import { Recipe } from '../store/RecipeTypes';
 import Modal from '../../common/components/Modal';
 
 export interface IRecipeHeaderProps {
@@ -126,9 +126,9 @@ const RecipeHeader: React.FC<IRecipeHeaderProps> = ({ recipe, showEditLink, dele
               <img className='img-responsive print-hidden' src={photo} alt={title} />
             </Col>
             <Col sm={7} xs={12} className='col-sm-push-5'>
-              <p className='print-only print-image'>
+              <P className='print-only print-image'>
                 <img className='img-responsive' src={photoThumbnail} alt={title} />
-              </p>
+              </P>
             </Col>
           </Row>
         )}

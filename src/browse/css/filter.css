@@ -1,0 +1,102 @@
+.filter-title {
+  margin-top: 20px;
+  background-color: #eee;
+  padding: 6px;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  color: #555;
+}
+.sidebar {
+  border: 1px solid #ccc;
+  padding-top: 10px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.sidebar .reset-search {
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+.sidebar .filter .list-group-item {
+  border: 0;
+  padding: 3px 7px;
+  color: #337ab7;
+}
+.sidebar .filter .list-group-item .clear {
+  clear: both;
+}
+.sidebar .filter .list-group-item .bi {
+  margin-right: 5px;
+}
+.sidebar .filter .list-group-item .badge {
+  display: block;
+  color: #fff;
+  background-color: #777;
+}
+.sidebar .filter .list-group-item.active {
+  background-color: #fff;
+  color: #337ab7;
+  font-weight: bold;
+}
+.sidebar .filter .list-group-item.active:hover {
+  background-color: #eee;
+  color: #135a97;
+}
+.sidebar .filter .clear-filter {
+  background-color: var(--errorText);
+  color: #eee;
+}
+@media (max-width: 991px) {
+  .filter .list-group-item {
+    padding: 7px 2px 7px 3px;
+ }
+}
+@media (max-width: 767px) {
+  .sidebar-header {
+    border: 1px solid #ddd;
+    margin-top: 20px;
+    background-color: #eee;
+    color: #777;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 10px;
+ }
+  .sidebar-header .filter-header .reset-margin {
+    margin-right: 60px;
+ }
+  .sidebar-header .filter-header-clear {
+    float: right;
+    margin-top: -30px;
+ }
+  .sidebar-header .filter-header-clear .clear-filter-mobile {
+    position: relative;
+    left: 10px;
+    padding: 9px;
+ }
+  .sidebar {
+    border: 1px solid #ddd;
+    margin-top: 0;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    padding: 5px 0;
+ }
+  .sidebar [class*="col-"] {
+    padding: 0 3px;
+ }
+  .sidebar .filter {
+    margin-bottom: 0;
+ }
+  .sidebar .filter .list-group-item {
+    text-transform: capitalize;
+ }
+  .search-bar {
+    margin-top: 0;
+ }
+}
+@media (max-width: 490px) {
+  .sidebar .filter .list-group-item .badge {
+    display: none;
+ }
+}

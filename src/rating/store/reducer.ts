@@ -1,5 +1,5 @@
-import ReduxHelper from '../../common/store/ReduxHelper';
-import { Rating, RatingsAction, RatingsActionTypes, RatingsState, RATINGS_STORE } from './types';
+import ReduxHelper, { ACTION } from '../../common/store/ReduxHelper';
+import { Rating, RatingAction, RatingsAction, RatingsState, RATINGS_STORE, RATING_STORE } from './types';
 
 const defaultState = ReduxHelper.getMapReducerDefaultState<Rating[]>(RATINGS_STORE);
 
@@ -31,15 +31,25 @@ function deleteRating(state: RatingsState, recipe: string, ratingId: number): Ra
 }
 
 const reducer = (state = defaultState, action: RatingsAction): RatingsState => {
+  if (RATING_STORE === action.store) {
+    const ratingAction = action as RatingAction;
+    switch (ratingAction.type) {
+      case ACTION.CREATE_SUCCESS:
+        return addRating(state, ratingAction.recipe, ratingAction.data);
+      case ACTION.DELETE_SUCCESS:
+        return deleteRating(state, ratingAction.recipe, ratingAction.ratingId);
+      default:
+        return ReduxHelper.caseMapDefaultReducer(state, action, defaultState);
+    }
+  }
+
+  if (state.ident !== action.store) return ReduxHelper.caseDefaultReducer(state, action, defaultState);
+
   switch (action.type) {
-    case RatingsActionTypes.LOAD:
+    case ACTION.GET_SUCCESS:
       return ReduxHelper.setMapItem(state, action.recipe, action.data);
-    case RatingsActionTypes.ADD:
-      return addRating(state, action.recipe, action.data);
-    case RatingsActionTypes.DELETE:
-      return deleteRating(state, action.recipe, action.ratingId);
     default:
-      return state;
+      return ReduxHelper.caseDefaultReducer(state, action, defaultState);
   }
 };
 

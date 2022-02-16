@@ -1,7 +1,7 @@
 import jwtDecode, { JwtPayload } from 'jwt-decode';
 import { Dispatch as ReduxDispatch } from 'redux';
 import ItemReducerType from '../../common/store/ItemReducerType';
-import { GenericReducerAction } from '../../common/store/ReduxHelper';
+import { GenericItemReducerAction } from '../../common/store/ReduxHelper';
 
 export type LoginDto = {
   id:    number;
@@ -47,15 +47,15 @@ export const ACCOUNT_TOKEN_STORAGE_KEY = 'ownrecipes-token';
 
 export interface IAccountLoginAction {
   store: typeof ACCOUNT_STORE;
-  type: typeof AccountActionTypes.LOGIN;
-  user: UserAccount;
+  type:  typeof AccountActionTypes.LOGIN;
+  user:  UserAccount;
 }
 
 export interface IAccountLogoutAction {
   store: typeof ACCOUNT_STORE;
-  type: typeof AccountActionTypes.LOGOUT;
+  type:  typeof AccountActionTypes.LOGOUT;
 }
 
 export type AccountState    = ItemReducerType<UserAccount>;
-export type AccountAction   = IAccountLoginAction | IAccountLogoutAction | GenericReducerAction;
+export type AccountAction   = IAccountLoginAction | IAccountLogoutAction | GenericItemReducerAction;
 export type AccountDispatch = ReduxDispatch<AccountAction>;

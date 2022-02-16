@@ -1,4 +1,4 @@
-import { IngredientGroup } from '../store/types';
+import { IngredientGroup } from '../store/RecipeTypes';
 
 import Ingredients from './Ingredients';
 

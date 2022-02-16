@@ -34,7 +34,7 @@
 .recipe-details .recipe-schema .table td .input-group .input-group-btn .btn-default {
   width: 20px;
 }
-.recipe-details .recipe-schema .table td .input-group .input-group-btn .glyphicon {
+.recipe-details .recipe-schema .table td .input-group .input-group-btn .bi {
   margin-left: -5px;
   font-size: 10px;
 }
@@ -100,16 +100,16 @@
 .recipe-details .recipe-schema .ingredients-buttons .recipe-list-spinner .sk-circle:before {
   background-color: #555;
 }
-.recipe-details .recipe-schema .ingredients-buttons .glyphicon {
+.recipe-details .recipe-schema .ingredients-buttons .bi {
   margin-top: 5px;
   margin-left: 12px;
   font-size: 18px;
 }
-.recipe-details .recipe-schema .ingredients-buttons .glyphicon.glyphicon-ok {
-  color: #3f9c35;
+.recipe-details .recipe-schema .ingredients-buttons .bi.check {
+  color: var(--successText);
 }
-.recipe-details .recipe-schema .ingredients-buttons .glyphicon.glyphicon-remove {
-  color: #a33f1f;
+.recipe-details .recipe-schema .ingredients-buttons .bi.x-square {
+  color: var(--errorText);
 }
 .recipe-details .ratings img {
   margin-top: 10px;

@@ -14,7 +14,7 @@ exports[`Alert component info test 1`] = `
     This is some alert
   </div>
   <p
-    className="alert-message mb-0"
+    className="body1 alert-message mb-0"
   >
     This is some message
   </p>
@@ -64,7 +64,7 @@ exports[`Alert component test 1`] = `
     This is some alert
   </div>
   <p
-    className="alert-message mb-0"
+    className="body1 alert-message mb-0"
   >
     This is some message
   </p>

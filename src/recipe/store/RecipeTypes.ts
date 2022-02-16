@@ -1,35 +1,58 @@
 import { Dispatch as ReduxDispatch } from 'redux';
 import ItemReducerType from '../../common/store/ItemReducerType';
-import MapReducerType from '../../common/store/MapReducerType';
-import { GenericReducerAction } from '../../common/store/ReduxHelper';
+import { ACTION, GenericItemReducerAction } from '../../common/store/ReduxHelper';
+
+export type Quantity = {
+  numerator:   number;
+  denominator: number;
+  measurement: string;
+}
 
 export type Ingredient = {
   id:          number;
   title:       string;
-  measurement: string;
-  numerator:   number;
-  denominator: number;
 
   quantity?:   string;
   checked?:    boolean;
-}
+
+  measurement: string;
+} & Quantity;
 
 export type IngredientGroup = {
   title:       string;
   ingredients: Array<Ingredient>;
 }
 
+export type SubRecipeDto = {
+  title:       string;
+  slug:        string;
+  child_recipe_id: number;
+  parent_recipe_id?: number;
+
+  measurement?: string;
+} & Quantity;
+
 export type SubRecipe = {
   title:       string;
-  slug?:       string;
-  child_recipe_id: number;
-  measurement: string;
-  numerator:   number;
-  denominator: number;
+  slug:        string;
+  child_recipe_id:   number;
+  parent_recipe_id?: number;
+  measurement?: string;
 
-  quantity:    string;
+  quantity?:   string;
   checked?:    boolean;
-}
+} & Quantity;
+
+export const toSubRecipe = (dto: SubRecipeDto): SubRecipe => ({
+  title: dto.title,
+  slug:  dto.slug,
+  child_recipe_id:  dto.child_recipe_id,
+  parent_recipe_id: dto.parent_recipe_id,
+
+  measurement: dto.measurement,
+  numerator:   dto.numerator,
+  denominator: dto.denominator,
+});
 
 export type Course = {
   id: number;
@@ -41,11 +64,43 @@ export type Cuisine = {
   title: string;
 }
 
-export type RecipeDto = {
+export type RecipeListDto = {
   id:    number;
   title: string; // Tasty Chili 24
   slug:  string; // tasty-werwerchili-4
 
+  photo_thumbnail?: string | null;
+
+  info:     string;
+  rating:   number;
+  pub_date: string; // 2011-05-20
+}
+
+export type RecipeList = {
+  id:    number;
+  title: string; // Tasty Chili 24
+  slug:  string; // tasty-werwerchili-4
+
+  photoThumbnail?: string;
+
+  info:     string;
+  rating:   number;
+  pubDate:  Date; // 2011-05-20
+}
+
+export const toRecipeList = (dto: RecipeListDto): RecipeList => ({
+  id:    dto.id,
+  title: dto.title,
+  slug:  dto.slug,
+
+  photoThumbnail: dto.photo_thumbnail ?? undefined,
+
+  info: dto.info,
+  rating: dto.rating,
+  pubDate: new Date(dto.pub_date),
+});
+
+export type RecipeDto = {
   username:    string;
   author:      number;
   source:      string;
@@ -58,28 +113,20 @@ export type RecipeDto = {
   cuisine: Cuisine;
 
   photo?: string | null;
-  photo_thumbnail?: string | null;
 
   subrecipes: Array<SubRecipe>;
   ingredient_groups: Array<IngredientGroup>;
   tags: Array<string>;
 
   directions: string;
-  info:       string;
 
-  rating: number;
   public: boolean;
-  pub_date: string; // 2011-05-20
   update_date: string;
 
   customServings: number;
-}
+} & RecipeListDto;
 
 export type Recipe = {
-  id:    number;
-  title: string; // Tasty Chili 24
-  slug:  string; // tasty-werwerchili-4
-
   username:    string;
   author:      number;
   source:      string;
@@ -92,22 +139,18 @@ export type Recipe = {
   cuisine: Cuisine;
 
   photo?: string;
-  photoThumbnail?: string;
 
   subrecipes: Array<SubRecipe>;
   ingredientGroups: Array<IngredientGroup>;
   tags: Array<string>;
 
   directions: string;
-  info:       string;
 
-  rating: number;
   public: boolean;
-  pubDate: Date; // 2011-05-20
   updateDate: Date;
 
   customServings: number;
-}
+} & RecipeList;
 
 export const toRecipe = (dto: RecipeDto): Recipe => ({
   id:    dto.id,
@@ -144,7 +187,6 @@ export const toRecipe = (dto: RecipeDto): Recipe => ({
 });
 
 export enum RecipeActionTypes {
-  RECIPE_LOAD = 'RECIPE_LOAD',
   RECIPE_DELETE = 'RECIPE_DELETE',
   RECIPE_INGREDIENT = 'RECIPE_INGREDIENT',
   RECIPE_INGREDIENT_CHECK_INGREDIENT = 'RECIPE_INGREDIENT_CHECK_INGREDIENT',
@@ -163,20 +205,20 @@ export const RECIPE_STORE = '@@recipe';
 
 export interface IRecipeDataAction {
   store: typeof RECIPE_STORE;
-  type: typeof RecipeActionTypes.RECIPE_LOAD;
-  data: Recipe;
+  type:  typeof ACTION.GET_SUCCESS;
+  data:  Recipe;
 }
 
 export interface IRecipeSlugAction {
   store: typeof RECIPE_STORE;
-  type: typeof RecipeActionTypes.RECIPE_DELETE;
-  data: string;
+  type:  typeof RecipeActionTypes.RECIPE_DELETE;
+  data:  string;
 }
 
 export interface IRecipeIngredientUpdateServingAction {
   store: typeof RECIPE_STORE;
-  type: typeof RecipeActionTypes.RECIPE_INGREDIENT_SERVINGS_UPDATE;
-  recipeSlug: string;
+  type:  typeof RecipeActionTypes.RECIPE_INGREDIENT_SERVINGS_UPDATE;
+  recipeSlug:     string;
   customServings: number;
 }
 
@@ -190,38 +232,21 @@ export interface IRecipeIngredientServingSimpleAction {
 
 export interface IRecipeIngredientCheckIngredientAction {
   store: typeof RECIPE_STORE;
-  type: typeof RecipeActionTypes.RECIPE_INGREDIENT_CHECK_INGREDIENT;
+  type:  typeof RecipeActionTypes.RECIPE_INGREDIENT_CHECK_INGREDIENT;
   recipeSlug: string;
-  id: number;
+  id:    number;
   value: boolean;
 }
 
 export interface IRecipeIngredientCheckSubRecipeAction {
   store: typeof RECIPE_STORE;
-  type: typeof RecipeActionTypes.RECIPE_INGREDIENT_CHECK_SUBRECIPE;
+  type:  typeof RecipeActionTypes.RECIPE_INGREDIENT_CHECK_SUBRECIPE;
   recipeSlug: string;
-  id: number;
+  id:    number;
   value: boolean;
 }
 
 export type RecipeState     = ItemReducerType<Recipe>;
 export type RecipeAction    = IRecipeDataAction | IRecipeSlugAction | IRecipeIngredientUpdateServingAction
-   | IRecipeIngredientServingSimpleAction | IRecipeIngredientCheckIngredientAction | IRecipeIngredientCheckSubRecipeAction | GenericReducerAction;
+   | IRecipeIngredientServingSimpleAction | IRecipeIngredientCheckIngredientAction | IRecipeIngredientCheckSubRecipeAction | GenericItemReducerAction;
 export type RecipeDispatch  = ReduxDispatch<RecipeAction>;
-
-export enum RecipesActionTypes {
-  LOADING  = 'loading',
-  COMPLETE = 'complete',
-  ERROR    = 'error',
-}
-
-export const RECIPES_STORE = '@@recipes';
-
-export interface IRecipesAction {
-  store: typeof RECIPE_STORE;
-  type: keyof typeof RecipesActionTypes;
-}
-
-export type RecipesState    = MapReducerType<Recipe>;
-export type RecipesAction   = IRecipesAction | GenericReducerAction;
-export type RecipesDispatch = ReduxDispatch<RecipesAction>;

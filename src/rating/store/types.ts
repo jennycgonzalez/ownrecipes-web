@@ -1,8 +1,8 @@
 import { Dispatch as ReduxDispatch } from 'redux';
 import MapReducerType from '../../common/store/MapReducerType';
-import { GenericReducerAction } from '../../common/store/ReduxHelper';
+import { ACTION, GenericItemReducerAction, GenericMapReducerAction } from '../../common/store/ReduxHelper';
 
-export const RATINGS_STORE = '@@ratings';
+export const RATING_STORE  = '@@rating';
 
 export type RatingDto = {
   id:       number;
@@ -34,34 +34,32 @@ export const toRating = (dto: RatingDto): Rating => ({
   rating:   dto.rating,
 });
 
-export enum RatingsActionTypes {
-  ADD    = 'RATINGS_ADD',
-  LOAD   = 'RATINGS_LOAD',
-  DELETE = 'RATINGS_DELETE',
-  UPDATE = 'RATINGS_UPDATE',
-}
-
-export interface IRatingsLoadAction {
-  store:  typeof RATINGS_STORE;
-  type:   typeof RatingsActionTypes.LOAD;
-  recipe: string;
-  data:   Array<Rating>;
-}
-
-export interface IRatingsAddAction {
-  store:  typeof RATINGS_STORE;
-  type:   typeof RatingsActionTypes.ADD;
+export interface IRatingAddAction {
+  store:  typeof RATING_STORE;
+  type:   ACTION.CREATE_SUCCESS;
   recipe: string;
   data:   Rating;
 }
 
-export interface IRatingsDeleteAction {
-  store:    typeof RATINGS_STORE;
-  type:     typeof RatingsActionTypes.DELETE;
+export interface IRatingDeleteAction {
+  store:    typeof RATING_STORE;
+  type:     ACTION.DELETE_SUCCESS;
   recipe:   string;
   ratingId: number;
 }
 
+export type RatingAction   = IRatingAddAction | IRatingDeleteAction | GenericItemReducerAction;
+export type RatingDispatch = ReduxDispatch<RatingAction>;
+
+export const RATINGS_STORE = '@@ratings';
+
+export interface IRatingsLoadAction {
+  store:  typeof RATINGS_STORE;
+  type:   ACTION.GET_SUCCESS;
+  recipe: string;
+  data:   Array<Rating>;
+}
+
 export type RatingsState    = MapReducerType<Rating[]>;
-export type RatingsAction   = IRatingsLoadAction | IRatingsAddAction | IRatingsDeleteAction | GenericReducerAction;
+export type RatingsAction   = IRatingsLoadAction | GenericMapReducerAction;
 export type RatingsDispatch = ReduxDispatch<RatingsAction>;

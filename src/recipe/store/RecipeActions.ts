@@ -1,17 +1,20 @@
 import { handleError, request } from '../../common/CustomSuperagent';
 import { serverURLs } from '../../common/config';
-import { RecipeActionTypes, RecipeDispatch, RECIPE_STORE, toRecipe } from './types';
+import { RecipeActionTypes, RecipeDispatch, RECIPE_STORE, toRecipe } from './RecipeTypes';
+import { ACTION } from '../../common/store/ReduxHelper';
 
 export const load = (recipeSlug: string) => (dispatch: RecipeDispatch) => {
+  dispatch({ store: RECIPE_STORE, type: ACTION.GET_START });
   request()
     .get(`${serverURLs.recipe}${recipeSlug}/`)
     .then(res => {
-      dispatch({ store: RECIPE_STORE, type: RecipeActionTypes.RECIPE_LOAD, data: toRecipe(res.body) });
+      dispatch({ store: RECIPE_STORE, type: ACTION.GET_SUCCESS, data: toRecipe(res.body) });
     })
     .catch(err => dispatch(handleError(err, RECIPE_STORE)));
 };
 
 export const deleteRecipe = (recipeSlug: string) => (dispatch: RecipeDispatch) => {
+  dispatch({ store: RECIPE_STORE, type: ACTION.DELETE_START });
   request()
     .get(`${serverURLs.recipe}${recipeSlug}/`)
     .then(() => {

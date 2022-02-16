@@ -3,8 +3,8 @@ import * as _ from 'lodash';
 import ingredient, { RecipeIngredientReducerActionTypes, RECIPE_INGREDIENTS_STORE } from './IngredientReducer';
 import subrecipes, { RecipeSubrecipesReducerActionTypes, RECIPE_SUBRECIPES_STORE } from './SubRecipeReducer';
 import fq from '../utilts/formatQuantity';
-import ReduxHelper from '../../common/store/ReduxHelper';
-import { Recipe, RecipeAction, RecipeActionTypes, RecipeState, RECIPE_STORE } from './types';
+import ReduxHelper, { ACTION } from '../../common/store/ReduxHelper';
+import { Recipe, RecipeAction, RecipeActionTypes, RecipeState, RECIPE_STORE } from './RecipeTypes';
 
 const defaultState: RecipeState = ReduxHelper.getItemReducerDefaultState<Recipe>(RECIPE_STORE);
 
@@ -13,7 +13,7 @@ const recipe = (state = defaultState, action: RecipeAction): RecipeState => {
 
   const recipeAction = action as RecipeAction;
   switch (recipeAction.type) {
-    case RecipeActionTypes.RECIPE_LOAD:
+    case ACTION.GET_SUCCESS:
       {
         const actionRecipe = recipeAction.data;
 

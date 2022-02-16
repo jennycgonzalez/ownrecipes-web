@@ -2,7 +2,7 @@ import IngredientGroups from '../components/IngredientGroups';
 import createComponentWithIntlAndRouter from '../../test/createComponentWithIntlAndRouter';
 
 import data from './data';
-import { IngredientGroup } from '../store/types';
+import { IngredientGroup } from '../store/RecipeTypes';
 
 test('Ingredient Group component test', () => {
   // const checkIngredient = jest.fn();

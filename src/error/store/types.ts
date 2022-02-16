@@ -17,8 +17,8 @@ export enum ErrorActionTypes {
 
 interface IErrorDataAction {
   store: string; // Any store can throw an error
-  type: typeof ErrorActionTypes.SET_APP_ERROR;
-  data: IError;
+  type:  typeof ErrorActionTypes.SET_APP_ERROR;
+  data:  IError;
 }
 
 export type ErrorState = IError | null;

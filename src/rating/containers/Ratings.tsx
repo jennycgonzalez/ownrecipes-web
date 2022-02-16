@@ -19,9 +19,9 @@ const Ratings: React.FC = () => {
   const removeRatingCallback = useCallback((recSlug, ratingId: number)     => dispatch(RatingsActions.remove(recSlug, ratingId)), [dispatch]);
 
   useEffect(() => {
-    if (recipeSlug == null) return;
-    dispatch(RatingsActions.load(recipeSlug));
-  }, [recipeSlug]);
+    if (recipe == null || recipe.slug == null || recipe.rating === 0) return;
+    dispatch(RatingsActions.load(recipe.slug));
+  }, [recipe]);
 
   if (recipeSlug == null) return null;
   const ratings = recipeSlug != null ? ratingsState.items?.get(recipeSlug) : undefined;
@@ -29,7 +29,8 @@ const Ratings: React.FC = () => {
     <RatingsWrapper
         recipeSlug = {recipeSlug}
         userId     = {account?.id ?? 0}
-        ratings    = {ratings}
+        ratings    = {recipe != null && recipe.rating === 0 ? [] : ratings}
+        pending    = {ratingsState.pending}
 
         addRating  = {addRatingCallback}
         removeRating = {removeRatingCallback} />

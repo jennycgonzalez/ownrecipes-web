@@ -1,17 +1,21 @@
-import Ratings from './Ratings';
-import { Rating } from '../store/types';
+import React, { useState } from 'react';
+import { defineMessages, useIntl } from 'react-intl';
 import { Button, Col, Row } from 'react-bootstrap';
 import Spinner from 'react-spinkit';
+
+import { Rating } from '../store/types';
 import Icon from '../../common/components/Icon';
 import P from '../../common/components/P';
-import { defineMessages, useIntl } from 'react-intl';
 import Modal from '../../common/components/Modal';
-import React, { useState } from 'react';
+import Ratings from './Ratings';
+import { PendingState } from '../../common/store/GenericReducerType';
 
 export interface IRatingCommentsProps {
   recipeSlug: string;
-  ratings: Array<Rating> | undefined;
-  userId: number;
+  ratings:    Array<Rating> | undefined;
+  userId:     number;
+  pending:    PendingState;
+
   removeRating: (recipe: string, rating: number) => void;
 }
 
@@ -22,7 +26,7 @@ function getReversedArray<T>(arr: Array<T> | undefined): Array<T> | undefined {
   return rev;
 }
 
-const RatingComments: React.FC<IRatingCommentsProps> = ({ ratings, userId, recipeSlug, removeRating }: IRatingCommentsProps) => {
+const RatingComments: React.FC<IRatingCommentsProps> = ({ recipeSlug, ratings, userId, pending, removeRating }: IRatingCommentsProps) => {
   const intl = useIntl();
 
   const messages = defineMessages({
@@ -84,7 +88,7 @@ const RatingComments: React.FC<IRatingCommentsProps> = ({ ratings, userId, recip
 
   return (
     <>
-      {ratingsList == null && <Spinner name='three-bounce' />}
+      {pending === PendingState.LOADING && <Spinner name='three-bounce' />}
       {ratingsList?.length === 0 && beTheFirst}
       {ratingsList}
 

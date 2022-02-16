@@ -1,6 +1,13 @@
 import { Dispatch as ReduxDispatch } from 'redux';
 import ArrayReducerType from '../../common/store/ArrayReducerType';
-import { ACTION, GenericReducerAction } from '../../common/store/ReduxHelper';
+import { ACTION, GenericArrayReducerAction } from '../../common/store/ReduxHelper';
+
+export type NewsItemDto = {
+  id:      number;
+  image:   string;
+  title:   string;
+  content: string;
+}
 
 export type NewsItem = {
   id:      number;
@@ -9,14 +16,21 @@ export type NewsItem = {
   content: string;
 }
 
+export const toNewsItem = (dto: NewsItemDto): NewsItem => ({
+  id:      dto.id,
+  image:   dto.image,
+  title:   dto.title,
+  content: dto.content,
+});
+
 export const NEWS_STORE = '@@news';
 
 export interface INewsLoadAction {
   store: typeof NEWS_STORE;
-  type: typeof ACTION.GET_SUCCESS;
-  data: Array<NewsItem>;
+  type:  typeof ACTION.GET_SUCCESS;
+  data:  Array<NewsItem>;
 }
 
 export type NewsState    = ArrayReducerType<NewsItem>;
-export type NewsAction   = INewsLoadAction | GenericReducerAction;
+export type NewsAction   = INewsLoadAction | GenericArrayReducerAction;
 export type NewsDispatch = ReduxDispatch<NewsAction>;

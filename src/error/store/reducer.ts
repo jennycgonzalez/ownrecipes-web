@@ -8,13 +8,13 @@ const reducer = (state = defaultState, action: ErrorAction): ErrorState => {
     case ErrorActionTypes.SET_APP_ERROR:
       {
         const newState: ErrorState = {
-          store: action.store,
+          store:   action.store,
 
-          name: action.data.name,
+          name:    action.data.name,
           message: action.data.message,
-          stack: action.data.stack,
+          stack:   action.data.stack,
 
-          error: action.data,
+          error:   action.data,
         };
         return newState;
       }
