@@ -63,8 +63,24 @@ const PrivateRoutes: Array<IRouteType> = [
 
 const PublicRoutes: Array<IRouteType> = [
   {
+    path:      '/home',
+    component: News,
+  },
+  {
+    path:      '/browser',
+    component: Browse,
+  },
+  {
+    path:      '/recipe/:recipe',
+    component: RecipeView,
+  },
+  {
     path:      '/login',
     component: Login,
+  },
+  {
+    path:      '/NotFound',
+    component: NotFound,
   },
 ];
 
@@ -95,7 +111,10 @@ const Routes: React.FC<IRoutesProps> = (props: IRoutesProps) => {
       return <Route path={getResourcePath(r.path)} key={r.path} element={<PageComponent />} />;
     });
     routesList.push(
-      <Route path='*' key='*' element={<Navigate replace to={getResourcePath('/login?course=entry&rating=5')} />} />
+      <Route path='/' key='/' element={<Navigate replace to={getResourcePath('/home')} />} />
+    );
+    routesList.push(
+      <Route path='*' key='*' element={<Navigate replace to={getResourcePath('/login')} />} />
     );
   }
 

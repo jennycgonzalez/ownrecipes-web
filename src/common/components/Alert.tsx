@@ -12,18 +12,18 @@ export interface IAlertProps {
   children: React.ReactNode;
 }
 
-const Alert: React.FC<IAlertProps> = (props: IAlertProps) => (
-  <BootstrapAlert variant={props.severity}>
+const Alert: React.FC<IAlertProps> = ({ severity, title, className, children }: IAlertProps) => (
+  <BootstrapAlert variant={severity} className={className}>
     <BootstrapAlert.Heading>
-      {props.severity === 'info'   && <Icon icon='info-circle' size='2x' className='alert-icon' />}
-      {props.severity === 'danger' && <Icon icon='exclamation-diamond' size='2x' className='alert-icon' />}
-      {props.title}
+      {severity === 'info'   && <Icon icon='info-circle' size='2x' className='alert-icon' />}
+      {severity === 'danger' && <Icon icon='exclamation-diamond' size='2x' className='alert-icon' />}
+      {title}
     </BootstrapAlert.Heading>
-    {typeof props.children === 'string' && (
-      <P className='alert-message mb-0'>{props.children}</P>
+    {typeof children === 'string' && (
+      <P className='alert-message mb-0'>{children}</P>
     )}
-    {typeof props.children !== 'string' && (
-      <div className='alert-message'>{props.children}</div>
+    {typeof children !== 'string' && (
+      <div className='alert-message'>{children}</div>
     )}
   </BootstrapAlert>
 );

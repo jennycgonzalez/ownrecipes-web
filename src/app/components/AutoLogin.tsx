@@ -62,7 +62,7 @@ class AutoLogin extends Component<IProps, IAutoLoginState> {
       }
     } else if (prevToken != null && currToken == null) {
       setTimeout(() => {
-        this.props.nav(getResourcePath('/login'));
+        this.props.nav(getResourcePath('/home'));
         this.props.nav(0);
       }, 500);
     }
