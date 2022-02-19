@@ -3,24 +3,27 @@ import ArrayReducerType from '../../common/store/ArrayReducerType';
 import { ACTION, GenericArrayReducerAction } from '../../common/store/ReduxHelper';
 
 export type NewsItemDto = {
-  id:      number;
-  image:   string;
-  title:   string;
-  content: string;
+  id:        number;
+  image:     string;
+  title:     string;
+  content:   string;
+  frontpage: boolean;
 }
 
 export type NewsItem = {
-  id:      number;
-  image:   string;
-  title:   string;
-  content: string;
+  id:        number;
+  image:     string;
+  title:     string;
+  content:   string;
+  frontpage: boolean;
 }
 
 export const toNewsItem = (dto: NewsItemDto): NewsItem => ({
-  id:      dto.id,
-  image:   dto.image,
-  title:   dto.title,
-  content: dto.content,
+  id:        dto.id,
+  image:     dto.image,
+  title:     dto.title,
+  content:   dto.content,
+  frontpage: dto.frontpage,
 });
 
 export const NEWS_STORE = '@@news';

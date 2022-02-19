@@ -45,7 +45,7 @@ const News: React.FC = () => {
     dispatch(NewsActions.load());
   }, [newsList]);
 
-  const carouselItems = newsList?.map(entry => (
+  const carouselItems = newsList?.filter(entry => entry.frontpage).map(entry => (
     <Carousel.Item key={entry.id}>
       {entry.image && <img className='d-block w-100' src={entry.image} alt={entry.title} />}
       <Carousel.Caption>
@@ -53,14 +53,14 @@ const News: React.FC = () => {
         <P>{entry.content}</P>
       </Carousel.Caption>
     </Carousel.Item>
-    ));
+  )) ?? [];
 
   return (
     <PageWrapper title={intl.messages['nav.home'] as string}>
       {news.pending === PendingState.LOADING && (
         <Loading />
       )}
-      {carouselItems != null && (
+      {carouselItems.length > 0 && (
         <Carousel controls={carouselItems.length > 1} indicators={carouselItems.length > 1}>
           {carouselItems}
         </Carousel>
