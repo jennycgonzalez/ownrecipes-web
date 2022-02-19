@@ -30,9 +30,6 @@ body {
 
 /* Custom page CSS -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
-.container .text-muted {
-  margin: 20px 0;
-}
 code {
   font-size: 80%;
 }
@@ -72,24 +69,50 @@ h4, .h4 {
 }
 .dropdown-item {
   color: var(--primaryText);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-radius: 4px;
 }
-.dropdown-item:hover {
-  background-color: var(--hoverBg);
+.dropdown-item:not(.disabled):hover {
   color: var(--hoverText);
+  background-color: var(--hoverBg);
 }
-
+.dropdown-item:focus {
+  color: var(--hoverText);
+  background-color: var(--hoverBg);
+  box-shadow: 0 0 0 2px var(--primaryText);
+}
+.dropdown-item:active {
+  color: var(--hoverText);
+  background-color: var(--hoverBg);
+  box-shadow: 0 0 0 2px var(--primaryText);
+}
+.dropdown-item.active {
+  color: var(--primaryContrast);
+  background-color: var(--primaryMain);
+}
+.dropdown-item.active:hover {
+  color: var(--primaryContrast);
+  background-color: var(--primaryLight);
+}
 
 .list-group-item {
-  background-color: var(--midground);
   color: var(--primaryText);
+  background-color: var(--midground);
 }
 .list-group-item:not(.disabled):hover {
-  background-color: var(--hoverBg);
   color: var(--hoverText);
+  background-color: var(--hoverBg);
+}
+.list-group-item-action:focus, .list-group-item-action:focus-visible {
+  color: var(--hoverText);
+  background-color: var(--hoverBg);
+  box-shadow: 0 0 0 2px var(--primaryText);
+  outline: 0;
 }
 .list-group-item.disabled, .list-group-item:disabled {
-  background-color: var(--inputBgDisabled);
   color: var(--disabledText);
+  background-color: var(--inputBgDisabled);
 }
 
 
@@ -103,6 +126,10 @@ h4, .h4 {
 .card-footer {
   background-color: rgba(128, 128, 128, 0.12);
   color: var(--secondaryText);
+}
+
+.sk-spinner.sk-circle {
+  color: var(--disabledText);
 }
 
 .table {
@@ -141,4 +168,15 @@ h4, .h4 {
 }
 .table-striped > tbody > tr:nth-of-type(2n+1) > td:last-child {
   border-radius: 0 8px 8px 0;
+}
+
+@media (max-width: 767px) {
+  .hidden-xs {
+    display: none;
+  };
+}
+@media (min-width: 768px) {
+  .visible-xs {
+    display: none;
+  };
 }

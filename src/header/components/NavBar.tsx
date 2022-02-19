@@ -59,7 +59,7 @@ const NavBar: React.FC<INavBarProps> = (props: INavBarProps) => {
         <Navbar.Toggle />
         <Navbar.Collapse>
           <Nav>
-            <Nav.Link href={getResourcePath('/browse')}>{formatMessage(messages.recipes)}</Nav.Link>
+            <Nav.Link href={getResourcePath('/browser')}>{formatMessage(messages.recipes)}</Nav.Link>
             <Nav.Link onClick={props.onRandomRecipeClick}>{formatMessage(messages.randomRecipe)}</Nav.Link>
             {/* isAuthenticated && <MenuMenuItem /> */}
             {isAuthenticated && <CreateRecipeMenuItem />}

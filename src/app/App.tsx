@@ -10,9 +10,9 @@ import Footer from './components/Footer';
 import ErrorBoundary from '../common/components/ErrorBoundary';
 import { isDemoMode } from '../common/utility';
 
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import './css/core.css';
 import './css/print.css';
-import 'bootstrap-icons/font/bootstrap-icons.css';
 
 import { CombinedStore } from './Store';
 import Routes from './components/Routes';

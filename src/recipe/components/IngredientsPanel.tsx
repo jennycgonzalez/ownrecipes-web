@@ -1,4 +1,3 @@
-import Spinner from 'react-spinkit';
 import { defineMessages, useIntl } from 'react-intl';
 
 import '../css/ingredients_panel.css';
@@ -10,6 +9,7 @@ import IngredientGroups from './IngredientGroups';
 import GenericReducerType, { PendingState } from '../../common/store/GenericReducerType';
 import P from '../../common/components/P';
 import IngredientsHeader from './IngredientsHeader';
+import Loading from '../../common/components/Loading';
 
 export interface IIngredientsPanelProps {
   recipe: Recipe;
@@ -43,7 +43,7 @@ const IngredientsPanel: React.FC<IIngredientsPanelProps> = ({ recipe, recipeStat
   return (
     <article className='ingredients-panel'>
       <IngredientsHeader recipe={recipe} recipeState={recipeState} updateServings={updateServings} />
-      {pending === PendingState.LOADING && <Spinner name='circle' className='recipe-list-spinner' fadeIn='none' />}
+      {pending === PendingState.LOADING && <Loading />}
       {hasNoIngredients && (
         <P className='placeholder'>{formatMessage(messages.no_ingredients)}</P>
       )}

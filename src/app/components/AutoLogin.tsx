@@ -28,6 +28,7 @@ interface IStateProps {
 
 interface IAutoLoginState {
   originUrl: string;
+  originSearch: string;
 }
 
 type IProps = IStateProps & IDispatchProps & IAutoLoginProps;
@@ -38,6 +39,7 @@ class AutoLogin extends Component<IProps, IAutoLoginState> {
 
     this.state = {
       originUrl: this.props.loc.pathname,
+      originSearch: this.props.loc.search,
     };
   }
 
@@ -56,7 +58,7 @@ class AutoLogin extends Component<IProps, IAutoLoginState> {
       if (originUrl === '/' || originUrl === '/login') {
         this.props.nav(getResourcePath('/home'));
       } else {
-        this.props.nav(originUrl);
+        this.props.nav(`${originUrl}${this.state.originSearch}`);
       }
     } else if (prevToken != null && currToken == null) {
       setTimeout(() => {

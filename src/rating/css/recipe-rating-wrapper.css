@@ -1,5 +1,6 @@
 .rating-panel {
   margin-top: 3rem;
+  margin-bottom: 2rem;
 }
 .rating-panel .card-header .ratings-heading-col {
   display: flex;

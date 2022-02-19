@@ -41,32 +41,34 @@ const merge = (state: RecipeSubrecipesState, action: IRecipeSubrecipesLoadAction
 const defaultState: RecipeSubrecipesState = [];
 
 const subRecipes = (state = defaultState, action: RecipeSubrecipesAction) => {
-  if (action.store !== RECIPE_SUBRECIPES_STORE) return state;
-
-  switch (action.type) {
-    case RecipeSubrecipesReducerActionTypes.RECIPE_SUBRECIPES_LOAD:
-      return merge(state, action);
-    case RecipeSubrecipesReducerActionTypes.RECIPE_SUBRECIPES_SERVINGS_UPDATE:
-      return state.map(i => {
-        const custom = action.formatQuantity(i.numerator, i.denominator);
-        return { ...i, quantity: custom };
-      });
-    /*
-      case RecipeActionTypes.RECIPE_INGREDIENT_CHECK_SUBRECIPE:
-      return state.map(i => {
-        if (i.child_recipe_id === action.id) {
-          return { ...i, checked: action.value };
-        }
-        return i;
-      });
-    case RecipeActionTypes.RECIPE_INGREDIENT_CHECK_ALL:
-      return state.map(i => ({ ...i, checked: true }));
-    case RecipeActionTypes.RECIPE_INGREDIENT_UNCHECK_ALL:
-      return state.map(i => ({ ...i, checked: false }));
-      */
-    default:
-      return state;
+  if (action.store === RECIPE_SUBRECIPES_STORE) {
+    switch (action.type) {
+      case RecipeSubrecipesReducerActionTypes.RECIPE_SUBRECIPES_LOAD:
+        return merge(state, action);
+      case RecipeSubrecipesReducerActionTypes.RECIPE_SUBRECIPES_SERVINGS_UPDATE:
+        return state.map(i => {
+          const custom = action.formatQuantity(i.numerator, i.denominator);
+          return { ...i, quantity: custom };
+        });
+      /*
+        case RecipeActionTypes.RECIPE_INGREDIENT_CHECK_SUBRECIPE:
+        return state.map(i => {
+          if (i.child_recipe_id === action.id) {
+            return { ...i, checked: action.value };
+          }
+          return i;
+        });
+      case RecipeActionTypes.RECIPE_INGREDIENT_CHECK_ALL:
+        return state.map(i => ({ ...i, checked: true }));
+      case RecipeActionTypes.RECIPE_INGREDIENT_UNCHECK_ALL:
+        return state.map(i => ({ ...i, checked: false }));
+        */
+      default:
+        break;
+    }
   }
+
+  return state;
 };
 
 export default subRecipes;

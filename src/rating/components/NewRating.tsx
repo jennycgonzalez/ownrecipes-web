@@ -105,7 +105,7 @@ const NewRating: React.FC<INewRatingProps> = ({ show, recipeSlug, userId, addRat
           </Row>
           <Row>
             <Col xs={12}>
-              <Button type='submit' variant='outline-primary' disabled={formData.rating.length === 0 || formData.comment.length === 0}>
+              <Button type='submit' variant='primary' disabled={formData.rating.length === 0 || formData.comment.length === 0}>
                 {formatMessage(messages.submit)}
               </Button>
             </Col>

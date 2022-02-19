@@ -29,7 +29,6 @@
   "filter.hide_filters": "Hide Filters",
   "filter.pub_date": "Created Date",
   "filter.rating": "Rating",
-  "filter.recipes": "recipes",
   "filter.reset": "Reset",
   "filter.show_filters": "Show Filters",
   "filter.title": "Title",
@@ -116,9 +115,13 @@
   "recipe.servings": "Servings",
   "recipe.servings_input_tooltip": "Amount of servings",
   "recipe.source": "Source",
-  "searchbar.label": "Search for Recipes",
-  "searchbar.mobile.label": "Search",
   "searchbar.placeholder": "Enter a title, tag, or ingredient",
+  "searchsummary.results": "{resultsCount, plural, one {# result} other {# results}}",
+  "searchsummary.results_pagination": "{offset}-{offsetLast} of {resultsCount} results",
+  "searchsummary.sort_by": "Sort by: {sort}",
+  "sort_by.pub_date": "Create date",
+  "sort_by.rating": "Rating",
+  "sort_by.title": "Title",
   "theme.mode.dark": "Dark",
   "theme.mode.light": "Light"
 }

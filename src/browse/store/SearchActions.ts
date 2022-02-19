@@ -1,6 +1,6 @@
 import queryString from 'query-string';
 
-import { request } from '../../common/CustomSuperagent';
+import { handleError, request } from '../../common/CustomSuperagent';
 import { serverURLs } from '../../common/config';
 import { BROWSER_SEARCH_STORE, SearchDispatch, SearchResultDto, toSearchResult } from './SearchTypes';
 import { ACTION } from '../../common/store/ReduxHelper';
@@ -21,7 +21,6 @@ export const loadRecipes = (filters: Record<string, string>) => (dispatch: Searc
     }
   });
 
-  // TODO error handling
   request()
     .get(serverURLs.browse)
     .query(parsedFilters)
@@ -31,7 +30,8 @@ export const loadRecipes = (filters: Record<string, string>) => (dispatch: Searc
         store: BROWSER_SEARCH_STORE,
         type:  ACTION.GET_SUCCESS,
         qs:    queryString.stringify(filters),
-        res:   toSearchResult(resDto),
+        data:  toSearchResult(resDto),
       });
-    });
+    })
+    .catch(err => { dispatch(handleError(err, BROWSER_SEARCH_STORE)); });
 };

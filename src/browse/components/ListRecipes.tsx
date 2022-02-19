@@ -24,8 +24,8 @@ const ListRecipes: React.FC<IListRecipes> = ({ data }: IListRecipes) => {
   const recipes = data?.map(recipe => {
     const link = `/recipe/${recipe.slug}`;
     return (
-      <Col>
-        <Card className={classNames('recipe', 'print-hidden')} key={recipe.id}>
+      <Col key={recipe.id}>
+        <Card className={classNames('recipe', 'print-hidden')}>
           <Link to={link}>
             <Card.Img variant='top' src={getRecipeImage(recipe)} alt='' />
             <Card.Title as='h3'>{recipe.title}</Card.Title>

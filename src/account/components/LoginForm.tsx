@@ -24,21 +24,6 @@ interface ILoginFormData {
 const LoginForm: React.FC<ILoginFormProps> = (props: ILoginFormProps) => {
   const intl = useIntl();
 
-  const [formData, setFormData] = useState<ILoginFormData>({ username: '', password: '' });
-
-  const handleChange = (attr: string, value: string) => {
-    setFormData(prev => {
-      const newState = _.cloneDeep(prev);
-      _.set(newState, attr, value);
-      return newState;
-    });
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    props.onLogin(formData.username, formData.password);
-  };
-
   const { formatMessage } = intl;
   const messages = defineMessages({
     please_sign_in: {
@@ -62,6 +47,21 @@ const LoginForm: React.FC<ILoginFormProps> = (props: ILoginFormProps) => {
       defaultMessage: 'Sign in',
     },
   });
+
+  const [formData, setFormData] = useState<ILoginFormData>({ username: '', password: '' });
+
+  const handleChange = (attr: string, value: string) => {
+    setFormData(prev => {
+      const newState = _.cloneDeep(prev);
+      _.set(newState, attr, value);
+      return newState;
+    });
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    props.onLogin(formData.username, formData.password);
+  };
 
   return (
     <form className='form-signin' onSubmit={handleSubmit}>

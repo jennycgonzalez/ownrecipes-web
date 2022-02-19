@@ -56,7 +56,7 @@ const IngredientButtons: React.FC<IIngredientButtonsProps> = ({ lists /* , pendi
   let checkmark = '';
   if (pending === PendingState.LOADING) {
     checkmark = (
-      <Spinner spinnerName="circle" className="recipe-list-spinner" noFadeIn />
+      <Loading />
     )
   } else if (pending === PendingState.COMPLETED) {
     checkmark = (

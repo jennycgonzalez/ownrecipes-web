@@ -13,6 +13,8 @@ import * as NewsActions from '../store/actions';
 import PageWrapper from '../../common/components/PageWrapper';
 import P from '../../common/components/P';
 import MiniBrowse from '../../browse/containers/MiniBrowse';
+import { PendingState } from '../../common/store/GenericReducerType';
+import Loading from '../../common/components/Loading';
 
 const News: React.FC = () => {
   const intl = useIntl();
@@ -34,6 +36,7 @@ const News: React.FC = () => {
 
   const news = useSelector((state: CombinedStore) => state.news);
   const newsList = news.items;
+  const miniBrowseState = useSelector((state: CombinedStore) => state.browse.miniBrowse);
   // const accountState = useSelector((state: CombinedStore) => state.account);
   // const user = accountState.item;
 
@@ -42,7 +45,7 @@ const News: React.FC = () => {
     dispatch(NewsActions.load());
   }, [newsList]);
 
-  const carouselItems = newsList != null && newsList.length > 0 ? newsList.map(entry => (
+  const carouselItems = newsList?.map(entry => (
     <Carousel.Item key={entry.id}>
       {entry.image && <img className='d-block w-100' src={entry.image} alt={entry.title} />}
       <Carousel.Caption>
@@ -50,10 +53,13 @@ const News: React.FC = () => {
         <P>{entry.content}</P>
       </Carousel.Caption>
     </Carousel.Item>
-    )) : null;
+    ));
 
   return (
     <PageWrapper title={intl.messages['nav.home'] as string}>
+      {news.pending === PendingState.LOADING && (
+        <Loading />
+      )}
       {carouselItems != null && (
         <Carousel controls={carouselItems.length > 1} indicators={carouselItems.length > 1}>
           {carouselItems}
@@ -66,10 +72,12 @@ const News: React.FC = () => {
           : ''}
       </Row>
       */}
-      <div>
-        <h2 className='page-header'>{formatMessage(messages.recommendedRecipes)}</h2>
-        <MiniBrowse qs='?limit=4' />
-      </div>
+      {miniBrowseState.hasConnection && miniBrowseState.error == null && (
+        <div>
+          <h2 className='page-header'>{formatMessage(messages.recommendedRecipes)}</h2>
+          <MiniBrowse qs='?limit=4' />
+        </div>
+      )}
     </PageWrapper>
   );
 };

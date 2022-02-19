@@ -52,32 +52,34 @@ const merge = (state: RecipeIngredientsState, action: IRecipeIngredientLoadActio
 const defaultState: RecipeIngredientsState = [];
 
 const recipes = (state = defaultState, action: RecipeIngredientsAction): RecipeIngredientsState => {
-  if (action.store !== RECIPE_INGREDIENTS_STORE) return state;
-
-  switch (action.type) {
-    case RecipeIngredientReducerActionTypes.RECIPE_INGREDIENTS_LOAD:
-      return merge(state, action);
-    case RecipeIngredientReducerActionTypes.RECIPE_INGREDIENTS_SERVINGS_UPDATE:
-      return ingredients(state, i => {
-        const custom = action.formatQuantity(i.numerator, i.denominator);
-        return { ...i, quantity: custom };
-      });
-    /*
-    case RecipeActionTypes.RECIPE_INGREDIENT_CHECK_INGREDIENT:
-      return ingredients(state, i => {
-        if (i.id === action.id) {
-          return { ...i, checked: action.value };
-        }
-        return i;
-      });
-    case RecipeActionTypes.RECIPE_INGREDIENT_CHECK_ALL:
-      return ingredients(state, i => ({ ...i, checked: true }));
-    case RecipeActionTypes.RECIPE_INGREDIENT_UNCHECK_ALL:
-      return ingredients(state, i => ({ ...i, checked: false }));
-    */
-    default:
-      return state;
+  if (action.store === RECIPE_INGREDIENTS_STORE) {
+    switch (action.type) {
+      case RecipeIngredientReducerActionTypes.RECIPE_INGREDIENTS_LOAD:
+        return merge(state, action);
+      case RecipeIngredientReducerActionTypes.RECIPE_INGREDIENTS_SERVINGS_UPDATE:
+        return ingredients(state, i => {
+          const custom = action.formatQuantity(i.numerator, i.denominator);
+          return { ...i, quantity: custom };
+        });
+      /*
+      case RecipeActionTypes.RECIPE_INGREDIENT_CHECK_INGREDIENT:
+        return ingredients(state, i => {
+          if (i.id === action.id) {
+            return { ...i, checked: action.value };
+          }
+          return i;
+        });
+      case RecipeActionTypes.RECIPE_INGREDIENT_CHECK_ALL:
+        return ingredients(state, i => ({ ...i, checked: true }));
+      case RecipeActionTypes.RECIPE_INGREDIENT_UNCHECK_ALL:
+        return ingredients(state, i => ({ ...i, checked: false }));
+      */
+      default:
+        break;
+    }
   }
+
+  return state;
 };
 
 export default recipes;

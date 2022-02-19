@@ -25,11 +25,12 @@ const Ratings: React.FC = () => {
 
   if (recipeSlug == null) return null;
   const ratings = recipeSlug != null ? ratingsState.items?.get(recipeSlug) : undefined;
+
   return (
     <RatingsWrapper
         recipeSlug = {recipeSlug}
         userId     = {account?.id ?? 0}
-        ratings    = {recipe != null && recipe.rating === 0 ? [] : ratings}
+        ratings    = {ratings}
         pending    = {ratingsState.pending}
 
         addRating  = {addRatingCallback}

@@ -73,7 +73,7 @@ const IngredientsHeader: React.FC<IIngredientsHeaderProps> = ({ recipe, recipeSt
     <>
       {(hasNoIngredients || servings === 0) && <h2>{formatMessage(messages.ingredients)}</h2>}
       {!hasNoIngredients && servings > 0 && (
-        <>
+        <div className='ingredients-for-servings-row'>
           <h2>
             {formatMessage(messages.ingredients_for_servings)}
             <span className='print-only'>{`: ${recipe.customServings} ${formatMessage(messages.servings)}`}</span>
@@ -95,7 +95,7 @@ const IngredientsHeader: React.FC<IIngredientsHeaderProps> = ({ recipe, recipeSt
               </Button>
             </form>
           </div>
-        </>
+        </div>
       )}
     </>
   );

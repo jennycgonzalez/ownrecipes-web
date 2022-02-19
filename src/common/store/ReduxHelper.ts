@@ -150,6 +150,16 @@ export default class ReduxHelper {
     return newState;
   };
 
+  static setArray<T>(state: ArrayReducerType<T>, items: Array<T>): ArrayReducerType<T> {
+    const updState = _.clone(state);
+
+    updState.error = undefined;
+    updState.pending = PendingState.COMPLETED;
+    updState.hasConnection = true;
+    updState.items = items;
+    return updState;
+  }
+
   static setMapItem<T>(state: MapReducerType<T>, id: string, item: T): MapReducerType<T> {
     const updState = _.clone(state);
     const map = updState.items;
@@ -200,20 +210,20 @@ export default class ReduxHelper {
   };
 
   static caseItemDefaultReducer = <T>(state: ItemReducerType<T>, action: AnyAction, defaultState: ItemReducerType<T>): ItemReducerType<T> => {
-    if (state.ident !== action.store) {
-      return ReduxHelper.caseDefaultReducer(state, action, defaultState);
+    if (state.ident === action.store) {
+      switch (action.type) {
+        case ACTION.CREATE_START:
+          return ReduxHelper.setPending(state, PendingState.SAVING);
+        case ACTION.DELETE_START:
+          return ReduxHelper.setPending(state, PendingState.DELETING);
+        case ACTION.GET_START:
+          return ReduxHelper.setPending(state, PendingState.LOADING);
+        default:
+          break;
+      }
     }
 
-    switch (action.type) {
-      case ACTION.CREATE_START:
-        return ReduxHelper.setPending(state, PendingState.SAVING);
-      case ACTION.DELETE_START:
-        return ReduxHelper.setPending(state, PendingState.DELETING);
-      case ACTION.GET_START:
-        return ReduxHelper.setPending(state, PendingState.LOADING);
-      default:
-        return ReduxHelper.caseDefaultReducer(state, action, defaultState);
-    }
+    return ReduxHelper.caseDefaultReducer(state, action, defaultState);
   };
 
   static caseArrayDefaultReducer = <T>(state: ArrayReducerType<T>, action: AnyAction, defaultState: ArrayReducerType<T>, itemStoreIdent?: string): ArrayReducerType<T> => {
@@ -247,24 +257,24 @@ export default class ReduxHelper {
       }
     }
 
-    if (state.ident !== action.store) {
-      return ReduxHelper.caseDefaultReducer(state, action, defaultState);
+    if (state.ident === action.store) {
+      switch (action.type) {
+        case ACTION.GET_START:
+          return ReduxHelper.setPending(state, PendingState.LOADING);
+        case ACTION.GET_SUCCESS:
+          {
+            if (action.data == null) return state;
+
+            const updState = { ...state };
+            updState.items = action.data;
+            return updState;
+          }
+        default:
+          break;
+      }
     }
 
-    switch (action.type) {
-      case ACTION.GET_START:
-        return ReduxHelper.setPending(state, PendingState.LOADING);
-      case ACTION.GET_SUCCESS:
-        {
-          if (action.data == null) return state;
-
-          const updState = { ...state };
-          updState.items = action.data;
-          return updState;
-        }
-      default:
-        return ReduxHelper.caseDefaultReducer(state, action, defaultState);
-    }
+    return ReduxHelper.caseDefaultReducer(state, action, defaultState);
   };
 
   static caseMapDefaultReducer = <T>(state: MapReducerType<T>, action: AnyAction, defaultState: MapReducerType<T>, itemStoreIdent?: string): MapReducerType<T> => {
@@ -297,34 +307,34 @@ export default class ReduxHelper {
       }
     }
 
-    if (state.ident !== action.store) {
-      return ReduxHelper.caseDefaultReducer(state, action, defaultState);
+    if (state.ident === action.store) {
+      switch (action.type) {
+        case ACTION.GET_START:
+          return ReduxHelper.setPending(state, PendingState.LOADING);
+        default:
+          break;
+      }
     }
 
-    switch (action.type) {
-      case ACTION.GET_START:
-        return ReduxHelper.setPending(state, PendingState.LOADING);
-      default:
-        return ReduxHelper.caseDefaultReducer(state, action, defaultState);
-    }
+    return ReduxHelper.caseDefaultReducer(state, action, defaultState);
   };
 
   static caseDefaultReducer = <T extends GenericReducerType>(state: T, action: AnyAction, defaultState: T): T => {
-    if (state.ident !== action.store) {
-      return state;
+    if (state.ident === action.store) {
+      switch (action.type) {
+        case ACTION.LOADING:       return ReduxHelper.setPending(state, PendingState.LOADING);
+
+        case ACTION.ERROR:         return ReduxHelper.setError(state, action.data);
+
+        case ACTION.RESET:         return defaultState;
+        case ACTION.SOFT_RESET:    return ReduxHelper.setSoftReset(state);
+
+        case ACTION.NO_CONNECTION: return ReduxHelper.setNoConnection(state);
+
+        default: break;
+      }
     }
 
-    switch (action.type) {
-      case ACTION.LOADING:       return ReduxHelper.setPending(state, PendingState.LOADING);
-
-      case ACTION.ERROR:         return ReduxHelper.setError(state, action.data);
-
-      case ACTION.RESET:         return defaultState;
-      case ACTION.SOFT_RESET:    return ReduxHelper.setSoftReset(state);
-
-      case ACTION.NO_CONNECTION: return ReduxHelper.setNoConnection(state);
-
-      default: return state;
-    }
+    return state;
   };
 }

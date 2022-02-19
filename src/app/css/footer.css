@@ -18,5 +18,8 @@
   justify-content: center;
 }
 .footer > .container p {
-  margin: 0
+  margin: 0;
+}
+.footer > .container a {
+  color: inherit;
 }

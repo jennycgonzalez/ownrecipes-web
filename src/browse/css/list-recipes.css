@@ -5,8 +5,12 @@
 .recipes-list .recipe > a {
   text-decoration: none;
   color: unset;
+  padding: 4px;
 }
-.recipes-list .recipe > a:hover .card-title {
+.recipes-list .recipe > a:focus {
+  box-shadow: 0 0 0 2px var(--primaryText);
+}
+.recipes-list .recipe > a:hover .card-title, .recipes-list .recipe > a:focus .card-title {
   text-decoration: underline;
   color: var(--primaryLight);
 }

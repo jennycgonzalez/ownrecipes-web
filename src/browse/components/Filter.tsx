@@ -1,13 +1,14 @@
 import React from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-
 import Icon from '../../common/components/Icon';
 
 export type RecipeFilter = {
-  id:    number;
-  title: string;
-  slug:  string;
+  id:      number;
+  title:   string;
+  slug:    string;
+  total?:  number;
+  rating?: number;
 }
 
 export interface IFilterProps {
@@ -22,30 +23,40 @@ export interface IFilterProps {
 }
 
 const Filter: React.FC<IFilterProps> = ({ title, qsTitle, data, qs, multiSelect, cssClass, buildUrl }: IFilterProps) => {
-  const items = data.map(item => {
-    let active = false;
-    if (qs[qsTitle]) {
-      if (qs[qsTitle].split(',').includes(item.slug.toString())) {
-        active = true;
+  let items = data
+    .map(item => {
+      let active = false;
+      if (qs[qsTitle]) {
+        if (qs[qsTitle].split(',').includes(item.slug)) {
+          active = true;
+        }
       }
-    }
 
-    return (
-      <div key={item.slug}>
-        <Link to={buildUrl(qsTitle, item.slug, multiSelect)} className={classNames({ 'list-group-item': true, active: active })}>
-          {active && <Icon icon='x-square' variant='light' />}
-          {item.title}
-          {(item as any).total && <span className='badge'>{(item as any).total}</span>}
-        </Link>
-      </div>
-    );
-  });
+      if (!active && (item.total == null || item.total === 0)) {
+        return undefined;
+      }
+
+      return (
+        <li key={item.slug}>
+          <Link to={buildUrl(qsTitle, item.slug, multiSelect)} className={classNames({ 'list-group-item list-group-item-action': true, active: active })}>
+            {item.title}
+            <span className='count'>{`(${item.total})`}</span>
+            {active && <Icon icon='x-square' variant='light' />}
+          </Link>
+        </li>
+      );
+  }) ?? [];
+  items = items.filter(it => it != null);
+
+  if (items.length === 0) return null;
 
   return (
-    <div className={`list-group filter ${cssClass}`}>
-      {title}
-      {items}
-    </div>
+    <li className={classNames('filter-group', cssClass)}>
+      <div className='list-group-title'>{title}</div>
+      <ul className='filter-list'>
+        {items}
+      </ul>
+    </li>
   );
 };
 

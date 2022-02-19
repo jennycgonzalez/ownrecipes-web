@@ -1,4 +1,4 @@
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 
 import { PaginationProps } from '../constants/DefaultFilters';
 // import { SearchState } from '../store/SearchTypes';
@@ -7,12 +7,16 @@ import SearchBar from './SearchBar';
 import Results from './Results';
 import NoResults from './NoResults';
 import Loading from './Loading';
+import { CategoryCountState, RatingCountState } from '../store/FilterTypes';
+import { PendingState } from '../../common/store/GenericReducerType';
+import { SearchState } from '../store/SearchTypes';
+import SearchSummary from './SearchSummary';
 
 export interface ISearchProps {
-  search:   any; // SearchState;
-  courses:  any;
-  cuisines: any;
-  ratings:  any;
+  search:   SearchState;
+  courses:  CategoryCountState;
+  cuisines: CategoryCountState;
+  ratings:  RatingCountState;
   qs:       Record<string, string>;
   qsString: string;
 
@@ -23,39 +27,44 @@ export interface ISearchProps {
 }
 
 const Search: React.FC<ISearchProps> = ({ search, courses, cuisines, ratings, qs, qsString, defaultFilters, buildUrl, doSearch }: ISearchProps) => {
-  if (Object.keys(search.results).length > 0) {
+  if (search.items != null && search.items.size > 0) {
+    const pending = search.pending === PendingState.LOADING;
+    const qsSearchResult = search.items.get(qsString);
+
     return (
-      <Container>
+      <>
+        <SearchBar
+            value    = {qs.search ?? ''}
+            doSearch = {doSearch} />
+        <SearchSummary
+            qs       = {qs}
+            search   = {qsSearchResult}
+            buildUrl = {buildUrl}
+            />
         <Row>
-          <Col xs={12} sm={3} lg={2}>
+          <Col xs={12} className='filter-panel'>
             <SearchMenu
-                courses  = {courses.results[qsString]}
-                cuisines = {cuisines.results[qsString]}
-                ratings  = {ratings.results[qsString]}
-                loading  = {courses.loading || cuisines.loading || ratings.loading}
-                error    = {courses.error   || cuisines.error   || ratings.error}
+                courses  = {courses.items?.get(qsString)}
+                cuisines = {cuisines?.items?.get(qsString)}
+                ratings  = {ratings?.items?.get(qsString)}
                 qs       = {qs}
                 buildUrl = {buildUrl}
             />
           </Col>
-          <Col xs={12} sm={9} lg={10}>
-            <SearchBar
-                count={search.results[qsString]?.totalRecipes ?? 0}
-                value={qs.search ?? ''}
-                doSearch={doSearch} />
-            {search.loading && <Loading />}
-            {!search.loading && (!search.results[qsString] || search.results[qsString].recipes.length === 0) && <NoResults />}
-            {!search.loading && search.results[qsString] && search.results[qsString].recipes.length > 0 && (
+          <Col xs={12} className='results-panel'>
+            {pending && <Loading />}
+            {!pending && (qsSearchResult == null || qsSearchResult.recipes.length === 0) && <NoResults />}
+            {!pending && qsSearchResult != null && qsSearchResult.recipes.length > 0 && (
               <Results
-                  search={search.results[qsString]}
-                  qs={qs}
-                  defaults={defaultFilters}
-                  buildUrl={buildUrl}
+                  search   = {qsSearchResult}
+                  qs       = {qs}
+                  defaults = {defaultFilters}
+                  buildUrl = {buildUrl}
               />
             )}
           </Col>
         </Row>
-      </Container>
+      </>
     );
   } else {
     return <Loading />;

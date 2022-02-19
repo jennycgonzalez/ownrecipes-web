@@ -1,28 +1,14 @@
-import classNames from 'classnames';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Pagination as BootstraPagination } from 'react-bootstrap';
+
+import { PaginationLink } from '../../common/components/Pagination';
 
 export interface IPaginationProps {
-  offset:   string;
-  limit:    string;
-  count:    string;
+  offset:   number;
+  limit:    number;
+  count:    number;
   buildUrl: (qsTitle: string, recipeSlug: string, multiSelect?: boolean) => string;
 }
-
-interface IPaginationLinkProps {
-  title:  string;
-  offset: number;
-  active: boolean;
-  buildUrl: (qsTitle: string, recipeSlug: string, multiSelect?: boolean) => string;
-}
-
-const PaginationLink: React.FC<IPaginationLinkProps> = ({ title, offset, active, buildUrl }: IPaginationLinkProps) => (
-  <li className={classNames({ 'page-item': true, active: active })}>
-    <Link className='page-link' to={buildUrl('offset', String(offset))}>
-      {title}
-    </Link>
-  </li>
-);
 
 interface IPaginationNumbersListProps {
   offset: number;
@@ -33,39 +19,43 @@ interface IPaginationNumbersListProps {
 
 const PaginationNumbersList: React.FC<IPaginationNumbersListProps> = ({ offset, limit, count, buildUrl }: IPaginationNumbersListProps) => {
   const numberList: Array<React.ReactNode> = [];
+  numberList.push(<PaginationLink title='1' offset={0} key='0' active={offset === 0} buildUrl={buildUrl} />);
 
   const min = 2, max = 5;
-  let floor = Math.floor(count / limit);
-  floor = count % limit === 0 ? floor : floor + 1;
+  let numOfPages = Math.floor(count / limit);
+  numOfPages = count % limit === 0 ? numOfPages : numOfPages + 1;
+  if (numOfPages > max) {
+    numOfPages = max;
+  }
 
   // Make sure we start at the min value
-  let start = offset / limit - min < 1 ? 1 : offset / limit - min;
+  let start = Math.max(2, offset / limit - min);
   // Make sure we start at the max value
-  start = start > floor - max ? floor - max : start;
+  if (start > numOfPages - max) {
+    start = numOfPages - max;
+  }
   // Only show data if we have results
-  start = start < 1 ? 1 : start;
+  start = Math.max(2, start);
 
-  for (let i = start; i < floor && i < max + start; i++) {
-    numberList.push(<PaginationLink title={String(i + 1)} offset={limit * i} key={String(i + 1)} active={offset === limit * i} buildUrl={buildUrl} />);
+  for (let i = start; i <= numOfPages; i++) {
+    numberList.push(<PaginationLink title={String(i)} offset={limit * (i - 1)} key={String(i)} active={offset === limit * (i - 1)} buildUrl={buildUrl} />);
   }
   return <>{numberList}</>;
 };
 
 const Pagination: React.FC<IPaginationProps> = ({ offset, limit, count, buildUrl }: IPaginationProps) => {
-  const offsetNumber = offset ? parseInt(offset) : 0;
-  const limitNumber = limit ? parseInt(limit) : 0;
-  const countNumber = count ? parseInt(count) : 0;
-  const next = offsetNumber + limitNumber;
-  const previous = offsetNumber - limitNumber;
+  const next = offset + limit;
+  const previous = offset - limit;
+
+  if (count <= limit) return null;
 
   return (
-    <div className='text-center'>
-      <ul className='pagination'>
-        {previous >= 0 && <PaginationLink title='←' offset={previous} key='previous' active buildUrl={buildUrl} />}
-        <PaginationLink title='1' offset={0} key='first' active={offsetNumber === 0} buildUrl={buildUrl} />
-        <PaginationNumbersList offset={offsetNumber} limit={limitNumber} count={countNumber} buildUrl={buildUrl} />
-        {next < countNumber && <PaginationLink title='→' offset={next} key='next' active buildUrl={buildUrl} />}
-      </ul>
+    <div>
+      <BootstraPagination>
+        <PaginationLink title='←' offset={previous} key='previous' buildUrl={buildUrl} disabled={previous < 0} />
+        <PaginationNumbersList    offset={offset}   limit={limit}  buildUrl={buildUrl} count={count} />
+        <PaginationLink title='→' offset={next}     key='next'     buildUrl={buildUrl} disabled={next > count} />
+      </BootstraPagination>
     </div>
   );
 };

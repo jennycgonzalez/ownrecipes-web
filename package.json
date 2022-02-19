@@ -89,16 +89,11 @@
     "superagent": "^7.1.1",
     "superagent-defaults": "^0.1.14"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  "browserslist": [
+    ">0.2%",
+    "Firefox ESR",
+    "last 2 years",
+    "not dead",
+    "not op_mini all"
+  ]
 }

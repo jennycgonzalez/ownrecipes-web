@@ -10,7 +10,7 @@
 
 .form-control:hover {
   border-color: var(--primaryText);
-  box-shadow: 0 0 0 .05rem var(--primaryText);
+  box-shadow: 0 0 0 1px var(--primaryText);
 }
 .form-control:read-only:hover {
   cursor: not-allowed;
@@ -18,7 +18,7 @@
 
 .form-control:focus {
   border-color: var(--primaryText);
-  box-shadow: 0 0 0 .05rem var(--primaryText);
+  box-shadow: 0 0 0 1px var(--primaryText);
   color: var(--primaryText);
 }
 .form-control:not(:read-only):focus {
@@ -31,4 +31,8 @@
   padding: .35em .75em;
   line-height: 1;
   border: 1px solid var(--inputBorder);
+}
+
+.form-group .input-adornment-start button, .form-group .input-adornment-end button {
+  min-height: unset;
 }

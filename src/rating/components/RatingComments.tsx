@@ -80,7 +80,7 @@ const RatingComments: React.FC<IRatingCommentsProps> = ({ recipeSlug, ratings, u
         </Col>
       </Row>
     </React.Fragment>
-  ));
+  )) ?? [];
 
   const beTheFirst = (
     <Row key='be-the-first'><Col><P className='placeholder'>{intl.formatMessage(messages.no_comments)}</P></Col></Row>
@@ -89,7 +89,7 @@ const RatingComments: React.FC<IRatingCommentsProps> = ({ recipeSlug, ratings, u
   return (
     <>
       {pending === PendingState.LOADING && <Spinner name='three-bounce' />}
-      {ratingsList?.length === 0 && beTheFirst}
+      {ratingsList.length === 0 && beTheFirst}
       {ratingsList}
 
       <Modal

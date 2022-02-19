@@ -4,20 +4,37 @@
 }
 
 .modal-header {
-  padding: 0.75rem 1rem;
+  padding: 0 1rem;
   border-bottom-color: rgba(128, 128, 128, 0.4);
+  flex-shrink: unset;
 }
-.modal-header .h4 {
-  margin: 0;
+.modal-header .modal-title {
+  margin: 0.25rem;
 }
 .modal-header .btn-close {
   color: var(--secondaryText);
+  box-sizing: border-box;
+  margin: 2px;
+  min-height: 2.5rem;
+  min-width: 2.5rem;
 }
 .modal-header .btn-close:hover {
   background-color: var(--hoverBg);
   color: var(--hoverText);
 }
+.modal-header .btn-close:focus {
+  box-shadow: 0 0 0 2px var(--primaryText);
+}
 
 .modal-footer {
   border-top-color: rgba(128, 128, 128, 0.4);
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 32rem;
+   }
+  .modal-sm {
+    max-width: 20rem;
+  }
 }

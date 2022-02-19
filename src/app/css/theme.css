@@ -6,9 +6,10 @@ html {
   --primaryContrast: #fff;
 
   --secondaryMain: #da6575;
+  --secondaryLight: #f17f8e;
   --secondaryContrast: #fff;
 
-  --disabledTheme: #727f8b;
+  --actionDisabled: #b9c1c5;
 
   --background: #efefef;
   --midground: #fafafa;
@@ -40,9 +41,10 @@ html[data-theme="dark"] {
   --primaryContrast: #fff;
 
   --secondaryMain: #da6575;
+  --secondaryLight: #f17f8e;
   --secondaryContrast: #fff;
 
-  --disabledTheme: #8b8d8e;
+  --actionDisabled: #303336;
 
   --background: #151518;
   --midground: #181c22;
@@ -60,7 +62,7 @@ html[data-theme="dark"] {
   --successText: #349b25;
 
   --inputBgActive: #2a333a;
-  --inputBgDisabled: #2a2d30;
+  --inputBgDisabled: #303336;
   --inputBorder: #bababa;
 
   --hoverBg: rgba(105, 130, 150, 0.15);

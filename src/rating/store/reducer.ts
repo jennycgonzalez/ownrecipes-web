@@ -43,14 +43,16 @@ const reducer = (state = defaultState, action: RatingsAction): RatingsState => {
     }
   }
 
-  if (state.ident !== action.store) return ReduxHelper.caseDefaultReducer(state, action, defaultState);
-
-  switch (action.type) {
-    case ACTION.GET_SUCCESS:
-      return ReduxHelper.setMapItem(state, action.recipe, action.data);
-    default:
-      return ReduxHelper.caseDefaultReducer(state, action, defaultState);
+  if (RATINGS_STORE === action.store) {
+    switch (action.type) {
+      case ACTION.GET_SUCCESS:
+        return ReduxHelper.setMapItem(state, action.recipe, action.data);
+      default:
+        break;
+    }
   }
+
+  return ReduxHelper.caseDefaultReducer(state, action, defaultState);
 };
 
 export default reducer;

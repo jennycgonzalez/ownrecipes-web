@@ -1,5 +1,16 @@
 .ingredients-panel h2 {
   display: inline-block;
+  margin-bottom: 0;
+}
+
+.recipe-details .ingredients-panel .ingredients-for-servings-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.ingredients-panel .ingredients-for-servings-row form.custom-servings .input-group {
+  height: 2.5rem;
 }
 
 .ingredients-panel .ingredient-group {
@@ -16,7 +27,7 @@
   display: flex;
 }
 .ingredients-panel .custom-servings form input {
-  max-width: 4rem;
+  max-width: 5rem;
   border-top-left-radius: 1em;
   border-bottom-left-radius: 1em;
 

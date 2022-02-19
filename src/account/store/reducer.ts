@@ -4,21 +4,23 @@ import { AccountAction, AccountActionTypes, AccountState, ACCOUNT_STORE, ACCOUNT
 const defaultState: AccountState = ReduxHelper.getItemReducerDefaultState(ACCOUNT_STORE);
 
 const reducer = (state = defaultState, action: AccountAction): AccountState => {
-  if (state.ident !== action.store) return ReduxHelper.caseItemDefaultReducer(state, action, defaultState);
-
-  switch (action.type) {
-    case AccountActionTypes.LOGIN:
-      {
-        const user = action.user;
-        localStorage.setItem(ACCOUNT_TOKEN_STORAGE_KEY, JSON.stringify(user));
-        return ReduxHelper.setItem(state, action.user);
-      }
-    case AccountActionTypes.LOGOUT:
-      localStorage.removeItem(ACCOUNT_TOKEN_STORAGE_KEY);
-      return defaultState;
-    default:
-      return ReduxHelper.caseItemDefaultReducer(state, action, defaultState);
+  if (state.ident === action.store) {
+    switch (action.type) {
+      case AccountActionTypes.LOGIN:
+        {
+          const user = action.user;
+          localStorage.setItem(ACCOUNT_TOKEN_STORAGE_KEY, JSON.stringify(user));
+          return ReduxHelper.setItem(state, action.user);
+        }
+      case AccountActionTypes.LOGOUT:
+        localStorage.removeItem(ACCOUNT_TOKEN_STORAGE_KEY);
+        return defaultState;
+      default:
+        break;
+    }
   }
+
+  return ReduxHelper.caseItemDefaultReducer(state, action, defaultState);
 };
 
 export default reducer;

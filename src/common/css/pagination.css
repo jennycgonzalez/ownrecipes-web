@@ -1,0 +1,33 @@
+.page-item {
+  min-height: 2.5rem;
+  min-width:  2.5rem;
+  text-align: center;
+}
+
+.page-link {
+  background-color: transparent;
+}
+
+.page-link.active:hover {
+  cursor: default;
+  pointer-events: none;
+}
+
+.page-link.disabled:focus {
+  box-shadow: 0 0 0 1px var(--secondaryText);
+}
+.page-link:not(.disabled):focus {
+  box-shadow: 0 0 0 2px var(--primaryText);
+}
+
+.page-item.active .page-link {
+  color:            var(--primaryContrast);
+  background-color: var(--primaryMain);
+  border-color:     var(--primaryMain);
+}
+
+.page-item.disabled .page-link {
+  color:            var(--secondaryText);
+  background-color: var(--actionDisabled);
+  border-color:     var(--actionDisabled);
+}

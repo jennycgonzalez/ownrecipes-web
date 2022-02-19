@@ -25,16 +25,18 @@ function setTheme(state: SettingsState, action: ISettingsAction): SettingsState 
 }
 
 const reducer = (state = defaultState, action: SettingsAction): SettingsState => {
-  if (action.store !== SETTINGS_STORE) return state;
-
-  switch (action.type) {
-    case SettingsActionTypes.LANGUAGE:
-      return setLanguage(state, action);
-    case SettingsActionTypes.THEME_MODE:
-      return setTheme(state, action);
-    default:
-      return state;
+  if (action.store === SETTINGS_STORE) {
+    switch (action.type) {
+      case SettingsActionTypes.LANGUAGE:
+        return setLanguage(state, action);
+      case SettingsActionTypes.THEME_MODE:
+        return setTheme(state, action);
+      default:
+        break;
+    }
   }
+
+  return state;
 };
 
 export default reducer;

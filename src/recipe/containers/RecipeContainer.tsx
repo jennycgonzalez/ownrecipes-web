@@ -61,7 +61,7 @@ const RecipeContainer: React.FC = () => {
     if (prevRecipe.current == null) {
       prevRecipe.current = recipe;
     } else if (prevRecipe.current != null && recipe == null && isDeleting) {
-      nav(getResourcePath('/browse'));
+      nav(getResourcePath('/browser'));
     }
   }, [recipe]);
 

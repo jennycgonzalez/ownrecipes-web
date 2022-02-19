@@ -19,6 +19,24 @@ interface IPageWrapperProps {
 }
 
 /**
+ * Strips slashes etc. of the path.
+ *
+ * Example:
+ * location.pathname = /browse/
+ * toCleanLocationPath = browse
+ *
+ * @param path - location.pathname
+ *
+ * @return Nice path without gibberish.
+ */
+function toCleanLocationPath(path: string): string {
+  const startsWithSlash = path.startsWith('/');
+  const endsWithSlash   = path.endsWith('/');
+
+  return path.substring(startsWithSlash ? 1 : 0, endsWithSlash ? path.length - 1 : undefined);
+}
+
+/**
  * HOC to properly set the browser title to assure accessibilty.
  */
  const PageWrapper: React.FC<IPageWrapperProps> = (props: IPageWrapperProps) => {
@@ -40,7 +58,7 @@ interface IPageWrapperProps {
 
   return (
     <ErrorBoundary verbose printStack>
-      <Container className={location.pathname.substring(1)}>
+      <Container className={toCleanLocationPath(location.pathname)}>
         {props.children}
       </Container>
     </ErrorBoundary>

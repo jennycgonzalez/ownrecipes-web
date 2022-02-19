@@ -5,7 +5,7 @@ import { getResourcePath } from '../../common/utility';
 
 import News from '../../news/container/News';
 import Login from '../../account/containers/Login';
-// import Browse from '../../browse/containers/Browse';
+import Browse from '../../browse/containers/Browse';
 // import RecipeForm from '../../recipe_form/containers/Form';
 import RecipeView from '../../recipe/containers/RecipeView';
 // import List from '../../list/containers/List';
@@ -24,11 +24,11 @@ const PrivateRoutes: Array<IRouteType> = [
     path:      '/home',
     component: News,
   },
-  /*
   {
-    path:      '/browse',
+    path:      '/browser',
     component: Browse,
   },
+  /*
   {
     path:      '/recipe/edit/:recipe',
     component: RecipeForm,
@@ -95,7 +95,7 @@ const Routes: React.FC<IRoutesProps> = (props: IRoutesProps) => {
       return <Route path={getResourcePath(r.path)} key={r.path} element={<PageComponent />} />;
     });
     routesList.push(
-      <Route path='*' key='*' element={<Navigate replace to={getResourcePath('/login')} />} />
+      <Route path='*' key='*' element={<Navigate replace to={getResourcePath('/login?course=entry&rating=5')} />} />
     );
   }
 

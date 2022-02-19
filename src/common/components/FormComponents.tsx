@@ -29,7 +29,7 @@ export class BaseComponent<P extends IBaseComponentProps, S = {}> extends Compon
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   handleChange(event: any) {
     if (this.props.change) {
-      this.props.change(event.target.name, event.target.value);
+      this.props.change(this.props.name, event.target.value);
     }
   }
 

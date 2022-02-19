@@ -20,6 +20,7 @@
 .recipe-details .info {
   display: block;
 }
+
 .recipe-details .recipe-schema {
   padding: 20px;
 }
@@ -38,18 +39,7 @@
   margin-left: -5px;
   font-size: 10px;
 }
-.recipe-details .recipe-schema .table td .input-group .servings-textbox input[type=number]::-webkit-inner-spin-button, .recipe-details .recipe-schema .table td .input-group .servings-textbox input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-.recipe-details .recipe-schema .table td .input-group .servings-textbox .form-group {
-  margin-bottom: 0;
-}
-.recipe-details .recipe-schema .table td .input-group .servings-textbox .form-group .form-control {
-  display: inline-block;
-  text-align: center;
-  max-width: 80px;
-}
+
 .recipe-details .recipe-schema .panel-default th, .recipe-details .recipe-schema .panel-default td {
   text-align: center;
 }

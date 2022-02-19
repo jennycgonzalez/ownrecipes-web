@@ -8,7 +8,7 @@ const Footer = () => (
   <footer className='footer print-hidden'>
     <Container>
       <div>
-        <P variant='body2' className='text-muted'>
+        <P variant='body2'>
           <FormattedMessage
               id='footer.credit'
               description='Footer credit'
