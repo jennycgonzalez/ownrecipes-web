@@ -7,6 +7,7 @@ import * as AuthActions from '../store/actions';
 import LoginForm from '../components/LoginForm';
 import { CombinedStore } from '../../app/Store';
 import PageWrapper from '../../common/components/PageWrapper';
+import SignUpInfo from '../components/SignUpInfo';
 
 const Login: React.FC = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,8 @@ const Login: React.FC = () => {
           <LoginForm
               accountState={accountState}
               onLogin={handleLogin} />
+          <hr />
+          <SignUpInfo />
         </Modal.Body>
       </Modal.Dialog>
     </PageWrapper>
