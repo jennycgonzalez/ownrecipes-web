@@ -8,10 +8,6 @@
   color: var(--primaryText);
 }
 
-.form-control:hover {
-  border-color: var(--primaryText);
-  box-shadow: 0 0 0 1px var(--primaryText);
-}
 .form-control:read-only:hover {
   cursor: not-allowed;
 }
@@ -23,6 +19,9 @@
 }
 .form-control:not(:read-only):focus {
   background-color: var(--inputBgActive);
+}
+.form-control:hover {
+  border-color: var(--primaryMain);
 }
 
 .input-group-text {

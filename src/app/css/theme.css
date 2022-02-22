@@ -1,7 +1,7 @@
 html {
   /* light */
-  --primaryLight: #3ebd2b;
-  --primaryMain: #349b25;
+  --primaryLight: #65b425;
+  --primaryMain: #4f9615;
   --primaryShadow: rgba(49, 255, 132, .25);
   --primaryContrast: #fff;
 
@@ -35,8 +35,8 @@ html {
 
 html[data-theme="dark"] {
   /* dark */
-  --primaryLight: #3ebd2b;
-  --primaryMain: #349b25;
+  --primaryLight: #2faa49;
+  --primaryMain: #4f9615;
   --primaryShadow: rgba(49, 255, 132, .2);
   --primaryContrast: #fff;
 

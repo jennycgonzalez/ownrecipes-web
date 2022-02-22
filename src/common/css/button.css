@@ -44,31 +44,31 @@
 }
 .btn-check:active + .btn-primary, .btn-check:checked + .btn-primary, .btn-primary.active, .btn-primary:active, .show > .btn-primary.dropdown-toggle {
   color: var(--primaryContrast);
-  background-color: var(--primaryLight);
-  border-color: var(--primaryLight);
+  background-color: var(--primaryMain);
+  border-color: var(--primaryMain);
 }
 .btn-check:active + .btn-primary:focus, .btn-check:checked + .btn-primary:focus, .btn-primary.active:focus, .btn-primary:active:focus, .show > .btn-primary.dropdown-toggle:focus {
   box-shadow: 0 0 0 2px var(--primaryText);
 }
 
 .btn-outline-primary {
-  color: var(--primaryMain);
-  border-color: var(--primaryMain);
+  color: var(--secondaryText);
+  border-color: var(--secondaryText);
 }
 .btn-outline-primary:hover {
-  color: var(--primaryContrast);
-  background-color: var(--primaryMain);
+  color: var(--primaryMain);
+  background-color: transparent;
   border-color: var(--primaryMain);
 }
 .btn-check:focus + .btn-outline-primary, .btn-outline-primary:focus {
-  color: var(--primaryContrast);
-  background-color: var(--primaryMain);
+  color: var(--primaryMain);
+  background-color: transparent;
   border-color: var(--primaryMain);
 }
 .btn-check:active + .btn-outline-primary, .btn-check:checked + .btn-outline-primary, .btn-outline-primary.active, .btn-outline-primary.dropdown-toggle.show, .btn-outline-primary:active {
-  color: var(--primaryContrast);
-  background-color: var(--primaryLight);
-  border-color: var(--primaryLight);
+  color: var(--primaryMain);
+  background-color: transparent;
+  border-color: var(--primaryMain);
 }
 .btn-check:active + .btn-outline-primary:focus, .btn-check:checked + .btn-outline-primary:focus, .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus, .btn-outline-primary:active:focus {
   box-shadow: 0 0 0 2px var(--primaryText);
@@ -81,6 +81,30 @@
 
 
 /* secondary */
+
+.btn-secondary {
+  color: var(--secondaryContrast);
+  background-color: var(--secondaryMain);
+  border-color: var(--secondaryMain);
+}
+.btn-secondary:hover {
+  color: var(--secondaryContrast);
+  background-color: var(--secondaryMain);
+  border-color: var(--secondaryMain);
+}
+.btn-check:focus + .btn-secondary, .btn-secondary:focus {
+  color: var(--secondaryContrast);
+  background-color: var(--secondaryMain);
+  border-color: var(--secondaryMain);
+}
+.btn-check:active + .btn-secondary, .btn-check:checked + .btn-secondary, .btn-secondary.active, .btn-secondary:active, .show > .btn-secondary.dropdown-toggle {
+  color: var(--secondaryContrast);
+  background-color: var(--secondaryMain);
+  border-color: var(--secondaryMain);
+}
+.btn-check:active + .btn-secondary:focus, .btn-check:checked + .btn-secondary:focus, .btn-secondary.active:focus, .btn-secondary:active:focus, .show > .btn-secondary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 2px var(--primaryText);
+}
 
 .btn-outline-secondary {
   color: var(--secondaryMain);
@@ -98,11 +122,11 @@
 }
 .btn-check:active + .btn-outline-secondary, .btn-check:checked + .btn-outline-secondary, .btn-outline-secondary.active, .btn-outline-secondary.dropdown-toggle.show, .btn-outline-secondary:active {
   color: var(--secondaryContrast);
-  background-color: var(--secondaryLight);
-  border-color: var(--secondaryLight);
+  background-color: var(--secondaryMain);
+  border-color: var(--secondaryMain);
 }
 .btn-check:active + .btn-outline-secondary:focus, .btn-check:checked + .btn-outline-secondary:focus, .btn-outline-secondary.active:focus, .btn-outline-secondary.dropdown-toggle.show:focus, .btn-outline-secondary:active:focus {
-  box-shadow: 0 0 0 2px var(--secondaryText);
+  box-shadow: 0 0 0 2px var(--primaryText);
 }
 .btn-outline-secondary.disabled, .btn-outline-secondary:disabled {
   color: var(--disabledText);
@@ -139,23 +163,22 @@
 }
 
 .btn-outline-danger {
-  color: var(--errorText);
-  border-color: var(--errorText);
+  color: var(--secondaryText);
+  border-color: var(--secondaryText);
 }
 .btn-outline-danger:hover {
-  color: var(--primaryContrast);
-  background-color: var(--errorText);
+  color: var(--errorText);
+  background-color: transparent;
   border-color: var(--errorText);
 }
 .btn-check:focus + .btn-outline-danger, .btn-outline-danger:focus {
-  color: var(--primaryContrast);
-  background-color: var(--errorText);
+  color: var(--errorText);
+  background-color: transparent;
   border-color: var(--errorText);
-  box-shadow: 0 0 0 2px var(--primaryText);
 }
 .btn-check:active + .btn-outline-danger, .btn-check:checked + .btn-outline-danger, .btn-outline-danger.active, .btn-outline-danger.dropdown-toggle.show, .btn-outline-danger:active {
-  color: var(--primaryContrast);
-  background-color: var(--errorText);
+  color: var(--errorText);
+  background-color: transparent;
   border-color: var(--errorText);
 }
 .btn-check:active + .btn-outline-danger:focus, .btn-check:checked + .btn-outline-danger:focus, .btn-outline-danger.active:focus, .btn-outline-danger.dropdown-toggle.show:focus, .btn-outline-danger:active:focus {

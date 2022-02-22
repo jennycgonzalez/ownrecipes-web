@@ -75,7 +75,7 @@ const Modal: React.FC<IModalProps> = (props: IModalProps) => {
       {hasButton && (
         <BootstrapModal.Footer>
           {onClose != null && !noCloseButton && (
-            <Button variant='secondary' onClick={handleClose}>
+            <Button variant='outline-primary' onClick={handleClose}>
               {closeTitle ?? formatMessage(messages.close)}
             </Button>
           )}

@@ -80,16 +80,19 @@ h4, .h4 {
 .dropdown-item:focus {
   color: var(--hoverText);
   background-color: var(--hoverBg);
-  box-shadow: 0 0 0 2px var(--primaryText);
+  box-shadow: 0 0 0 2px var(--primaryText) inset;
+  outline: 0;
 }
 .dropdown-item:active {
   color: var(--hoverText);
   background-color: var(--hoverBg);
-  box-shadow: 0 0 0 2px var(--primaryText);
+  box-shadow: 0 0 0 2px var(--primaryText) inset;
+  outline: 0;
 }
 .dropdown-item.active {
   color: var(--primaryContrast);
   background-color: var(--primaryMain);
+  border-radius: 0;
 }
 .dropdown-item.active:hover {
   color: var(--primaryContrast);

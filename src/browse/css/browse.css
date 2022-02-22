@@ -57,11 +57,9 @@
   padding-bottom: 4px;
   min-height: unset;
   border-color: var(--inputBorder);
-  color: var(--secondaryText);
 }
 .container.browser .search-summary #sort-by-button:hover, .container.browser .search-summary #sort-by-button:focus {
   border-color: var(--primaryMain);
-  color: var(--primaryContrast);
 }
 
 

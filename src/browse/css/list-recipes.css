@@ -12,7 +12,7 @@
 }
 .recipes-list .recipe > a:hover .card-title, .recipes-list .recipe > a:focus .card-title {
   text-decoration: underline;
-  color: var(--primaryLight);
+  color: var(--primaryMain);
 }
 .recipes-list .recipe .card-title {
   font-size: 1rem;
