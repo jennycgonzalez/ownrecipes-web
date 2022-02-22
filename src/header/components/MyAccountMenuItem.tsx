@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { defineMessages, useIntl } from 'react-intl';
-import { NavDropdown, ListGroup, Button } from 'react-bootstrap';
+import { NavDropdown, Button } from 'react-bootstrap';
 import { getResourcePath } from '../../common/utility';
 import { UserAccount } from '../../account/store/types';
-import Modal from '../../common/components/Modal';
 import { LanguageCode, Settings, ThemeMode } from '../../account/store/settings/types';
-import { toLanguageName } from '../../app/components/IntlProvider';
+import Icon from '../../common/components/Icon';
+import { LanguageDialog } from './LanguageDialog';
+import { ThemeDialog } from './ThemeDialog';
 
 export const AccountLoginMenuItem: React.FC = () => {
   const { formatMessage } = useIntl();
@@ -18,7 +19,10 @@ export const AccountLoginMenuItem: React.FC = () => {
   });
 
   return (
-    <Button variant='primary' href={getResourcePath('/login')}>{formatMessage(messages.label)}</Button>
+    <Button variant='primary' href={getResourcePath('/login')}>
+      <Icon icon='box-arrow-in-right' variant='light' size='2x' className='visible-xs' />
+      <span className='hidden-xs'>{formatMessage(messages.label)}</span>
+    </Button>
   );
 };
 
@@ -49,30 +53,10 @@ export const AccountMenuMenuItem: React.FC<IAccountMenuMenuItemProps> = (props: 
       description: 'Item to open the language change dialog',
       defaultMessage: 'Language',
     },
-    language_modal_title: {
-      id: 'nav.accountmenu.language_modal_title',
-      description: 'Change language dialog title',
-      defaultMessage: 'Choose language',
-    },
     theme: {
       id: 'nav.accountmenu.theme',
       description: 'Item to open the theme change dialog',
       defaultMessage: 'Theme',
-    },
-    theme_modal_title: {
-      id: 'nav.accountmenu.theme_modal_title',
-      description: 'Change theme mode dialog title',
-      defaultMessage: 'Choose theme',
-    },
-    theme_mode_dark: {
-      id: 'theme.mode.dark',
-      description: 'Dark mode',
-      defaultMessage: 'Dark',
-    },
-    theme_mode_light: {
-      id: 'theme.mode.light',
-      description: 'Light mode',
-      defaultMessage: 'Light',
     },
     admin: {
       id: 'nav.accountmenu.admin',
@@ -104,25 +88,18 @@ export const AccountMenuMenuItem: React.FC<IAccountMenuMenuItemProps> = (props: 
     props.onChangeTheme(theme);
   };
 
-  const languageButtons = Object.values(LanguageCode).map(l => (
-    <ListGroup.Item key={l} action disabled={props.settings.language === l} onClick={() => handleChangeLanguage(l)}>{toLanguageName(l)}</ListGroup.Item>
-  ));
-
-  const themeButtons = Object.values(ThemeMode).map(t => (
-    <ListGroup.Item key={t} action disabled={props.settings.themeMode === t} onClick={() => handleChangeTheme(t)}>{formatMessage(messages[`theme_mode_${t}`])}</ListGroup.Item>
-  ));
-
   return (
     <>
       <NavDropdown
           title={(
             <>
-              <div className='subtitle'>{formatMessage(messages.hello, { name: props.account.username })}</div>
-              <span>{formatMessage(messages.title)}</span>
+              <Icon icon='person-circle' variant='light' size='2x' className='visible-xs' />
+              <div  className='hidden-xs subtitle'>{formatMessage(messages.hello, { name: props.account.username })}</div>
+              <span className='hidden-xs'>{formatMessage(messages.title)}</span>
             </>
           )}
           align = 'end'
-          id='basic-nav-dropdown'>
+          id='my-account-dropdown'>
         <NavDropdown.Item onClick={handleChangeLanguageClick}>{`${formatMessage(messages.language)} …`}</NavDropdown.Item>
         <NavDropdown.Item onClick={handleChangeThemeClick}>{`${formatMessage(messages.theme)} …`}</NavDropdown.Item>
         <NavDropdown.Divider />
@@ -131,27 +108,17 @@ export const AccountMenuMenuItem: React.FC<IAccountMenuMenuItemProps> = (props: 
         <NavDropdown.Item onClick={props.onLogoutClick}>{formatMessage(messages.logout)}</NavDropdown.Item>
       </NavDropdown>
 
-      <Modal
-          show = {showLanguageDialog}
-          title = {formatMessage(messages.language_modal_title)}
-          onClose = {handleLanguageDialogClose}
-          size = 'sm'
-          noCloseButton>
-        <ListGroup>
-          {languageButtons}
-        </ListGroup>
-      </Modal>
+      <LanguageDialog
+          show     = {showLanguageDialog}
+          settings = {props.settings}
+          onChangeLanguage = {handleChangeLanguage}
+          onClose = {handleLanguageDialogClose} />
 
-      <Modal
-          show = {showThemeDialog}
-          title = {formatMessage(messages.theme_modal_title)}
-          onClose = {handleThemeDialogClose}
-          size = 'sm'
-          noCloseButton>
-        <ListGroup>
-          {themeButtons}
-        </ListGroup>
-      </Modal>
+      <ThemeDialog
+          show     = {showThemeDialog}
+          settings = {props.settings}
+          onChangeTheme = {handleChangeTheme}
+          onClose = {handleThemeDialogClose} />
     </>
   );
 };
