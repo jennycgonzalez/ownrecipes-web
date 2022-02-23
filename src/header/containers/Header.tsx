@@ -48,7 +48,7 @@ const Header: React.FC = () => {
         settings = {settings}
         // lists    = {listState}
 
-        isLoginPage = {location.pathname.endsWith('login')}
+        locationPath = {location.pathname}
 
         onChangeLanguage={handleChangeLanguage}
         onChangeTheme={handleChangeTheme}

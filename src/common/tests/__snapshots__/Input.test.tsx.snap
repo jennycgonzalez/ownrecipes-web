@@ -14,7 +14,7 @@ exports[`Input inputAdornmentStart 1`] = `
     className="input-group"
   >
     <span
-      className="input-group-text"
+      className="input-adornment-start input-group-text"
     >
       <span
         className="some span"
@@ -23,7 +23,7 @@ exports[`Input inputAdornmentStart 1`] = `
       </span>
     </span>
     <input
-      className="form-control"
+      className="adorned-start form-control"
       id="myInput"
       name="myInput"
       onChange={[Function]}

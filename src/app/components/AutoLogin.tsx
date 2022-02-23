@@ -56,9 +56,9 @@ class AutoLogin extends Component<IProps, IAutoLoginState> {
 
     if (prevToken == null && currToken != null) {
       if (originUrl === '/' || originUrl === '/login') {
-        this.props.nav(getResourcePath('/home'));
+        this.props.nav(getResourcePath('/home'), { replace: true });
       } else {
-        this.props.nav(`${originUrl}${this.state.originSearch}`);
+        this.props.nav(`${originUrl}${this.state.originSearch}`, { replace: true });
       }
     } else if (prevToken != null && currToken == null) {
       setTimeout(() => {

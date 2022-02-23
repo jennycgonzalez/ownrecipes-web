@@ -86,6 +86,7 @@
   "nav.menu": "Menu",
   "nav.randomRecipe": "Random",
   "nav.recipes": "Browse",
+  "nav.search.placeholder": "Search",
   "newRating.create.rating_comment_label": "Comments",
   "newRating.create.rating_comment_placeholder": "Leave a comment!",
   "newRating.create.rating_label": "Rating",

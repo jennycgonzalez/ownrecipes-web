@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { defineMessages, useIntl } from 'react-intl';
 import * as _ from 'lodash';
@@ -28,13 +28,18 @@ const SearchBar: React.FC<ISearchBarProps> = ({ value, doSearch }: ISearchBarPro
   });
 
   const [formData, setFormData] = useState<IFormData>({ value: value ?? '' });
+  const previousSearch = useRef<string>(value ?? '');
 
   useEffect(() => {
-    setFormData({ value: value });
+    if (formData.value !== value) {
+      setFormData({ value: value });
+    }
   }, [value]);
 
   useEffect(() => {
-    doSearch(formData.value);
+    if (previousSearch.current !== formData.value) {
+      doSearch(formData.value);
+    }
   }, [formData]);
 
   const handleChange = (attr: string, val: string) => {
@@ -64,6 +69,7 @@ const SearchBar: React.FC<ISearchBarProps> = ({ value, doSearch }: ISearchBarPro
         inputAdornmentStart = {<Icon icon='search' variant='light' />}
         inputAdornmentEnd = {formData.value.length > 0 ? clearInput : undefined}
         change = {handleChange}
+        debounceTimeout = {400}
         className = 'search-bar' />
   );
 };

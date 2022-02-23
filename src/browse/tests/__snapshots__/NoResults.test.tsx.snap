@@ -1,26 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`NoResults component test 1`] = `
-<div
-  className="row"
+<p
+  className="body1 no-results placeholder"
 >
-  <div
-    className="col-12"
-  >
-    <div
-      className="row"
-      id="browse"
-    >
-      <div
-        className="spinner"
-      >
-        <h3
-          className="no-results"
-        >
-          There are no results for your search.
-        </h3>
-      </div>
-    </div>
-  </div>
-</div>
+  There are no results for your search.
+</p>
 `;

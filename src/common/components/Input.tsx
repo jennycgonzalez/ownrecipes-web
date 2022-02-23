@@ -1,6 +1,7 @@
 import { Form, InputGroup } from 'react-bootstrap';
 import classNames from 'classnames';
 import { DebounceInput } from 'react-debounce-input';
+import { createRef } from 'react';
 
 import '../css/input.css';
 
@@ -51,6 +52,17 @@ export const isTextInput = (inp: IAnyInputProps): inp is ITextInputProps => (inp
 export const isNumberInput = (inp: IAnyInputProps): inp is INumberInputProps => (inp as INumberInputProps).type === 'number';
 
 export default class Input extends BaseComponent<IAnyInputProps> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private ref = createRef<any>();
+
+  focus(): boolean { // eslint-disable-line react/no-unused-class-component-methods
+    if (this.ref != null && this.ref.current) {
+      this.ref.current.focus();
+      return true;
+    }
+    return false;
+  }
+
   render() {
     const type = this.props.type ?? 'text';
     const isDebounce = this.props.debounceTimeout != null && this.props.debounceTimeout > 0;
@@ -86,7 +98,8 @@ export default class Input extends BaseComponent<IAnyInputProps> {
                 className = {classNames('form-control', {
                   'adorned-start': this.props.inputAdornmentStart,
                   'adorned-end': this.props.inputAdornmentEnd,
-                })} />
+                })}
+                ref = {this.ref} />
           )}
           {!isDebounce && (
             <Form.Control
@@ -111,7 +124,8 @@ export default class Input extends BaseComponent<IAnyInputProps> {
                   'adorned-end': this.props.inputAdornmentEnd,
                 })}
 
-                onChange={this.handleChange} />
+                onChange={this.handleChange}
+                ref = {this.ref} />
             )}
           {this.props.inputAdornmentEnd && <InputGroup.Text className='input-adornment-end'>{this.props.inputAdornmentEnd}</InputGroup.Text>}
         </InputGroup>

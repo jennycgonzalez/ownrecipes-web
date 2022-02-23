@@ -88,6 +88,7 @@
   "nav.menu": "Menü",
   "nav.randomRecipe": "Zufallsrezept",
   "nav.recipes": "Rezepte durchsuchen",
+  "nav.search.placeholder": "Suche",
   "newRating.create.rating_comment_label": "Kommentare",
   "newRating.create.rating_comment_placeholder": "Dein Kommentar",
   "newRating.create.rating_label": "Bewertung",
