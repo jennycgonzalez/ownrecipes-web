@@ -1,0 +1,26 @@
+.modal.internalError .modal-header {
+  background-color: var(--errorText);
+  color: white;
+  border-bottom-color: var(--primaryText);
+}
+
+.modal.internalError .modal-body {
+  padding: 0;
+}
+
+.modal.internalError .caption {
+  font-weight: bold;
+  display: 'inline-block';
+}
+.modal.internalError .caption:not(:first-of-type) {
+  margin-top:  2rem;
+}
+
+.modal.internalError .text {
+  white-space: pre-wrap;
+}
+
+
+.modal.internalError textarea {
+  line-height: 1.5 !important;
+}

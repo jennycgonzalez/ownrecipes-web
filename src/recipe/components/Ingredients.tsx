@@ -1,6 +1,7 @@
-// import { Checkbox } from '../../common/components/FormComponents';
 import { Table } from 'react-bootstrap';
 import { defineMessages, useIntl } from 'react-intl';
+
+// import { Checkbox } from '../../common/components/FormComponents';
 import { optionallyFormatMessage } from '../../common/utility';
 import { Ingredient } from '../store/RecipeTypes';
 
@@ -25,12 +26,13 @@ const Ingredients: React.FC<IIngredientsProps> = ({ data /* , checkIngredient */
     },
   });
 
-  const ingredients = data.map(ingredient => {
+  const ingredients = data.map((ingredient, index) => {
     const quantityString    = ingredient.quantity;
-    const measurementString = optionallyFormatMessage(intl, 'measurement.', ingredient.measurement, { itemCount: ingredient.quantity });
+    const measurementString = ingredient.measurement != null ? optionallyFormatMessage(intl, 'measurement.', ingredient.measurement, { itemCount: ingredient.quantity }) : '';
     const titleString       = ingredient.title;
+
     return (
-      <tr className='ingredient' key={String(ingredient.id)}>
+      <tr className='ingredient' key={String(ingredient.id ?? index)}>
         {/*
         <Checkbox
             name    = {String(ingredient.id)}

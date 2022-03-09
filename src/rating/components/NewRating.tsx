@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Col, Row } from 'react-bootstrap';
+import { Button, Col, Form, Row } from 'react-bootstrap';
 import { defineMessages, useIntl } from 'react-intl';
 
 import Input from '../../common/components/Input';
@@ -77,29 +77,31 @@ const NewRating: React.FC<INewRatingProps> = ({ show, recipeSlug, userId, addRat
 
   return (
     <>
-      <form onSubmit={handleSubmit} className='new-rating'>
+      <Form onSubmit={handleSubmit} className='new-rating'>
         <fieldset>
           <legend className='new-rating-heading'>{formatMessage(messages.new_rating_title)}</legend>
           <Row>
             <Col lg={4} md={5} sm={12}>
               <Input
-                  name='rating'
-                  type='number'
-                  label={formatMessage(messages.rating_label)}
+                  name   = 'rating'
+                  type   = 'number'
+                  label  = {formatMessage(messages.rating_label)}
                   placeholder={formatMessage(messages.rating_placeholder)}
-                  change={handleChange}
-                  value={formData.rating} />
+                  value  = {formData.rating}
+                  required
+                  change = {handleChange} />
             </Col>
           </Row>
           <Row>
             <Col>
               <Input
-                  name='comment'
-                  rows={4}
-                  label={formatMessage(messages.rating_comment_label)}
-                  placeholder={formatMessage(messages.rating_comment_placeholder)}
-                  change={handleChange}
-                  value={formData.comment}
+                  name   = 'comment'
+                  rows   = {4}
+                  label  = {formatMessage(messages.rating_comment_label)}
+                  placeholder = {formatMessage(messages.rating_comment_placeholder)}
+                  value  = {formData.comment}
+                  required
+                  change = {handleChange}
               />
             </Col>
           </Row>
@@ -111,7 +113,7 @@ const NewRating: React.FC<INewRatingProps> = ({ show, recipeSlug, userId, addRat
             </Col>
           </Row>
         </fieldset>
-      </form>
+      </Form>
       <hr />
     </>
   );

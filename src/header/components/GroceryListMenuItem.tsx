@@ -1,5 +1,6 @@
 import { useIntl, defineMessages } from 'react-intl';
 import { NavDropdown } from 'react-bootstrap';
+
 import { getResourcePath } from '../../common/utility';
 
 export type ListItemType = {

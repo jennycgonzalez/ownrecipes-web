@@ -1,8 +1,8 @@
 html {
   /* light */
   --primaryLight: #65b425;
-  --primaryMain: #4f9615;
-  --primaryShadow: rgba(49, 255, 132, .25);
+  --primaryMain: #448112;
+  --primaryShadow: rgba(89, 192, 49, 0.2);
   --primaryContrast: #fff;
 
   --secondaryMain: #da6575;
@@ -20,15 +20,15 @@ html {
 
   --primaryText: #1f1f1f;
   --secondaryText: #444;
-  --disabledText: #7b7b7b;
+  --disabledText: #777;
   --hoverText: #000;
   --errorText: #b60d0d;
   --infoText: #0d0db6;
   --successText: #349b25;
 
   --inputBgActive: #fff;
-  --inputBgDisabled: #d5d5d5;
-  --inputBorder: #777;
+  --inputBgDisabled: #e2e2e2;
+  --inputBorder: #aaa;
 
   --hoverBg: rgba(110, 135, 150, 0.15);
 }
@@ -37,7 +37,7 @@ html[data-theme="dark"] {
   /* dark */
   --primaryLight: #2faa49;
   --primaryMain: #4f9615;
-  --primaryShadow: rgba(49, 255, 132, .2);
+  --primaryShadow: rgba(74, 151, 38, 0.2);
   --primaryContrast: #fff;
 
   --secondaryMain: #da6575;
@@ -50,7 +50,7 @@ html[data-theme="dark"] {
   --midground: #181c22;
   --elevation: #33373d;
 
-  --elevationShadow: rgba(33, 33, 33, 0.75);
+  --elevationShadow: rgba(96, 96, 110, 0.4);
   --elevationBorder: rgba(255, 255, 255, 0.2);
 
   --primaryText: #ededed;
@@ -61,9 +61,9 @@ html[data-theme="dark"] {
   --infoText: #3676ff;
   --successText: #349b25;
 
-  --inputBgActive: #2a333a;
+  --inputBgActive: #1d2430;
   --inputBgDisabled: #303336;
-  --inputBorder: #bababa;
+  --inputBorder: #bbb;
 
   --hoverBg: rgba(105, 130, 150, 0.15);
 }

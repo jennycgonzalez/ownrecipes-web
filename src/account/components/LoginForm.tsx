@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { defineMessages, useIntl } from 'react-intl';
 import * as _ from 'lodash';
 
@@ -64,7 +64,7 @@ const LoginForm: React.FC<ILoginFormProps> = (props: ILoginFormProps) => {
   };
 
   return (
-    <form className='form-signin' onSubmit={handleSubmit}>
+    <Form className='form-signin' onSubmit={handleSubmit}>
       <Alert reducerState={props.accountState} />
 
       <h2 className='form-signin-heading'>{formatMessage(messages.please_sign_in)}</h2>
@@ -90,7 +90,7 @@ const LoginForm: React.FC<ILoginFormProps> = (props: ILoginFormProps) => {
       <Button variant='primary' type='submit'>
         {formatMessage(messages.sign_in)}
       </Button>
-    </form>
+    </Form>
   );
 };
 

@@ -12,13 +12,13 @@ export interface IRecipeSubrecipesLoadAction {
   store: typeof RECIPE_SUBRECIPES_STORE;
   type: typeof RecipeSubrecipesReducerActionTypes.RECIPE_SUBRECIPES_LOAD;
   subrecipes: Array<SubRecipe>;
-  formatQuantity: (numerator: number, denominator: number) => string;
+  formatQuantity: (numerator: number | undefined, denominator: number) => string;
 }
 
 export interface IRecipeSubrecipesIngredientsUpdateAction {
   store: typeof RECIPE_SUBRECIPES_STORE;
   type: typeof RecipeSubrecipesReducerActionTypes.RECIPE_SUBRECIPES_SERVINGS_UPDATE;
-  formatQuantity: (numerator: number, denominator: number) => string;
+  formatQuantity: (numerator: number | undefined, denominator: number) => string;
 }
 
 export type RecipeSubrecipesState = Array<SubRecipe>;

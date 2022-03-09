@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
+
 import Icon from '../../common/components/Icon';
 
 export type RecipeFilter = {

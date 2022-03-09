@@ -6,12 +6,14 @@ import '../css/recipe.css';
 import { Recipe } from '../store/RecipeTypes';
 import GenericReducerType from '../../common/store/GenericReducerType';
 import IngredientsPanel from './IngredientsPanel';
+import { Col, Row } from 'react-bootstrap';
 
 interface IRecipeSchemeProps {
-  recipe: Recipe;
-  recipeState: GenericReducerType;
+  recipe:       Recipe | undefined;
+  recipeState:  GenericReducerType;
   showEditLink: boolean;
 
+  onEditRecipe: () => void;
   deleteRecipe: () => void;
 
   // lists: Array<any>;
@@ -27,34 +29,39 @@ interface IRecipeSchemeProps {
   updateServings: (servings: number) => void;
 }
 
-const RecipeScheme: React.FC<IRecipeSchemeProps> = ({ recipe, recipeState, showEditLink, deleteRecipe, updateServings }: IRecipeSchemeProps) => (
+const RecipeScheme: React.FC<IRecipeSchemeProps> = ({ recipe, recipeState, showEditLink, onEditRecipe, deleteRecipe, updateServings }: IRecipeSchemeProps) => (
   <div className='recipe-details'>
     <RecipeHeader
         recipe = {recipe}
         showEditLink = {showEditLink}
+        onEditRecipe = {onEditRecipe}
         // onAddToMenuClick={props.onAddToMenuClick}
         deleteRecipe = {deleteRecipe} />
 
     <hr />
 
-    <IngredientsPanel
-        recipe = {recipe}
-        recipeState = {recipeState}
+    <Row>
+      <Col xl={4} lg={12}>
+        <IngredientsPanel
+            recipe = {recipe}
+            recipeState = {recipeState}
 
-        // lists = {lists}
+            // lists = {lists}
 
-        // bulkAdd = {bulkAdd}
-        // checkAllIngredients = {checkAllIngredients}
-        // uncheckAllIngredients = {uncheckAllIngredients}
+            // bulkAdd = {bulkAdd}
+            // checkAllIngredients = {checkAllIngredients}
+            // uncheckAllIngredients = {uncheckAllIngredients}
 
-        // checkIngredient = {checkIngredient}
-        // checkSubRecipe = {checkSubRecipe}
+            // checkIngredient = {checkIngredient}
+            // checkSubRecipe = {checkSubRecipe}
 
-        updateServings = {updateServings} />
-
-    <hr />
-
-    <Directions data={recipe.directions} />
+            updateServings = {updateServings} />
+      </Col>
+      <hr className='d-block d-xl-none' />
+      <Col xl={8} lg={12}>
+        <Directions data={recipe?.directions ?? ''} />
+      </Col>
+    </Row>
   </div>
 );
 

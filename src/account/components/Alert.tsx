@@ -1,4 +1,5 @@
 import { defineMessages, useIntl } from 'react-intl';
+
 import Alert from '../../common/components/Alert';
 import GenericReducerType from '../../common/store/GenericReducerType';
 

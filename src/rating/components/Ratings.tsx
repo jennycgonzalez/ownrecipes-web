@@ -1,5 +1,6 @@
-import Icon from '../../common/components/Icon';
 import '../css/ratings.css';
+
+import Icon from '../../common/components/Icon';
 
 export interface IRatingsProps {
   stars: number;
@@ -26,9 +27,9 @@ const Ratings: React.FC<IRatingsProps> = ({ stars }: IRatingsProps) => {
   }
 
   return (
-    <span className='rating-stars'>
+    <div className='rating-stars'>
       {starsList}
-    </span>
+    </div>
   );
 };
 

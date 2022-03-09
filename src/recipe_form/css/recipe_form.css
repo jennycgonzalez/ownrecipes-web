@@ -1,0 +1,65 @@
+#content > .container[class*="recipe\/edit"] {
+  padding-top:   10px;
+  padding-left:  0;
+  padding-right: 0;
+}
+.recipe-form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.recipe-form #recipe-meta .row {
+  align-items: end;
+}
+
+.recipe-form img {
+  width: 100%;
+  border-radius: 1em;
+  border: 2px solid var(--inputBorder)
+}
+.recipe-form .btn {
+  float: right;
+  margin-left: 5px;
+}
+
+.recipe-form .live-editor {
+  padding-top:    10px;
+  padding-bottom: 10px;
+}
+.recipe-form .tooltip-icon {
+  color: var(--disabledText);
+}
+.recipe-form .live-editor .nav-tabs.has-error {
+  border-color: var(--errorText);
+}
+.recipe-form .live-editor .content {
+  border: 1px solid var(--inputBgDisabled);
+  border-top: none;
+}
+.recipe-form .live-editor .content textarea {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top: 0;
+}
+.recipe-form .live-editor .content.has-error textarea {
+  border-color: var(--errorText);
+}
+.recipe-form .live-editor .help-text {
+  font-size: 0.92em;
+  color: var(--errorText);
+  padding-left: 5px;
+}
+
+.recipe-form .live-editor .form-group {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.recipe-form .live-editor .tab-pane.active.editor .content {
+  border: 0;
+}
+
+.recipe-form .live-editor textarea#ingredientGroups {
+  line-height: 1.5em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}

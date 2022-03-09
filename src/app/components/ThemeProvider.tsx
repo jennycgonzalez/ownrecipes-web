@@ -1,16 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
+import '../css/theme.css';
+
 import { ThemeMode } from '../../account/store/settings/types';
 import { CombinedStore } from '../Store';
 
-import '../css/theme.css';
-
-export interface IThemeProviderProps {
-  children: React.ReactNode;
-}
-
-const ThemeProvider: React.FC<IThemeProviderProps> = (props: IThemeProviderProps) => {
+const ThemeProvider: React.FC = () => {
   const settings = useSelector((state: CombinedStore) => state.settings);
 
   const [theme, setTheme] = useState<ThemeMode>();
@@ -33,7 +29,7 @@ const ThemeProvider: React.FC<IThemeProviderProps> = (props: IThemeProviderProps
     }
   }, [settings.themeMode]);
 
-  return <>{props.children}</>;
+  return null;
 };
 
 export default ThemeProvider;

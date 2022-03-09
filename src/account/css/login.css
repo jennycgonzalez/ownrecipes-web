@@ -16,29 +16,11 @@
   font-size: 1em;
 }
 
-.form-signin .form-control {
-  padding: 10px;
+.form-signin .form-group {
+  margin-top:    20px;
+  margin-bottom: 20px;
 }
-.form-signin input[type="text"] {
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-.form-signin input[type="password"] {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-.form-signin .form-group:first-of-type .input-group-text {
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-.form-signin .form-group:last-of-type .input-group-text {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
 .form-signin button {
-  margin-top: 20px;
   width: 100%;
-  height: calc(1.5rem + 20px + 2px);
-  min-height: calc(1.5rem + 20px + 2px);
+  height:     3em;
 }

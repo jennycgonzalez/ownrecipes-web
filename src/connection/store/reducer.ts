@@ -1,4 +1,5 @@
 import { AnyAction } from 'redux';
+
 import { ACTION } from '../../common/store/ReduxHelper';
 import { ConnectionState } from './types';
 

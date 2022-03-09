@@ -1,3 +1,4 @@
+import { RecipeList } from '../../recipe/store/RecipeTypes';
 import { PaginationProps } from '../constants/DefaultFilters';
 import { SearchResult } from '../store/SearchTypes';
 import ListRecipes from './ListRecipes';
@@ -8,6 +9,7 @@ export interface IResultsProps {
   qs:       Record<string, string>;
   defaults: Partial<PaginationProps>;
   buildUrl: (qsTitle: string, recipeSlug: string, multiSelect?: boolean) => string;
+  onOpenRecipe: (rec: RecipeList) => void;
 }
 
 function toNumberDefault(val: string | undefined, defIfNull: number): number {
@@ -24,16 +26,16 @@ function toNumberDefault(val: string | undefined, defIfNull: number): number {
   }
 }
 
-const Results: React.FC<IResultsProps> = ({ search, qs, defaults, buildUrl }: IResultsProps) => (
+const Results: React.FC<IResultsProps> = ({ search, qs, defaults, buildUrl, onOpenRecipe }: IResultsProps) => (
   <>
     <ListRecipes
-        // format='col-xs-12 col-sm-6 col-md-4 col-lg-3'
-        data={search.recipes} />
+        data = {search.recipes}
+        onOpenRecipe = {onOpenRecipe} />
     <Pagination
-        limit={toNumberDefault(qs.limit, defaults.limit ?? 12)}
-        count={search.totalRecipes}
-        offset={toNumberDefault(qs.offset, defaults.offset ?? 0)}
-        buildUrl={buildUrl} />
+        limit    = {toNumberDefault(qs.limit, defaults.limit ?? 12)}
+        count    = {search.totalRecipes}
+        offset   = {toNumberDefault(qs.offset, defaults.offset ?? 0)}
+        buildUrl = {buildUrl} />
   </>
 );
 

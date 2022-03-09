@@ -1,27 +1,66 @@
 import { Dispatch as ReduxDispatch } from 'redux';
+
+import { NUMBER_UNDEFINED } from '../../common/constants';
 import ItemReducerType from '../../common/store/ItemReducerType';
-import { ACTION, GenericItemReducerAction } from '../../common/store/ReduxHelper';
+import { GenericItemReducerAction } from '../../common/store/ReduxHelper';
 
 export type Quantity = {
-  numerator:   number;
-  denominator: number;
-  measurement: string;
+  numerator?:   number;
+  denominator:  number;
+  measurement?: string;
 }
 
-export type Ingredient = {
-  id:          number;
-  title:       string;
+export type IngredientInput = {
+  title:        string;
 
-  quantity?:   string;
-  checked?:    boolean;
+  quantity?:    string;
+  checked?:     boolean;
+} & Partial<Quantity>;
 
-  measurement: string;
+export type IngredientDto = {
+  id:           number;
+  title:        string;
 } & Quantity;
+export type Ingredient = {
+  id:           number;
+  title:        string;
 
+  quantity?:    string;
+  checked?:     boolean;
+} & Quantity;
+export const toIngredientDto = (obj: Ingredient): IngredientDto => ({
+  id:    obj.id,
+  title: obj.title,
+
+  numerator:   obj.numerator,
+  denominator: obj.denominator,
+  measurement: obj.measurement,
+});
+export const toIngredient = (dto: IngredientDto): Ingredient => ({
+  id:    dto.id,
+  title: dto.title,
+
+  numerator:   dto.numerator && dto.numerator > 0 ? dto.numerator : undefined,
+  denominator: dto.denominator,
+  measurement: dto.measurement,
+});
+
+export type IngredientGroupDto = {
+  title:       string;
+  ingredients: Array<IngredientDto>;
+}
 export type IngredientGroup = {
   title:       string;
   ingredients: Array<Ingredient>;
 }
+export const toIngredientGroupDto = (obj: IngredientGroup): IngredientGroupDto => ({
+  title:       obj.title,
+  ingredients: obj.ingredients.map(i => toIngredientDto(i)),
+});
+export const toIngredientGroup = (dto: IngredientGroupDto): IngredientGroup => ({
+  title:       dto.title,
+  ingredients: dto.ingredients.map(i => toIngredient(i)),
+});
 
 export type SubRecipeDto = {
   title:       string;
@@ -42,7 +81,16 @@ export type SubRecipe = {
   quantity?:   string;
   checked?:    boolean;
 } & Quantity;
+export const toSubRecipeDto = (obj: SubRecipe): SubRecipeDto => ({
+  title: obj.title,
+  slug:  obj.slug,
+  child_recipe_id:  obj.child_recipe_id,
+  parent_recipe_id: obj.parent_recipe_id,
 
+  measurement: obj.measurement,
+  numerator:   obj.numerator,
+  denominator: obj.denominator,
+});
 export const toSubRecipe = (dto: SubRecipeDto): SubRecipe => ({
   title: dto.title,
   slug:  dto.slug,
@@ -54,15 +102,63 @@ export const toSubRecipe = (dto: SubRecipeDto): SubRecipe => ({
   denominator: dto.denominator,
 });
 
+export type CourseDto = {
+  id:    number;
+  title: string;
+}
+
 export type Course = {
-  id: number;
+  id:    number;
+  title: string;
+}
+
+export const toCourse = (dto: CourseDto): Course => ({
+  id:    dto.id,
+  title: dto.title,
+});
+
+export const toCourseDto = (obj: Course): CourseDto => ({
+  id:    obj.id,
+  title: obj.title,
+});
+
+export type CuisineDto = {
+  id:    number;
   title: string;
 }
 
 export type Cuisine = {
-  id: number;
+  id:    number;
   title: string;
 }
+
+export const toCuisine = (dto: CuisineDto): Cuisine => ({
+  id:    dto.id,
+  title: dto.title,
+});
+
+export const toCuisineDto = (obj: Cuisine): CuisineDto => ({
+  id:    obj.id,
+  title: obj.title,
+});
+
+export type TagDto = {
+  id:    number;
+  title: string;
+  slug:  string;
+}
+
+export type Tag = {
+  id:    number;
+  title: string;
+  slug:  string;
+}
+
+export const toTag = (dto: TagDto): Tag => ({
+  id:    dto.id,
+  title: dto.title,
+  slug:  dto.slug,
+});
 
 export type RecipeListDto = {
   id:    number;
@@ -109,14 +205,14 @@ export type RecipeDto = {
   prep_time: number;
   servings:  number;
 
-  course: Course;
+  course:  Course;
   cuisine: Cuisine;
+  tags:    Array<TagDto>;
 
   photo?: string | null;
 
-  subrecipes: Array<SubRecipe>;
-  ingredient_groups: Array<IngredientGroup>;
-  tags: Array<string>;
+  subrecipes: Array<SubRecipeDto>;
+  ingredient_groups: Array<IngredientGroupDto>;
 
   directions: string;
 
@@ -131,18 +227,18 @@ export type Recipe = {
   author:      number;
   source:      string;
 
-  cookTime: number;
-  prepTime: number;
+  cookTime?: number;
+  prepTime?: number;
   servings:  number;
 
-  course: Course;
+  course:  Course;
   cuisine: Cuisine;
+  tags:    Array<Tag>;
 
   photo?: string;
 
   subrecipes: Array<SubRecipe>;
   ingredientGroups: Array<IngredientGroup>;
-  tags: Array<string>;
 
   directions: string;
 
@@ -161,19 +257,19 @@ export const toRecipe = (dto: RecipeDto): Recipe => ({
   author:   dto.author,
   source:   dto.source,
 
-  cookTime: dto.cook_time,
-  prepTime: dto.prep_time,
+  cookTime: parseBackendNumber(dto.cook_time),
+  prepTime: parseBackendNumber(dto.prep_time),
   servings: dto.servings,
 
-  course:  dto.course,
-  cuisine: dto.cuisine,
+  course:  toCourse(dto.course),
+  cuisine: toCuisine(dto.cuisine),
+  tags:    dto.tags.map(t => toTag(t)),
 
   photo: dto.photo ?? undefined,
   photoThumbnail: dto.photo_thumbnail ?? undefined,
 
-  subrecipes: dto.subrecipes,
-  ingredientGroups: dto.ingredient_groups,
-  tags: dto.tags,
+  subrecipes: dto.subrecipes.map(sr => toSubRecipe(sr)),
+  ingredientGroups: dto.ingredient_groups.filter(ig => ig.ingredients.length > 0).map(ig => toIngredientGroup(ig)),
 
   directions: dto.directions,
   info: dto.info,
@@ -184,6 +280,57 @@ export const toRecipe = (dto: RecipeDto): Recipe => ({
   updateDate: new Date(dto.update_date),
 
   customServings: dto.servings,
+});
+
+export type RecipeRequest = {
+  title:      string;
+
+  source:     string;
+
+  cook_time:  number;
+  prep_time:  number;
+  servings:   number;
+
+  tags:       Array<TagDto>;
+  course:     CourseDto;
+  cuisine:    CuisineDto;
+
+  subrecipes: Array<SubRecipeDto>;
+  ingredient_groups: Array<IngredientGroupDto>;
+  directions: string;
+  info:       string;
+
+  public:     boolean;
+};
+
+function ifNull<T>(val: T | undefined, d: T): T {
+  if (val == null || (typeof val === 'string' && val === '')) return d;
+  return val;
+}
+function parseBackendNumber(val: number): number | undefined {
+  if (val === NUMBER_UNDEFINED) return undefined;
+  return val;
+}
+
+export const toRecipeRequest = (obj: Recipe): RecipeRequest => ({
+  title:      obj.title,
+
+  source:     obj.source,
+
+  cook_time:  ifNull(obj.cookTime, NUMBER_UNDEFINED),
+  prep_time:  ifNull(obj.prepTime, NUMBER_UNDEFINED),
+  servings:   obj.servings,
+
+  tags:       obj.tags,
+  course:     toCourseDto(obj.course),
+  cuisine:    toCuisineDto(obj.cuisine),
+
+  subrecipes: obj.subrecipes?.map(sr => toSubRecipeDto(sr)) ?? [],
+  ingredient_groups: obj.ingredientGroups?.filter(ig => ig.ingredients.length > 0).map(ig => toIngredientGroupDto(ig)),
+  directions: obj.directions,
+  info:       obj.info,
+
+  public:     obj.public,
 });
 
 export enum RecipeActionTypes {
@@ -203,16 +350,10 @@ export enum RecipeActionTypes {
 
 export const RECIPE_STORE = '@@recipe';
 
-export interface IRecipeDataAction {
-  store: typeof RECIPE_STORE;
-  type:  typeof ACTION.GET_SUCCESS;
-  data:  Recipe;
-}
-
 export interface IRecipeSlugAction {
   store: typeof RECIPE_STORE;
   type:  typeof RecipeActionTypes.RECIPE_DELETE;
-  data:  string;
+  data:  { slug: string };
 }
 
 export interface IRecipeIngredientUpdateServingAction {
@@ -247,6 +388,6 @@ export interface IRecipeIngredientCheckSubRecipeAction {
 }
 
 export type RecipeState     = ItemReducerType<Recipe>;
-export type RecipeAction    = IRecipeDataAction | IRecipeSlugAction | IRecipeIngredientUpdateServingAction
-   | IRecipeIngredientServingSimpleAction | IRecipeIngredientCheckIngredientAction | IRecipeIngredientCheckSubRecipeAction | GenericItemReducerAction;
+export type RecipeAction    = IRecipeSlugAction | IRecipeIngredientUpdateServingAction
+   | IRecipeIngredientServingSimpleAction | IRecipeIngredientCheckIngredientAction | IRecipeIngredientCheckSubRecipeAction | GenericItemReducerAction<Recipe>;
 export type RecipeDispatch  = ReduxDispatch<RecipeAction>;

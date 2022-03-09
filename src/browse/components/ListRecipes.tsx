@@ -1,17 +1,19 @@
 import { Link } from 'react-router-dom';
+import { Card, Col, Row } from 'react-bootstrap';
+import classNames from 'classnames';
 
 import '../css/list-recipes.css';
 
 import Ratings from '../../rating/components/Ratings';
 import { RecipeList } from '../../recipe/store/RecipeTypes';
-import { Card, Col, Row } from 'react-bootstrap';
-import classNames from 'classnames';
+import { IMAGE_PLACEHOLDER } from '../../common/constants';
 
 export interface IListRecipes {
   data:   Array<RecipeList> | undefined;
+  onOpenRecipe: (rec: RecipeList) => void;
 }
 
-const ListRecipes: React.FC<IListRecipes> = ({ data }: IListRecipes) => {
+const ListRecipes: React.FC<IListRecipes> = ({ data, onOpenRecipe }: IListRecipes) => {
   const getRecipeImage = (recipe: RecipeList) => {
     if (recipe.photoThumbnail) {
       return recipe.photoThumbnail;
@@ -26,8 +28,8 @@ const ListRecipes: React.FC<IListRecipes> = ({ data }: IListRecipes) => {
     return (
       <Col key={recipe.id}>
         <Card className={classNames('recipe', 'print-hidden')}>
-          <Link to={link}>
-            <Card.Img variant='top' src={getRecipeImage(recipe)} alt='' />
+          <Link to={link} onClick={() => onOpenRecipe(recipe)}>
+            <Card.Img variant='top' src={getRecipeImage(recipe)} alt='' placeholder={IMAGE_PLACEHOLDER} />
             <Card.Title as='h3'>{recipe.title}</Card.Title>
             <div><Ratings stars={recipe.rating} /></div>
             <Card.Text>{recipe.info}</Card.Text>

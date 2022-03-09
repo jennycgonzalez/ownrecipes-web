@@ -1,0 +1,71 @@
+
+.toast[class*="Toast-anchorOrigin"] {
+  position: fixed;
+  z-index: 1;
+}
+
+.toast.Toast-anchorOriginBottomLeft {
+  left:   1.5rem;
+  right:  auto;
+  bottom: 1.5rem;
+}
+
+.toast.Toast-anchorOriginBottomRight {
+  left:   auto;
+  right:  1.5rem;
+  bottom: 1.5rem;
+}
+
+.toast.Toast-anchorOriginBottomCenter {
+  left:   50%;
+  transform: translateX(-50%);
+  right:  auto;
+  bottom: 1.5rem;
+}
+
+.simple-toast {
+  padding-left: 0;
+  padding-right: 0;
+  border-radius: 0.25rem;
+  border: 3px solid var(--primaryMain);
+  background-color: var(--elevation);
+  color:            var(--primaryText);
+  box-shadow: 0 0 5px 4px var(--elevationShadow);
+
+  width: 22em;
+}
+
+.simple-toast.success {
+  border-color:     var(--primaryMain);
+  background-color: var(--primaryMain);
+  color:            var(--primaryContrast);
+  box-shadow: 0 0 5px 4px var(--primaryShadow);
+}
+
+.simple-toast .toast-header {
+  background-color: transparent;
+  color: inherit;
+  border: 0;
+  padding: 0;
+  align-items: start;
+}
+
+.simple-toast .toast-header .toast-icon {
+  margin-right: 0.25em;
+  margin-left: 0.5em;
+  line-height: 1;
+  margin-top: 0.45em;
+}
+
+.simple-toast .toast-header .toast-title {
+  flex: 1;
+  align-self: center;
+  margin-right: 0.5em;
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
+}
+
+.simple-toast .toast-header button {
+  margin: 0;
+  padding: 0.75em;
+}

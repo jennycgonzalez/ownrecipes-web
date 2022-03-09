@@ -1,5 +1,6 @@
 import { DropdownButton, Dropdown, ButtonGroup, Button } from 'react-bootstrap';
 import { defineMessages, useIntl } from 'react-intl';
+
 import { PendingState } from '../../common/store/GenericReducerType';
 
 export type IListsListType = {

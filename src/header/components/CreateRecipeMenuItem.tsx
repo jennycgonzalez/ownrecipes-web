@@ -14,7 +14,7 @@ const CreateRecipeMenuItem: React.FC = () => {
   });
 
   return (
-    <NavLink to={getResourcePath('/recipe/create')}>{formatMessage(messages.create_recipe)}</NavLink>
+    <NavLink to={getResourcePath('/recipe/edit/create')}>{formatMessage(messages.create_recipe)}</NavLink>
   );
 };
 

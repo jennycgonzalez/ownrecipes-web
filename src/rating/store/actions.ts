@@ -10,7 +10,7 @@ export const load = (recipeSlug: string) => (dispatch: RatingsDispatch) => {
     .then(res => dispatch({
       store:  RATINGS_STORE,
       type:   ACTION.GET_SUCCESS,
-      recipe: recipeSlug,
+      id:     recipeSlug,
       data:   ReduxHelper.transformEntities(res.body.results, toRating),
     }))
     .catch(err => handleError(err, RATINGS_STORE));

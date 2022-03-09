@@ -5,14 +5,17 @@ import { AccountState } from '../account/store/types';
 import browse, { BrowseState } from '../browse/store/Reducer';
 import connection from '../connection/store/reducer';
 import { ConnectionState } from '../connection/store/types';
-import error from '../error/store/reducer';
-import { ErrorState } from '../error/store/types';
+import internalError from '../internal_error/store/reducer';
+import { InternalErrorState } from '../internal_error/store/types';
 // import list from '../../list/reducers/GroceryListReducer';
 import recipe from '../recipe/store/RecipeReducer';
 import { RecipeState } from '../recipe/store/RecipeTypes';
+import recipeForm from '../recipe_form/store/reducer';
+import { RecipeFormState } from '../recipe_form/store/types';
+import recipeGroups from '../recipe_groups/store/reducer';
+import { RecipeGroupsState } from '../recipe_groups/store/types';
 import recipes from '../recipe/store/RecipesReducer';
 import { RecipesState } from '../recipe/store/RecipesTypes';
-// import recipeForm from '../../recipe_form/reducers/Reducer';
 // import menu from '../../menu/reducers/reducer';
 import news from '../news/store/reducer';
 import { NewsState } from '../news/store/types';
@@ -25,14 +28,15 @@ export type CombinedStore = {
   account:    AccountState;
   browse:     BrowseState;
   connection: ConnectionState;
-  error:      ErrorState;
+  internalError: InternalErrorState;
   // list:       ListState;
   // menu:       MenuState;
   news:       NewsState;
   ratings:    RatingsState;
   recipe:     RecipeState;
+  recipeGroups: RecipeGroupsState;
+  recipeForm: RecipeFormState;
   recipes:    RecipesState;
-  // recipeForm: RecipeFormState;
   settings:   SettingsState;
 }
 
@@ -40,14 +44,15 @@ const reducer = combineReducers({
   account,
   browse,
   connection,
-  error,
+  internalError,
   // list,
   // menu,
   news,
   ratings,
   recipe,
+  recipeForm,
+  recipeGroups,
   recipes,
-  // recipeForm,
   settings,
 });
 

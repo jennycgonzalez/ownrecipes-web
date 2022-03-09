@@ -7,11 +7,13 @@ import * as _ from 'lodash';
 
 import Search from '../components/Search';
 
+import * as RecipeActions from '../../recipe/store/RecipeActions';
 import * as SearchActions from '../store/SearchActions';
 import * as FilterActions from '../store/FilterActions';
 import DefaultFilters from '../constants/DefaultFilters';
 import PageWrapper from '../../common/components/PageWrapper';
 import { CombinedStore } from '../../app/Store';
+import { RecipeList } from '../../recipe/store/RecipeTypes';
 
 function mergeDefaultFilters(query: queryString.ParsedQuery<string | number | boolean>) {
   const filter: Record<string, unknown> = {};
@@ -67,21 +69,6 @@ const Browse: React.FC = () => {
     reloadData();
   }, [locationSearch]);
 
-  const doSearch = (value: string) => {
-    const qsBuilder = _.cloneDeep(qs);
-
-    delete qsBuilder.offset;
-    if (value !== '') {
-      qsBuilder.search = value;
-    } else {
-      delete qsBuilder.search;
-    }
-
-    let str = queryString.stringify(qsBuilder);
-    str = str ? `/browser?${str}` : '/browser';
-    nav(str);
-  };
-
   const buildUrl = (name: string, value: string, multiSelect = false) => {
     if (!name) return '/browser';
 
@@ -115,14 +102,34 @@ const Browse: React.FC = () => {
     return str ? `/browser?${str}` : '/browser';
   };
 
+  const doSearch = (value: string) => {
+    const qsBuilder = _.cloneDeep(qs);
+
+    delete qsBuilder.offset;
+    if (value !== '') {
+      qsBuilder.search = value;
+    } else {
+      delete qsBuilder.search;
+    }
+
+    let str = queryString.stringify(qsBuilder);
+    str = str ? `/browser?${str}` : '/browser';
+    nav(str);
+  };
+
+  const handleOpenRecipe = (rec: RecipeList) => {
+    dispatch(RecipeActions.preload(rec));
+  };
+
   return (
     <PageWrapper title={intl.messages['nav.recipes'] as string}>
       <Search
           qs = {qs}
           qsString = {qsMergedString}
-          doSearch = {doSearch}
-          buildUrl = {buildUrl}
           defaultFilters = {DefaultFilters}
+          buildUrl = {buildUrl}
+          doSearch = {doSearch}
+          onOpenRecipe = {handleOpenRecipe}
 
           search   = {search}
           courses  = {courses}

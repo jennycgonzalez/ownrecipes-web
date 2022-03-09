@@ -1,17 +1,17 @@
+import { useEffect, useState } from 'react';
 import { defineMessages, useIntl } from 'react-intl';
+import { Button, Form } from 'react-bootstrap';
 
 import { Recipe } from '../store/RecipeTypes';
 
 // import IngredientButtons from './IngredientButtons';
 import GenericReducerType, { PendingState } from '../../common/store/GenericReducerType';
 import Input from '../../common/components/Input';
-import { useState } from 'react';
 import { updateFormData } from '../../common/utility';
-import { Button } from 'react-bootstrap';
 import Icon from '../../common/components/Icon';
 
 export interface IIngredientsHeaderProps {
-  recipe: Recipe;
+  recipe:      Recipe | undefined;
   recipeState: GenericReducerType;
 
   // lists: Array<any>;
@@ -27,7 +27,7 @@ export interface IIngredientsHeaderProps {
 }
 
 export interface IFormDataProps {
-  servings: string;
+  servings: number;
 }
 
 const IngredientsHeader: React.FC<IIngredientsHeaderProps> = ({ recipe, recipeState, updateServings }: IIngredientsHeaderProps) => {
@@ -55,19 +55,30 @@ const IngredientsHeader: React.FC<IIngredientsHeaderProps> = ({ recipe, recipeSt
     },
   });
 
-  const [formData, setFormData] = useState<IFormDataProps>({ servings: recipe.customServings.toString() });
+  const customServings = recipe?.customServings;
+  const [formData, setFormData] = useState<IFormDataProps>({ servings: customServings ?? 0 });
+
+  useEffect(() => {
+    if (customServings != null && customServings !== formData.servings) {
+      setFormData(prev => updateFormData(prev, 'servings', customServings.toString()));
+    }
+  }, [customServings]);
+
   const handleChange = (name: string, value: unknown) => {
     setFormData(prev => updateFormData(prev, name, value));
   };
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    updateServings(parseInt(formData.servings));
+    if (customServings === formData.servings) return;
+    updateServings(formData.servings);
   };
 
-  const pending = recipeState.pending;
-  const servings = recipe.customServings;
-  const hasNoIngredients = pending === PendingState.COMPLETED && recipe.subrecipes.length === 0 && recipe.ingredientGroups.length === 0;
+  const pending  = recipeState.pending;
+  const servings = recipe?.customServings ?? 0;
+  const hasNoIngredients = pending === PendingState.COMPLETED
+      && recipe?.subrecipes != null && recipe.subrecipes.length === 0
+      && recipe?.ingredientGroups != null && recipe.ingredientGroups.length === 0;
 
   return (
     <>
@@ -76,10 +87,10 @@ const IngredientsHeader: React.FC<IIngredientsHeaderProps> = ({ recipe, recipeSt
         <div className='ingredients-for-servings-row'>
           <h2>
             {formatMessage(messages.ingredients_for_servings)}
-            <span className='print-only'>{`: ${recipe.customServings} ${formatMessage(messages.servings)}`}</span>
+            <span className='print-only'>{`: ${recipe?.customServings ?? ''} ${formatMessage(messages.servings)}`}</span>
           </h2>
           <div className='custom-servings print-hidden'>
-            <form onSubmit={handleSubmit} className='custom-servings'>
+            <Form onSubmit={handleSubmit} className='custom-servings'>
               <Input
                   name = 'servings'
                   type = 'number'
@@ -93,7 +104,7 @@ const IngredientsHeader: React.FC<IIngredientsHeaderProps> = ({ recipe, recipeSt
                 <Icon icon='arrow-repeat' variant='light' />
                 {formatMessage(messages.servings)}
               </Button>
-            </form>
+            </Form>
           </div>
         </div>
       )}

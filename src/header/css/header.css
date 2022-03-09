@@ -83,6 +83,15 @@
   display: flex;
   flex-direction: row;
 }
+@media screen and (max-width: 767px) {
+  #header-navbar #my-account-dropdown {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+  }
+  #header-navbar #my-account-dropdown:hover {
+    color: var(--primaryContrast);
+  }
+}
 @media screen and (min-width: 768px) {
   #header-navbar .my-account-nav {
     margin-left: auto;
@@ -102,9 +111,17 @@
   font-size: 0.875em;
 }
 
+#header-navbar form .form-group {
+  margin-top:    0;
+  margin-bottom: 0;
+}
+#header-navbar form .form-control {
+  height: 2.5rem;
+  line-height: 2.5rem;
+}
 #header-navbar form .input-adornment-end {
   padding: 0;
-  height: calc(1.5rem + 0.75rem + 2px);
+  height: 2.5rem;
 }
 
 @media screen and (max-width: 64rem) {
@@ -149,6 +166,9 @@
 #header-navbar form .form-group .input-adornment-end .nav-link:hover {
   color: white;
 }
+#header-navbar form .form-group .input-adornment-end .nav-link .bi {
+  font-size: 1.25rem;
+}
 @media screen and (max-width: 767px) {
   #header-navbar form > .form-group:not(.expanded),
   #header-navbar form > .form-group:not(.expanded) > .input-group,
@@ -163,8 +183,8 @@
     display: none;
   }
   #header-navbar .container.search-expanded .my-account-nav {
-    padding-top: calc(0.5rem - 1px);
-    padding-bottom: calc(0.5rem - 1px);
+    height: 3.25rem;
+    align-items: center;
   }
 }
 @media screen and (min-width: 768px) {

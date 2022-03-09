@@ -1,11 +1,11 @@
 import { Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import { defineMessages, useIntl } from 'react-intl';
 
 import '../css/connection.css';
 
 import Alert from '../../common/components/Alert';
 import { CombinedStore } from '../Store';
-import { defineMessages, useIntl } from 'react-intl';
 
 const ConnectionObserver: React.FC = () => {
   const { formatMessage } = useIntl();

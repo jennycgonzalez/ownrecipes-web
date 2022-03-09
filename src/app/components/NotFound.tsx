@@ -1,9 +1,10 @@
 import { defineMessages, useIntl } from 'react-intl';
+
+import '../css/404.css';
+
 import P from '../../common/components/P';
 import PageWrapper from '../../common/components/PageWrapper';
 import { getResourcePath } from '../../common/utility';
-
-import '../css/404.css';
 
 const NotFound = () => {
   const { formatMessage } = useIntl();

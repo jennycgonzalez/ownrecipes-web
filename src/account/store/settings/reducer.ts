@@ -1,4 +1,5 @@
 import * as _ from 'lodash';
+
 import { ISettingsAction, LanguageCode, parseLanguage, parseTheme, SettingsAction, SettingsActionTypes, SettingsState, SETTINGS_STORE, SETTING_LANGUAGE_STORAGE_KEY, SETTING_THEME_STORAGE_KEY, ThemeMode } from './types';
 
 const defaultState: SettingsState = {

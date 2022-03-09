@@ -29,7 +29,7 @@ export const loadRecipes = (filters: Record<string, string>) => (dispatch: Searc
       dispatch({
         store: BROWSER_SEARCH_STORE,
         type:  ACTION.GET_SUCCESS,
-        qs:    queryString.stringify(filters),
+        id:    queryString.stringify(filters),
         data:  toSearchResult(resDto),
       });
     })

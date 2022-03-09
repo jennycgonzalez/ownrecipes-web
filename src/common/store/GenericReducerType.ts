@@ -1,3 +1,5 @@
+import { ValidationResult } from './Validation';
+
 export enum PendingState {
   INITIAL   = 'INITIAL',
   LOADING   = 'LOADING',
@@ -10,8 +12,9 @@ export enum PendingState {
 type GenericReducerType = {
   readonly ident: string;
 
-  error: Error | undefined;
-  pending: PendingState;
+  error:      Error | undefined;
+  validation: ValidationResult | undefined;
+  pending:    PendingState;
 
   hasConnection: boolean;
 };

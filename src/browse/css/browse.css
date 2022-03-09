@@ -55,9 +55,14 @@
 .container.browser .search-summary #sort-by-button {
   padding-top: 4px;
   padding-bottom: 4px;
-  min-height: unset;
   border-color: var(--inputBorder);
 }
+@media screen and (min-width: 768px) {
+  .container.browser .search-summary #sort-by-button {
+    min-height: unset;
+  }
+}
+
 .container.browser .search-summary #sort-by-button:hover, .container.browser .search-summary #sort-by-button:focus {
   border-color: var(--primaryMain);
 }

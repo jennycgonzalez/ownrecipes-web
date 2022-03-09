@@ -94,8 +94,8 @@ export default function initMeasurements() {
       id: 'measurement.tablespoon',
       defaultMessage: 'tbsp',
     },
-    measurement_teespoon: {
-      id: 'measurement.teespoon',
+    measurement_teaspoon: {
+      id: 'measurement.teaspoon',
       defaultMessage: 'tsp',
     },
     measurement_whole: {

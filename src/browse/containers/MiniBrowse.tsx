@@ -5,6 +5,8 @@ import { useLocation } from 'react-router';
 import '../css/browse.css';
 
 import { CombinedStore } from '../../app/Store';
+import { Recipe, RecipeList } from '../../recipe/store/RecipeTypes';
+import * as RecipeActions from '../../recipe/store/RecipeActions';
 import ListRecipes from '../components/ListRecipes';
 import * as MiniBrowseActions from '../store/MiniBrowseActions';
 
@@ -21,8 +23,12 @@ const MiniBrowse: React.FC<IMiniBrowseProps> = ({ qs }: IMiniBrowseProps) => {
     dispatch(MiniBrowseActions.loadMiniBrowse(qs));
   }, [location]);
 
+  const handleOpenRecipe = (rec: RecipeList) => {
+    dispatch(RecipeActions.preload(rec as Recipe));
+  };
+
   return (
-    <ListRecipes data={miniBrowseState.items} />
+    <ListRecipes data={miniBrowseState.items} onOpenRecipe={handleOpenRecipe} />
   );
 };
 

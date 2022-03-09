@@ -4,6 +4,8 @@ import { Image, Navbar, Nav, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
+import '../css/header.css';
+
 import Icon from '../../common/components/Icon';
 import CreateRecipeMenuItem from './CreateRecipeMenuItem';
 // import GroceryListMenuItem, { ListItemType } from './GroceryListMenuItem';
@@ -11,8 +13,6 @@ import CreateRecipeMenuItem from './CreateRecipeMenuItem';
 import { AccountMenuMenuItem, AccountLoginMenuItem } from './MyAccountMenuItem';
 import { getResourcePath } from '../../common/utility';
 import { UserAccount } from '../../account/store/types';
-
-import '../css/header.css';
 import { LanguageCode, Settings, ThemeMode } from '../../account/store/settings/types';
 import LoginSettings from './LoginSettings';
 import NavSearch from './NavSearch';

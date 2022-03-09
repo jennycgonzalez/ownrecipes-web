@@ -48,18 +48,11 @@ export interface IRatingDeleteAction {
   ratingId: number;
 }
 
-export type RatingAction   = IRatingAddAction | IRatingDeleteAction | GenericItemReducerAction;
+export type RatingAction   = IRatingAddAction | IRatingDeleteAction | GenericItemReducerAction<Rating>;
 export type RatingDispatch = ReduxDispatch<RatingAction>;
 
 export const RATINGS_STORE = '@@ratings';
 
-export interface IRatingsLoadAction {
-  store:  typeof RATINGS_STORE;
-  type:   ACTION.GET_SUCCESS;
-  recipe: string;
-  data:   Array<Rating>;
-}
-
 export type RatingsState    = MapReducerType<Rating[]>;
-export type RatingsAction   = IRatingsLoadAction | GenericMapReducerAction;
+export type RatingsAction   = GenericMapReducerAction<Rating[]>;
 export type RatingsDispatch = ReduxDispatch<RatingsAction>;

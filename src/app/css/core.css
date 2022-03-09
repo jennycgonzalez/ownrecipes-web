@@ -28,6 +28,12 @@ body {
   }
 }
 
+@media (min-width: 87rem) {
+  .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    max-width: 83rem;
+  }
+}
+
 /* Custom page CSS -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
 code {
@@ -61,6 +67,22 @@ h4, .h4 {
 }
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
   color: var(--hoverText);
+}
+
+
+.accordion.accordion-flush .accordion-item {
+  background-color: transparent;
+  border-color: var(--inputBorder);
+}
+.accordion.accordion-flush .accordion-button {
+  background-color: var(--elevation);
+  color: var(--primaryText);
+}
+.accordion.accordion-flush .accordion-button:focus {
+  box-shadow: 0 0 0 1px var(--primaryText) inset;
+}
+html[data-theme="dark"] .accordion.accordion-flush .accordion-button.collapsed::after {
+  filter: invert(100%);
 }
 
 
@@ -102,6 +124,16 @@ h4, .h4 {
 .list-group-item {
   color: var(--primaryText);
   background-color: var(--midground);
+  padding-top: 0;
+  padding-bottom: 0;
+  height:      3em;
+  line-height: 3em;
+}
+@media screen and (min-width: 768px) {
+  .list-group-item {
+    height:      2.5em;
+    line-height: 2.5em;
+  }
 }
 .list-group-item:not(.disabled):hover {
   color: var(--hoverText);
@@ -135,6 +167,42 @@ h4, .h4 {
   color: var(--disabledText);
 }
 
+
+.nav-link {
+  color: var(--primaryMain);
+}
+@media screen and (max-width: 767px) {
+  .nav-link {
+    padding-top:    0.75em;
+    padding-bottom: 0.75em;
+    padding-right:  1em;
+    padding-left:   1em;
+  }
+}
+.nav-link:hover, .nav-link:focus {
+  color: var(--primaryLight);
+}
+
+.nav-tabs {
+  border-color: var(--inputBorder);
+}
+.nav-tabs .nav-link {
+  color: var(--secondaryText);
+}
+.nav-tabs .nav-link.active {
+  color: var(--primaryText);
+  background-color: var(--inputBgActive);
+  border-color: var(--inputBorder);
+  border-bottom: 0;
+}
+.nav-tabs .nav-link:not(.active):hover {
+  background-color: var(--hoverBg);
+}
+.nav-tabs .nav-link.active:hover {
+  cursor: default;
+}
+
+
 .table {
   color: var(--primaryText);
   height: '1px'; /* HACK: Fix height issues in older browser. */
@@ -167,10 +235,13 @@ h4, .h4 {
   box-shadow: none;
 }
 .table-striped > tbody > tr:nth-of-type(2n+1) > td:first-child {
-  border-radius: 8px 0 0 8px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+
 }
 .table-striped > tbody > tr:nth-of-type(2n+1) > td:last-child {
-  border-radius: 0 8px 8px 0;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 @media (max-width: 767px) {
@@ -182,4 +253,8 @@ h4, .h4 {
   .visible-xs {
     display: none;
   };
+}
+
+html[data-theme="dark"] img {
+  opacity: 0.875;
 }

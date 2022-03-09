@@ -1,5 +1,6 @@
-import Alert from '../../common/components/Alert';
 import '../css/demo.css';
+
+import Alert from '../../common/components/Alert';
 
 const Demo = () => (
   <div className='list-error demo-no-margin'>

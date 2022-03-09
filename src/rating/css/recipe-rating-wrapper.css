@@ -18,6 +18,6 @@
 .rating-panel .new-rating {
   margin-bottom: 30px;
 }
-.rating-panel .new-rating .row {
-  margin-bottom: 15px;
+.rating-panel .new-rating button {
+  margin-top: 10px;
 }

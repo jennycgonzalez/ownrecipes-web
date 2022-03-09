@@ -17,22 +17,25 @@ import './css/print.css';
 import { CombinedStore } from './Store';
 import Routes from './components/Routes';
 import AutoLogin from './components/AutoLogin';
-import initCourses from './components/Courses';
-import initCuisines from './components/Cuisines';
-import initMeasurements from './components/Measurements';
+import initCourses from './components/messages/Courses';
+import initCuisines from './components/messages/Cuisines';
+import initMeasurements from './components/messages/Measurements';
 import ConnectionObserver from './components/ConnectionObserver';
+import initValidations from './components/messages/Validations';
+import InternalErrorDialog from './components/InternalErrorDialog';
 
 const App = () => {
-  const account = useSelector((state: CombinedStore) => state.account.item);
-  const isAuthenticated = account != null && account.id !== 0;
-
   const nav = useNavigate();
   const location = useLocation();
+
+  const account = useSelector((state: CombinedStore) => state.account.item);
+  const isAuthenticated = account != null && account.id !== 0;
 
   useEffect(() => {
     initCourses();
     initCuisines();
     initMeasurements();
+    initValidations();
   }, []);
 
   const main = (
@@ -46,6 +49,7 @@ const App = () => {
         </div>
         <Footer />
       </AutoLogin>
+      <InternalErrorDialog />
     </ErrorBoundary>
   );
 

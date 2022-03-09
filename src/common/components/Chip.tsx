@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+
 import '../css/chip.css';
 
 export interface IChipProps {

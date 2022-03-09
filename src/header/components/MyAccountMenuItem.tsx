@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { defineMessages, useIntl } from 'react-intl';
 import { NavDropdown, Button } from 'react-bootstrap';
+
 import { getResourcePath } from '../../common/utility';
 import { UserAccount } from '../../account/store/types';
 import { LanguageCode, Settings, ThemeMode } from '../../account/store/settings/types';

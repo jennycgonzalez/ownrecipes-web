@@ -1,9 +1,10 @@
 import { defineMessages, useIntl } from 'react-intl';
+import { Dropdown } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
 import { SearchResult } from '../store/SearchTypes';
 import P from '../../common/components/P';
 import DefaultFilters from '../constants/DefaultFilters';
-import { Dropdown } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import { optionallyFormatMessage } from '../../common/utility';
 
 export interface ISearchSummaryProps {

@@ -3,6 +3,8 @@ import { Button, Modal as BootstrapModal } from 'react-bootstrap';
 
 import '../css/modal.css';
 
+import Icon from './Icon';
+
 export interface IModalProps {
   show: boolean;
   title: string;
@@ -14,7 +16,7 @@ export interface IModalProps {
   onClose?: (autoClose: boolean) => void;
   noCloseButton?: boolean;
 
-  size?: 'sm' | 'lg';
+  size?: 'sm' | 'lg' | 'xl';
 
   className?: string;
   acceptButtonProps?: Partial<unknown>;
@@ -64,8 +66,13 @@ const Modal: React.FC<IModalProps> = (props: IModalProps) => {
         onHide = {handleClose}
         keyboard = {false}
         className = {className}>
-      <BootstrapModal.Header closeButton={onClose != null}>
+      <BootstrapModal.Header>
         <BootstrapModal.Title>{title}</BootstrapModal.Title>
+        {onClose != null && (
+          <Button type='button' onClick={handleClose} variant='transparent' className='close-button' aria-label='Close'>
+            <Icon icon='x' variant='light' size='2x' />
+          </Button>
+        )}
       </BootstrapModal.Header>
 
       <BootstrapModal.Body>

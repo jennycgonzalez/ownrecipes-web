@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useIntl } from 'react-intl';
 import { NavDropdown } from 'react-bootstrap';
+
 import { LanguageCode, Settings, ThemeMode } from '../../account/store/settings/types';
 import Icon from '../../common/components/Icon';
 import { LanguageDialog } from './LanguageDialog';

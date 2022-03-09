@@ -28,7 +28,7 @@ export const loadCourses = (filters: Record<string, string>) => (dispatch: Filte
       dispatch({
         store: BROWSE_FILTER_COURSE_STORE,
         type:  ACTION.GET_SUCCESS,
-        qs:    queryString.stringify(filters),
+        id:    queryString.stringify(filters),
         data:  res.body.results,
       })
     ))
@@ -48,7 +48,7 @@ export const loadCuisines = (filters: Record<string, string>) => (dispatch: Filt
       dispatch({
         store: BROWSE_FILTER_CUISINE_STORE,
         type:  ACTION.GET_SUCCESS,
-        qs:    queryString.stringify(filters),
+        id:    queryString.stringify(filters),
         data:  res.body.results,
       })
     ))
@@ -68,7 +68,7 @@ export const loadRatings = (filter: Record<string, string>) => (dispatch: Filter
       dispatch({
         store: BROWSE_FILTER_RATING_STORE,
         type:  ACTION.GET_SUCCESS,
-        qs:    queryString.stringify(filter),
+        id:    queryString.stringify(filter),
         data:  res.body.results,
       })
     ))

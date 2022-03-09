@@ -11,12 +11,11 @@ import App from './App';
 const Root = () => (
   <Suspense fallback={<Spinner />}>
     <Provider store={store}>
+      <ThemeProvider />
       <IntlProvider>
-        <ThemeProvider>
-          <Router>
-            <App />
-          </Router>
-        </ThemeProvider>
+        <Router>
+          <App />
+        </Router>
       </IntlProvider>
     </Provider>
   </Suspense>

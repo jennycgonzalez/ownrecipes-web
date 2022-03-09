@@ -5,6 +5,10 @@ export function isDemoMode(): boolean {
   return process.env.REACT_APP_DEMO === 'demo';
 }
 
+export function getRecipeImage(photoThumbnail: string | undefined, loadingError = false) {
+  return !loadingError ? (photoThumbnail ?? '') : '/images/fried-eggs.jpg';
+}
+
 export function getResourcePath(path: string): string {
   return `${process.env.PUBLIC_URL}${path}`;
 }
@@ -16,16 +20,16 @@ export function updateFormData(prev: any, id: string, newValue: unknown): any {
   return updFormData;
 }
 
-export function optionallyFormatMessage(intl: IntlShape, baseMessageId: string, value: string, values?: Record<string, React.ReactNode>): string {
-  const msgId = `${baseMessageId}${value}`;
-  const msg = intl.messages[msgId];
+export function optionallyFormatMessage(intl: IntlShape, baseMessageId: string, msgId: string, values?: Record<string, React.ReactNode>): string {
+  const fullMsgId = `${baseMessageId}${msgId}`;
+  const msg = intl.messages[fullMsgId];
 
   if (msg == null) {
-    return value;
+    return msgId;
   } else if (msg.length === 0) {
     return '';
   } else {
     // HACK: Ignore locales generator.
-    return (intl as IntlShape).formatMessage({ id: msgId }, values) as string;
+    return (intl as IntlShape).formatMessage({ id: fullMsgId }, values) as string;
   }
 }

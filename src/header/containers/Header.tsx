@@ -21,7 +21,7 @@ const Header: React.FC = () => {
   // const listState = useSelector((state: CombinedStore) => state.list.lists);
   // const listState: Array<ListItemType> = [];
 
-  /* TODO
+  /* TODO Lists
   useEffect(() => {
     dispatch(ListActions.load());
   }, []); */

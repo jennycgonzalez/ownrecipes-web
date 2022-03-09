@@ -6,7 +6,7 @@ import { getResourcePath } from '../../common/utility';
 import News from '../../news/container/News';
 import Login from '../../account/containers/Login';
 import Browse from '../../browse/containers/Browse';
-// import RecipeForm from '../../recipe_form/containers/Form';
+import RecipeFormContainer from '../../recipe_form/containers/RecipeFormContainer';
 import RecipeView from '../../recipe/containers/RecipeView';
 // import List from '../../list/containers/List';
 // import Menu from '../../menu/containers/Menu';
@@ -28,12 +28,10 @@ const PrivateRoutes: Array<IRouteType> = [
     path:      '/browser',
     component: Browse,
   },
-  /*
   {
     path:      '/recipe/edit/:recipe',
-    component: RecipeForm,
+    component: RecipeFormContainer,
   },
-  */
   {
     path:      '/recipe/:recipe',
     component: RecipeView,

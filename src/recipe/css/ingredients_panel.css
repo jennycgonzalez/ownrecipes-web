@@ -9,10 +9,6 @@
   align-items: center;
 }
 
-.ingredients-panel .ingredients-for-servings-row form.custom-servings .input-group {
-  height: 2.5rem;
-}
-
 .ingredients-panel .ingredient-group {
   margin-top: 1rem;
   margin-bottom: 2rem;
@@ -26,6 +22,10 @@
 .ingredients-panel .custom-servings form {
   display: flex;
 }
+.ingredients-panel .custom-servings form .form-group {
+  margin-top:    0;
+  margin-bottom: 0;
+}
 .ingredients-panel .custom-servings form input {
   max-width: 5rem;
   border-top-left-radius: 1em;
@@ -35,11 +35,25 @@
   border-bottom-right-radius: 0;
 }
 .ingredients-panel .custom-servings form button {
+  height:      3rem;
+  line-height: 3rem;
+  padding-top:    0;
+  padding-bottom: 0;
+
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 
   border-top-right-radius: 1em;
   border-bottom-right-radius: 1em;
+
+  min-width: min-content;
+  white-space: nowrap;
+}
+@media screen and (min-width: 768px) {
+  .ingredients-panel .custom-servings form button {
+    height:      2.5em;
+    line-height: 2.5em;
+  }
 }
 .ingredients-panel .custom-servings form button .bi {
   margin-right: 5px;
@@ -50,8 +64,8 @@
   flex-direction: row;
   flex-wrap: wrap;
 
-  margin-left: -20px;
-  margin-right: -20px;
+  margin-left: -15px;
+  margin-right: -15px;
 }
 .ingredients-panel .ingredient-groups .ingredient-group {
   flex: 1;

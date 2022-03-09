@@ -1,7 +1,9 @@
 /* eslint-disable no-param-reassign */
 import { GCD } from './gcd';
 
-export default (servings: number, customServings: number, numerator: number, denominator: number): string => {
+export default (servings: number, customServings: number, numerator: number | undefined, denominator: number): string => {
+  if (numerator == null) return '';
+
   // If there isn't a denominator.
   // We can assume the user wants to display
   // the recipe ings as decimals.

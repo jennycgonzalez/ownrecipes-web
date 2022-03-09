@@ -29,6 +29,16 @@
   margin-bottom: 0.5em;
 }
 
+.recipes-list .recipe .card-img-top {
+  height: 15rem;
+  width:  100%;
+  object-fit: cover;
+}
+@media screen and (min-width: 768px) {
+  .recipes-list .recipe .card-img-top {
+    height: 10rem;
+  }
+}
 .recipes-list .recipe .card-text {
   font-size: 0.92rem;
   display: -webkit-box;

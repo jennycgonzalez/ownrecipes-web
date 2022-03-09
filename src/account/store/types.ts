@@ -1,5 +1,6 @@
 import jwtDecode, { JwtPayload } from 'jwt-decode';
 import { Dispatch as ReduxDispatch } from 'redux';
+
 import ItemReducerType from '../../common/store/ItemReducerType';
 import { GenericItemReducerAction } from '../../common/store/ReduxHelper';
 
@@ -57,5 +58,5 @@ export interface IAccountLogoutAction {
 }
 
 export type AccountState    = ItemReducerType<UserAccount>;
-export type AccountAction   = IAccountLoginAction | IAccountLogoutAction | GenericItemReducerAction;
+export type AccountAction   = IAccountLoginAction | IAccountLogoutAction | GenericItemReducerAction<UserAccount>;
 export type AccountDispatch = ReduxDispatch<AccountAction>;

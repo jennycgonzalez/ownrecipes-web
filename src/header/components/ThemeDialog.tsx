@@ -1,5 +1,6 @@
 import { defineMessages, useIntl } from 'react-intl';
 import { ListGroup } from 'react-bootstrap';
+
 import Modal from '../../common/components/Modal';
 import { Settings, ThemeMode } from '../../account/store/settings/types';
 

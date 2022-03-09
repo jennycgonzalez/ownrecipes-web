@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { defineMessages, useIntl } from 'react-intl';
 import * as _ from 'lodash';
+import classNames from 'classnames';
 
 import Icon from '../../common/components/Icon';
 import Input from '../../common/components/Input';
-import classNames from 'classnames';
 import NavLink from './NavLink';
 
 export interface INavSearchProps {

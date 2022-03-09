@@ -11,6 +11,7 @@ import { CategoryCountState, RatingCountState } from '../store/FilterTypes';
 import { PendingState } from '../../common/store/GenericReducerType';
 import { SearchState } from '../store/SearchTypes';
 import SearchSummary from './SearchSummary';
+import { RecipeList } from '../../recipe/store/RecipeTypes';
 
 export interface ISearchProps {
   search:   SearchState;
@@ -24,23 +25,28 @@ export interface ISearchProps {
 
   buildUrl: (qsTitle: string, recipeSlug: string, multiSelect?: boolean) => string;
   doSearch: (value: string) => void;
+  onOpenRecipe: (rec: RecipeList) => void;
 }
 
-const Search: React.FC<ISearchProps> = ({ search, courses, cuisines, ratings, qs, qsString, defaultFilters, buildUrl, doSearch }: ISearchProps) => {
-  if (search.items != null && search.items.size > 0) {
-    const pending = search.pending === PendingState.LOADING;
-    const qsSearchResult = search.items.get(qsString);
+const Search: React.FC<ISearchProps> = ({ search, courses, cuisines, ratings, qs, qsString, defaultFilters, buildUrl, doSearch, onOpenRecipe }: ISearchProps) => {
+  const isInit  = search.items != null && search.items.size > 0;
+  const pending = search.pending === PendingState.LOADING;
+  const qsSearchResult = search?.items?.get(qsString);
 
-    return (
-      <>
-        <SearchBar
-            value    = {qs.search ?? ''}
-            doSearch = {doSearch} />
-        <SearchSummary
-            qs       = {qs}
-            search   = {qsSearchResult}
-            buildUrl = {buildUrl}
-            />
+  return (
+    <>
+      <SearchBar
+          value    = {qs.search ?? ''}
+          doSearch = {doSearch} />
+      <SearchSummary
+          qs       = {qs}
+          search   = {qsSearchResult}
+          buildUrl = {buildUrl}
+          />
+      {!isInit && (
+        <Loading />
+      )}
+      {isInit && (
         <Row>
           <Col xs={12} className='filter-panel'>
             <SearchMenu
@@ -60,15 +66,14 @@ const Search: React.FC<ISearchProps> = ({ search, courses, cuisines, ratings, qs
                   qs       = {qs}
                   defaults = {defaultFilters}
                   buildUrl = {buildUrl}
+                  onOpenRecipe = {onOpenRecipe}
               />
             )}
           </Col>
         </Row>
-      </>
-    );
-  } else {
-    return <Loading />;
-  }
+      )}
+    </>
+  );
 };
 
 export default Search;

@@ -1,8 +1,9 @@
 import { Container } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import P from '../../common/components/P';
 
 import '../css/footer.css';
+
+import P from '../../common/components/P';
 
 const Footer = () => (
   <footer className='footer print-hidden'>

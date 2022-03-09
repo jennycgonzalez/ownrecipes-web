@@ -1,47 +1,91 @@
+import classNames from 'classnames';
+import { Table } from 'react-bootstrap';
+import { defineMessages, useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
 
 // import { Checkbox } from '../../common/components/FormComponents';
-import { getResourcePath } from '../../common/utility';
+import { getResourcePath, optionallyFormatMessage } from '../../common/utility';
 import { SubRecipe } from '../store/RecipeTypes';
 
 export interface ISubRecipesProps {
-  subRecipes: Array<SubRecipe>;
+  subRecipes: Array<SubRecipe> | undefined;
 
   // checkSubRecipe: (id: number, checked: boolean) => void;
 }
 
 const SubRecipes: React.FC<ISubRecipesProps> = ({ subRecipes /* , checkSubRecipe */ }: ISubRecipesProps) => {
-  const subRecipesList = subRecipes.map(subRecipe => (
-    <li className='ingredient' key={subRecipe.child_recipe_id}>
-      {/*
-      <Checkbox
-          name={String(subRecipe.child_recipe_id)}
-          checked={subRecipe.checked ?? false}
-          change={(_id, checked) => checkSubRecipe(subRecipe.child_recipe_id, checked)} /> */}
-      {subRecipe.quantity != null && subRecipe.quantity.length > 0 && (
-        <span className='quantity'>
-          {subRecipe.quantity}
-          {' '}
-        </span>
-      )}
-      {subRecipe.measurement && (
-        <span className='measurement'>
-          {subRecipe.measurement}
-          {' '}
-        </span>
-      )}
-      {subRecipe.title && (
-        <Link to={getResourcePath(`/recipe/${subRecipe.slug}`)} className='title'>{ subRecipe.title }</Link>
-      )}
-    </li>
-  ));
+  const intl = useIntl();
 
-  if (subRecipesList.length === 0) return null;
+  const messages = defineMessages({
+    subrecipes: {
+      id: 'subrecipes.subrecipes heading',
+      description: 'Subrecipes header',
+      defaultMessage: 'Subrecipes',
+    },
+    quantity: {
+      id: 'subrecipes.table.quantity',
+      description: 'Subrecipes table quantity header',
+      defaultMessage: 'Quantity',
+    },
+    subrecipe: {
+      id: 'subrecipes.table.subrecipe',
+      description: 'Subrecipes table ingredient header',
+      defaultMessage: 'Subrecipe',
+    },
+  });
+
+  const showQuantityCol = subRecipes == null || subRecipes.filter(sr => (
+    (sr.quantity != null && sr.quantity.length > 0 && sr.quantity !== '0')
+      || (sr.measurement != null && sr.measurement.length > 0)
+  )).length > 0;
+
+  const subRecipesList = subRecipes?.map((subRecipe, index) => {
+    const quantityString    = subRecipe.quantity != null && subRecipe.quantity.length > 0 && subRecipe.quantity !== '0' ? subRecipe.quantity : '';
+    const measurementString = subRecipe.measurement != null ? optionallyFormatMessage(intl, 'measurement.', subRecipe.measurement, { itemCount: subRecipe.quantity }) : '';
+    const titleString       = subRecipe.title;
+
+    return (
+      <tr className='ingredient' key={String(subRecipe.child_recipe_id ?? index)}>
+        {/*
+        <Checkbox
+            name    = {String(subRecipe.child_recipe_id)}
+            checked = {subRecipe.checked ?? false}
+            change  = {(_id, checked) => checkSubRecipe(subRecipe.child_recipe_id, checked)} /> */}
+        {showQuantityCol && (
+          <td className='quantity first-col'>
+            <span>
+              {quantityString}
+              {quantityString != null && quantityString.length > 0 && measurementString.length > 0 && ' '}
+              {measurementString}
+            </span>
+          </td>
+        )}
+        <td className={classNames('ingredient last-col', { 'first-col': showQuantityCol })}>
+          <span>
+            <Link to={getResourcePath(`/recipe/${subRecipe.slug}`)} className='title'>{titleString}</Link>
+          </span>
+        </td>
+      </tr>
+    );
+  });
+
+  if (subRecipesList == null || subRecipesList.length === 0) return null;
 
   return (
-    <ul className='ingredients'>
-      {subRecipesList}
-    </ul>
+    <div className='ingredient-group'>
+      <h3 className='subheading'>{intl.formatMessage(messages.subrecipes)}</h3>
+      <Table striped size='sm' className='table ingredients-table'>
+        <thead className='hideme'>
+          <tr>
+            {showQuantityCol && <th><span>{intl.formatMessage(messages.quantity)}</span></th>}
+            <th><span>{intl.formatMessage(messages.subrecipe)}</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          {subRecipesList}
+        </tbody>
+      </Table>
+    </div>
   );
 };
 

@@ -1,57 +1,42 @@
-.check-container, .checkbox-control {
-  display: block;
-  position: relative;
-  margin-bottom: 7px;
+.form-check {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+
+  min-height: 3rem;
+  font-size: 2rem;
+}
+@media screen and (min-width: 768px) {
+  .form-check {
+    min-height: 2.5rem;
+    font-size: 1.5rem;
+  }
+}
+.form-check .form-check-label {
+  align-self: stretch;
+  padding-left: 0.5em;
+
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.form-check-input {
+  margin-top: 0;
+  background-color: var(--midground);
+  border-color: var(--inputBorder);
+}
+.form-check-input:focus {
+  border-color: var(--primaryText);
+  box-shadow: 0 0 0 1px var(--primaryText);
+}
+.form-check-input:checked {
+  background-color: var(--primaryMain);
+  border-color: var(--primaryText);
+}
+.form-check-input:hover {
   cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }
-.check-container input, .checkbox-control input {
-  position: absolute;
-  opacity: 0;
-}
-.check-container .checkmark, .checkbox-control .checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 20px;
-  width: 20px;
-  background-color: #eee;
-  border: solid 1px #ccc;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
-.check-container .checkmark:after, .checkbox-control .checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-  left: 7px;
-  top: 3px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 2px 2px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-.check-container input:checked ~ .checkmark:after, .checkbox-control input:checked ~ .checkmark:after {
-  display: block;
-}
-.check-container input:checked ~ .checkmark, .checkbox-control input:checked ~ .checkmark {
-  background-color: #4c965d !important;
-  border-color: #4c965d !important;
-}
-.check-container:hover input ~ .checkmark, .checkbox-control:hover input ~ .checkmark {
-  background-color: #ccc;
-}
-.check-container .checklabel, .checkbox-control .checklabel {
-  padding-left: 30px;
-}
-.check-container {
-  margin-left: -30px;
-  font-size: 18px;
+.form-check-input:not(:checked):hover {
+  background-color: var(--primaryShadow);
 }

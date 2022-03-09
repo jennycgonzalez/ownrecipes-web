@@ -14,14 +14,15 @@ const Ratings: React.FC = () => {
   const ratingsState = useSelector((state: CombinedStore) => state.ratings);
 
   const recipeSlug = recipe?.slug;
+  const recipeRating = recipe?.rating;
 
   const addRatingCallback    = useCallback((recSlug, rating: RatingCreate) => dispatch(RatingsActions.add(recSlug, rating)), [dispatch]);
   const removeRatingCallback = useCallback((recSlug, ratingId: number)     => dispatch(RatingsActions.remove(recSlug, ratingId)), [dispatch]);
 
   useEffect(() => {
-    if (recipe == null || recipe.slug == null || recipe.rating === 0) return;
-    dispatch(RatingsActions.load(recipe.slug));
-  }, [recipe]);
+    if (recipeSlug == null || recipeRating == null || recipeRating === 0) return;
+    dispatch(RatingsActions.load(recipeSlug));
+  }, [recipeSlug, recipeRating]);
 
   if (recipeSlug == null) return null;
   const ratings = recipeSlug != null ? ratingsState.items?.get(recipeSlug) : undefined;

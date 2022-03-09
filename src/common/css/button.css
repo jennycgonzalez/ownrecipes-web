@@ -2,9 +2,17 @@
 
 .btn {
   color: var(--secondaryText);
-  min-height: 2.5rem;
-  min-width:  2.5rem;
+  min-height: 3rem;
+  min-width:  3rem;
 }
+@media screen and (min-width: 768px) {
+  .btn {
+    color: var(--secondaryText);
+    min-height: 2.5rem;
+    min-width:  2.5rem;
+  }
+}
+
 .btn:hover {
   color: var(--primaryText);
   border-color: var(--primaryText);
@@ -16,6 +24,10 @@
   color: var(--primaryText);
   background-color: var(--actionDisabled);
   border-color: var(--actionDisabled);
+}
+
+.btn-close:focus {
+  box-shadow: 0 0 0 2px var(--primaryText);
 }
 
 /* transparent */

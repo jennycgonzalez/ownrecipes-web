@@ -1,6 +1,6 @@
 import { handleError, request } from '../../common/CustomSuperagent';
 import { serverURLs } from '../../common/config';
-import { RecipeActionTypes, RecipeDispatch, RECIPE_STORE, toRecipe } from './RecipeTypes';
+import { Recipe, RecipeActionTypes, RecipeDispatch, RECIPE_STORE, toRecipe } from './RecipeTypes';
 import { ACTION } from '../../common/store/ReduxHelper';
 
 export const load = (recipeSlug: string) => (dispatch: RecipeDispatch) => {
@@ -18,7 +18,7 @@ export const deleteRecipe = (recipeSlug: string) => (dispatch: RecipeDispatch) =
   request()
     .get(`${serverURLs.recipe}${recipeSlug}/`)
     .then(() => {
-      dispatch({ store: RECIPE_STORE, type: RecipeActionTypes.RECIPE_DELETE, data: recipeSlug });
+      dispatch({ store: RECIPE_STORE, type: RecipeActionTypes.RECIPE_DELETE, data: { slug: recipeSlug } });
     })
     .catch(err => dispatch(handleError(err, RECIPE_STORE)));
 };
@@ -116,3 +116,11 @@ export const bulkAdd = (recipeState: Recipe, list: string) => (dispatch: RecipeD
   }
 };
 */
+
+export const preload = (recipe: Partial<Recipe>) => (dispatch: RecipeDispatch) => {
+  dispatch({ store: RECIPE_STORE, type: ACTION.PRELOAD, data: recipe });
+};
+
+export const reset = () => (dispatch: RecipeDispatch) => {
+  dispatch({ store: RECIPE_STORE, type: ACTION.RESET });
+};

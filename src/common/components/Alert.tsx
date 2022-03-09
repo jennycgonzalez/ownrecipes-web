@@ -1,6 +1,7 @@
 import { Alert as BootstrapAlert } from 'react-bootstrap';
 
 import '../css/alert.css';
+
 import Icon from './Icon';
 import P from './P';
 

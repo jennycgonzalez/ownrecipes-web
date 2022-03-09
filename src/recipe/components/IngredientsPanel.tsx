@@ -12,7 +12,7 @@ import IngredientsHeader from './IngredientsHeader';
 import Loading from '../../common/components/Loading';
 
 export interface IIngredientsPanelProps {
-  recipe: Recipe;
+  recipe:      Recipe | undefined;
   recipeState: GenericReducerType;
 
   // lists: Array<any>;
@@ -38,7 +38,9 @@ const IngredientsPanel: React.FC<IIngredientsPanelProps> = ({ recipe, recipeStat
   });
 
   const pending = recipeState.pending;
-  const hasNoIngredients = pending === PendingState.COMPLETED && recipe.subrecipes.length === 0 && recipe.ingredientGroups.length === 0;
+  const hasNoIngredients = pending === PendingState.COMPLETED
+      && recipe?.subrecipes != null && recipe.subrecipes.length === 0
+      && recipe?.ingredientGroups != null && recipe.ingredientGroups.length === 0;
 
   return (
     <article className='ingredients-panel'>
@@ -49,14 +51,16 @@ const IngredientsPanel: React.FC<IIngredientsPanelProps> = ({ recipe, recipeStat
       )}
       {!hasNoIngredients && (
         <>
-          <SubRecipes
-              subRecipes = {recipe.subrecipes}
-              // checkSubRecipe = {checkSubRecipe}
-              />
-          <IngredientGroups
-              groups  = {recipe.ingredientGroups}
-              // checkIngredient = {checkIngredient}
-              />
+          <div className='ingredient-groups'>
+            <SubRecipes
+                subRecipes = {recipe?.subrecipes}
+                // checkSubRecipe = {checkSubRecipe}
+                />
+            <IngredientGroups
+                groups  = {recipe?.ingredientGroups}
+                // checkIngredient = {checkIngredient}
+                />
+          </div>
           {/*
           <IngredientButtons
               pending    = {pending}

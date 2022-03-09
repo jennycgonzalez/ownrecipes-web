@@ -1,5 +1,5 @@
 import ReduxHelper, { ACTION } from '../../common/store/ReduxHelper';
-import { Rating, RatingAction, RatingsAction, RatingsState, RATINGS_STORE, RATING_STORE } from './types';
+import { Rating, RatingAction, RatingsAction, IRatingAddAction, IRatingDeleteAction, RatingsState, RATINGS_STORE, RATING_STORE } from './types';
 
 const defaultState = ReduxHelper.getMapReducerDefaultState<Rating[]>(RATINGS_STORE);
 
@@ -35,24 +35,15 @@ const reducer = (state = defaultState, action: RatingsAction): RatingsState => {
     const ratingAction = action as RatingAction;
     switch (ratingAction.type) {
       case ACTION.CREATE_SUCCESS:
-        return addRating(state, ratingAction.recipe, ratingAction.data);
+        return addRating(state, (ratingAction as IRatingAddAction).recipe, ratingAction.data);
       case ACTION.DELETE_SUCCESS:
-        return deleteRating(state, ratingAction.recipe, ratingAction.ratingId);
+        return deleteRating(state, (ratingAction as IRatingDeleteAction).recipe, (ratingAction as IRatingDeleteAction).ratingId);
       default:
         return ReduxHelper.caseMapDefaultReducer(state, action, defaultState);
     }
   }
 
-  if (RATINGS_STORE === action.store) {
-    switch (action.type) {
-      case ACTION.GET_SUCCESS:
-        return ReduxHelper.setMapItem(state, action.recipe, action.data);
-      default:
-        break;
-    }
-  }
-
-  return ReduxHelper.caseDefaultReducer(state, action, defaultState);
+  return ReduxHelper.caseMapDefaultReducer(state, action, defaultState);
 };
 
 export default reducer;

@@ -6,11 +6,11 @@ import { ThunkDispatch } from 'redux-thunk';
 import { NavigateFunction } from 'react-router';
 import { Location } from 'history';
 
+import '../css/404.css';
+
 import { getResourcePath } from '../../common/utility';
 import { CombinedStore } from '../Store';
 import * as AccountActions from '../../account/store/actions';
-
-import '../css/404.css';
 
 interface IAutoLoginProps {
   nav: NavigateFunction;
@@ -57,7 +57,7 @@ class AutoLogin extends Component<IProps, IAutoLoginState> {
     if (prevToken == null && currToken != null) {
       if (originUrl === '/' || originUrl === '/login') {
         this.props.nav(getResourcePath('/home'), { replace: true });
-      } else {
+      } else if (this.props.loc.pathname !== originUrl) {
         this.props.nav(`${originUrl}${this.state.originSearch}`, { replace: true });
       }
     } else if (prevToken != null && currToken == null) {
