@@ -54,7 +54,8 @@
   #header-navbar .navbar-brand a:hover,
   #header-navbar button:hover,
   #header-navbar a:hover {
-    background-color: var(--hoverBg) !important;
+    background-color: transparent !important;
+    color: var(--primaryMain) !important;
   }
   #header-navbar .nav-link {
     color: inherit;

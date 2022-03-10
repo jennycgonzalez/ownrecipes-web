@@ -68,7 +68,7 @@ const SearchBar: React.FC<ISearchBarProps> = ({ value, doSearch }: ISearchBarPro
         required
         inputAdornmentStart = {<Icon icon='search' variant='light' />}
         inputAdornmentEnd = {formData.value.length > 0 ? clearInput : undefined}
-        change = {handleChange}
+        onChange = {handleChange}
         debounceTimeout = {400}
         className = 'search-bar' />
   );

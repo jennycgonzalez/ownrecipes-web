@@ -11,9 +11,7 @@ import Icon from './Icon';
 interface ICheckboxProps extends IBaseComponentProps {
   value?: boolean;
 
-  size?: string;
-
-  change?: (name: string, newValue: boolean) => void;
+  onChange?: (name: string, newValue: boolean) => void;
 }
 
 export default class Checkbox extends BaseComponent<ICheckboxProps> {
@@ -44,14 +42,14 @@ export default class Checkbox extends BaseComponent<ICheckboxProps> {
     }
   }
 
-  handleChange() {
+  handleChange = () => {
     // event: React.ChangeEvent<HTMLInputElement>
     // NOTE: bootstrap will pass as event.target.value always "on".
     if (this.props.readOnly || this.props.disabled) return;
-    if (this.props.change) {
-      this.props.change(this.props.name, !this.props.value);
+    if (this.props.onChange) {
+      this.props.onChange(this.props.name, !this.props.value);
     }
-  }
+  };
 
   render() {
     return (

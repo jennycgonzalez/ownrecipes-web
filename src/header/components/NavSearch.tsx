@@ -104,10 +104,8 @@ const NavSearch: React.FC<INavSearchProps> = ({ onExpandSearch }: INavSearchProp
           placeholder = {formatMessage(messages.search_placeholder)}
           className = {classNames('search', { expanded: isExpanded })}
           aria-label = {formatMessage(messages.search_placeholder)}
-          inputAdornmentEnd = {
-            searchButton
-          }
-          change = {handleChange}
+          inputAdornmentEnd = {searchButton}
+          onChange = {handleChange}
           ref = {searchRef}
       />
     </Form>

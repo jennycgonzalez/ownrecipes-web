@@ -4,7 +4,7 @@
 .directions ol {
   list-style: none;
   counter-reset: cupcake;
-  padding-left: 1rem;
+  padding-left: 0.5rem;
 }
 .directions ol li {
   counter-increment: cupcake;

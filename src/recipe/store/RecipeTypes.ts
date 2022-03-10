@@ -191,8 +191,8 @@ export const toRecipeList = (dto: RecipeListDto): RecipeList => ({
 
   photoThumbnail: dto.photo_thumbnail ?? undefined,
 
-  info: dto.info,
-  rating: dto.rating,
+  info:    dto.info,
+  rating:  dto.rating,
   pubDate: new Date(dto.pub_date),
 });
 

@@ -92,14 +92,14 @@ const IngredientsHeader: React.FC<IIngredientsHeaderProps> = ({ recipe, recipeSt
           <div className='custom-servings print-hidden'>
             <Form onSubmit={handleSubmit} className='custom-servings'>
               <Input
-                  name = 'servings'
-                  type = 'number'
+                  name  = 'servings'
+                  type  = 'number'
                   value = {formData.servings}
                   aria-label = {formatMessage(messages.servings_input_tooltip)}
-                  min = {0}
-                  max = {1000}
+                  min   = {0}
+                  max   = {1000}
                   autoComplete = 'off'
-                  change = {handleChange} />
+                  onChange = {handleChange} />
               <Button type='submit' variant='primary'>
                 <Icon icon='arrow-repeat' variant='light' />
                 {formatMessage(messages.servings)}

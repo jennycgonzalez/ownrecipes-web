@@ -129,11 +129,11 @@ const IngredientGroupsBox: React.FC<IIngredientGroupsBoxProps> = ({
         errors   = {errors}
         tooltip  = {formatMessage(messages.info_tooltip)}>
       <Input
-          name   = {name}
-          rows   = {8}
+          name     = {name}
+          rows     = {8}
           placeholder = {formatMessage(messages.ingredients_placeholder)}
-          change = {handleChange}
-          value  = {text} />
+          onChange = {handleChange}
+          value    = {text} />
       <div className='recipe-details'>
         <div className='recipe-schema'>
           <IngredientGroups groups={data} />

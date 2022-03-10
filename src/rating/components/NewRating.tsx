@@ -5,6 +5,7 @@ import { defineMessages, useIntl } from 'react-intl';
 import Input from '../../common/components/Input';
 import { updateFormData } from '../../common/utility';
 import { RatingCreate } from '../store/types';
+import Ratings from './Ratings';
 
 export interface INewRatingProps {
   show: boolean;
@@ -15,30 +16,12 @@ export interface INewRatingProps {
 }
 
 export interface IFormDataProps {
-  rating:  string;
+  rating:  number;
   comment: string;
 }
 
 const NewRating: React.FC<INewRatingProps> = ({ show, recipeSlug, userId, addRating }: INewRatingProps) => {
   const intl = useIntl();
-
-  const [formData, setFormData] = useState<IFormDataProps>({ rating: '', comment: '' });
-
-  const handleChange = (name: string, value: unknown) => {
-    setFormData(prev => updateFormData(prev, name, value));
-  };
-
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    const newRating: RatingCreate = {
-      rating:     parseInt(formData.rating),
-      comment:    formData.comment,
-      userId:     userId,
-    };
-    addRating(recipeSlug, newRating);
-    setFormData({ rating: '', comment: '' });
-  };
-
   const { formatMessage } = intl;
   const messages = defineMessages({
     new_rating_title: {
@@ -73,6 +56,23 @@ const NewRating: React.FC<INewRatingProps> = ({ show, recipeSlug, userId, addRat
     },
   });
 
+  const [formData, setFormData] = useState<IFormDataProps>({ rating: 0, comment: '' });
+
+  const handleChange = (name: string, value: unknown) => {
+    setFormData(prev => updateFormData(prev, name, value));
+  };
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    const newRating: RatingCreate = {
+      rating:     formData.rating,
+      comment:    formData.comment,
+      userId:     userId,
+    };
+    addRating(recipeSlug, newRating);
+    setFormData({ rating: 0, comment: '' });
+  };
+
   if (!show) return null;
 
   return (
@@ -81,15 +81,9 @@ const NewRating: React.FC<INewRatingProps> = ({ show, recipeSlug, userId, addRat
         <fieldset>
           <legend className='new-rating-heading'>{formatMessage(messages.new_rating_title)}</legend>
           <Row>
-            <Col lg={4} md={5} sm={12}>
-              <Input
-                  name   = 'rating'
-                  type   = 'number'
-                  label  = {formatMessage(messages.rating_label)}
-                  placeholder={formatMessage(messages.rating_placeholder)}
-                  value  = {formData.rating}
-                  required
-                  change = {handleChange} />
+            <Col className='form-group required'>
+              <div className='form-label'>{formatMessage(messages.rating_label)}</div>
+              <Ratings stars={formData.rating} onChange={stars => handleChange('rating', stars)} />
             </Col>
           </Row>
           <Row>
@@ -101,13 +95,13 @@ const NewRating: React.FC<INewRatingProps> = ({ show, recipeSlug, userId, addRat
                   placeholder = {formatMessage(messages.rating_comment_placeholder)}
                   value  = {formData.comment}
                   required
-                  change = {handleChange}
+                  onChange = {handleChange}
               />
             </Col>
           </Row>
           <Row>
             <Col xs={12}>
-              <Button type='submit' variant='primary' disabled={formData.rating.length === 0 || formData.comment.length === 0}>
+              <Button type='submit' variant='primary' disabled={formData.rating > 0 || formData.comment.length === 0}>
                 {formatMessage(messages.submit)}
               </Button>
             </Col>

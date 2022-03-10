@@ -11,19 +11,17 @@ import ConditionalWrapper from './ConditionalWrapper';
 
 interface IInputProps extends IBaseComponentProps {
   label?: string;
-  pushOnChange?: boolean; // TODO implement pushOnChange
+  pushOnChange?: boolean;
 
-  placeholder?: string;
+  placeholder?:  string;
   autoComplete?: string;
 
   inputAdornmentStart?: React.ReactNode;
-  inputAdornmentEnd?: React.ReactNode;
-
-  size?: string;
+  inputAdornmentEnd?:   React.ReactNode;
 
   debounceTimeout?: number;
 
-  change?: (name: string, newValue: string) => void;
+  onChange?: (name: string, newValue: string) => void;
 }
 
 type ITextInputProps = {
@@ -32,13 +30,13 @@ type ITextInputProps = {
 
   value?: string;
 
-  change?: (name: string, newValue: string) => void;
+  onChange?: (name: string, newValue: string) => void;
 } & IBaseComponentProps & IInputProps;
 
 type INumberInputProps = {
   type?:  'number';
 
-  placeholder?: string;
+  placeholder?:  string;
   autoComplete?: string;
 
   inputAdornmentStart?: React.ReactNode;
@@ -47,7 +45,7 @@ type INumberInputProps = {
   min?:   number;
   max?:   number;
 
-  change?: (name: string, newValue: string) => void;
+  onChange?: (name: string, newValue: string) => void;
 } & IBaseComponentProps & IInputProps;
 
 interface IInputState {
@@ -59,7 +57,7 @@ interface IInputState {
 }
 
 type IAnyInputProps = ITextInputProps | INumberInputProps;
-export const isTextInput = (inp: IAnyInputProps): inp is ITextInputProps => (inp as ITextInputProps).type == null || (inp as ITextInputProps).type === 'text' || (inp as ITextInputProps).type === 'password';
+export const isTextInput   = (inp: IAnyInputProps): inp is ITextInputProps => (inp as ITextInputProps).type == null || (inp as ITextInputProps).type === 'text' || (inp as ITextInputProps).type === 'password';
 export const isNumberInput = (inp: IAnyInputProps): inp is INumberInputProps => (inp as INumberInputProps).type === 'number';
 
 export default class Input extends BaseComponent<IAnyInputProps, IInputState> {
@@ -98,10 +96,10 @@ export default class Input extends BaseComponent<IAnyInputProps, IInputState> {
   }
 
   pushChange(value: string | number) {
-    const { name, change } = this.props;
-    if (!change) return;
+    const { name, onChange } = this.props;
+    if (!onChange) return;
     if (this.state.initValue === value) return;
-    change(name, value);
+    onChange(name, value);
   }
 
   formatValue(value: string, trim = false): string | number {
@@ -133,13 +131,13 @@ export default class Input extends BaseComponent<IAnyInputProps, IInputState> {
     }
   }
 
-  handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+  handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (this.props.readOnly || this.props.disabled) return;
 
     const value = this.formatValue(event.target.value);
     if (value === this.state.value) return;
 
-    if (this.props.pushOnChange || this.props.debounceTimeout || !this.state.isChanged) {
+    if (this.props.pushOnChange || this.props.debounceTimeout || !this.state.isChanged || this.props.errors) {
       this.pushChange(value);
     }
 
@@ -147,7 +145,7 @@ export default class Input extends BaseComponent<IAnyInputProps, IInputState> {
       isChanged: true,
       value: value,
     });
-  }
+  };
 
   handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.defaultPrevented || event.ctrlKey || event.shiftKey) return;
@@ -180,8 +178,8 @@ export default class Input extends BaseComponent<IAnyInputProps, IInputState> {
         }
       }
 
-      if (this.props.change && newVal != null && newVal !== value) {
-        this.props.change(this.props.name, newVal);
+      if (this.props.onChange && newVal != null && newVal !== value) {
+        this.props.onChange(this.props.name, newVal);
       }
     } else if (type === 'text' && isTextArea && event.key === 'Enter') {
       const valueS = this.formatValue(String(value), true);

@@ -44,7 +44,7 @@ const TagList: React.FC<ITagListProps> = ({
         value     = {stringify(tags)}
         errors    = {errors}
         className = {className}
-        change    = {handleChange}
+        onChange  = {handleChange}
     />
   );
 };

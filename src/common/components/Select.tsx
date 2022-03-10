@@ -48,9 +48,7 @@ interface ISelectProps extends IBaseComponentProps {
   value?: SelectDataType;
   data?:  OptionsOrGroups<SelectDataType, GroupBase<SelectDataType>> | undefined;
 
-  size?: string;
-
-  change?: (name: string, newValue: boolean) => void;
+  onChange?: (name: string, newValue: boolean) => void;
 }
 
 // eslint-disable-next-line import/prefer-default-export
@@ -66,15 +64,15 @@ export class Select extends BaseComponent<ISelectProps> {
     return false;
   }
 
-  handleChange(data: SelectDataType) {
+  handleChange = (data: SelectDataType) => {
     this.setState({
       value: data,
     });
 
-    if (this.props.change) {
-      this.props.change(this.props.name, data.value);
+    if (this.props.onChange) {
+      this.props.onChange(this.props.name, data.value);
     }
-  }
+  };
 
   render() {
     return (

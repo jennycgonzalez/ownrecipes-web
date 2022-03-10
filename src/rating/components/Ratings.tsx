@@ -1,12 +1,43 @@
+import { Button } from 'react-bootstrap';
+
 import '../css/ratings.css';
 
 import Icon from '../../common/components/Icon';
+import ConditionalWrapper from '../../common/components/ConditionalWrapper';
 
 export interface IRatingsProps {
   stars: number;
+  onChange?: (stars: number) => void;
 }
 
-const Ratings: React.FC<IRatingsProps> = ({ stars }: IRatingsProps) => {
+interface IStarProps {
+  stars: number;
+  num:   number;
+  onChange?: (stars: number) => void;
+}
+
+const Star: React.FC<IStarProps> = ({ stars, num, onChange }: IStarProps) => {
+  const handleClick = () => {
+    if (onChange) {
+      onChange(num);
+    }
+  };
+
+  const isHalfFilled = stars > (num - 1) && stars < num;
+  const icon = isHalfFilled ? 'star-half' : 'star';
+  const variant = num > stars || isHalfFilled ? 'light' : 'filled';
+
+  return (
+    <ConditionalWrapper
+        condition={onChange != null}
+        render    = {childr => <Button variant='transparent' className='rating' onClick={handleClick}>{childr}</Button>}
+        key={num}>
+      <Icon key={num} icon={icon} variant={variant} size={onChange != null ? '2x' : '1x'} />
+    </ConditionalWrapper>
+  );
+};
+
+const Ratings: React.FC<IRatingsProps> = ({ stars, onChange }: IRatingsProps) => {
   let starss = stars;
   if (stars > 5) {
     starss = 5;
@@ -14,17 +45,9 @@ const Ratings: React.FC<IRatingsProps> = ({ stars }: IRatingsProps) => {
     starss = 0;
   }
 
-  const starsList: Array<React.ReactNode> = [];
-  if (starss > 0) {
-    for (let i = 0; i < starss; ++i) {
-      starsList.push(<Icon key={i} icon='star' />);
-    }
-  }
-  if (starss < 5) {
-    for (let i = 0; i < (5 - starss); ++i) {
-      starsList.push(<Icon key={5 - i} icon='star' variant='light' />);
-    }
-  }
+  const starsList: Array<React.ReactNode> = Array.from({ length: 5 }, (_, i) => i + 1).map(num => (
+    <Star key={num} stars={starss} num={num} onChange={onChange} />
+  ));
 
   return (
     <div className='rating-stars'>

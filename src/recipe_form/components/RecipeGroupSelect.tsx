@@ -17,7 +17,7 @@ interface IRecipeGroupSelectProps extends IBaseComponentProps {
 
   size?: string;
 
-  change?: (name: string, newValue: SelectDataType) => void;
+  onChange?: (name: string, newValue: SelectDataType) => void;
 }
 
 interface IRecipeGroupSelectState {
@@ -44,14 +44,14 @@ export default class RecipeGroupSelect extends BaseComponent<IRecipeGroupSelectP
     return false;
   }
 
-  handleChange(data: SelectDataType) {
+  handleChange = (data: SelectDataType) => {
     if (typeof data !== 'object') { return; }
     if (data instanceof Array) { return; }
 
-    if (this.props.change) {
-      this.props.change(this.props.name, data ? data.value : '');
+    if (this.props.onChange) {
+      this.props.onChange(this.props.name, data ? data.value : '');
     }
-  }
+  };
 
   // eslint-disable-next-line class-methods-use-this
   isValidNewOption = (value: SelectDataType) => !!value;
@@ -64,8 +64,8 @@ export default class RecipeGroupSelect extends BaseComponent<IRecipeGroupSelectP
         options: [...options, newOption],
       },
       () => {
-        if (this.props.change) {
-          this.props.change(this.props.name, newOption.value);
+        if (this.props.onChange) {
+          this.props.onChange(this.props.name, newOption.value);
         }
       }
     );

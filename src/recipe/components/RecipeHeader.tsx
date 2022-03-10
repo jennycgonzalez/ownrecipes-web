@@ -104,12 +104,33 @@ const RecipeHeader: React.FC<IRecipeHeaderProps> = ({ recipe, showEditLink, onEd
   ) : null;
 
   let hostname = '';
-  if (recipe?.source) {
+  if (recipe?.source && recipe.source.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g)) {
     // Get Host name of a URL
     const a = document.createElement('a');
     a.href = recipe.source;
     hostname = a.hostname;
   }
+
+  const optionButtons = (
+    <div className='options print-hidden'>
+      <div className='options-wrapper'>
+        {showEditLink && (
+          <>
+            {editLink}
+            {deleteLink}
+          </>
+        )}
+        {/*
+          <Button variant='outline-primary' aria-label='Add receipt to menu' onClick={onAddToMenuClick}>
+            <Icon icon='calendar' />
+          </Button>
+        */}
+        <Button variant='outline-primary' aria-label='Print receipt' onClick={window.print}>
+          <Icon icon='printer' />
+        </Button>
+      </div>
+    </div>
+  );
 
   const chips = (
     <>
@@ -161,56 +182,45 @@ const RecipeHeader: React.FC<IRecipeHeaderProps> = ({ recipe, showEditLink, onEd
       <article className='recipe-header'>
         <h1 className='d-block d-xl-none'>{recipe?.title}</h1>
 
-        {recipe != null && recipe.photo && (
-          <Row className='flex-row-reverse'>
-            <Col xl={6} lg={12} className='img-wrapper print-hidden'>
-              <WidthHeightRatio height={66.67} width={100}>
-                <Image
-                    src = {recipe.photo}
-                    alt = ''
-                    className='img-responsive print-hidden' />
-              </WidthHeightRatio>
-              <div className='options print-hidden'>
-                <div className='options-wrapper'>
-                  {showEditLink && (
-                    <>
-                      {editLink}
-                      {deleteLink}
-                    </>
-                  )}
-                  {/*
-                    <Button variant='outline-primary' aria-label='Add receipt to menu' onClick={onAddToMenuClick}>
-                      <Icon icon='calendar' />
-                    </Button>
-                  */}
-                  <Button variant='outline-primary' aria-label='Print receipt' onClick={window.print}>
-                    <Icon icon='printer' />
-                  </Button>
-                </div>
-              </div>
-            </Col>
-            <Col sm={7} xs={12} className='col-sm-push-5 print-only'>
-              <WidthHeightRatio height={66.67} width={100} className='print-only print-image'>
-                <Image
-                    src = {recipe.photoThumbnail ?? recipe.photo}
-                    alt = '' />
-              </WidthHeightRatio>
-            </Col>
+        <Row className='flex-row-reverse justify-content-center'>
+          {recipe != null && recipe.photo && (
+            <>
+              <Col xl={6} lg={12} className='img-wrapper print-hidden'>
+                <WidthHeightRatio height={66.67} width={100}>
+                  <Image
+                      src = {recipe.photo}
+                      alt = ''
+                      className='img-responsive print-hidden' />
+                </WidthHeightRatio>
+                {optionButtons}
+              </Col>
+              <Col sm={7} xs={12} className='col-sm-push-5 print-only'>
+                <WidthHeightRatio height={66.67} width={100} className='print-only print-image'>
+                  <Image
+                      src = {recipe.photoThumbnail ?? recipe.photo}
+                      alt = '' />
+                </WidthHeightRatio>
+              </Col>
+            </>
+          )}
+          {recipe != null && !recipe.photo && (
+            optionButtons
+          )}
 
-            <Col xl={6} lg={12} className='info-wrapper'>
-              <h1 className='d-none d-xl-block'>{recipe?.title}</h1>
-              <P>{recipe?.info}</P>
-              <Ratings stars={recipe?.rating ?? 0} />
-              {chips}
-              {recipe?.source && (
-                <div>
-                  {`${formatMessage(messages.source)}: `}
-                  <a href={recipe.source}>{hostname}</a>
-                </div>
-              )}
-            </Col>
-          </Row>
-        )}
+          <Col xl={6} lg={12} className='info-wrapper'>
+            <h1 className='d-none d-xl-block'>{recipe?.title}</h1>
+            <P>{recipe?.info}</P>
+            <Ratings stars={recipe?.rating ?? 0} />
+            {chips}
+            {recipe?.source && (
+              <div>
+                {`${formatMessage(messages.source)}: `}
+                {hostname.length > 0 && <a href={recipe.source}>{hostname}</a>}
+                {hostname.length === 0 && recipe.source}
+              </div>
+            )}
+          </Col>
+        </Row>
       </article>
 
       <Modal

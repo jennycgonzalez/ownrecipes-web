@@ -76,7 +76,7 @@ const LoginForm: React.FC<ILoginFormProps> = (props: ILoginFormProps) => {
           autoFocus
           required
           inputAdornmentStart = {<Icon icon='person' size='2x' />}
-          change = {handleChange} />
+          onChange = {handleChange} />
       <Input
           name  = 'password'
           value = {formData.password}
@@ -85,7 +85,7 @@ const LoginForm: React.FC<ILoginFormProps> = (props: ILoginFormProps) => {
           autoComplete = 'password'
           required
           inputAdornmentStart = {<Icon icon='key' size='2x' />}
-          change = {handleChange} />
+          onChange = {handleChange} />
 
       <Button variant='primary' type='submit'>
         {formatMessage(messages.sign_in)}

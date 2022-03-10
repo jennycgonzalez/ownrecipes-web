@@ -7,29 +7,25 @@
   border-color: var(--inputBorder);
   color: var(--primaryText);
 }
-
-.form-control:read-only {
-  background-color: var(--inputBgDisabled);
-  color: var(--secondaryText);
-  border: 1px dotted var(--inputBorder);
-}
-.form-control:read-only:hover {
-  cursor: not-allowed;
-}
-
 .form-control:focus {
   border-color: var(--primaryText);
   box-shadow: 0 0 0 1px var(--primaryText);
   color: var(--primaryText);
 }
-.form-control:not(:read-only):focus {
+.form-group.readonly .form-control {
+  background-color: var(--inputBgDisabled);
+  color: var(--secondaryText);
+  border: 1px dotted var(--inputBorder);
+}
+.form-group.readonly .form-control:hover {
+  cursor: not-allowed;
+  border-color: var(--primaryText);
+}
+.form-group:not(.readonly) .form-control:focus {
   background-color: var(--inputBgActive);
 }
-.form-control:not(:read-only):hover {
+.form-group:not(.readonly) .form-control:hover {
   border-color: var(--primaryMain);
-}
-.form-control:read-only:hover {
-  border-color: var(--primaryText);
 }
 
 .input-group-text {

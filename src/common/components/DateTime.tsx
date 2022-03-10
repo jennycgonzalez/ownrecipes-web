@@ -9,12 +9,12 @@ import ConditionalWrapper from './ConditionalWrapper';
 require('react-datetime/css/react-datetime.css');
 
 interface IDateTimeProps extends IBaseComponentProps {
-  name: string;
+  name:  string;
   label: string;
   timeFormat?: string;
   dateFormat?: string;
-  change: (name: string, newIsoDate: string) => void;
-  class: string;
+
+  onChange: (name: string, newIsoDate: string) => void;
 }
 
 interface IDateTimeState {
@@ -22,15 +22,15 @@ interface IDateTimeState {
 }
 
 export default class DateTime extends BaseComponent<IDateTimeProps, IDateTimeState> {
-  handleChange(date: moment.MomentInput) {
+  handleChange = (date: moment.MomentInput) => {
     this.setState({
       value: date,
     });
 
-    if (this.props.change) {
-      this.props.change(this.props.name, moment(date).toISOString());
+    if (this.props.onChange) {
+      this.props.onChange(this.props.name, moment(date).toISOString());
     }
-  }
+  };
 
   render() {
     return (

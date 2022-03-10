@@ -23,7 +23,7 @@ export interface IBaseComponentProps {
 
   className?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  change?: (name: string, newValue: any) => void;
+  onChange?: (name: string, newValue: any) => void;
 }
 
 export type BaseLabelProps = {
@@ -31,19 +31,13 @@ export type BaseLabelProps = {
 }
 
 export default class BaseComponent<P extends IBaseComponentProps, S = {}> extends Component<P, S> {
-  constructor(props: P) {
-    super(props);
-
-    this.handleChange = this.handleChange.bind(this);
-  }
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  handleChange(event: any) {
+  handleChange = (event: any) => { // eslint-disable-line react/no-unused-class-component-methods
     if (this.props.readOnly || this.props.disabled) return;
-    if (this.props.change) {
-      this.props.change(this.props.name, event.target.value);
+    if (this.props.onChange) {
+      this.props.onChange(this.props.name, event.target.value);
     }
-  }
+  };
 
   hasError(): boolean {
     return !!this.props.errors;

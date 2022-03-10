@@ -9,9 +9,7 @@ interface IFileSelectProps extends IBaseComponentProps {
   value?:  File;
   accept?: string;
 
-  size?:   string;
-
-  change?: (name: string, newValue: File | undefined) => void;
+  onChange?: (name: string, newValue: File | undefined) => void;
 }
 
 class FileBase extends BaseComponent<IFileSelectProps> {
@@ -26,11 +24,11 @@ class FileBase extends BaseComponent<IFileSelectProps> {
     return false;
   }
 
-  handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    if (this.props.change) {
-      this.props.change(event.target.name, event?.target.files?.[0]);
+  handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (this.props.onChange) {
+      this.props.onChange(event.target.name, event?.target.files?.[0]);
     }
-  }
+  };
 
   render() {
     return (

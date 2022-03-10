@@ -161,12 +161,12 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
             <Row>
               <Col xs={12}>
                 <Input
-                    name   = 'title'
-                    label  = {formatMessage(messages.name_label)}
-                    value  = {form?.title ?? ''}
+                    name     = 'title'
+                    label    = {formatMessage(messages.name_label)}
+                    value    = {form?.title ?? ''}
                     required
-                    errors = {formatValidation(intl, formState.validation?.title)}
-                    change = {update} />
+                    errors   = {formatValidation(intl, formState.validation?.title)}
+                    onChange = {update} />
               </Col>
             </Row>
 
@@ -174,8 +174,8 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
               <Col xs={12}>
                 <WidthHeightRatio height={66.67} width={100}>
                   <Image
-                      src = {getRecipeImage(form?.photoThumbnail ?? '/images/fried-eggs.jpg')}
-                      alt = ''
+                      src   = {getRecipeImage(form?.photoThumbnail ?? '/images/fried-eggs.jpg')}
+                      alt   = ''
                       style = {{ objectFit: 'contain' }} />
                 </WidthHeightRatio>
               </Col>
@@ -184,34 +184,34 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
             <Row>
               <Col xs={12}>
                 <FileSelect
-                    name   = 'photo'
-                    label  = {formatMessage(messages.photo_label)}
+                    name     = 'photo'
+                    label    = {formatMessage(messages.photo_label)}
                     helpText = {formatMessage(messages.photo_help_text)}
-                    accept = 'image/*'
-                    change = {update} />
+                    accept   = 'image/*'
+                    onChange = {update} />
               </Col>
             </Row>
 
             <Row>
               <Col xs={12} sm={6}>
                 <RecipeGroupSelect
-                    name   = 'course'
-                    label  = {formatMessage(messages.course_label)}
-                    data   = {courses}
-                    value  = {form?.course ?? ''}
+                    name     = 'course'
+                    label    = {formatMessage(messages.course_label)}
+                    data     = {courses}
+                    value    = {form?.course ?? ''}
                     required
-                    errors = {formatValidation(intl, formState.validation?.course)}
-                    change = {update} />
+                    errors   = {formatValidation(intl, formState.validation?.course)}
+                    onChange = {update} />
               </Col>
               <Col xs={12} sm={6}>
                 <RecipeGroupSelect
-                    name   = 'cuisine'
-                    label  = {formatMessage(messages.cuisine_label)}
-                    data   = {cuisines}
-                    value  = {form?.cuisine ?? ''}
+                    name     = 'cuisine'
+                    label    = {formatMessage(messages.cuisine_label)}
+                    data     = {cuisines}
+                    value    = {form?.cuisine ?? ''}
                     required
-                    errors = {formatValidation(intl, formState.validation?.cuisine)}
-                    change = {update} />
+                    errors   = {formatValidation(intl, formState.validation?.cuisine)}
+                    onChange = {update} />
               </Col>
               <Col xs={12}>
                 <TagList
@@ -227,58 +227,58 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
             <Row>
               <Col xs={12} sm={6}>
                 <Input
-                    name   = 'prepTime'
-                    type   = 'number'
-                    label  = {formatMessage(messages.prep_time_label)}
-                    value  = {form?.prepTime ?? ''}
-                    min    = {1}
-                    max    = {999}
-                    errors = {formatValidation(intl, formState.validation?.prepTime)}
-                    change = {update} />
+                    name     = 'prepTime'
+                    type     = 'number'
+                    label    = {formatMessage(messages.prep_time_label)}
+                    value    = {form?.prepTime ?? ''}
+                    min      = {1}
+                    max      = {999}
+                    errors   = {formatValidation(intl, formState.validation?.prepTime)}
+                    onChange = {update} />
               </Col>
               <Col xs={12} sm={6}>
                 <Input
-                    name   = 'cookTime'
-                    type   = 'number'
-                    label  = {formatMessage(messages.cooking_time_label)}
-                    value  = {form?.cookTime ?? ''}
-                    errors = {formatValidation(intl, formState.validation?.cookTime)}
-                    change = {update} />
+                    name     = 'cookTime'
+                    type     = 'number'
+                    label    = {formatMessage(messages.cooking_time_label)}
+                    value    = {form?.cookTime ?? ''}
+                    errors   = {formatValidation(intl, formState.validation?.cookTime)}
+                    onChange = {update} />
               </Col>
             </Row>
             <Row>
               <Col xs={12}>
                 <Input
-                    name   = 'servings'
-                    type   = 'number'
-                    label  = {formatMessage(messages.servings_label)}
-                    value  = {form?.servings ?? ''}
-                    min    = {1}
-                    max    = {999}
+                    name     = 'servings'
+                    type     = 'number'
+                    label    = {formatMessage(messages.servings_label)}
+                    value    = {form?.servings ?? ''}
+                    min      = {1}
+                    max      = {999}
                     required
-                    errors = {formatValidation(intl, formState.validation?.servings)}
-                    change = {update} />
+                    errors   = {formatValidation(intl, formState.validation?.servings)}
+                    onChange = {update} />
               </Col>
             </Row>
             <Row>
               <Col xs={12}>
                 <Input
-                    name   = 'source'
-                    label  = {formatMessage(messages.source_label)}
-                    tooltip = {formatMessage(messages.source_tooltip)}
-                    value  = {form?.source ?? ''}
-                    errors = {formatValidation(intl, formState.validation?.source)}
-                    change = {update} />
+                    name     = 'source'
+                    label    = {formatMessage(messages.source_label)}
+                    tooltip  = {formatMessage(messages.source_tooltip)}
+                    value    = {form?.source ?? ''}
+                    errors   = {formatValidation(intl, formState.validation?.source)}
+                    onChange = {update} />
               </Col>
             </Row>
             <Row>
               <Col xs={12}>
                 <Checkbox
-                    name    = 'public'
-                    label   = {formatMessage(messages.public_label)}
-                    value   = {form?.public ?? false}
-                    errors  = {formatValidation(intl, formState.validation?.public)}
-                    change  = {update} />
+                    name      = 'public'
+                    label     = {formatMessage(messages.public_label)}
+                    value     = {form?.public ?? false}
+                    errors    = {formatValidation(intl, formState.validation?.public)}
+                    onChange  = {update} />
               </Col>
             </Row>
 
@@ -291,7 +291,7 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
                 placeholder = {formatMessage(messages.information_placeholder)}
                 value    = {form?.info ?? ''}
                 errors   = {formatValidation(intl, formState.validation?.info)}
-                change   = {update} />
+                onChange = {update} />
             <IngredientGroupsBox
                 name     = 'ingredientGroups'
                 groups   = {form?.ingredientGroups}

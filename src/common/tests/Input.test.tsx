@@ -11,7 +11,7 @@ test('Input type text', () => {
         value = 'Some value'
         placeholder = 'Some placeholder'
         autoComplete = 'Some autocomplete'
-        change = {handleChange} />
+        onChange = {handleChange} />
   );
   const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
@@ -27,7 +27,7 @@ test('Input type number', () => {
         value = '17'
         placeholder = 'Some placeholder'
         autoComplete = 'Some autocomplete'
-        change = {handleChange} />
+        onChange = {handleChange} />
   );
   const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
@@ -44,7 +44,7 @@ test('Input type text multirow', () => {
         value = 'Some value'
         placeholder = 'Some placeholder'
         autoComplete = 'Some autocomplete'
-        change = {handleChange} />
+        onChange = {handleChange} />
   );
   const tree = component.toJSON();
   expect(tree).toMatchSnapshot();
@@ -59,7 +59,7 @@ test('Input required', () => {
         type  = 'text'
         value = 'Some value'
         required
-        change = {handleChange} />
+        onChange = {handleChange} />
   );
   const tree = component.toJSON();
   expect(tree).toMatchSnapshot();

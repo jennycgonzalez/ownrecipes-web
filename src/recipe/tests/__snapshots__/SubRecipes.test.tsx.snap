@@ -1,54 +1,87 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Test Sub Recipes 1`] = `
-<ul
-  className="ingredients"
+<div
+  className="ingredient-group"
 >
-  <li
-    className="ingredient"
+  <h3
+    className="subheading"
   >
-    <span
-      className="quantity"
-    >
-      1
-       
-    </span>
-    <span
-      className="measurement"
-    >
-      dash
-       
-    </span>
-    <a
-      className="title"
-      href="/recipe/undefined"
-      onClick={[Function]}
-    >
-      black pepper
-    </a>
-  </li>
-  <li
-    className="ingredient"
+    Subrecipes
+  </h3>
+  <table
+    className="table ingredients-table table table-sm table-striped"
   >
-    <span
-      className="quantity"
+    <thead
+      className="hideme"
     >
-      4
-       
-    </span>
-    <span
-      className="measurement"
-    >
-      tablespoons
-       
-    </span>
-    <a
-      className="title"
-      href="/recipe/undefined"
-      onClick={[Function]}
-    >
-      chili powder
-    </a>
-  </li>
-</ul>
+      <tr>
+        <th>
+          <span>
+            Quantity
+          </span>
+        </th>
+        <th>
+          <span>
+            Subrecipe
+          </span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        className="ingredient"
+      >
+        <td
+          className="quantity first-col"
+        >
+          <span>
+            1
+             
+            dash
+          </span>
+        </td>
+        <td
+          className="ingredient last-col first-col"
+        >
+          <span>
+            <a
+              className="title"
+              href="/recipe/undefined"
+              onClick={[Function]}
+            >
+              black pepper
+            </a>
+          </span>
+        </td>
+      </tr>
+      <tr
+        className="ingredient"
+      >
+        <td
+          className="quantity first-col"
+        >
+          <span>
+            4
+             
+            tablespoons
+          </span>
+        </td>
+        <td
+          className="ingredient last-col first-col"
+        >
+          <span>
+            <a
+              className="title"
+              href="/recipe/undefined"
+              onClick={[Function]}
+            >
+              chili powder
+            </a>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 `;

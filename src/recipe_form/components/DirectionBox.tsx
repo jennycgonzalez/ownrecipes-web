@@ -40,11 +40,11 @@ const DirectionBox: React.FC<IDirectionBox> = ({
         errors    = {errors}
         tooltip   = {formatMessage(messages.directions_tooltip)}>
       <Input
-          name    = {name}
-          rows    = {8}
-          value   = {directions}
+          name     = {name}
+          rows     = {8}
+          value    = {directions}
           placeholder = {formatMessage(messages.directions_placeholder)}
-          change  = {onChange} />
+          onChange = {onChange} />
       <div className='recipe-details'>
         <div className='recipe-schema'>
           <Directions data={directions} />
