@@ -7,8 +7,9 @@ import Icon from '../../common/components/Icon';
 import Tooltip from '../../common/components/Tooltip';
 
 export interface ITabbedViewProps {
-  label:       string;
-  tooltip?:    string;
+  id:          string;
+  labels:      Array<string>;
+  tooltips?:   Array<string>;
   initialTab?: number;
   errors?:     string;
   className?:  string;
@@ -17,7 +18,7 @@ export interface ITabbedViewProps {
 }
 
 const TabbedView: React.FC<ITabbedViewProps> = ({
-    label, errors, tooltip, children } : ITabbedViewProps) => {
+    id, labels, errors, tooltips, children } : ITabbedViewProps) => {
   const intl = useIntl();
 
   const { formatMessage } = intl;
@@ -37,31 +38,40 @@ const TabbedView: React.FC<ITabbedViewProps> = ({
     'has-error': !!errors,
   });
 
-  return (
-    <div className='live-editor'>
-      <Tabs id={`${label}-tabs`} defaultActiveKey='editor' className={navClassName}>
-        <Tab
-            title = {(
+  const tabs = children.slice(0, children.length - 1).map((childr, index) => (
+    <Tab
+        key = {String(index)}
+        title = {(
+          <>
+            {labels[index]}
+            {tooltips?.[index] && (
               <>
-                {label}
                 &nbsp;
                 <Tooltip
-                    id = {`${label}-tooltip`}
+                    id = {`${labels[index]}-tooltip`}
                     placement = 'bottom'
-                    tooltip   = {tooltip}>
+                    tooltip   = {tooltips[index]}>
                   <Icon icon='info-circle' className='tooltip-icon' />
                 </Tooltip>
               </>
             )}
-            eventKey = 'editor'
-            className = 'editor'>
-          <div className={contentClassName}>{children[0]}</div>
-        </Tab>
+          </>
+        )}
+        eventKey  = {String(index)}
+        className = 'editor'>
+      <div className={contentClassName}>{childr}</div>
+    </Tab>
+  ));
+
+  return (
+    <div className='live-editor'>
+      <Tabs id={`${id}-tabs`} defaultActiveKey='0' className={navClassName}>
+        {tabs}
         <Tab
             title = {formatMessage(messages.preview)}
             className = 'preview'
-            eventKey = 'preview'>
-          <div className={contentClassName}>{children[1]}</div>
+            eventKey  = 'preview'>
+          <div className={contentClassName}>{children[children.length - 1]}</div>
         </Tab>
       </Tabs>
       <div className='help-text error'>{errors}</div>

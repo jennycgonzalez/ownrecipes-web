@@ -36,9 +36,10 @@ const DirectionBox: React.FC<IDirectionBox> = ({
 
   return (
     <TabbedView
-        label     = {formatMessage(messages.directions_label)}
+        id        = 'directions'
+        labels    = {[formatMessage(messages.directions_label)]}
         errors    = {errors}
-        tooltip   = {formatMessage(messages.directions_tooltip)}>
+        tooltips  = {[formatMessage(messages.directions_tooltip)]}>
       <Input
           name     = {name}
           rows     = {8}

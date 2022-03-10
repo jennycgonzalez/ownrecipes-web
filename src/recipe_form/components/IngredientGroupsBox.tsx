@@ -1,21 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { defineMessages, useIntl } from 'react-intl';
+import ReactTextareaAutocomplete from '@webscopeio/react-textarea-autocomplete';
+
+import '../css/smart_text_box.css';
 
 import Input from '../../common/components/Input';
 import IngredientGroups from '../../recipe/components/IngredientGroups';
 import TabbedView from './TabbedView';
 import formatQuantity from '../../recipe/utilts/formatQuantity';
 import parseIngredient from '../utilts/parseIngredient';
-import { Ingredient, IngredientGroup, IngredientInput } from '../../recipe/store/RecipeTypes';
+import { Ingredient, IngredientGroup, IngredientInput, SubRecipe } from '../../recipe/store/RecipeTypes';
+import SubRecipes from '../../recipe/components/SubRecipes';
+import { AutocompleteListItem } from '../store/types';
 
 export interface IIngredientGroupsBoxProps {
   name:     string;
-  groups:   Array<IngredientGroup> | undefined;
   errors:   string | undefined;
+
+  groups:   Array<IngredientGroup> | undefined;
+  subrecipes: Array<SubRecipe> | undefined;
+
+  fetchRecipeList: (searchTerm: string) => Promise<Array<AutocompleteListItem>>;
   onChange: (name: string, value: unknown) => void;
 }
 
-function stringify(value: Array<IngredientGroup>): string {
+/* IngredientGroups */
+
+function igStringify(value: Array<IngredientGroup>): string {
   let tr = '';
   if (value) {
     value.filter(ig => ig.title.length > 0 || ig.ingredients.length > 0).forEach(ig => {
@@ -36,7 +47,7 @@ function stringify(value: Array<IngredientGroup>): string {
   return tr;
 }
 
-function arrayify(value: string): Array<IngredientGroup> {
+function igArrayify(value: string): Array<IngredientGroup> {
   const dict = [{ title: '', ingredients: [] }];
   let igTitle = '';
   let ings: Array<IngredientInput> | undefined = dict.find(t => t.title === '')?.ingredients; // Should always exist, as it is the init group.
@@ -63,7 +74,7 @@ function arrayify(value: string): Array<IngredientGroup> {
   return dict;
 }
 
-function isSameData(oldIg: Array<IngredientGroup> | undefined, newIg: Array<IngredientGroup> | undefined): boolean {
+function isSameIgData(oldIg: Array<IngredientGroup> | undefined, newIg: Array<IngredientGroup> | undefined): boolean {
   const toString = (ing: Ingredient): string => `${String(ing.numerator)} ${String(ing.denominator)} ${ing.measurement} ${ing.title}`;
 
   const oldIgHash = oldIg?.map(ig => {
@@ -81,8 +92,49 @@ function isSameData(oldIg: Array<IngredientGroup> | undefined, newIg: Array<Ingr
   return oldIgHash === newIgHash;
 }
 
+/* SubRecipe */
+
+function srStringify(value: Array<SubRecipe>) {
+  let tr = '';
+  if (value) {
+    // eslint-disable-next-line
+    value.map(i => {
+      tr += i.numerator ? `${formatQuantity(1, 1, i.numerator, i.denominator)} ` : '';
+      tr += i.measurement ? `${i.measurement} ` : '';
+      tr += `${i.title}\n`;
+    });
+  }
+  return tr.substring(0, tr.length - 1);
+}
+
+function srArrayify(value: string): Array<SubRecipe> {
+  const ings: Array<SubRecipe> = [];
+  const subRecipes = value.split('\n').filter(t => t.trim().length > 1);
+  subRecipes.forEach(sr => {
+    if (sr.length > 0) {
+      ings.push(parseIngredient(sr) as SubRecipe);
+    }
+  });
+  return ings;
+}
+
+function isSameSrData(oldSr: Array<SubRecipe> | undefined, newSr: Array<SubRecipe> | undefined): boolean {
+  const toString = (sr: SubRecipe): string => `${String(sr.numerator)} ${String(sr.denominator)} ${sr.measurement} ${sr.title}`;
+
+  const oldSrHash = oldSr?.map(sr => toString(sr)).join(',') ?? '';
+  const newSrHash = newSr?.map(sr => toString(sr)).join(',') ?? '';
+
+  return oldSrHash === newSrHash;
+}
+
+interface IItemProps {
+  entity: AutocompleteListItem;
+}
+const Item    = ({ entity: { name } }: IItemProps) => <div>{`${name}`}</div>;
+const Loading = () => <div className='loading'>Loading...</div>;
+
 const IngredientGroupsBox: React.FC<IIngredientGroupsBoxProps> = ({
-    name, groups, errors, onChange }: IIngredientGroupsBoxProps) => {
+    name, groups, subrecipes, errors, fetchRecipeList, onChange }: IIngredientGroupsBoxProps) => {
   const intl = useIntl();
 
   const { formatMessage } = intl;
@@ -92,7 +144,7 @@ const IngredientGroupsBox: React.FC<IIngredientGroupsBoxProps> = ({
       description: 'Recipe ingredients label',
       defaultMessage: 'Ingredients',
     },
-    info_tooltip: {
+    ingredients_tooltip: {
       id: 'recipe.create.ing.info_desc',
       description: 'info_desc',
       defaultMessage: 'Each Ingredient should be on its own line.',
@@ -102,41 +154,100 @@ const IngredientGroupsBox: React.FC<IIngredientGroupsBoxProps> = ({
       description: 'Example for writing ingredients',
       defaultMessage: 'Dough:\n300 g flour\n100 ml milk\n\nDip:\n100 ml olive oil\n...',
     },
+
+    subrecipes_label: {
+      id: 'recipe.create.subrecipes_label',
+      description: 'Recipe links label',
+      defaultMessage: 'Recipe links',
+    },
+    subrecipes_tooltip: {
+      id: 'recipe.create.subrecipes.tooltip',
+      description: 'Subrecipes tooltip',
+      defaultMessage: 'If the recipe is made of several subrecipes, then link them here. Each Recipe Link should be on its own line.',
+    },
+    subrecipes_placeholder: {
+      id: 'recipe.create.subrecipes.placeholder',
+      description: 'Subreceipes placeholder',
+      defaultMessage: ':dough-1\n:olive-oil-dip-1',
+    },
   });
 
-  const [data, setData] = useState<Array<IngredientGroup>>(groups ?? []);
-  const [text, setText] = useState<string>(stringify(groups ?? []));
+  const [igData, setIgData] = useState<Array<IngredientGroup>>(groups ?? []);
+  const [igText, setIgText] = useState<string>(igStringify(groups ?? []));
+
+  const [srData, setSrData] = useState<Array<SubRecipe>>(subrecipes ?? []);
+  const [srText, setSrText] = useState<string>(srStringify(subrecipes ?? []));
 
   useEffect(() => {
-    if (!isSameData(data, groups)) {
-      setText(stringify(groups ?? []));
+    if (!isSameIgData(igData, groups)) {
+      setIgText(igStringify(groups ?? []));
     }
-    setData(groups ?? []);
+    setIgData(groups ?? []);
   }, [groups]);
 
-  const handleChange = (key: string, value: string) => {
-    const list = arrayify(value);
+  const handleIgChange = (key: string, value: string) => {
+    const list = igArrayify(value);
 
-    setData(list);
-    setText(value);
+    setIgData(list);
+    setIgText(value);
 
     onChange(key, list);
   };
 
+  useEffect(() => {
+    if (!isSameSrData(srData, subrecipes)) {
+      setSrText(srStringify(subrecipes ?? []));
+    }
+    setSrData(subrecipes ?? []);
+  }, [subrecipes]);
+
+  const handleSrChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const val  = event.target.value;
+    if (val === srText) return;
+    const list = srArrayify(val);
+
+    setSrData(list);
+    setSrText(val);
+
+    onChange(name, list);
+  };
+
   return (
     <TabbedView
-        label    = {formatMessage(messages.ingredients_label)}
+        id       = 'ingredients'
+        labels   = {[formatMessage(messages.ingredients_label), formatMessage(messages.subrecipes_label)]}
         errors   = {errors}
-        tooltip  = {formatMessage(messages.info_tooltip)}>
+        tooltips = {[formatMessage(messages.ingredients_tooltip), formatMessage(messages.subrecipes_tooltip)]}>
       <Input
           name     = {name}
           rows     = {8}
           placeholder = {formatMessage(messages.ingredients_placeholder)}
-          onChange = {handleChange}
-          value    = {text} />
+          onChange = {handleIgChange}
+          value    = {igText} />
+      <div className='form-group'>
+        <ReactTextareaAutocomplete<AutocompleteListItem>
+            value = {srText}
+            onChange = {handleSrChange}
+            rows = {8}
+            placeholder = {formatMessage(messages.subrecipes_placeholder)}
+            loadingComponent = {Loading}
+            className = 'form-control'
+            trigger={{
+            ':': {
+              dataProvider: token => fetchRecipeList(token),
+              component: Item,
+              output: item => item.char,
+            },
+          }} />
+      </div>
       <div className='recipe-details'>
         <div className='recipe-schema'>
-          <IngredientGroups groups={data} />
+          <article className='ingredients-panel'>
+            <div className='ingredient-groups'>
+              <SubRecipes subRecipes={srData} />
+              <IngredientGroups groups={igData} />
+            </div>
+          </article>
         </div>
       </div>
     </TabbedView>

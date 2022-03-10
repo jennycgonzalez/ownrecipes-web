@@ -12,7 +12,6 @@ import RecipeGroupSelect from './RecipeGroupSelect';
 
 import IngredientGroupsBox from './IngredientGroupsBox';
 import DirectionBox from './DirectionBox';
-import SubRecipeBox from './SubRecipeBox';
 import TagList from './TagList';
 import Status from './Status';
 import { Course, Cuisine, Recipe } from '../../recipe/store/RecipeTypes';
@@ -294,15 +293,11 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
                 onChange = {update} />
             <IngredientGroupsBox
                 name     = 'ingredientGroups'
+                errors   = {formatValidation(intl, formState.validation?.ingredientGroups) || formatValidation(intl, formState.validation?.subrecipes)}
                 groups   = {form?.ingredientGroups}
-                errors   = {formatValidation(intl, formState.validation?.ingredientGroups)}
-                onChange = {update} />
-            <SubRecipeBox
-                name       = 'subrecipes'
                 subrecipes = {form?.subrecipes}
-                errors     = {formatValidation(intl, formState.validation?.subrecipes)}
                 fetchRecipeList = {fetchRecipeList}
-                onChange   = {update} />
+                onChange = {update} />
             <DirectionBox
                 name       = 'directions'
                 directions = {form?.directions ?? ''}
