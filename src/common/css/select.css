@@ -44,7 +44,7 @@
 }
 
 .form-group.required:not(.readonly):not(.error) .creatable-select__control {
-  background-color: var(--primaryShadow);
+  background-color: var(--inputBgRequired);
 }
 .form-group.error:not(.readonly) .creatable-select__control{
   background-color: rgba(225, 128, 128, 0.15);

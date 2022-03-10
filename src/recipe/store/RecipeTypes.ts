@@ -1,6 +1,6 @@
 import { Dispatch as ReduxDispatch } from 'redux';
 
-import { NUMBER_UNDEFINED } from '../../common/constants';
+import { NUMBER_UNDEFINED, STRING_UNDEFINED } from '../../common/constants';
 import ItemReducerType from '../../common/store/ItemReducerType';
 import { GenericItemReducerAction } from '../../common/store/ReduxHelper';
 
@@ -271,7 +271,7 @@ export const toRecipe = (dto: RecipeDto): Recipe => ({
   subrecipes: dto.subrecipes.map(sr => toSubRecipe(sr)),
   ingredientGroups: dto.ingredient_groups.filter(ig => ig.ingredients.length > 0).map(ig => toIngredientGroup(ig)),
 
-  directions: dto.directions,
+  directions: parseBackendString(dto.directions) ?? '',
   info: dto.info,
 
   rating: dto.rating,
@@ -311,6 +311,10 @@ function parseBackendNumber(val: number): number | undefined {
   if (val === NUMBER_UNDEFINED) return undefined;
   return val;
 }
+function parseBackendString(str: string): string | undefined {
+  if (str === STRING_UNDEFINED) return undefined;
+  return str;
+}
 
 export const toRecipeRequest = (obj: Recipe): RecipeRequest => ({
   title:      obj.title,
@@ -327,7 +331,7 @@ export const toRecipeRequest = (obj: Recipe): RecipeRequest => ({
 
   subrecipes: obj.subrecipes?.map(sr => toSubRecipeDto(sr)) ?? [],
   ingredient_groups: obj.ingredientGroups?.filter(ig => ig.ingredients.length > 0).map(ig => toIngredientGroupDto(ig)),
-  directions: obj.directions,
+  directions: ifNull(obj.directions, STRING_UNDEFINED),
   info:       obj.info,
 
   public:     obj.public,

@@ -25,7 +25,7 @@
   margin-bottom: 2px;
 }
 .form-group.required:not(.readonly) .form-control {
-  background-color: var(--primaryShadow);
+  background-color: var(--inputBgRequired);
 }
 
 .form-group.error:not(.readonly) .form-label {

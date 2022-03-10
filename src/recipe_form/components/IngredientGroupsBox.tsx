@@ -220,10 +220,11 @@ const IngredientGroupsBox: React.FC<IIngredientGroupsBoxProps> = ({
         tooltips = {[formatMessage(messages.ingredients_tooltip), formatMessage(messages.subrecipes_tooltip)]}>
       <Input
           name     = {name}
+          value    = {igText}
           rows     = {8}
           placeholder = {formatMessage(messages.ingredients_placeholder)}
-          onChange = {handleIgChange}
-          value    = {igText} />
+          required
+          onChange = {handleIgChange} />
       <div className='form-group'>
         <ReactTextareaAutocomplete<AutocompleteListItem>
             value = {srText}
