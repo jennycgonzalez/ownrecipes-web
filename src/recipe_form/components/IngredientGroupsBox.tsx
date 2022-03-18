@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { defineMessages, useIntl } from 'react-intl';
+import React, { useContext, useEffect, useState } from 'react';
+import { defineMessages, IntlShape, useIntl } from 'react-intl';
 import ReactTextareaAutocomplete from '@webscopeio/react-textarea-autocomplete';
 
 import '../css/smart_text_box.css';
@@ -12,6 +12,7 @@ import parseIngredient from '../utilts/parseIngredient';
 import { Ingredient, IngredientGroup, IngredientInput, SubRecipe } from '../../recipe/store/RecipeTypes';
 import SubRecipes from '../../recipe/components/SubRecipes';
 import { AutocompleteListItem } from '../store/types';
+import MeasurementContext from '../../common/context/MeasurementContext';
 
 export interface IIngredientGroupsBoxProps {
   name:     string;
@@ -26,28 +27,29 @@ export interface IIngredientGroupsBoxProps {
 
 /* IngredientGroups */
 
-function igStringify(value: Array<IngredientGroup>): string {
+function igStringify(intl: IntlShape, formatter: Record<string, string>, values: Array<IngredientGroup>): string {
   let tr = '';
-  if (value) {
-    value.filter(ig => ig.title.length > 0 || ig.ingredients.length > 0).forEach(ig => {
+  if (values) {
+    values.filter(ig => ig.title.length > 0 || ig.ingredients.length > 0).forEach(ig => {
       if (ig.title) {
         tr += `${ig.title}:\n`;
       }
       ig.ingredients.forEach(i => {
+        const locMsrmnt = i.measurement ? formatter[i.measurement] : '';
         tr += i.numerator ? `${formatQuantity(1, 1, i.numerator, i.denominator)} ` : '';
-        tr += i.measurement ? `${i.measurement} ` : '';
+        tr += locMsrmnt ? `${(intl as IntlShape).formatMessage({ id: `measurement.${locMsrmnt.toLocaleLowerCase()}` }, { itemCount: i.numerator })} ` : '';
         tr += `${i.title}\n`;
       });
       tr += '\n';
     });
   }
-  if (tr.length > 3) {
+  if (tr.endsWith('\n')) {
     return tr.substring(0, tr.length - 2);
   }
   return tr;
 }
 
-function igArrayify(value: string): Array<IngredientGroup> {
+function igArrayify(parser: Record<string, string>, value: string): Array<IngredientGroup> {
   const dict = [{ title: '', ingredients: [] }];
   let igTitle = '';
   let ings: Array<IngredientInput> | undefined = dict.find(t => t.title === '')?.ingredients; // Should always exist, as it is the init group.
@@ -66,7 +68,7 @@ function igArrayify(value: string): Array<IngredientGroup> {
           if (ings == null) throw new Error('Invalid state: The create ings may not be null.');
         } else {
           if (ings == null) throw new Error('Invalid state: ings may not be null.');
-          ings.push(parseIngredient(line));
+          ings.push(parseIngredient(parser, line));
         }
       }
     });
@@ -94,25 +96,25 @@ function isSameIgData(oldIg: Array<IngredientGroup> | undefined, newIg: Array<In
 
 /* SubRecipe */
 
-function srStringify(value: Array<SubRecipe>) {
+function srStringify(intl: IntlShape, formatter: Record<string, string>, values: Array<SubRecipe>) {
   let tr = '';
-  if (value) {
-    // eslint-disable-next-line
-    value.map(i => {
+  if (values) {
+    values.forEach(i => {
+      const locMsrmnt = i.measurement ? formatter[i.measurement] : '';
       tr += i.numerator ? `${formatQuantity(1, 1, i.numerator, i.denominator)} ` : '';
-      tr += i.measurement ? `${i.measurement} ` : '';
+      tr += locMsrmnt ? `${(intl as IntlShape).formatMessage({ id: `measurement.${locMsrmnt.toLocaleLowerCase()}` }, { itemCount: i.numerator })} ` : '';
       tr += `${i.title}\n`;
     });
   }
   return tr.substring(0, tr.length - 1);
 }
 
-function srArrayify(value: string): Array<SubRecipe> {
+function srArrayify(parser: Record<string, string>, value: string): Array<SubRecipe> {
   const ings: Array<SubRecipe> = [];
   const subRecipes = value.split('\n').filter(t => t.trim().length > 1);
   subRecipes.forEach(sr => {
     if (sr.length > 0) {
-      ings.push(parseIngredient(sr) as SubRecipe);
+      ings.push(parseIngredient(parser, sr) as SubRecipe);
     }
   });
   return ings;
@@ -136,7 +138,6 @@ const Loading = () => <div className='loading'>Loading...</div>;
 const IngredientGroupsBox: React.FC<IIngredientGroupsBoxProps> = ({
     name, groups, subrecipes, errors, fetchRecipeList, onChange }: IIngredientGroupsBoxProps) => {
   const intl = useIntl();
-
   const { formatMessage } = intl;
   const messages = defineMessages({
     ingredients_label: {
@@ -172,39 +173,42 @@ const IngredientGroupsBox: React.FC<IIngredientGroupsBoxProps> = ({
     },
   });
 
+  const measurementsContext = useContext(MeasurementContext);
+
   const [igData, setIgData] = useState<Array<IngredientGroup>>(groups ?? []);
-  const [igText, setIgText] = useState<string>(igStringify(groups ?? []));
+  const [igText, setIgText] = useState<string>(igStringify(intl, measurementsContext?.formatter ?? {}, groups ?? []));
 
   const [srData, setSrData] = useState<Array<SubRecipe>>(subrecipes ?? []);
-  const [srText, setSrText] = useState<string>(srStringify(subrecipes ?? []));
+  const [srText, setSrText] = useState<string>(srStringify(intl, measurementsContext?.formatter ?? {}, subrecipes ?? []));
 
   useEffect(() => {
     if (!isSameIgData(igData, groups)) {
-      setIgText(igStringify(groups ?? []));
+      setIgText(igStringify(intl, measurementsContext?.formatter ?? {}, groups ?? []));
     }
     setIgData(groups ?? []);
-  }, [groups]);
+  }, [groups, measurementsContext?.formatter]);
 
   const handleIgChange = (key: string, value: string) => {
-    const list = igArrayify(value);
+    const list = igArrayify(measurementsContext?.parser ?? {}, value);
 
     setIgData(list);
-    setIgText(value);
+    const text = igStringify(intl, measurementsContext?.formatter ?? {}, list);
+    setIgText(text);
 
     onChange(key, list);
   };
 
   useEffect(() => {
     if (!isSameSrData(srData, subrecipes)) {
-      setSrText(srStringify(subrecipes ?? []));
+      setSrText(srStringify(intl, measurementsContext?.formatter ?? {}, subrecipes ?? []));
     }
     setSrData(subrecipes ?? []);
-  }, [subrecipes]);
+  }, [subrecipes, measurementsContext?.formatter]);
 
   const handleSrChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const val  = event.target.value;
     if (val === srText) return;
-    const list = srArrayify(val);
+    const list = srArrayify(measurementsContext?.parser ?? {}, val);
 
     setSrData(list);
     setSrText(val);

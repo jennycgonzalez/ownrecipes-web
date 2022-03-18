@@ -1,5 +1,7 @@
+import { useContext } from 'react';
 import { Table } from 'react-bootstrap';
 import { defineMessages, useIntl } from 'react-intl';
+import MeasurementContext from '../../common/context/MeasurementContext';
 
 // import { Checkbox } from '../../common/components/FormComponents';
 import { optionallyFormatMessage } from '../../common/utility';
@@ -12,7 +14,6 @@ export interface IIngredientsProps {
 
 const Ingredients: React.FC<IIngredientsProps> = ({ data /* , checkIngredient */ }: IIngredientsProps) => {
   const intl = useIntl();
-
   const messages = defineMessages({
     quantity: {
       id: 'ingredients.table.quantity',
@@ -26,10 +27,22 @@ const Ingredients: React.FC<IIngredientsProps> = ({ data /* , checkIngredient */
     },
   });
 
+  const measurementsContext = useContext(MeasurementContext);
+
   const ingredients = data.map((ingredient, index) => {
     const quantityString    = ingredient.quantity;
-    const measurementString = ingredient.measurement != null ? optionallyFormatMessage(intl, 'measurement.', ingredient.measurement, { itemCount: ingredient.quantity }) : '';
-    const titleString       = ingredient.title;
+    let measurementString: string;
+    if (ingredient.measurement != null) {
+      const measurementParserId = measurementsContext?.formatter[measurementsContext?.parser[ingredient.measurement]];
+      if (measurementParserId != null) {
+        measurementString = optionallyFormatMessage(intl, 'measurement.', measurementParserId, { itemCount: ingredient.quantity });
+      } else {
+        measurementString = ingredient.measurement;
+      }
+    } else {
+      measurementString = '';
+    }
+    const titleString = ingredient.title;
 
     return (
       <tr className='ingredient' key={String(ingredient.id ?? index)}>

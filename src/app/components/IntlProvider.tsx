@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { IntlProvider as ReactIntlProvider } from 'react-intl';
+import { createIntl, createIntlCache, IntlProvider as ReactIntlProvider, IntlShape } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { LanguageCode, parseLanguage, SETTING_LANGUAGE_STORAGE_KEY } from '../../account/store/settings/types';
 
@@ -31,8 +31,21 @@ export function toLanguageName(lang: LanguageCode): string {
   }
 }
 
+export function createIntlInstance(languageCode: LanguageCode): IntlShape {
+  const cache = createIntlCache();
+  const intl = createIntl(
+    {
+      locale: languageCode,
+      messages: getMessagesFromLang(languageCode),
+    },
+    cache
+  );
+
+  return intl;
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function getMessagesFromLang(lang: LanguageCode): any {
+export function getMessagesFromLang(lang: LanguageCode): any {
   switch (lang) {
     case LanguageCode.DE: return localeDe;
     case LanguageCode.EN: return localeEn;

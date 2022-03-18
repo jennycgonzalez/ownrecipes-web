@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router';
 
@@ -17,12 +16,9 @@ import './css/print.css';
 import { CombinedStore } from './Store';
 import Routes from './components/Routes';
 import AutoLogin from './components/AutoLogin';
-import initCourses from './components/messages/Courses';
-import initCuisines from './components/messages/Cuisines';
-import initMeasurements from './components/messages/Measurements';
 import ConnectionObserver from './components/ConnectionObserver';
-import initValidations from './components/messages/Validations';
 import InternalErrorDialog from './components/InternalErrorDialog';
+import IntlMessagesCreator from './components/IntlMessagesCreator';
 
 const App = () => {
   const nav = useNavigate();
@@ -31,13 +27,6 @@ const App = () => {
   const account = useSelector((state: CombinedStore) => state.account.item);
   const isAuthenticated = account != null && account.id !== 0;
 
-  useEffect(() => {
-    initCourses();
-    initCuisines();
-    initMeasurements();
-    initValidations();
-  }, []);
-
   const main = (
     <ErrorBoundary verbose printStack>
       <AutoLogin nav={nav} loc={location}>
@@ -45,6 +34,7 @@ const App = () => {
           <Header />
           {isDemoMode() && <Demo />}
           {!isDemoMode() && <ConnectionObserver />}
+          {!isDemoMode() && <IntlMessagesCreator />}
           <Routes isAuthenticated={isAuthenticated} />
         </div>
         <Footer />

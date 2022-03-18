@@ -8,7 +8,7 @@ export interface IIngredientGroupsProps {
 }
 
 const IngredientGroups: React.FC<IIngredientGroupsProps> = ({ groups /* , checkIngredient */ }: IIngredientGroupsProps) => {
-  const ingredientGroups = groups?.map(group => (
+  const ingredientGroups = groups?.filter(group => group.title || group.ingredients.length > 0).map(group => (
     <div className='ingredient-group' key={group.title}>
       {groups.length > 1 && group.title && <h3 className='subheading'>{group.title}</h3>}
       <Ingredients

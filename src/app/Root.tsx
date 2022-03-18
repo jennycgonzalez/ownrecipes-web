@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 
 import Spinner from './components/Spinner';
 import store from '../common/store/store';
-import IntlProvider from './components/IntlProvider';
+import ContextProvider from './components/ContextProvider';
 import ThemeProvider from './components/ThemeProvider';
 import App from './App';
 
@@ -12,11 +12,11 @@ const Root = () => (
   <Suspense fallback={<Spinner />}>
     <Provider store={store}>
       <ThemeProvider />
-      <IntlProvider>
+      <ContextProvider>
         <Router>
           <App />
         </Router>
-      </IntlProvider>
+      </ContextProvider>
     </Provider>
   </Suspense>
 );
