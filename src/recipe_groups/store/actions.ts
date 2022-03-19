@@ -13,7 +13,9 @@ export const fetchCourses = () => (dispatch: RecipeGroupsDispatch) => {
       dispatch({
         store:     COURSES_STORE,
         type:      ACTION.GET_SUCCESS,
-        data:      res.body.results.map((courseDto: CourseDto) => toCourse(courseDto)),
+        data:      res.body.results
+            .filter((courseDto: CourseDto) => courseDto.title !== '-')
+            .map((courseDto: CourseDto) => toCourse(courseDto)),
       });
     })
     .catch(err => dispatch(handleError(err, COURSES_STORE)));
@@ -28,7 +30,9 @@ export const fetchCuisines = () => (dispatch: RecipeGroupsDispatch) => {
       dispatch({
         store:     CUISINES_STORE,
         type:      ACTION.GET_SUCCESS,
-        data:      res.body.results.map((cuisineDto: CuisineDto) => toCuisine(cuisineDto)),
+        data:      res.body.results
+            .filter((cuisineDto: CuisineDto) => cuisineDto.title !== '-')
+            .map((cuisineDto: CuisineDto) => toCuisine(cuisineDto)),
       });
     })
     .catch(err => dispatch(handleError(err, CUISINES_STORE)));

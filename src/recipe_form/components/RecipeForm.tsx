@@ -198,7 +198,6 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
                     label    = {formatMessage(messages.course_label)}
                     data     = {courses}
                     value    = {form?.course ?? ''}
-                    required
                     errors   = {formatValidation(intl, formState.validation?.course)}
                     onChange = {update} />
               </Col>
@@ -208,7 +207,6 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
                     label    = {formatMessage(messages.cuisine_label)}
                     data     = {cuisines}
                     value    = {form?.cuisine ?? ''}
-                    required
                     errors   = {formatValidation(intl, formState.validation?.cuisine)}
                     onChange = {update} />
               </Col>

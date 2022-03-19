@@ -231,9 +231,9 @@ export type Recipe = {
   prepTime?: number;
   servings:  number;
 
-  course:  Course;
-  cuisine: Cuisine;
-  tags:    Array<Tag>;
+  course?:  Course;
+  cuisine?: Cuisine;
+  tags:     Array<Tag>;
 
   photo?: string;
 
@@ -261,8 +261,8 @@ export const toRecipe = (dto: RecipeDto): Recipe => ({
   prepTime: parseBackendNumber(dto.prep_time),
   servings: dto.servings,
 
-  course:  toCourse(dto.course),
-  cuisine: toCuisine(dto.cuisine),
+  course:  dto.course.title  === '-' ? undefined : toCourse(dto.course),
+  cuisine: dto.cuisine.title === '-' ? undefined : toCuisine(dto.cuisine),
   tags:    dto.tags.map(t => toTag(t)),
 
   photo: dto.photo ?? undefined,
@@ -326,8 +326,8 @@ export const toRecipeRequest = (obj: Recipe): RecipeRequest => ({
   servings:   obj.servings,
 
   tags:       obj.tags,
-  course:     toCourseDto(obj.course),
-  cuisine:    toCuisineDto(obj.cuisine),
+  course:     obj.course ? toCourseDto(obj.course) : ({ title: '-' } as CourseDto),
+  cuisine:    obj.cuisine ? toCuisineDto(obj.cuisine) : ({ title: '-' } as CuisineDto),
 
   subrecipes: obj.subrecipes?.map(sr => toSubRecipeDto(sr)) ?? [],
   ingredient_groups: obj.ingredientGroups?.filter(ig => ig.ingredients.length > 0).map(ig => toIngredientGroupDto(ig)),

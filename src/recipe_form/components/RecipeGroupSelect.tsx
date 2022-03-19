@@ -24,6 +24,8 @@ interface IRecipeGroupSelectState {
   options: OptionsOrGroups<SelectDataType, GroupBase<SelectDataType>>;
 }
 
+const isValidNewOption = (value: SelectDataType): boolean => !!value;
+
 export default class RecipeGroupSelect extends BaseComponent<IRecipeGroupSelectProps, IRecipeGroupSelectState> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private ref = createRef<any>();
@@ -52,9 +54,6 @@ export default class RecipeGroupSelect extends BaseComponent<IRecipeGroupSelectP
       this.props.onChange(this.props.name, data ? data.value : '');
     }
   };
-
-  // eslint-disable-next-line class-methods-use-this
-  isValidNewOption = (value: SelectDataType) => !!value;
 
   handleCreate = (inputValue: SelectDataType) => {
     const { options } = this.state;
@@ -87,8 +86,9 @@ export default class RecipeGroupSelect extends BaseComponent<IRecipeGroupSelectP
           <CreatableSelect
               inputId = {`${this.props.name}-input`}
               onChange = {this.handleChange}
-              isValidNewOption = {this.isValidNewOption}
+              isValidNewOption = {isValidNewOption}
               onCreateOption = {this.handleCreate}
+              isClearable
               value = {{ value: this.props.value, label: this.props.value.title }}
               className = 'react-select-container'
               classNamePrefix = 'creatable-select'

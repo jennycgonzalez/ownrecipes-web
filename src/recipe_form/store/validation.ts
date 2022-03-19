@@ -26,14 +26,11 @@ const ingRequiredValidator = (name: string, val: Array<IngredientGroup>): Valida
 };
 
 const validators: ValidatorsType = [
-  { name: 'course'     , validators: [requiredValidator] },
-  { name: 'cuisine'    , validators: [requiredValidator] },
-  { name: 'prepTime'   , validators: [numberValidator] },
-  { name: 'cookTime'   , validators: [numberValidator] },
-  { name: 'servings'   , validators: [requiredValidator, numberValidator] },
-  { name: 'title'      , validators: [requiredValidator] },
+  { name: 'cookTime'        , validators: [numberValidator] },
   { name: 'ingredientGroups', validators: [ingRequiredValidator] },
-  { name: 'directions' , validators: [] },
+  { name: 'servings'        , validators: [requiredValidator, numberValidator] },
+  { name: 'prepTime'        , validators: [numberValidator] },
+  { name: 'title'           , validators: [requiredValidator] },
 ];
 
 export default validators;
