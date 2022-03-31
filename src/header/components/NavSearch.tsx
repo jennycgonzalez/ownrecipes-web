@@ -7,6 +7,7 @@ import classNames from 'classnames';
 import Icon from '../../common/components/Icon';
 import Input from '../../common/components/Input';
 import NavLink from './NavLink';
+import { getResourcePath } from '../../common/utility';
 
 export interface INavSearchProps {
   onExpandSearch?: (expanded: boolean) => void;
@@ -88,7 +89,7 @@ const NavSearch: React.FC<INavSearchProps> = ({ onExpandSearch }: INavSearchProp
     }
   };
 
-  const buildUrl = (): string => (formData.search ? `/browser?search=${formData.search}` : '/browser');
+  const buildUrl = (): string => (getResourcePath(formData.search ? `/browser?search=${formData.search}` : '/browser'));
 
   const searchButton = (
     <NavLink id='search-button' as={isExpanded ? undefined : 'button'} to={isExpanded ? buildUrl() : undefined} onClick={isExpanded ? handleSearchClick : handleExpandClick} ref={urlRef}>

@@ -150,7 +150,7 @@ export default class Input extends BaseComponent<IAnyInputProps, IInputState> {
   handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.defaultPrevented || event.ctrlKey || event.shiftKey) return;
 
-    const value = this.props.value;
+    const value = this.state.value;
     const type  = this.props.type ?? 'text';
     const rows  = (this.props as ITextInputProps).rows ?? 1;
     const isTextArea = type === 'text' && rows > 1;
@@ -181,7 +181,7 @@ export default class Input extends BaseComponent<IAnyInputProps, IInputState> {
       if (this.props.onChange && newVal != null && newVal !== value) {
         this.props.onChange(this.props.name, newVal);
       }
-    } else if (type === 'text' && isTextArea && event.key === 'Enter') {
+    } else if (event.key === 'Enter' && !isTextArea) {
       const valueS = this.formatValue(String(value), true);
       this.pushChange(valueS);
     }

@@ -14,6 +14,7 @@ import DefaultFilters from '../constants/DefaultFilters';
 import PageWrapper from '../../common/components/PageWrapper';
 import { CombinedStore } from '../../app/Store';
 import { RecipeList } from '../../recipe/store/RecipeTypes';
+import { getResourcePath } from '../../common/utility';
 
 function mergeDefaultFilters(query: queryString.ParsedQuery<string | number | boolean>) {
   const filter: Record<string, unknown> = {};
@@ -70,7 +71,7 @@ const Browse: React.FC = () => {
   }, [locationSearch]);
 
   const buildUrl = (name: string, value: string, multiSelect = false) => {
-    if (!name) return '/browser';
+    if (!name) return getResourcePath('/browser');
 
     const qsBuilder = _.cloneDeep(qs);
 
@@ -99,7 +100,7 @@ const Browse: React.FC = () => {
     }
 
     const str = queryString.stringify(qsBuilder);
-    return str ? `/browser?${str}` : '/browser';
+    return getResourcePath(str ? `/browser?${str}` : '/browser');
   };
 
   const doSearch = (value: string) => {
@@ -113,7 +114,7 @@ const Browse: React.FC = () => {
     }
 
     let str = queryString.stringify(qsBuilder);
-    str = str ? `/browser?${str}` : '/browser';
+    str = getResourcePath(str ? `/browser?${str}` : '/browser');
     nav(str);
   };
 

@@ -1,12 +1,13 @@
 import * as _ from 'lodash';
 import { IntlShape } from 'react-intl';
+import { IMAGE_PLACEHOLDER } from './constants';
 
 export function isDemoMode(): boolean {
   return process.env.REACT_APP_DEMO === 'demo';
 }
 
 export function getRecipeImage(photoThumbnail: string | undefined, loadingError = false) {
-  return !loadingError ? (photoThumbnail ?? '') : '/images/fried-eggs.jpg';
+  return !loadingError ? (photoThumbnail ?? '') : IMAGE_PLACEHOLDER;
 }
 
 export function getResourcePath(path: string): string {

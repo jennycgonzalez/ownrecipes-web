@@ -97,7 +97,7 @@ const Routes: React.FC<IRoutesProps> = (props: IRoutesProps) => {
       return <Route path={getResourcePath(r.path)} key={r.path} element={<PageComponent />} />;
     });
     routesList.push(
-      <Route path='/' key='/' element={<Navigate replace to={getResourcePath('/home')} />} />
+      <Route path={getResourcePath('/')} key='/' element={<Navigate replace to={getResourcePath('/home')} />} />
     );
     routesList.push(
       <Route path='*' key='*' element={<Navigate replace to={getResourcePath('/NotFound')} />} />
@@ -109,7 +109,7 @@ const Routes: React.FC<IRoutesProps> = (props: IRoutesProps) => {
       return <Route path={getResourcePath(r.path)} key={r.path} element={<PageComponent />} />;
     });
     routesList.push(
-      <Route path='/' key='/' element={<Navigate replace to={getResourcePath('/home')} />} />
+      <Route path={getResourcePath('/')} key='/' element={<Navigate replace to={getResourcePath('/home')} />} />
     );
     routesList.push(
       <Route path='*' key='*' element={<Navigate replace to={getResourcePath('/login')} />} />

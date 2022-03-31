@@ -9,6 +9,12 @@ import { getResourcePath } from '../../common/utility';
 export const randomRecipe = (nav: NavigateFunction) => (dispatch: Dispatch<unknown>) => {
   request()
     .get(`${serverURLs.mini_browse}?limit=1&fields=slug`)
-    .then(res => { nav(getResourcePath(`/recipe/${res.body.results[0].slug}`)); })
+    .then(res => {
+      const recipe = res.body.results?.[0]?.slug;
+      if (recipe) {
+        nav(getResourcePath(`/recipe/${res.body.results[0].slug}`));
+      }
+      // OPT Show info that no recipe was found
+    })
     .catch(err => dispatch(handleError(err, 'UNKNOWN')));
 };

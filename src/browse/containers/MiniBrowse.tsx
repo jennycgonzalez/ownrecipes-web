@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 
 import '../css/browse.css';
 
@@ -17,6 +17,8 @@ interface IMiniBrowseProps {
 const MiniBrowse: React.FC<IMiniBrowseProps> = ({ qs }: IMiniBrowseProps) => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const params = useParams();
+
   const miniBrowseState = useSelector((state: CombinedStore) => state.browse.miniBrowse);
 
   useEffect(() => {
@@ -24,7 +26,10 @@ const MiniBrowse: React.FC<IMiniBrowseProps> = ({ qs }: IMiniBrowseProps) => {
   }, [location]);
 
   const handleOpenRecipe = (rec: RecipeList) => {
-    dispatch(RecipeActions.preload(rec as Recipe));
+    const recipeSlug = params.recipe ?? '';
+    if (recipeSlug !== rec.slug) {
+      dispatch(RecipeActions.preload(rec as Recipe));
+    }
   };
 
   return (

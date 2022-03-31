@@ -128,6 +128,8 @@ export default (parser: Record<string, string>, line: string): IngredientInput =
   let ix;
   for (ix = 0; ix < tags.length - 1; ++ix) {
     const nextTag = tags[ix];
+    if (nextTag.length === 0) continue;
+
     const vulgarFraction = !noMoreQuantities ? parseFraction(nextTag[0]) : [];
 
     if (!noMoreQuantities && !Number.isNaN(parseInt(nextTag[0]))) {

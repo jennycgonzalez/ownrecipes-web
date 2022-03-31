@@ -30,10 +30,12 @@ interface IPageWrapperProps {
  * @return Nice path without gibberish.
  */
 function toCleanLocationPath(path: string): string {
-  const startsWithSlash = path.startsWith('/');
-  const endsWithSlash   = path.endsWith('/');
+  const pathNoHost      = path.startsWith(process.env.PUBLIC_URL) ? path.substring(process.env.PUBLIC_URL.length) : path;
+  const startsWithSlash = pathNoHost.startsWith('/');
+  const endsWithSlash   = pathNoHost.endsWith('/');
+  const pathNoSlashes   = pathNoHost.substring(startsWithSlash ? 1 : 0, endsWithSlash ? pathNoHost.length - 1 : undefined);
 
-  return path.substring(startsWithSlash ? 1 : 0, endsWithSlash ? path.length - 1 : undefined);
+  return pathNoSlashes;
 }
 
 /**

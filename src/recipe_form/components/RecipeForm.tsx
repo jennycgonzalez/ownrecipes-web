@@ -20,6 +20,7 @@ import { getRecipeImage, getResourcePath } from '../../common/utility';
 import { formatValidation } from '../../common/store/Validation';
 import WidthHeightRatio from '../../common/components/WidthHeightRatio';
 import Image from '../../common/components/Image';
+import { IMAGE_PLACEHOLDER } from '../../common/constants';
 
 export interface IRecipeFormProps {
   form:      Recipe | undefined;
@@ -173,7 +174,7 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
               <Col xs={12}>
                 <WidthHeightRatio height={66.67} width={100}>
                   <Image
-                      src   = {getRecipeImage(form?.photoThumbnail ?? '/images/fried-eggs.jpg')}
+                      src   = {getRecipeImage(form?.photoThumbnail ?? IMAGE_PLACEHOLDER)}
                       alt   = ''
                       style = {{ objectFit: 'contain' }} />
                 </WidthHeightRatio>

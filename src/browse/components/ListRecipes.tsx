@@ -7,6 +7,7 @@ import '../css/list-recipes.css';
 import Ratings from '../../rating/components/Ratings';
 import { RecipeList } from '../../recipe/store/RecipeTypes';
 import { IMAGE_PLACEHOLDER } from '../../common/constants';
+import { getResourcePath } from '../../common/utility';
 
 export interface IListRecipes {
   data:   Array<RecipeList> | undefined;
@@ -19,12 +20,12 @@ const ListRecipes: React.FC<IListRecipes> = ({ data, onOpenRecipe }: IListRecipe
       return recipe.photoThumbnail;
     } else {
       const images = ['fish', 'fried-eggs', 'pizza', 'soup', 'steak'];
-      return `/images/${images[Math.floor(Math.random() * images.length)]}.jpg`;
+      return getResourcePath(`/images/${images[Math.floor(Math.random() * images.length)]}.jpg`);
     }
   };
 
   const recipes = data?.map(recipe => {
-    const link = `/recipe/${recipe.slug}`;
+    const link = getResourcePath(`/recipe/${recipe.slug}`);
     return (
       <Col key={recipe.id}>
         <Card className={classNames('recipe', 'print-hidden')}>

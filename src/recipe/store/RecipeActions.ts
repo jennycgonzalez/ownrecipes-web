@@ -16,7 +16,7 @@ export const load = (recipeSlug: string) => (dispatch: RecipeDispatch) => {
 export const deleteRecipe = (recipeSlug: string) => (dispatch: RecipeDispatch) => {
   dispatch({ store: RECIPE_STORE, type: ACTION.DELETE_START });
   request()
-    .get(`${serverURLs.recipe}${recipeSlug}/`)
+    .delete(`${serverURLs.recipe}${recipeSlug}/`)
     .then(() => {
       dispatch({ store: RECIPE_STORE, type: RecipeActionTypes.RECIPE_DELETE, data: { slug: recipeSlug } });
     })

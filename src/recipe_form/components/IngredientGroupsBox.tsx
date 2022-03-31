@@ -49,13 +49,19 @@ function igStringify(intl: IntlShape, formatter: Record<string, string>, values:
   return tr;
 }
 
+function normalizeLine(line: string): string {
+  let res = line.replace(/\t/g, ' ');
+  res = res.trim();
+  return res;
+}
+
 function igArrayify(parser: Record<string, string>, value: string): Array<IngredientGroup> {
   const dict = [{ title: '', ingredients: [] }];
   let igTitle = '';
   let ings: Array<IngredientInput> | undefined = dict.find(t => t.title === '')?.ingredients; // Should always exist, as it is the init group.
   if (ings == null) throw new Error('Invalid state: ings may not be null.');
   if (value) {
-    const tags = value.split('\n').filter(t => t.trim().length > 0);
+    const tags = value.split('\n').map(line => normalizeLine(line)).filter(t => t.length > 0);
     tags.forEach(line => {
       if (line.length > 0) {
         // Check if the line is an IG title
@@ -111,7 +117,7 @@ function srStringify(intl: IntlShape, formatter: Record<string, string>, values:
 
 function srArrayify(parser: Record<string, string>, value: string): Array<SubRecipe> {
   const ings: Array<SubRecipe> = [];
-  const subRecipes = value.split('\n').filter(t => t.trim().length > 1);
+  const subRecipes = value.split('\n').map(line => normalizeLine(line)).filter(t => t.length > 1);
   subRecipes.forEach(sr => {
     if (sr.length > 0) {
       ings.push(parseIngredient(parser, sr) as SubRecipe);
