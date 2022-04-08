@@ -69,7 +69,7 @@
   "measurement.gallon_abbrev": "",
   "measurement.glass": "{itemCount, plural, one {Glass} other {Gläser}}",
   "measurement.glass_abbrev": "",
-  "measurement.gram": "Gram",
+  "measurement.gram": "Gramm",
   "measurement.gram_abbrev": "g",
   "measurement.kilogram": "Kilogram",
   "measurement.kilogram_abbrev": "kg",
