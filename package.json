@@ -5,6 +5,7 @@
   "homepage": ".",
   "scripts": {
     "build": "react-scripts build",
+    "build:prod": "sh -c 'env-cmd -f .env.${REACT_APP_ENV} react-scripts build'",
     "lint": "eslint \"./src/**/*.{ts,tsx}\"",
     "lint:fix": "eslint \"./src/**/*.{ts,tsx}\" --fix",
     "start": "react-scripts start",
@@ -47,6 +48,7 @@
     "@types/webscopeio__react-textarea-autocomplete": "^4.7.2",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
+    "env-cmd": "^10.1.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-compat": "^4.0.1",
     "eslint-plugin-import": "^2.25.4",
