@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { defineMessages, useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
@@ -136,8 +136,20 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
     },
   });
 
-  const isNew = form == null || form.id == null || form.id === 0;
+  const id = form?.id;
+  const isNew = id == null || id === 0;
   const showViewButton = !isNew && !isDirty && form?.slug != null;
+
+  const prevId = useRef<number | undefined>();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const photoInputRef = useRef<any>(null);
+
+  useEffect(() => {
+    if (photoInputRef.current) {
+      photoInputRef.current.clearValue();
+    }
+    prevId.current = id;
+  }, [id]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     if (form == null) return;
@@ -145,13 +157,13 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
     save(form);
   };
 
-  const handleInvalide = () => {
+  const handleInvalid = () => {
     if (form == null) return;
     validate(form);
   };
 
   return (
-    <Form className='recipe-form' onSubmit={handleSubmit} onInvalid={handleInvalide}>
+    <Form className='recipe-form' onSubmit={handleSubmit} onInvalid={handleInvalid}>
       <Container>
         <Row>
           <Status queryState={formState} />
@@ -188,7 +200,8 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
                     label    = {formatMessage(messages.photo_label)}
                     helpText = {formatMessage(messages.photo_help_text)}
                     accept   = 'image/*'
-                    onChange = {update} />
+                    onChange = {update}
+                    ref = {photoInputRef} />
               </Col>
             </Row>
 

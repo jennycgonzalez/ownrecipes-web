@@ -6,7 +6,6 @@ import ConditionalWrapper from './ConditionalWrapper';
 import Tooltip from './Tooltip';
 
 interface IFileSelectProps extends IBaseComponentProps {
-  value?:  File;
   accept?: string;
 
   onChange?: (name: string, newValue: File | undefined) => void;
@@ -15,6 +14,12 @@ interface IFileSelectProps extends IBaseComponentProps {
 class FileBase extends BaseComponent<IFileSelectProps> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private ref = createRef<any>();
+
+  clearValue() { // eslint-disable-line react/no-unused-class-component-methods
+    if (this.ref != null && this.ref.current) {
+      this.ref.current.value = '';
+    }
+  }
 
   focus(): boolean { // eslint-disable-line react/no-unused-class-component-methods
     if (this.ref != null && this.ref.current) {
