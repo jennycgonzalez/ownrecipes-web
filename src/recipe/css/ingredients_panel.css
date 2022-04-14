@@ -64,8 +64,8 @@
   flex-direction: row;
   flex-wrap: wrap;
 
-  margin-left: -15px;
-  margin-right: -15px;
+  margin-left: calc(var(--bs-gutter-x) * -.5);
+  margin-right: calc(var(--bs-gutter-x) * -.5);
 }
 .ingredients-panel .ingredient-groups .ingredient-group {
   flex: 1;

@@ -4,6 +4,10 @@
   color: var(--secondaryText);
   min-height: 3rem;
   min-width:  3rem;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 @media screen and (min-width: 768px) {
   .btn {

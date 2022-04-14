@@ -20,7 +20,7 @@ export const AccountLoginMenuItem: React.FC = () => {
   });
 
   return (
-    <Button id='login-button' variant='primary' href={getResourcePath('/login')}>
+    <Button id='login-button' variant='primary' href={getResourcePath('/login')} className='nav-link'>
       <Icon icon='box-arrow-in-right' variant='light' size='2x' className='visible-xs' />
       <span className='hidden-xs'>{formatMessage(messages.label)}</span>
     </Button>

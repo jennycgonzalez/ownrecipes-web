@@ -192,4 +192,8 @@
   #header-navbar form .form-group .input-adornment-end:hover {
     border-color: var(--primaryMain);
   }
+
+  #header-navbar #login-button {
+    color: var(--primaryContrast);
+  }
 }
