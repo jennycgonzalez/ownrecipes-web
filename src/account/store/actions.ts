@@ -29,7 +29,7 @@ export const tryAutoLogin = () => (dispatch: AccountDispatch) => {
   const decodedToken: JwtPayload | undefined = user.token ? jwtDecode<JwtPayload>(user.token) : undefined;
 
   if (user.token != null && decodedToken != null) {
-    if (decodedToken.exp != null && (moment(new Date()).add(10, 'days') > moment.unix(decodedToken.exp))) {
+    if (decodedToken.exp != null && (moment(new Date()).add(2, 'days') > moment.unix(decodedToken.exp))) {
       refreshToken.instance(user.token);
     } else {
       dispatch({ store: ACCOUNT_STORE, type: AccountActionTypes.LOGIN, user: user });

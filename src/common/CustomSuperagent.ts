@@ -6,7 +6,7 @@ import moment from 'moment';
 
 import store from './store/store';
 import { serverURLs } from './config';
-import { AccountAction, AccountActionTypes, ACCOUNT_STORE } from '../account/store/types';
+import { AccountAction, AccountActionTypes, ACCOUNT_STORE, LoginDto, toUserAccount } from '../account/store/types';
 import { ACTION } from './store/ReduxHelper';
 import * as InternalErrorActions from '../internal_error/store/actions';
 import { logUserOut } from '../account/store/actions';
@@ -43,7 +43,8 @@ export const refreshToken = (() => {
       .send({ token: token })
       .then(res => {
         blocking = false;
-        store.dispatch({ store: ACCOUNT_STORE, type: AccountActionTypes.LOGIN, user: res.body } as AccountAction);
+        const data: LoginDto = res.body;
+        store.dispatch({ store: ACCOUNT_STORE, type: AccountActionTypes.LOGIN, user: toUserAccount(data) } as AccountAction);
       })
       .catch(() => {
         blocking = false;
@@ -78,7 +79,7 @@ export const request = (): SuperAgentStatic => {
       // If the token is undefined.
       // Log the user out and direct them to the login page.
       store.dispatch({ store: ACCOUNT_STORE, type: AccountActionTypes.LOGOUT });
-    } else if (moment(new Date()).add(10, 'days') > moment.unix(decodedToken.exp)) {
+    } else if (moment(new Date()).add(2, 'days') > moment.unix(decodedToken.exp)) {
       // If it is then call for a refreshed token.
       // If the token is to old, the request will fail and
       // the user will be logged-out and redirect to the login screen.
@@ -90,8 +91,8 @@ export const request = (): SuperAgentStatic => {
   // Make sure every request we get is json
   customRequest.set('Accept', 'application/json');
   customRequest.timeout({
-    response: 20000, // 20 s
-    deadline: 40000, // 40 s
+    response: 30000, // 30 s
+    deadline: 60000, // 60 s
   });
 
   return customRequest;
