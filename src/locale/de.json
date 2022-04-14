@@ -84,7 +84,7 @@
   "measurement.ounce": "{itemCount, plural, one {Ounze} other {Ounzen}}",
   "measurement.ounce_abbrev": "oz",
   "measurement.package": "{itemCount, plural, one {Packung} other {Packungen}}",
-  "measurement.package_abbrev": "pck",
+  "measurement.package_abbrev": "Pck.",
   "measurement.pinch": "{itemCount, plural, one {Prise} other {Prisen}}",
   "measurement.pinch_abbrev": "",
   "measurement.pint": "Pint",
