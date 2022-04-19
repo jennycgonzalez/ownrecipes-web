@@ -8,11 +8,13 @@ import { optionallyFormatMessage } from '../../common/utility';
 import { Ingredient } from '../store/RecipeTypes';
 
 export interface IIngredientsProps {
+  caption: string | undefined;
   data: Array<Ingredient>;
   // checkIngredient: (id: number, checked: boolean) => void;
 }
 
-const Ingredients: React.FC<IIngredientsProps> = ({ data /* , checkIngredient */ }: IIngredientsProps) => {
+const Ingredients: React.FC<IIngredientsProps> = ({
+    caption, data /* , checkIngredient */ }: IIngredientsProps) => {
   const intl = useIntl();
   const messages = defineMessages({
     quantity: {
@@ -69,6 +71,8 @@ const Ingredients: React.FC<IIngredientsProps> = ({ data /* , checkIngredient */
 
   return (
     <Table striped size='sm' className='table ingredients-table'>
+      {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+      {caption && <caption className='subheading h3'>{caption}:</caption>}
       <thead className='hideme'>
         <tr>
           <th><span>{intl.formatMessage(messages.quantity)}</span></th>

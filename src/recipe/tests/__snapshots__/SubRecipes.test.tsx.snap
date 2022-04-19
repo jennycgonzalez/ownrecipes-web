@@ -2,16 +2,17 @@
 
 exports[`Test Sub Recipes 1`] = `
 <div
-  className="ingredient-group"
+  className="subgroup ingredient-group"
 >
-  <h3
-    className="subheading"
-  >
-    Subrecipes
-  </h3>
   <table
     className="table ingredients-table table table-sm table-striped"
   >
+    <caption
+      className="subheading h3"
+    >
+      Subrecipes
+      :
+    </caption>
     <thead
       className="hideme"
     >

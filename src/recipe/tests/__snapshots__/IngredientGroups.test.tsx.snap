@@ -3,16 +3,17 @@
 exports[`Ingredient Group component test 1`] = `
 Array [
   <div
-    className="ingredient-group"
+    className="subgroup ingredient-group"
   >
-    <h3
-      className="subheading"
-    >
-      Chili
-    </h3>
     <table
       className="table ingredients-table table table-sm table-striped"
     >
+      <caption
+        className="subheading h3"
+      >
+        Chili
+        :
+      </caption>
       <thead
         className="hideme"
       >
@@ -54,16 +55,17 @@ Array [
     </table>
   </div>,
   <div
-    className="ingredient-group"
+    className="subgroup ingredient-group"
   >
-    <h3
-      className="subheading"
-    >
-      Spices
-    </h3>
     <table
       className="table ingredients-table table table-sm table-striped"
     >
+      <caption
+        className="subheading h3"
+      >
+        Spices
+        :
+      </caption>
       <thead
         className="hideme"
       >
@@ -105,9 +107,8 @@ Array [
     </table>
   </div>,
   <div
-    className="ingredient-group"
+    className="subgroup ingredient-group"
   >
-    
     <table
       className="table ingredients-table table table-sm table-striped"
     >

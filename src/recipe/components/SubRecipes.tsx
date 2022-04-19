@@ -72,9 +72,10 @@ const SubRecipes: React.FC<ISubRecipesProps> = ({ subRecipes /* , checkSubRecipe
   if (subRecipesList == null || subRecipesList.length === 0) return null;
 
   return (
-    <div className='ingredient-group'>
-      <h3 className='subheading'>{intl.formatMessage(messages.subrecipes)}</h3>
+    <div className='subgroup ingredient-group'>
       <Table striped size='sm' className='table ingredients-table'>
+        {/* eslint-disable-next-line react/jsx-one-expression-per-line */}
+        <caption className='subheading h3'>{intl.formatMessage(messages.subrecipes)}:</caption>
         <thead className='hideme'>
           <tr>
             {showQuantityCol && <th><span>{intl.formatMessage(messages.quantity)}</span></th>}

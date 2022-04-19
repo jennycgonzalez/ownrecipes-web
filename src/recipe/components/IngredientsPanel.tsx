@@ -58,6 +58,7 @@ const IngredientsPanel: React.FC<IIngredientsPanelProps> = ({ recipe, recipeStat
                 />
             <IngredientGroups
                 groups  = {recipe?.ingredientGroups}
+                hasSubrecipes = {recipe?.subrecipes != null && recipe?.subrecipes.length > 0}
                 // checkIngredient = {checkIngredient}
                 />
           </div>

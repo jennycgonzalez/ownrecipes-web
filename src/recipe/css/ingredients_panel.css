@@ -9,11 +9,6 @@
   align-items: center;
 }
 
-.ingredients-panel .ingredient-group {
-  margin-top: 1rem;
-  margin-bottom: 2rem;
-}
-
 .ingredients-panel .custom-servings {
   margin-left: 10px;
   display: inline-block;
@@ -67,19 +62,32 @@
   margin-left: calc(var(--bs-gutter-x) * -.5);
   margin-right: calc(var(--bs-gutter-x) * -.5);
 }
+.ingredients-panel .ingredient-groups .subgroup {
+  margin: 20px;
+  min-width: 18rem;
+}
 .ingredients-panel .ingredient-groups .ingredient-group {
   flex: 1;
-  margin: 20px;
-  min-width: 20rem;
 }
 @media print {
-  .ingredients-panel .ingredient-groups .ingredient-group {
+  .ingredients-panel .ingredient-groups .subgroup {
     margin: 10px;
     min-width: 18rem;
   }
 }
-.ingredients-panel .ingredient-group .subheading {
+@media screen and (min-width: 70rem) {
+  .ingredients-panel .ingredient-groups .subgroup {
+    min-width: 20rem;
+  }
+}
+.ingredients-panel .ingredients-table caption {
+  caption-side: top;
   margin-left: 33%;
+  color: var(--primaryText);
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0.7rem;
 }
 .ingredients-panel .ingredients-table {
   border-color: transparent;

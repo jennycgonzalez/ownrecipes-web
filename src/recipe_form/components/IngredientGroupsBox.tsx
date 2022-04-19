@@ -256,7 +256,7 @@ const IngredientGroupsBox: React.FC<IIngredientGroupsBoxProps> = ({
           <article className='ingredients-panel'>
             <div className='ingredient-groups'>
               <SubRecipes subRecipes={srData} />
-              <IngredientGroups groups={igData} />
+              <IngredientGroups groups={igData} hasSubrecipes={srData.length > 0} />
             </div>
           </article>
         </div>
