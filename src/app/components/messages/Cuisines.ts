@@ -6,9 +6,21 @@ export default function initCuisines() {
       id: 'cuisine.American',
       defaultMessage: 'American',
     },
+    cuisine_arabian: {
+      id: 'cuisine.Arabian',
+      defaultMessage: 'Arabian',
+    },
+    cuisine_asian: {
+      id: 'cuisine.Asian',
+      defaultMessage: 'Asian',
+    },
     cuisine_chinese: {
       id: 'cuisine.Chinese',
       defaultMessage: 'Chinese',
+    },
+    cuisine_european: {
+      id: 'cuisine.European',
+      defaultMessage: 'European',
     },
     cuisine_french: {
       id: 'cuisine.French',
@@ -21,6 +33,10 @@ export default function initCuisines() {
     cuisine_greek: {
       id: 'cuisine.Greek',
       defaultMessage: 'Greek',
+    },
+    cuisine_hawaiian: {
+      id: 'cuisine.Hawaiian',
+      defaultMessage: 'Hawaiian',
     },
     cuisine_indian: {
       id: 'cuisine.Indian',
@@ -38,13 +54,33 @@ export default function initCuisines() {
       id: 'cuisine.Korean',
       defaultMessage: 'Korean',
     },
+    cuisine_malaysian: {
+      id: 'cuisine.Malaysian',
+      defaultMessage: 'Malaysian',
+    },
+    cuisine_mediterranean: {
+      id: 'cuisine.Mediterranean',
+      defaultMessage: 'Mediterranean',
+    },
     cuisine_mexican: {
       id: 'cuisine.Mexican',
       defaultMessage: 'Mexican',
     },
+    cuisine_middle_east: {
+      id: 'cuisine.Middle East',
+      defaultMessage: 'Middle East',
+    },
+    cuisine_nordic: {
+      id: 'cuisine.Nordic',
+      defaultMessage: 'Nordic',
+    },
     cuisine_thai: {
       id: 'cuisine.Thai',
       defaultMessage: 'Thai',
+    },
+    cuisine_vietnamese: {
+      id: 'cuisine.Vietnamese',
+      defaultMessage: 'Vietnamese',
     },
   });
 }

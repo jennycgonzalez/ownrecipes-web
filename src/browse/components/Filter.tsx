@@ -3,6 +3,8 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 
 import Icon from '../../common/components/Icon';
+import { optionallyFormatMessage } from '../../common/utility';
+import { useIntl } from 'react-intl';
 
 export type RecipeFilter = {
   id:      number;
@@ -24,6 +26,7 @@ export interface IFilterProps {
 }
 
 const Filter: React.FC<IFilterProps> = ({ title, qsTitle, data, qs, multiSelect, cssClass, buildUrl }: IFilterProps) => {
+  const intl = useIntl();
   let items = data
     .map(item => {
       let active = false;
@@ -40,7 +43,7 @@ const Filter: React.FC<IFilterProps> = ({ title, qsTitle, data, qs, multiSelect,
       return (
         <li key={item.slug}>
           <Link to={buildUrl(qsTitle, item.slug, multiSelect)} className={classNames({ 'list-group-item list-group-item-action': true, active: active })}>
-            {item.title}
+            {optionallyFormatMessage(intl, `${qsTitle}.`, item.title)}
             <span className='count'>{`(${item.total})`}</span>
             {active && <Icon icon='x-square' variant='light' />}
           </Link>
