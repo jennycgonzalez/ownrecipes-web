@@ -67,10 +67,10 @@ const RecipeFormContainer: React.FC = () => {
   }, [paramsRecipe]);
 
   useEffect(() => {
-    if (user != null && recipeForm != null && !mayEdit) {
+    if (user != null && recipeFormState.pending === PendingState.COMPLETED && recipeForm != null && !mayEdit) {
       nav(getResourcePath(`/recipe/${recipeSlug}`));
     }
-  }, [user, recipeForm, mayEdit]);
+  }, [user, recipeFormState, recipeForm, mayEdit]);
 
   useEffect(() => {
     if (recipeForm == null) return;
