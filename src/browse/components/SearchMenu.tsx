@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { defineMessages, useIntl } from 'react-intl';
 import { Button, Card } from 'react-bootstrap';
+import queryString from 'query-string';
 
 import '../css/filter.css';
 
 import Filter from './Filter';
 import Icon from '../../common/components/Icon';
 import { CategoryCount, RatingCount } from '../store/FilterTypes';
+import { getResourcePath } from '../../common/utility';
 
 export interface ISearchMenuProps {
   qs: Record<string, string>;
@@ -96,6 +98,14 @@ const SearchMenu: React.FC<ISearchMenuProps> = ({ qs, courses, cuisines, ratings
     setShowMenu(prev => !prev);
   };
 
+  const getResetFilterUrl = () => {
+    const qsBuilder = {
+      search: qs.search,
+    };
+    const str = queryString.stringify(qsBuilder);
+    return getResourcePath(str ? `/browser?${str}` : '/browser');
+  };
+
   const hasActiveFilter = Object.keys(qs).filter(key => key !== 'limit' && key !== 'offset').length !== 0;
 
   const mobileHeader = (
@@ -106,7 +116,7 @@ const SearchMenu: React.FC<ISearchMenuProps> = ({ qs, courses, cuisines, ratings
       </Button>
       {hasActiveFilter && (
         <div className='filter-header-clear'>
-          <Link className='clear-filter-mobile btn btn-transparent' to={buildUrl('', '')}>
+          <Link className='clear-filter-mobile btn btn-transparent' to={getResetFilterUrl()}>
             {intl.formatMessage(messages.reset)}
           </Link>
         </div>
@@ -154,7 +164,7 @@ const SearchMenu: React.FC<ISearchMenuProps> = ({ qs, courses, cuisines, ratings
         </ul>
         {hasActiveFilter && (
           <div className='row reset-search-row hidden-xs'>
-            <Link className='btn btn-outline-danger reset-search hidden-xs' to={buildUrl('', '')}>
+            <Link className='btn btn-outline-danger reset-search hidden-xs' to={getResetFilterUrl()}>
               {intl.formatMessage(messages.reset)}
             </Link>
           </div>
