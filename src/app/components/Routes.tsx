@@ -1,7 +1,7 @@
 import { Route, Routes as RouterRoutes, Navigate } from 'react-router-dom';
 
 import { AnyComponent } from '../../types/Types';
-import { getResourcePath } from '../../common/utility';
+import { getEnvAsBoolean, getResourcePath } from '../../common/utility';
 
 import News from '../../news/container/News';
 import Login from '../../account/containers/Login';
@@ -82,12 +82,20 @@ const PublicRoutes: Array<IRouteType> = [
   },
 ];
 
+const PublicRoutesIfRequireLogin: Array<IRouteType> = [
+  {
+    path:      '/login',
+    component: Login,
+  },
+];
+
 export interface IRoutesProps {
   isAuthenticated: boolean;
 }
 
 const Routes: React.FC<IRoutesProps> = (props: IRoutesProps) => {
   const { isAuthenticated } = props;
+  const isLoginRequired = getEnvAsBoolean('REACT_APP_REQUIRE_LOGIN');
 
   let routesList: Array<React.ReactNode>;
   if (isAuthenticated) {
@@ -101,6 +109,15 @@ const Routes: React.FC<IRoutesProps> = (props: IRoutesProps) => {
     );
     routesList.push(
       <Route path='*' key='*' element={<Navigate replace to={getResourcePath('/NotFound')} />} />
+    );
+  } else if (isLoginRequired) {
+    routesList = PublicRoutesIfRequireLogin.map(r => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const PageComponent = r.component as any;
+      return <Route path={getResourcePath(r.path)} key={r.path} element={<PageComponent />} />;
+    });
+    routesList.push(
+      <Route path='*' key='*' element={<Navigate replace to={getResourcePath('/login')} />} />
     );
   } else {
     routesList = PublicRoutes.map(r => {

@@ -8,7 +8,7 @@ import { Location } from 'history';
 
 import '../css/404.css';
 
-import { getResourcePath } from '../../common/utility';
+import { getEnvAsBoolean, getResourcePath } from '../../common/utility';
 import { CombinedStore } from '../Store';
 import * as AccountActions from '../../account/store/actions';
 
@@ -62,7 +62,8 @@ class AutoLogin extends Component<IProps, IAutoLoginState> {
       }
     } else if (prevToken != null && currToken == null) {
       setTimeout(() => {
-        this.props.nav(getResourcePath('/home'));
+        const isLoginRequired = getEnvAsBoolean('REACT_APP_REQUIRE_LOGIN');
+        this.props.nav(getResourcePath(isLoginRequired ? '/login' : '/home'));
         this.props.nav(0);
       }, 500);
     }

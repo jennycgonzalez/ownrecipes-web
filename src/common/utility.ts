@@ -14,6 +14,13 @@ export function getResourcePath(path: string): string {
   return `${process.env.PUBLIC_URL}${path}`;
 }
 
+export function getEnvAsBoolean(key: string, ifNull = false): boolean {
+  const val = process.env[key];
+  if (val == null) return ifNull;
+  const valLowerCase = val.toLocaleLowerCase();
+  return ['true', 'yes', '1'].includes(valLowerCase);
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function updateFormData(prev: any, id: string, newValue: unknown): any {
   const updFormData = _.cloneDeep(prev);

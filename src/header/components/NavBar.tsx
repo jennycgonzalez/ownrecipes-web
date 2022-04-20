@@ -11,7 +11,7 @@ import CreateRecipeMenuItem from './CreateRecipeMenuItem';
 // import GroceryListMenuItem, { ListItemType } from './GroceryListMenuItem';
 // import MenuMenuItem from './MenuMenuItem';
 import { AccountMenuMenuItem, AccountLoginMenuItem } from './MyAccountMenuItem';
-import { getResourcePath } from '../../common/utility';
+import { getEnvAsBoolean, getResourcePath } from '../../common/utility';
 import { UserAccount } from '../../account/store/types';
 import { LanguageCode, Settings, ThemeMode } from '../../account/store/settings/types';
 import LoginSettings from './LoginSettings';
@@ -64,6 +64,7 @@ const NavBar: React.FC<INavBarProps> = ({
   const handleExpandSearch = (expanded: boolean) => setIsSearchExpanded(expanded);
 
   const isAuthenticated = account != null && account.id !== 0;
+  const isLoginRequired = getEnvAsBoolean('REACT_APP_REQUIRE_LOGIN');
   const isLoginPage = locationPath.endsWith('login');
   const isBrowserPage = locationPath.endsWith('browser');
 
@@ -113,15 +114,15 @@ const NavBar: React.FC<INavBarProps> = ({
         )}
         <Navbar.Collapse>
           <Nav className={classNames('header-nav', { 'collapse-d-lg': isSearchExpanded })}>
-            <NavLink to={getResourcePath('/browser')}>{formatMessage(messages.recipes)}</NavLink>
-            <NavLink as='button' onClick={onRandomRecipeClick}>{formatMessage(messages.randomRecipe)}</NavLink>
+            {(!isLoginRequired || isAuthenticated) && <NavLink to={getResourcePath('/browser')}>{formatMessage(messages.recipes)}</NavLink>}
+            {(!isLoginRequired || isAuthenticated) && <NavLink as='button' onClick={onRandomRecipeClick}>{formatMessage(messages.randomRecipe)}</NavLink>}
             {/* isAuthenticated && <MenuMenuItem /> */}
             {isAuthenticated && <CreateRecipeMenuItem />}
             {/* isAuthenticated && <GroceryListMenuItem data={props.lists} /> */}
           </Nav>
           {isScreenMdUp && (
             <div className='header-nav my-account-nav'>
-              {navSearch}
+              {(!isLoginRequired || isAuthenticated) && navSearch}
               {isAuthenticated && (
                 myAccountBtn
               )}

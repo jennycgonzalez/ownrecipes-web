@@ -22,6 +22,7 @@ OwnRecipes comes with several, but not exclusively, improvements:
 - [x] GUI redesign
 - [x] Responsive Design, including smartphone
 - [x] Propery parse and format measurements
+- [x] Optionally require login to avoid Copyright infringement
 - [ ] Grocery lists
 - [ ] Present some nice screenshots on GitHub wiki
 
