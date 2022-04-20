@@ -56,7 +56,7 @@ export type ItemDeleteSuccessAction = {
 export type GenericErrorAction = {
   store: string;
   type:  typeof ACTION.ERROR;
-  data?: ValidationResult | Error | undefined;
+  data?: ValidationResult | Error;
 }
 
 export type GenericGetStartAction = {
@@ -124,7 +124,7 @@ export type ItemUpdateSuccessAction<T> = {
 export type ValidationResultAction = {
   store: string;
   type:  typeof ACTION.VALIDATION;
-  data?: ValidationResult | undefined;
+  data?: ValidationResult;
   mode?: 'overwrite' | 'merge';
 }
 

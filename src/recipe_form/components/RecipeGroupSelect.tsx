@@ -13,7 +13,7 @@ import Tooltip from '../../common/components/Tooltip';
 
 interface IRecipeGroupSelectProps extends IBaseComponentProps {
   value?: SelectDataType;
-  data?:  OptionsOrGroups<SelectDataType, GroupBase<SelectDataType>> | undefined;
+  data?:  OptionsOrGroups<SelectDataType, GroupBase<SelectDataType>>;
 
   size?: string;
 
