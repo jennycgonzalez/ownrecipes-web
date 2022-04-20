@@ -40,21 +40,16 @@ export function toValidationErrors(error: ResponseError): ValidationResult | und
     return result;
   }
 
-  for (let ix = 0; ix < keys.length; ++ix) {
-    const nextKey = keys[ix];
+  keys.forEach(nextKey => {
     const attr    = ((/[_-]/).test(nextKey)) ? _.camelCase(nextKey) : nextKey;
     const nextVal = body[nextKey];
 
     if (Array.isArray(nextVal)) {
-      const resultAttrArray: Array<ValidationErrorType> = [];
-      for (let ixVal = 0; ixVal < nextVal.length; ++ixVal) {
-        resultAttrArray.push({
-          code:      toCode(nextVal[ixVal]),
-          message:   nextVal[ixVal],
-          attribute: attr,
-        });
-      }
-      result[attr] = resultAttrArray;
+      result[attr] = nextVal.map(v => ({
+        code:      toCode(v),
+        message:   v,
+        attribute: attr,
+      }));
     } else {
       result[attr] = {
         code:      toCode(nextVal),
@@ -62,7 +57,7 @@ export function toValidationErrors(error: ResponseError): ValidationResult | und
         attribute: attr,
       };
     }
-  }
+  });
 
   return result;
 }
@@ -133,13 +128,7 @@ export function runValidators(validations: ValidatorsType, data: unknown): Valid
 export function hasValidationError(result: ValidationResult): boolean {
   const keys = Object.keys(result).filter(key => key !== '__isValidationResult');
 
-  for (let ix = 0; ix < keys.length; ++ix) {
-    if (result[keys[ix]] !== undefined) {
-      return true;
-    }
-  }
-
-  return false;
+  return keys.find(key => result[key] !== undefined) != null;
 }
 
 export const urlValidator = (name: string, val: string | undefined): ValidationErrorType | undefined => {

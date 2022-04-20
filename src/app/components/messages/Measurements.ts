@@ -32,9 +32,7 @@ function buildMeasurementsParserForLangs(SupportedMeasurementsList: Record<strin
   const res: Record<string, string> = {};
   const allIntls = [...intls, usrIntl];
 
-  for (let i = 0; i < allIntls.length; ++i) {
-    const nextIntl = allIntls[i];
-
+  allIntls.forEach(nextIntl => {
     Object.keys(SupportedMeasurementsList).forEach(msrmnt => {
       if (!msrmnt.endsWith('_abbrev')) {
         const abbrevKey = `${msrmnt}_abbrev`;
@@ -66,7 +64,7 @@ function buildMeasurementsParserForLangs(SupportedMeasurementsList: Record<strin
         }
       }
     });
-  }
+  });
 
   return res;
 }
