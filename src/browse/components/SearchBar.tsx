@@ -39,6 +39,7 @@ const SearchBar: React.FC<ISearchBarProps> = ({ value, doSearch }: ISearchBarPro
   useEffect(() => {
     if (previousSearch.current !== formData.value) {
       doSearch(formData.value);
+      previousSearch.current = formData.value;
     }
   }, [formData]);
 
