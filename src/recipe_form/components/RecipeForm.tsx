@@ -21,6 +21,7 @@ import { formatValidation } from '../../common/store/Validation';
 import WidthHeightRatio from '../../common/components/WidthHeightRatio';
 import Image from '../../common/components/Image';
 import { IMAGE_PLACEHOLDER } from '../../common/constants';
+import { PendingState } from '../../common/store/GenericReducerType';
 
 export interface IRecipeFormProps {
   form:      Recipe | undefined;
@@ -319,6 +320,7 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
             <Button
                 variant = 'primary'
                 type    = 'submit'
+                disabled = {formState.pending === PendingState.SAVING}
                 as = {showViewButton ? Link as any : undefined}
                 to = {showViewButton ? getResourcePath(`/recipe/${form.slug}`) : null}>
               {formatMessage(showViewButton ? messages.view : messages.submit)}
