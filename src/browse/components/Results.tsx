@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { RecipeList } from '../../recipe/store/RecipeTypes';
 import { PaginationProps } from '../constants/DefaultFilters';
 import { SearchResult } from '../store/SearchTypes';
@@ -26,17 +27,27 @@ function toNumberDefault(val: string | undefined, defIfNull: number): number {
   }
 }
 
-const Results: React.FC<IResultsProps> = ({ search, qs, defaults, buildUrl, onOpenRecipe }: IResultsProps) => (
-  <>
+const Results: React.FC<IResultsProps> = ({ search, qs, defaults, buildUrl, onOpenRecipe }: IResultsProps) => {
+  const listJsx = useMemo(() => (
     <ListRecipes
         data = {search.recipes}
         onOpenRecipe = {onOpenRecipe} />
+  ), [search.recipes, onOpenRecipe]);
+
+  const paginationJsx = useMemo(() => (
     <Pagination
         limit    = {toNumberDefault(qs.limit, defaults.limit ?? 12)}
         count    = {search.totalRecipes}
         offset   = {toNumberDefault(qs.offset, defaults.offset ?? 0)}
         buildUrl = {buildUrl} />
-  </>
-);
+  ), [search.totalRecipes, qs, defaults, buildUrl, onOpenRecipe]);
+
+  return (
+    <>
+      {listJsx}
+      {paginationJsx}
+    </>
+  );
+};
 
 export default Results;

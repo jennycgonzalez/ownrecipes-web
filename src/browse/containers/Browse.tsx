@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import queryString from 'query-string';
 import { useIntl } from 'react-intl';
@@ -36,10 +36,10 @@ const Browse: React.FC = () => {
   const location = useLocation();
   const nav = useNavigate();
 
-  const search   = useSelector((state: CombinedStore) => state.browse.search);
-  const courses  = useSelector((state: CombinedStore) => state.browse.filters.courses);
-  const cuisines = useSelector((state: CombinedStore) => state.browse.filters.cuisines);
-  const ratings  = useSelector((state: CombinedStore) => state.browse.filters.ratings);
+  const search   = useSelector((state: CombinedStore) => state.browse.search.items);
+  const courses  = useSelector((state: CombinedStore) => state.browse.filters.courses.items);
+  const cuisines = useSelector((state: CombinedStore) => state.browse.filters.cuisines.items);
+  const ratings  = useSelector((state: CombinedStore) => state.browse.filters.ratings.items);
 
   const locationSearch = location.search;
   const qs: Record<string, string> = queryString.parse(locationSearch) as Record<string, string>;
@@ -48,19 +48,19 @@ const Browse: React.FC = () => {
 
   const reloadData = () => {
     window.scrollTo(0, 0);
-    if (search.items?.get(qsMergedString) == null) {
+    if (search?.get(qsMergedString) == null) {
       dispatch(SearchActions.loadRecipes(qsMergedDefaults));
       dispatch(FilterActions.loadCourses(qsMergedDefaults));
       dispatch(FilterActions.loadCuisines(qsMergedDefaults));
       dispatch(FilterActions.loadRatings(qsMergedDefaults));
     } else {
-      if (courses.items?.get(qsMergedString) == null) {
+      if (courses?.get(qsMergedString) == null) {
         dispatch(FilterActions.loadCourses(qsMergedDefaults));
       }
-      if (cuisines.items?.get(qsMergedString) == null) {
+      if (cuisines?.get(qsMergedString) == null) {
         dispatch(FilterActions.loadCuisines(qsMergedDefaults));
       }
-      if (ratings.items?.get(qsMergedString) == null) {
+      if (ratings?.get(qsMergedString) == null) {
         dispatch(FilterActions.loadRatings(qsMergedDefaults));
       }
     }
@@ -70,7 +70,7 @@ const Browse: React.FC = () => {
     reloadData();
   }, [locationSearch]);
 
-  const buildUrl = (name: string, value: string, multiSelect = false) => {
+  const buildUrl = useCallback((name: string, value: string, multiSelect = false) => {
     if (!name) return getResourcePath('/browser');
 
     const qsBuilder = _.cloneDeep(qs);
@@ -101,9 +101,9 @@ const Browse: React.FC = () => {
 
     const str = queryString.stringify(qsBuilder);
     return getResourcePath(str ? `/browser?${str}` : '/browser');
-  };
+  }, [qs]);
 
-  const doSearch = (value: string) => {
+  const doSearch = useCallback((value: string) => {
     const qsBuilder = _.cloneDeep(qs);
 
     delete qsBuilder.offset;
@@ -116,18 +116,17 @@ const Browse: React.FC = () => {
     let str = queryString.stringify(qsBuilder);
     str = getResourcePath(str ? `/browser?${str}` : '/browser');
     nav(str);
-  };
+  }, [qs, nav]);
 
-  const handleOpenRecipe = (rec: RecipeList) => {
+  const handleOpenRecipe = useCallback((rec: RecipeList) => {
     dispatch(RecipeActions.preload(rec));
-  };
+  }, [dispatch]);
 
   return (
     <PageWrapper title={intl.messages['nav.recipes'] as string}>
       <Search
           qs = {qs}
           qsString = {qsMergedString}
-          defaultFilters = {DefaultFilters}
           buildUrl = {buildUrl}
           doSearch = {doSearch}
           onOpenRecipe = {handleOpenRecipe}

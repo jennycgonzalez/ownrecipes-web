@@ -89,6 +89,8 @@ const NavBar: React.FC<INavBarProps> = ({
     <NavSearch onExpandSearch={handleExpandSearch} />
   );
 
+  // TODO for REACT_APP_REQUIRE_LOGIN hide everything if not authenticated
+
   return (
     <Navbar collapseOnSelect className='header' expand='md' id='header-navbar'>
       <Container className={classNames({ 'search-expanded': isSearchExpanded })}>

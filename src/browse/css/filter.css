@@ -51,7 +51,7 @@
 
 @media screen and (min-width: 768px) {
   .container.browser .filter-panel {
-    flex: 0 0 12em;
+    flex: 0 0 12rem;
     padding-right: 0;
   }
   .container.browser .results-panel {

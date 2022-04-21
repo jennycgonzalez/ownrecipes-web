@@ -72,6 +72,24 @@
   justify-content: center;
   margin-top: 1rem;
 }
+.container.browser .pagination .page-item.next,
+.container.browser .pagination .page-item.skipper-near,
+.container.browser .pagination .page-item.skipper-far {
+  display: none;
+}
+@media screen and (min-width: 43rem) {
+  .container.browser .pagination .page-item.next,
+  .container.browser .pagination .page-item.skipper-near {
+    display: list-item;
+  }
+}
+
+@media screen and (min-width: 50rem) {
+  .container.browser .pagination .page-item.skipper-near,
+  .container.browser .pagination .page-item.skipper-far {
+    display: list-item;
+  }
+}
 
 .container.browser .no-results {
   margin-top: 20px;

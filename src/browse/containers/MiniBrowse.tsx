@@ -19,7 +19,7 @@ const MiniBrowse: React.FC<IMiniBrowseProps> = ({ qs }: IMiniBrowseProps) => {
   const location = useLocation();
   const params = useParams();
 
-  const miniBrowseState = useSelector((state: CombinedStore) => state.browse.miniBrowse);
+  const miniBrowseItems = useSelector((state: CombinedStore) => state.browse.miniBrowse.items);
 
   useEffect(() => {
     dispatch(MiniBrowseActions.loadMiniBrowse(qs));
@@ -33,7 +33,7 @@ const MiniBrowse: React.FC<IMiniBrowseProps> = ({ qs }: IMiniBrowseProps) => {
   };
 
   return (
-    <ListRecipes data={miniBrowseState.items} onOpenRecipe={handleOpenRecipe} />
+    <ListRecipes data={miniBrowseItems} onOpenRecipe={handleOpenRecipe} />
   );
 };
 
