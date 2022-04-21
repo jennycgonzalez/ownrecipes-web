@@ -11,6 +11,10 @@
 .recipe-form #recipe-meta .row {
   align-items: end;
 }
+.recipe-form #recipe-meta .row .form-group {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 
 .recipe-form img {
   width: 100%;
@@ -56,10 +60,4 @@
 }
 .recipe-form .live-editor .tab-pane.active.editor .content {
   border: 0;
-}
-
-.recipe-form .live-editor textarea#ingredientGroups {
-  line-height: 1.5em;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
 }

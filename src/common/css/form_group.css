@@ -79,7 +79,7 @@
   height:      2em;
   line-height: 2em;
 }
-.form-group.no-label .form-control {
+.form-group.no-label .form-control:not(textarea) {
   height:      3em;
   line-height: 3em;
 }
@@ -88,7 +88,7 @@
   line-height: 3em;
 }
 @media screen and (min-width: 768px) {
-  .form-group.no-label .form-control {
+  .form-group.no-label .form-control:not(textarea) {
     height:      2.5em;
     line-height: 2.5em;
   }
@@ -102,6 +102,11 @@
   width: 100%;
 }
 
+.form-group textarea.form-control {
+  line-height:    1.5em;
+  padding-top:    0.5em;
+  padding-bottom: 0.5em;
+}
 .form-group textarea.form-control[rows="1"] {
   height: 2em;
 }

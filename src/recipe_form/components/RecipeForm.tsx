@@ -184,7 +184,7 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
             </Row>
 
             <Row>
-              <Col xs={12}>
+              <Col xs={12} lg={11} xl={10} xxl={9} style={{ marginLeft: 'auto', marginRight: 'auto' }}>
                 <WidthHeightRatio height={66.67} width={100}>
                   <Image
                       src   = {getRecipeImage(form?.photoThumbnail ?? IMAGE_PLACEHOLDER)}
@@ -298,7 +298,7 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
           <Col id='recipe' md={7} lg={8}>
             <Input
                 name     = 'info'
-                rows     = {4}
+                rows     = {3}
                 label    = {formatMessage(messages.information_label)}
                 placeholder = {formatMessage(messages.information_placeholder)}
                 value    = {form?.info ?? ''}
