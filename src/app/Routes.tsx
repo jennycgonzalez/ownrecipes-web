@@ -1,22 +1,26 @@
 import { Route, Routes as RouterRoutes, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-import { AnyComponent } from '../../types/Types';
-import { getEnvAsBoolean, getResourcePath } from '../../common/utility';
+import { AnyComponent } from '../types/Types';
+import { getEnvAsBoolean, getResourcePath } from '../common/utility';
 
-import News from '../../news/container/News';
-import Login from '../../account/containers/Login';
-import Browse from '../../browse/containers/Browse';
-import RecipeFormContainer from '../../recipe_form/containers/RecipeFormContainer';
-import RecipeView from '../../recipe/containers/RecipeView';
+import News from '../news/container/News';
+import Login from '../account/containers/Login';
+import Browse from '../browse/containers/Browse';
+import RecipeFormContainer from '../recipe_form/containers/RecipeFormContainer';
+import RecipeView from '../recipe/containers/RecipeView';
 // import List from '../../list/containers/List';
 // import Menu from '../../menu/containers/Menu';
-import NotFound from './NotFound';
+import NotFound from './components/NotFound';
+import { CombinedStore } from './Store';
+import UserRole from '../common/types/UserRole';
 
 export type IRouteType = {
   /** URL path. Should start with a slash. */
   path:      string;
   /** Container for this route. */
   component: AnyComponent;
+  restriction?: Array<UserRole>;
 }
 
 const PrivateRoutes: Array<IRouteType> = [
@@ -31,6 +35,7 @@ const PrivateRoutes: Array<IRouteType> = [
   {
     path:      '/recipe/edit/:recipe',
     component: RecipeFormContainer,
+    restriction: [UserRole.USER, UserRole.STAFF, UserRole.ADMIN],
   },
   {
     path:      '/recipe/:recipe',
@@ -89,17 +94,22 @@ const PublicRoutesIfRequireLogin: Array<IRouteType> = [
   },
 ];
 
-export interface IRoutesProps {
-  isAuthenticated: boolean;
+function hasRequiredRole(restriction: Array<string> | undefined, userRole: string | undefined): boolean {
+  if (restriction == null) return true;
+  else if (userRole == null) return false;
+  else return restriction.includes(userRole);
 }
 
-const Routes: React.FC<IRoutesProps> = (props: IRoutesProps) => {
-  const { isAuthenticated } = props;
+const Routes: React.FC = () => {
+  const account = useSelector((state: CombinedStore) => state.account.item);
+  const isAuthenticated = account != null && account.id !== 0;
+  const role = account?.role;
+
   const isLoginRequired = getEnvAsBoolean('REACT_APP_REQUIRE_LOGIN');
 
   let routesList: Array<React.ReactNode>;
   if (isAuthenticated) {
-    routesList = PrivateRoutes.map(r => {
+    routesList = PrivateRoutes.filter(r => hasRequiredRole(r.restriction, role)).map(r => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const PageComponent = r.component as any;
       return <Route path={getResourcePath(r.path)} key={r.path} element={<PageComponent />} />;

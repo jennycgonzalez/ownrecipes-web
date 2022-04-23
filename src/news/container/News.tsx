@@ -19,7 +19,7 @@ const News: React.FC = () => {
       <NewsCarousel />
       {/*
       <Row>
-        { user && user.id !== 0
+        { user && user.id !== 0 && ['user', 'staff', 'admin'].includes(user.role)
           ? <Menu SimpleLayout={UpComingRecipes} public />
           : ''}
       </Row>

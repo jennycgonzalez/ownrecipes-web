@@ -36,7 +36,8 @@ export interface IAccountMenuMenuItemProps {
   onLogoutClick: () => void;
 }
 
-export const AccountMenuMenuItem: React.FC<IAccountMenuMenuItemProps> = (props: IAccountMenuMenuItemProps) => {
+export const AccountMenuMenuItem: React.FC<IAccountMenuMenuItemProps> = ({
+    account, settings, onChangeLanguage, onChangeTheme, onLogoutClick }: IAccountMenuMenuItemProps) => {
   const { formatMessage } = useIntl();
   const messages = defineMessages({
     hello: {
@@ -81,12 +82,12 @@ export const AccountMenuMenuItem: React.FC<IAccountMenuMenuItemProps> = (props: 
 
   const handleChangeLanguage = (lang: LanguageCode) => {
     handleLanguageDialogClose();
-    props.onChangeLanguage(lang);
+    onChangeLanguage(lang);
   };
 
   const handleChangeTheme = (theme: ThemeMode) => {
     handleThemeDialogClose();
-    props.onChangeTheme(theme);
+    onChangeTheme(theme);
   };
 
   return (
@@ -95,7 +96,7 @@ export const AccountMenuMenuItem: React.FC<IAccountMenuMenuItemProps> = (props: 
           title={(
             <>
               <Icon icon='person-circle' variant='light' size='2x' className='visible-xs' />
-              <div  className='hidden-xs subtitle'>{formatMessage(messages.hello, { name: props.account.username })}</div>
+              <div  className='hidden-xs subtitle'>{formatMessage(messages.hello, { name: account.username })}</div>
               <span className='hidden-xs'>{formatMessage(messages.title)}</span>
             </>
           )}
@@ -104,20 +105,20 @@ export const AccountMenuMenuItem: React.FC<IAccountMenuMenuItemProps> = (props: 
         <NavDropdown.Item onClick={handleChangeLanguageClick}>{`${formatMessage(messages.language)} …`}</NavDropdown.Item>
         <NavDropdown.Item onClick={handleChangeThemeClick}>{`${formatMessage(messages.theme)} …`}</NavDropdown.Item>
         <NavDropdown.Divider />
-        <NavDropdown.Item href={process.env.REACT_APP_ADMIN_URL ?? '/admin'}>{`➝ ${formatMessage(messages.admin)}`}</NavDropdown.Item>
-        <NavDropdown.Divider />
-        <NavDropdown.Item onClick={props.onLogoutClick}>{formatMessage(messages.logout)}</NavDropdown.Item>
+        {account.role === 'admin' && <NavDropdown.Item href={process.env.REACT_APP_ADMIN_URL ?? '/admin'}>{`➝ ${formatMessage(messages.admin)}`}</NavDropdown.Item>}
+        {account.role === 'admin' && <NavDropdown.Divider />}
+        <NavDropdown.Item onClick={onLogoutClick}>{formatMessage(messages.logout)}</NavDropdown.Item>
       </NavDropdown>
 
       <LanguageDialog
           show     = {showLanguageDialog}
-          settings = {props.settings}
+          settings = {settings}
           onChangeLanguage = {handleChangeLanguage}
           onClose = {handleLanguageDialogClose} />
 
       <ThemeDialog
           show     = {showThemeDialog}
-          settings = {props.settings}
+          settings = {settings}
           onChangeTheme = {handleChangeTheme}
           onClose = {handleThemeDialogClose} />
     </>

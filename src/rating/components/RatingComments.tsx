@@ -13,7 +13,7 @@ import { PendingState } from '../../common/store/GenericReducerType';
 export interface IRatingCommentsProps {
   recipeSlug: string;
   ratings:    Array<Rating> | undefined;
-  userId:     number;
+  userId:     number | undefined;
   pending:    PendingState;
 
   removeRating: (recipe: string, rating: number) => void;
@@ -62,7 +62,7 @@ const RatingComments: React.FC<IRatingCommentsProps> = ({ recipeSlug, ratings, u
           <Ratings stars={rating.rating || 0} />
         </Col>
         <Col xs='auto'>
-          {userId === rating.userId && (
+          {rating.userId === userId && (
             <Button variant='outline-danger' size='sm' onClick={() => handleDeleteClick(rating.id)}>
               <Icon icon='trash' />
             </Button>

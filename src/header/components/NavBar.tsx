@@ -64,6 +64,7 @@ const NavBar: React.FC<INavBarProps> = ({
   const handleExpandSearch = (expanded: boolean) => setIsSearchExpanded(expanded);
 
   const isAuthenticated = account != null && account.id !== 0;
+  const isPrivilegedUser = account != null && ['user', 'staff', 'admin'].includes(account.role);
   const isLoginRequired = getEnvAsBoolean('REACT_APP_REQUIRE_LOGIN');
   const isLoginPage = locationPath.endsWith('login');
   const isBrowserPage = locationPath.endsWith('browser');
@@ -88,8 +89,6 @@ const NavBar: React.FC<INavBarProps> = ({
   const navSearch = !isBrowserPage && (
     <NavSearch onExpandSearch={handleExpandSearch} />
   );
-
-  // TODO for REACT_APP_REQUIRE_LOGIN hide everything if not authenticated
 
   return (
     <Navbar collapseOnSelect className='header' expand='md' id='header-navbar'>
@@ -119,7 +118,7 @@ const NavBar: React.FC<INavBarProps> = ({
             {(!isLoginRequired || isAuthenticated) && <NavLink to={getResourcePath('/browser')}>{formatMessage(messages.recipes)}</NavLink>}
             {(!isLoginRequired || isAuthenticated) && <NavLink as='button' onClick={onRandomRecipeClick}>{formatMessage(messages.randomRecipe)}</NavLink>}
             {/* isAuthenticated && <MenuMenuItem /> */}
-            {isAuthenticated && <CreateRecipeMenuItem />}
+            {isAuthenticated && isPrivilegedUser && <CreateRecipeMenuItem />}
             {/* isAuthenticated && <GroceryListMenuItem data={props.lists} /> */}
           </Nav>
           {isScreenMdUp && (

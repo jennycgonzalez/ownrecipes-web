@@ -1,13 +1,15 @@
 import { Button, Card, Col, Row } from 'react-bootstrap';
 import { defineMessages, useIntl } from 'react-intl';
 
+import UserRole from '../../common/types/UserRole';
+
 export interface IRatingsHeaderProps {
-  userId: number;
+  userRole:  UserRole | undefined;
   showNewRating: boolean;
   onShowNewRating: () => void;
 }
 
-const RatingsHeader: React.FC<IRatingsHeaderProps> = ({ userId, showNewRating, onShowNewRating }: IRatingsHeaderProps) => {
+const RatingsHeader: React.FC<IRatingsHeaderProps> = ({ userRole, showNewRating, onShowNewRating }: IRatingsHeaderProps) => {
   const { formatMessage } = useIntl();
   const messages = defineMessages({
     title: {
@@ -28,7 +30,7 @@ const RatingsHeader: React.FC<IRatingsHeaderProps> = ({ userId, showNewRating, o
         <Col className='ratings-heading-col'>
           <h2>{formatMessage(messages.title)}</h2>
         </Col>
-        {userId > 0 && !showNewRating && (
+        {!showNewRating && userRole != null && [UserRole.USER, UserRole.STAFF, UserRole.ADMIN].includes(userRole) && (
           <Col xs='auto'>
             <Button variant='outline-primary' onClick={onShowNewRating}>{formatMessage(messages.new_rating_button)}</Button>
           </Col>

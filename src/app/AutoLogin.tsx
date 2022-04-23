@@ -1,21 +1,32 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { AnyAction } from 'redux';
-import { AccountState } from '../../account/store/types';
+import { AccountState } from '../account/store/types';
 import { ThunkDispatch } from 'redux-thunk';
-import { NavigateFunction } from 'react-router';
+import { NavigateFunction, useLocation, useNavigate } from 'react-router';
 import { Location } from 'history';
 
-import '../css/404.css';
+import './css/404.css';
 
-import { getEnvAsBoolean, getResourcePath } from '../../common/utility';
-import { CombinedStore } from '../Store';
-import * as AccountActions from '../../account/store/actions';
+import { getEnvAsBoolean, getResourcePath } from '../common/utility';
+import { CombinedStore } from './Store';
+import * as AccountActions from '../account/store/actions';
 
-interface IAutoLoginProps {
+const AutoLogin: React.FC = () => {
+  const nav = useNavigate();
+  const location = useLocation();
+
+  return (
+    <EnhancedAutoLoginClass
+        nav = {nav}
+        loc = {location}
+        />
+  );
+};
+
+interface IAutoLoginClassProps {
   nav: NavigateFunction;
   loc: Location;
-  children: React.ReactNode;
 }
 
 interface IDispatchProps {
@@ -31,9 +42,9 @@ interface IAutoLoginState {
   originSearch: string;
 }
 
-type IProps = IStateProps & IDispatchProps & IAutoLoginProps;
+type IProps = IStateProps & IDispatchProps & IAutoLoginClassProps;
 
-class AutoLogin extends Component<IProps, IAutoLoginState> {
+class AutoLoginClass extends Component<IProps, IAutoLoginState> {
   constructor(props: IProps) {
     super(props);
 
@@ -70,7 +81,7 @@ class AutoLogin extends Component<IProps, IAutoLoginState> {
   }
 
   render() {
-    return this.props.children;
+    return null;
   }
 }
 
@@ -82,4 +93,6 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<CombinedStore, unknown, AnyA
   tryAutoLogin:  () => dispatch(AccountActions.tryAutoLogin()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AutoLogin);
+const EnhancedAutoLoginClass = connect(mapStateToProps, mapDispatchToProps)(AutoLoginClass);
+
+export default AutoLogin;

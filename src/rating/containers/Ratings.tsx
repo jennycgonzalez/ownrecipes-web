@@ -30,7 +30,8 @@ const Ratings: React.FC = () => {
   return (
     <RatingsWrapper
         recipeSlug = {recipeSlug}
-        userId     = {account?.id ?? 0}
+        userId     = {account?.id}
+        userRole   = {account?.role}
         ratings    = {ratings}
         pending    = {ratingsState.pending}
 
