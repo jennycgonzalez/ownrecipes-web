@@ -1,5 +1,6 @@
-import Icon from '../components/Icon';
 import renderer from 'react-test-renderer';
+
+import Icon from '../components/Icon';
 
 test('Icon component test', () => {
   const component = renderer.create(

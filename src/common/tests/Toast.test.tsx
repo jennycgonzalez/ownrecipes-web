@@ -1,10 +1,14 @@
 import renderer from 'react-test-renderer';
 
-import Loading from '../components/Loading';
+import Toast from '../components/Toast';
 
-test('Loading component test', () => {
+test('Toast', () => {
   const component = renderer.create(
-    <Loading message='Loading ...' />
+    <Toast
+        show
+        >
+      Some string test
+    </Toast>
   );
   const tree = component.toJSON();
   expect(tree).toMatchSnapshot();

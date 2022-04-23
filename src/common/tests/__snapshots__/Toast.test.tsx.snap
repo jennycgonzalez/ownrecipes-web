@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Toast 1`] = `
+<div
+  aria-atomic="true"
+  aria-live="assertive"
+  className="fade toast simple-toast show"
+  role="alert"
+>
+  <div
+    className="toast-header"
+  >
+    <span
+      className="toast-title"
+    >
+      Some string test
+    </span>
+  </div>
+</div>
+`;

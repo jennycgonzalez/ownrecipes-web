@@ -1,5 +1,6 @@
-import P from '../components/P';
 import renderer from 'react-test-renderer';
+
+import P from '../components/P';
 
 test('P string', () => {
   const component = renderer.create(

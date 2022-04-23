@@ -83,6 +83,7 @@ export class Select extends BaseComponent<ISelectProps> {
             condition = {this.props.tooltip != null}
             render    = {childr => <Tooltip id={`${this.props.name}-tooltip`} tooltip={this.props.tooltip}>{childr}</Tooltip>}>
           {this.getLabel()}
+          {this.getHelpText()}
           {this.getErrorMessage()}
           <SelectReact
               name     = {this.props.name}

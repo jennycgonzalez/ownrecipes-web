@@ -41,6 +41,7 @@ export default class DateTime extends BaseComponent<IDateTimeProps, IDateTimeSta
             condition = {this.props.tooltip != null}
             render    = {childr => <Tooltip id={`${this.props.name}-tooltip`} tooltip={this.props.tooltip}>{childr}</Tooltip>}>
           {this.getLabel()}
+          {this.getHelpText()}
           {this.getErrorMessage()}
           <Datetime
               value = {!this.props.timeFormat ? moment(this.state.value).format('ddd, ll') : moment(this.state.value).format('llll')}

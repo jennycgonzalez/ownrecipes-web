@@ -59,6 +59,7 @@ export default class Checkbox extends BaseComponent<ICheckboxProps> {
         <ConditionalWrapper
             condition = {this.props.tooltip != null}
             render    = {childr => <Tooltip id={`${this.props.name}-tooltip`} tooltip={this.props.tooltip}>{childr}</Tooltip>}>
+          {this.getHelpText()}
           {this.getErrorMessage()}
           <Form.Check
               name  = {this.props.name}

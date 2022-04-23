@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WidthHeightRatio 1`] = `
+<div
+  className="width-height-ratio some class"
+  style={
+    Object {
+      "paddingTop": "50%",
+      "position": "relative",
+      "width": "75%",
+    }
+  }
+>
+  Some string test
+</div>
+`;

@@ -204,6 +204,7 @@ export default class Input extends BaseComponent<IAnyInputProps, IInputState> {
             condition = {this.props.tooltip != null}
             render    = {childr => <Tooltip id={`${this.props.name}-tooltip`} tooltip={this.props.tooltip}>{childr}</Tooltip>}>
           {this.getLabel()}
+          {this.getHelpText()}
           {this.getErrorMessage()}
           <InputGroup>
             {this.props.inputAdornmentStart && <InputGroup.Text className='input-adornment-start'>{this.props.inputAdornmentStart}</InputGroup.Text>}

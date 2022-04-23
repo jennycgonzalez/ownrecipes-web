@@ -1,5 +1,6 @@
-import Alert from '../components/Alert';
 import renderer from 'react-test-renderer';
+
+import Alert from '../components/Alert';
 
 const TITLE = 'This is some alert';
 const MSG = 'This is some message';

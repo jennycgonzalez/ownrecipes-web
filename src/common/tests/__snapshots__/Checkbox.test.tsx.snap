@@ -1,0 +1,196 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox 1`] = `
+<div
+  className="form-group some class"
+>
+  <div
+    className="form-check"
+  >
+    <input
+      checked={true}
+      className="form-check-input"
+      disabled={false}
+      id="cb"
+      name="cb"
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <label
+      className="form-check-label"
+      htmlFor="cb"
+      title=""
+    >
+      some label
+    </label>
+  </div>
+</div>
+`;
+
+exports[`Checkbox complex 1`] = `
+<div
+  className="form-group some class error required"
+>
+  <span
+    className="tooltip-inline-block"
+    onBlur={[Function]}
+    onFocus={[Function]}
+    onMouseOut={[Function]}
+    onMouseOver={[Function]}
+  >
+    <small
+      className="help-text form-text"
+    >
+      some advice
+    </small>
+    <small
+      className="error-text form-text"
+    >
+      Oh no!
+    </small>
+    <div
+      className="form-check"
+    >
+      <input
+        checked={true}
+        className="form-check-input"
+        disabled={false}
+        id="cb"
+        name="cb"
+        onChange={[Function]}
+        required={true}
+        type="checkbox"
+      />
+      <label
+        className="form-check-label"
+        htmlFor="cb"
+        title=""
+      >
+        some label
+         
+        <i
+          className="bi bi-info-circle-fill size-1x tooltip-icon"
+        />
+      </label>
+    </div>
+  </span>
+</div>
+`;
+
+exports[`Checkbox disabled 1`] = `
+<div
+  className="form-group some class required"
+>
+  <div
+    className="form-check"
+  >
+    <input
+      checked={true}
+      className="form-check-input"
+      disabled={false}
+      id="cb"
+      name="cb"
+      onChange={[Function]}
+      required={true}
+      type="checkbox"
+    />
+    <label
+      className="form-check-label"
+      htmlFor="cb"
+      title=""
+    >
+      some label
+    </label>
+  </div>
+</div>
+`;
+
+exports[`Checkbox error 1`] = `
+<div
+  className="form-group some class error required"
+>
+  <small
+    className="error-text form-text"
+  >
+    Oh no!
+  </small>
+  <div
+    className="form-check"
+  >
+    <input
+      checked={true}
+      className="form-check-input"
+      disabled={false}
+      id="cb"
+      name="cb"
+      onChange={[Function]}
+      required={true}
+      type="checkbox"
+    />
+    <label
+      className="form-check-label"
+      htmlFor="cb"
+      title=""
+    >
+      some label
+    </label>
+  </div>
+</div>
+`;
+
+exports[`Checkbox readonly 1`] = `
+<div
+  className="form-group some class readonly"
+>
+  <div
+    className="form-check"
+  >
+    <input
+      checked={true}
+      className="form-check-input"
+      disabled={false}
+      id="cb"
+      name="cb"
+      onChange={[Function]}
+      readOnly={true}
+      required={true}
+      type="checkbox"
+    />
+    <label
+      className="form-check-label"
+      htmlFor="cb"
+      title=""
+    >
+      some label
+    </label>
+  </div>
+</div>
+`;
+
+exports[`Checkbox required 1`] = `
+<div
+  className="form-group some class required"
+>
+  <div
+    className="form-check"
+  >
+    <input
+      checked={true}
+      className="form-check-input"
+      disabled={false}
+      id="cb"
+      name="cb"
+      onChange={[Function]}
+      required={true}
+      type="checkbox"
+    />
+    <label
+      className="form-check-label"
+      htmlFor="cb"
+      title=""
+    >
+      some label
+    </label>
+  </div>
+</div>
+`;
