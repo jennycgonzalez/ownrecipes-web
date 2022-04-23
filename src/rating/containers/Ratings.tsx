@@ -25,7 +25,7 @@ const Ratings: React.FC = () => {
   }, [recipeSlug, recipeRating]);
 
   if (recipeSlug == null) return null;
-  const ratings = recipeSlug != null ? ratingsState.items?.get(recipeSlug) : undefined;
+  const ratings = recipeSlug != null && ratingsState.items != null ? ratingsState.items[recipeSlug] : undefined;
 
   return (
     <RatingsWrapper

@@ -10,10 +10,10 @@ import { SearchResult } from '../store/SearchTypes';
 import SearchResults from '../containers/SearchResults';
 
 export interface ISearchProps {
-  search:   Map<string, SearchResult> | undefined;
-  courses:  Map<string, CategoryCount[]> | undefined;
-  cuisines: Map<string, CategoryCount[]> | undefined;
-  ratings:  Map<string, RatingCount[]> | undefined;
+  search:   Record<string, SearchResult> | undefined;
+  courses:  Record<string, CategoryCount[]> | undefined;
+  cuisines: Record<string, CategoryCount[]> | undefined;
+  ratings:  Record<string, RatingCount[]> | undefined;
   qs:       Record<string, string>;
   qsString: string;
 
@@ -23,8 +23,8 @@ export interface ISearchProps {
 }
 
 const Search: React.FC<ISearchProps> = ({ search, courses, cuisines, ratings, qs, qsString, buildUrl, doSearch, onOpenRecipe }: ISearchProps) => {
-  const isInit  = search != null && search?.size > 0;
-  const qsSearchResult = search?.get(qsString);
+  const isInit  = search != null && Object.keys(search).length > 0;
+  const qsSearchResult = search?.[qsString];
 
   return (
     <>
@@ -43,9 +43,9 @@ const Search: React.FC<ISearchProps> = ({ search, courses, cuisines, ratings, qs
         <Row>
           <Col xs={12} className='filter-panel'>
             <SearchMenu
-                courses  = {courses?.get(qsString)}
-                cuisines = {cuisines?.get(qsString)}
-                ratings  = {ratings?.get(qsString)}
+                courses  = {courses?.[qsString]}
+                cuisines = {cuisines?.[qsString]}
+                ratings  = {ratings?.[qsString]}
                 qs       = {qs}
                 buildUrl = {buildUrl}
             />

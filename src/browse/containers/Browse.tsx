@@ -48,19 +48,19 @@ const Browse: React.FC = () => {
 
   const reloadData = () => {
     window.scrollTo(0, 0);
-    if (search?.get(qsMergedString) == null) {
+    if (search?.[qsMergedString] == null) {
       dispatch(SearchActions.loadRecipes(qsMergedDefaults));
       dispatch(FilterActions.loadCourses(qsMergedDefaults));
       dispatch(FilterActions.loadCuisines(qsMergedDefaults));
       dispatch(FilterActions.loadRatings(qsMergedDefaults));
     } else {
-      if (courses?.get(qsMergedString) == null) {
+      if (courses?.[qsMergedString] == null) {
         dispatch(FilterActions.loadCourses(qsMergedDefaults));
       }
-      if (cuisines?.get(qsMergedString) == null) {
+      if (cuisines?.[qsMergedString] == null) {
         dispatch(FilterActions.loadCuisines(qsMergedDefaults));
       }
-      if (ratings?.get(qsMergedString) == null) {
+      if (ratings?.[qsMergedString] == null) {
         dispatch(FilterActions.loadRatings(qsMergedDefaults));
       }
     }

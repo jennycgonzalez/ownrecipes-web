@@ -1,3 +1,5 @@
+import * as _ from 'lodash';
+
 import ReduxHelper, { ACTION } from '../../common/store/ReduxHelper';
 import { Rating, RatingAction, RatingsAction, IRatingAddAction, IRatingDeleteAction, RatingsState, RATINGS_STORE, RATING_STORE } from './types';
 
@@ -5,13 +7,13 @@ const defaultState = ReduxHelper.getMapReducerDefaultState<Rating[]>(RATINGS_STO
 
 function addRating(state: RatingsState, recipe: string, rating: Rating): RatingsState {
   const updState = { ...state };
-  const updMap = state.items != null ? new Map(state.items) : new Map();
+  const updMap = state.items != null ? _.clone(state.items) : {};
 
-  let ratings = updMap.get(recipe) ?? [];
+  let ratings = _.get(updMap, recipe) ?? [];
   ratings = [...ratings];
   ratings.push(rating);
 
-  updMap.set(recipe, ratings);
+  _.set(updMap, recipe, ratings);
   updState.items = updMap;
   return updState;
 }
@@ -19,13 +21,13 @@ function addRating(state: RatingsState, recipe: string, rating: Rating): Ratings
 function deleteRating(state: RatingsState, recipe: string, ratingId: number): RatingsState {
   const updState = { ...state };
   if (state.items == null) return state;
-  const updMap = new Map(state.items);
+  const updMap = _.clone(state.items);
 
-  let ratings = updMap.get(recipe);
+  let ratings = _.get(updMap, recipe);
   if (ratings == null) return state;
   ratings = ratings.filter(r => r.id !== ratingId);
 
-  updMap.set(recipe, ratings);
+  _.set(updMap, recipe, ratings);
   updState.items = updMap;
   return updState;
 }

@@ -19,7 +19,7 @@ export interface ISearchResultsProps {
 const SearchResults: React.FC<ISearchResultsProps> = ({ qs, qsString, buildUrl, onOpenRecipe }: ISearchResultsProps) => {
   const searchState = useSelector((state: CombinedStore) => state.browse.search);
   const pending = searchState.pending === PendingState.LOADING;
-  const qsSearchResult = searchState.items?.get(qsString);
+  const qsSearchResult = searchState.items?.[qsString];
 
   return (
     <>

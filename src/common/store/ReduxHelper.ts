@@ -221,9 +221,9 @@ export default class ReduxHelper {
   static setMapItem<T>(state: MapReducerType<T>, id: string, item: T): MapReducerType<T> {
     const updState = _.clone(state);
     const map = updState.items;
-    const updMap = map ? _.clone(map) : new Map();
+    const updMap = map ? _.clone(map) : {};
 
-    updMap.set(id, item);
+    _.set(updMap, id, item);
 
     updState.error = undefined;
     updState.pending = PendingState.COMPLETED;
@@ -235,9 +235,10 @@ export default class ReduxHelper {
   static deleteMapItem<T>(state: MapReducerType<T>, id: string): MapReducerType<T> {
     const updState = _.clone(state);
     const map = updState.items;
-    const updMap = map ? _.clone(map) : new Map();
+    const updMap = map ? _.clone(map) : {};
 
-    updMap.delete(id);
+    _.unset(updMap, id);
+
     updState.error = undefined;
     updState.pending = PendingState.COMPLETED;
     updState.hasConnection = true;
@@ -413,9 +414,9 @@ export default class ReduxHelper {
             if (itemAction.data == null || (itemAction.data as any).id == null) return state;
 
             const updState = { ...state };
-            const updItems = state.items != null ? new Map(state.items) : new Map();
+            const updItems = state.items != null ? _.clone(state.items) : {};
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            updItems.set((itemAction.data as any).id, itemAction.data);
+            _.set(updItems, (itemAction.data as any).id, itemAction.data);
             updState.items = updItems;
             return updState;
           }
@@ -424,8 +425,8 @@ export default class ReduxHelper {
             if (itemAction.data == null || state.items == null || itemAction.data.id == null) return state;
 
             const updState = { ...state };
-            const updItems = new Map(state.items);
-            if (updItems.delete(String(itemAction.data.id))) {
+            const updItems = _.clone(state.items);
+            if (_.unset(updItems, String(itemAction.data.id))) {
               updState.items = updItems;
               return updState;
             } else {
