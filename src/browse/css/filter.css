@@ -60,6 +60,17 @@
   .container.browser .filter-panel .reset-search-row {
     padding: 5px;
   }
+  .container.browser .filter-panel .clear-filter-desktop {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: var(--primaryText);
+  }
+  .container.browser .filter-panel .filter-group-list {
+    max-height: 50rem;
+    overflow-y: auto;
+    margin-bottom: 0;
+  }
 
   .container.browser .sidebar .filter-group .list-group-item.active:hover .bi,
   .container.browser .sidebar .filter-group .list-group-item.active:focus .bi {
@@ -83,6 +94,7 @@
   .container.browser .filter-panel .filter-header {
     flex: 1;
     text-align: left;
+    justify-content: start;
   }
   .container.browser .filter-panel .filter-header .bi {
     margin-left: 0.375em;

@@ -11,6 +11,7 @@ import Filter from './Filter';
 import Icon from '../../common/components/Icon';
 import { CategoryCount, RatingCount } from '../store/FilterTypes';
 import { getResourcePath } from '../../common/utility';
+import Tooltip from '../../common/components/Tooltip';
 
 export interface ISearchMenuProps {
   qs: Record<string, string>;
@@ -106,7 +107,7 @@ const SearchMenu: React.FC<ISearchMenuProps> = ({ qs, courses, cuisines, ratings
     return getResourcePath(str ? `/browser?${str}` : '/browser');
   };
 
-  const hasActiveFilter = Object.keys(qs).filter(key => key !== 'limit' && key !== 'offset').length !== 0;
+  const hasActiveFilter = Object.keys(qs).filter(key => !['limit', 'offset', 'search'].includes(key)).length !== 0;
 
   const mobileHeader = (
     <div className='sidebar-header'>
@@ -131,6 +132,13 @@ const SearchMenu: React.FC<ISearchMenuProps> = ({ qs, courses, cuisines, ratings
       </Card.Header>
       <Card.Header className='hidden-xs filter-title'>
         {intl.formatMessage(messages.filters)}
+        {hasActiveFilter && (
+          <Tooltip id='clear-tooltip' tooltip='Filter zurücksetzen' placement='bottom'>
+            <Link className='clear-filter-desktop btn btn-transparent' to={getResetFilterUrl()}>
+              <Icon icon='arrow-counterclockwise' variant='light' />
+            </Link>
+          </Tooltip>
+        )}
       </Card.Header>
       <Card.Text as='div' className={classNames('sidebar', { 'hidden-xs': !showMenu })}>
         <ul className='filter-group-list'>
