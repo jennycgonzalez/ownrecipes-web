@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';
 import { Button, Col, Row } from 'react-bootstrap';
 import { defineMessages, useIntl } from 'react-intl';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import '../css/recipe_header.css';
 
@@ -132,10 +132,10 @@ const RecipeHeader: React.FC<IRecipeHeaderProps> = ({ recipe, showEditLink, onEd
     </div>
   );
 
-  const chips = (
+  const chips = recipe != null ? (
     <>
       <div className='recipe-header-chips'>
-        {recipe && recipe.prepTime != null && recipe.prepTime > 0 && (
+        {recipe.prepTime != null && recipe.prepTime > 0 && (
           <Chip variant='secondary'>
             <Icon icon='clock' />
             {`${formatMessage(messages.prep_time)}: `}
@@ -143,7 +143,7 @@ const RecipeHeader: React.FC<IRecipeHeaderProps> = ({ recipe, showEditLink, onEd
             {` ${formatMessage(messages.minutes)}`}
           </Chip>
         )}
-        {recipe != null && recipe.cookTime != null && recipe.cookTime > 0 && (
+        {recipe.cookTime != null && recipe.cookTime > 0 && (
           <Chip variant='secondary'>
             <Icon icon='clock' />
             {`${formatMessage(messages.cooking_time)}: `}
@@ -151,13 +151,13 @@ const RecipeHeader: React.FC<IRecipeHeaderProps> = ({ recipe, showEditLink, onEd
             {` ${formatMessage(messages.minutes)}`}
           </Chip>
         )}
-        {recipe?.course != null && recipe.course.title != null && recipe.course.title.length > 0 && (
+        {recipe.course != null && recipe.course.title != null && recipe.course.title.length > 0 && (
           <Chip variant='secondary'>
             <Icon icon='bar-chart' />
             {optionallyFormatMessage(intl, 'course.', recipe.course.title)}
           </Chip>
         )}
-        {recipe?.cuisine != null && recipe.cuisine.title != null && recipe.cuisine.title.length > 0 && (
+        {recipe.cuisine != null && recipe.cuisine.title != null && recipe.cuisine.title.length > 0 && (
           <Chip variant='secondary'>
             <Icon icon='globe' variant='light' />
             {optionallyFormatMessage(intl, 'cuisine.', recipe.cuisine.title)}
@@ -174,8 +174,17 @@ const RecipeHeader: React.FC<IRecipeHeaderProps> = ({ recipe, showEditLink, onEd
           {recipe?.username ?? ''}
         </Chip>
       </div>
+      {recipe.tags != null && recipe.tags.length > 0 && (
+        <div className='recipe-header-chips'>
+          {recipe.tags.map(t => (
+            <Chip key={String(t.id)} variant='secondary'>
+              {optionallyFormatMessage(intl, 'tag.', t.title)}
+            </Chip>
+          ))}
+        </div>
+      )}
     </>
-  );
+  ) : null;
 
   return (
     <>
