@@ -1,129 +1,2288 @@
 {
-  "list": {
-    "lists": [
-      {
-        "id": 1,
-        "title": "food",
-        "slug": "sdf",
-        "pub_date": "",
-        "author": "ryan",
-        "item_count": 9,
-        "items": [
-          {
-            "id": 126,
-            "list": 1,
-            "title": "1 pound ground pork",
-            "completed": false
-          },
-          {
-            "id": 127,
-            "list": 1,
-            "title": "1 pound ground sirloin",
-            "completed": false
-          },
-          {
-            "id": 145,
-            "list": 1,
-            "title": "1 cup Tasty Chili 2",
-            "completed": false
-          },
-          {
-            "id": 153,
-            "list": 1,
-            "title": "2 cans diced tomatos",
-            "completed": false
-          },
-          {
-            "id": 154,
-            "list": 1,
-            "title": "1 whole green bell pepper",
-            "completed": false
-          },
-          {
-            "id": 155,
-            "list": 1,
-            "title": "1 can light kidney beans",
-            "completed": false
-          },
-          {
-            "id": 156,
-            "list": 1,
-            "title": "1 whole serrano pepper",
-            "completed": false
-          },
-          {
-            "id": 160,
-            "list": 1,
-            "title": "1 whole white onion",
-            "completed": false
-          },
-          {
-            "id": 166,
-            "list": 1,
-            "title": "1 tablespoon cumin",
-            "completed": false
-          }
-        ]
-      },
-      {
-        "id": 3,
-        "title": "more food",
-        "slug": "asdf",
-        "pub_date": "",
-        "author": "ryan",
-        "item_count": 5,
-        "items": [
-          {
-            "id": 161,
-            "list": 3,
-            "title": "1 whole serrano pepper",
-            "completed": true
-          },
-          {
-            "id": 162,
-            "list": 3,
-            "title": "1 whole white onion",
-            "completed": true
-          },
-          {
-            "id": 163,
-            "list": 3,
-            "title": "1 can light kidney beans",
-            "completed": true
-          },
-          {
-            "id": 164,
-            "list": 3,
-            "title": "1 whole serrano pepper",
-            "completed": false
-          },
-          {
-            "id": 165,
-            "list": 3,
-            "title": "1 whole white onion",
-            "completed": false
-          }
-        ]
-      }
-    ],
-    "error": ""
-  },
-  "user": {
-    "id": 1,
-    "token": "fghjfghj"
-  },
-  "news": [
-    {
+  "account": {
+    "item": {
       "id": 1,
-      "title": "OwnRecipes",
-      "content": "OwnRecipes is an open source recipe management site. You can share recipes with friends, rate recipes, store your favorite recipes to find easily, and more. If you want to run your own personal OwnRecipes site visit the <a href=\"https://github.com/ownrecipes/OwnRecipes\" target=\"_blank\">Github page</a>",
-      "frontpage": true,
-      "image": null
-    }
-  ],
+      "token": "fghjfghj",
+      "username": "Demo User",
+      "email": "demo@user.web",
+      "role": "user"
+    },
+    "ident": "@@account",
+    "pending": "COMPLETED"
+  },
   "browse": {
+    "filters": {
+      "courses": {
+        "items": {
+          "limit=12": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 2,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "course=appetizer&limit=12": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 2,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "course=appetizer%2Cdessert&limit=12": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 2,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "course=appetizer%2Cdessert%2Centry&limit=12": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 2,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "course=dessert%2Centry&limit=12": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 2,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "course=entry&limit=12": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 2,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "course=entry%2Cappetizer&limit=12": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 2,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "cuisine=american&limit=12": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "cuisine=american%2Cfrench&limit=12": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 2,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "cuisine=french&limit=12": [
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "limit=12&rating=5": [
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "limit=12&rating=3": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "limit=12&rating=3%2C5": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 2,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "limit=4": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 2,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "limit=8": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 2,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "limit=16": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 2,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "limit=16&ordering=title": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 2,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "limit=12&ordering=title": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 2,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "limit=12&ordering=-pub_date": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 2,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "limit=12&ordering=-rating": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 2,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "limit=12&ordering=title&rating=5": [
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "course=entry&limit=12&ordering=title&rating=5": [
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "course=entry&cuisine=american&limit=12&ordering=title&rating=5": [
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "cuisine=american&limit=12&ordering=title&rating=5": [
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "limit=12&ordering=title&rating=3": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "course=entry&limit=12&ordering=title&rating=3": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "course=dessert&limit=12&ordering=title&rating=3": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "course=appetizer&limit=12&ordering=title&rating=3": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "course=appetizer%2Cdessert&limit=12&ordering=title&rating=3": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "course=appetizer%2Centry&limit=12&ordering=title&rating=3": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "course=appetizer%2Centry%2Cdessert&limit=12&ordering=title&rating=3": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "course=entry%2Cdessert&limit=12&ordering=title&rating=3": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "cuisine=french&limit=12&ordering=title&rating=3": [
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "cuisine=french%2Camerican&limit=12&ordering=title&rating=3": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "cuisine=american&limit=12&ordering=title&rating=3": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            }
+          ],
+          "cuisine=american&limit=12&ordering=title": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "course=dessert&limit=12&ordering=title": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 2,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "course=dessert&cuisine=american&limit=12&ordering=title&rating=3": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            }
+          ],
+          "cuisine=american&limit=12&rating=5": [
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "course=entry&cuisine=american&limit=12&rating=5": [
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "course=entry&limit=12&rating=5": [
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "cuisine=french&limit=12&rating=3": [
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "cuisine=french%2Camerican&limit=12&rating=3": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "course=entry&limit=12&rating=3": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "course=entry%2Cdessert&limit=12&rating=3": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "course=entry%2Cdessert%2Cappetizer&limit=12&rating=3": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "course=dessert%2Cappetizer&limit=12&rating=3": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "course=appetizer&limit=12&rating=3": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ],
+          "course=appetizer%2Centry&limit=12&rating=3": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "Appetizer",
+              "slug": "appetizer",
+              "author": 1
+            },
+            {
+              "id": 4,
+              "total": 1,
+              "title": "Dessert",
+              "slug": "dessert",
+              "author": 1
+            },
+            {
+              "id": 2,
+              "total": 1,
+              "title": "Entry",
+              "slug": "entry",
+              "author": 1
+            }
+          ]
+        },
+        "ident": "@@BROWSE_FILTER_COURSE",
+        "pending": "COMPLETED"
+      },
+      "cuisines": {
+        "items": {
+          "limit=12": [
+            {
+              "id": 1,
+              "total": 3,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "course=appetizer&limit=12": [
+            {
+              "id": 1,
+              "total": 1,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            }
+          ],
+          "course=appetizer%2Cdessert&limit=12": [
+            {
+              "id": 1,
+              "total": 2,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            }
+          ],
+          "course=appetizer%2Cdessert%2Centry&limit=12": [
+            {
+              "id": 1,
+              "total": 3,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "course=dessert%2Centry&limit=12": [
+            {
+              "id": 1,
+              "total": 2,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "course=entry&limit=12": [
+            {
+              "id": 1,
+              "total": 1,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "course=entry%2Cappetizer&limit=12": [
+            {
+              "id": 1,
+              "total": 2,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "cuisine=american&limit=12": [
+            {
+              "id": 1,
+              "total": 3,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "cuisine=american%2Cfrench&limit=12": [
+            {
+              "id": 1,
+              "total": 3,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "cuisine=french&limit=12": [
+            {
+              "id": 1,
+              "total": 3,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "limit=12&rating=5": [
+            {
+              "id": 1,
+              "total": 1,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            }
+          ],
+          "limit=12&rating=3": [
+            {
+              "id": 1,
+              "total": 2,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "limit=12&rating=3%2C5": [
+            {
+              "id": 1,
+              "total": 3,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "limit=4": [
+            {
+              "id": 1,
+              "total": 3,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "limit=8": [
+            {
+              "id": 1,
+              "total": 3,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "limit=16": [
+            {
+              "id": 1,
+              "total": 3,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "limit=16&ordering=title": [
+            {
+              "id": 1,
+              "total": 3,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "limit=12&ordering=title": [
+            {
+              "id": 1,
+              "total": 3,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "limit=12&ordering=-pub_date": [
+            {
+              "id": 1,
+              "total": 3,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "limit=12&ordering=-rating": [
+            {
+              "id": 1,
+              "total": 3,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "limit=12&ordering=title&rating=5": [
+            {
+              "id": 1,
+              "total": 1,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            }
+          ],
+          "course=entry&limit=12&ordering=title&rating=5": [
+            {
+              "id": 1,
+              "total": 1,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            }
+          ],
+          "course=entry&cuisine=american&limit=12&ordering=title&rating=5": [
+            {
+              "id": 1,
+              "total": 1,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            }
+          ],
+          "cuisine=american&limit=12&ordering=title&rating=5": [
+            {
+              "id": 1,
+              "total": 1,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            }
+          ],
+          "limit=12&ordering=title&rating=3": [
+            {
+              "id": 1,
+              "total": 2,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "course=entry&limit=12&ordering=title&rating=3": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "course=dessert&limit=12&ordering=title&rating=3": [
+            {
+              "id": 1,
+              "total": 1,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            }
+          ],
+          "course=appetizer&limit=12&ordering=title&rating=3": [
+            {
+              "id": 1,
+              "total": 1,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            }
+          ],
+          "course=appetizer%2Cdessert&limit=12&ordering=title&rating=3": [
+            {
+              "id": 1,
+              "total": 2,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            }
+          ],
+          "course=appetizer%2Centry&limit=12&ordering=title&rating=3": [
+            {
+              "id": 1,
+              "total": 1,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "course=appetizer%2Centry%2Cdessert&limit=12&ordering=title&rating=3": [
+            {
+              "id": 1,
+              "total": 2,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "course=entry%2Cdessert&limit=12&ordering=title&rating=3": [
+            {
+              "id": 1,
+              "total": 1,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "cuisine=french&limit=12&ordering=title&rating=3": [
+            {
+              "id": 1,
+              "total": 2,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "cuisine=french%2Camerican&limit=12&ordering=title&rating=3": [
+            {
+              "id": 1,
+              "total": 2,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "cuisine=american&limit=12&ordering=title&rating=3": [
+            {
+              "id": 1,
+              "total": 2,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "cuisine=american&limit=12&ordering=title": [
+            {
+              "id": 1,
+              "total": 3,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "course=dessert&limit=12&ordering=title": [
+            {
+              "id": 1,
+              "total": 1,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            }
+          ],
+          "course=dessert&cuisine=american&limit=12&ordering=title&rating=3": [
+            {
+              "id": 1,
+              "total": 1,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            }
+          ],
+          "cuisine=american&limit=12&rating=5": [
+            {
+              "id": 1,
+              "total": 1,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            }
+          ],
+          "course=entry&cuisine=american&limit=12&rating=5": [
+            {
+              "id": 1,
+              "total": 1,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            }
+          ],
+          "course=entry&limit=12&rating=5": [
+            {
+              "id": 1,
+              "total": 1,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            }
+          ],
+          "cuisine=french&limit=12&rating=3": [
+            {
+              "id": 1,
+              "total": 2,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "cuisine=french%2Camerican&limit=12&rating=3": [
+            {
+              "id": 1,
+              "total": 2,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "course=entry&limit=12&rating=3": [
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "course=entry%2Cdessert&limit=12&rating=3": [
+            {
+              "id": 1,
+              "total": 1,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "course=entry%2Cdessert%2Cappetizer&limit=12&rating=3": [
+            {
+              "id": 1,
+              "total": 2,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ],
+          "course=dessert%2Cappetizer&limit=12&rating=3": [
+            {
+              "id": 1,
+              "total": 2,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            }
+          ],
+          "course=appetizer&limit=12&rating=3": [
+            {
+              "id": 1,
+              "total": 1,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            }
+          ],
+          "course=appetizer%2Centry&limit=12&rating=3": [
+            {
+              "id": 1,
+              "total": 1,
+              "title": "American",
+              "slug": "american",
+              "author": 1
+            },
+            {
+              "id": 3,
+              "total": 1,
+              "title": "French",
+              "slug": "french",
+              "author": 1
+            }
+          ]
+        },
+        "ident": "@@BROWSE_FILTER_CUISINE",
+        "pending": "COMPLETED"
+      },
+      "ratings": {
+        "items": {
+          "limit=12": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 3,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "course=appetizer&limit=12": [
+            {
+              "rating": 3,
+              "total": 1,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "course=appetizer%2Cdessert&limit=12": [
+            {
+              "rating": 3,
+              "total": 2,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "course=appetizer%2Cdessert%2Centry&limit=12": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 3,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "course=dessert%2Centry&limit=12": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 2,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "course=entry&limit=12": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 1,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "course=entry%2Cappetizer&limit=12": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 2,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "cuisine=american&limit=12": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 2,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "cuisine=american%2Cfrench&limit=12": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 3,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "cuisine=french&limit=12": [
+            {
+              "rating": 3,
+              "total": 1,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "limit=12&rating=5": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 3,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "limit=12&rating=3": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 3,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "limit=12&rating=3%2C5": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 3,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "limit=4": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 3,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "limit=8": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 3,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "limit=16": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 3,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "limit=16&ordering=title": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 3,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "limit=12&ordering=title": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 3,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "limit=12&ordering=-pub_date": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 3,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "limit=12&ordering=-rating": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 3,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "limit=12&ordering=title&rating=5": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 3,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "course=entry&limit=12&ordering=title&rating=5": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 1,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "course=entry&cuisine=american&limit=12&ordering=title&rating=5": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            }
+          ],
+          "cuisine=american&limit=12&ordering=title&rating=5": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 2,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "limit=12&ordering=title&rating=3": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 3,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "course=entry&limit=12&ordering=title&rating=3": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 1,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "course=dessert&limit=12&ordering=title&rating=3": [
+            {
+              "rating": 3,
+              "total": 1,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "course=appetizer&limit=12&ordering=title&rating=3": [
+            {
+              "rating": 3,
+              "total": 1,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "course=appetizer%2Cdessert&limit=12&ordering=title&rating=3": [
+            {
+              "rating": 3,
+              "total": 2,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "course=appetizer%2Centry&limit=12&ordering=title&rating=3": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 2,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "course=appetizer%2Centry%2Cdessert&limit=12&ordering=title&rating=3": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 3,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "course=entry%2Cdessert&limit=12&ordering=title&rating=3": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 2,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "cuisine=french&limit=12&ordering=title&rating=3": [
+            {
+              "rating": 3,
+              "total": 1,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "cuisine=french%2Camerican&limit=12&ordering=title&rating=3": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 3,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "cuisine=american&limit=12&ordering=title&rating=3": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 2,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "cuisine=american&limit=12&ordering=title": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 2,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "course=dessert&limit=12&ordering=title": [
+            {
+              "rating": 3,
+              "total": 1,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "course=dessert&cuisine=american&limit=12&ordering=title&rating=3": [
+            {
+              "rating": 3,
+              "total": 1,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "cuisine=american&limit=12&rating=5": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 2,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "course=entry&cuisine=american&limit=12&rating=5": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            }
+          ],
+          "course=entry&limit=12&rating=5": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 1,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "cuisine=french&limit=12&rating=3": [
+            {
+              "rating": 3,
+              "total": 1,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "cuisine=french%2Camerican&limit=12&rating=3": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 3,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "course=entry&limit=12&rating=3": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 1,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "course=entry%2Cdessert&limit=12&rating=3": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 2,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "course=entry%2Cdessert%2Cappetizer&limit=12&rating=3": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 3,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "course=dessert%2Cappetizer&limit=12&rating=3": [
+            {
+              "rating": 3,
+              "total": 2,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "course=appetizer&limit=12&rating=3": [
+            {
+              "rating": 3,
+              "total": 1,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ],
+          "course=appetizer%2Centry&limit=12&rating=3": [
+            {
+              "rating": 5,
+              "total": 1,
+              "slug": 5,
+              "title": "5 stars"
+            },
+            {
+              "rating": 3,
+              "total": 2,
+              "slug": 3,
+              "title": "3 stars"
+            }
+          ]
+        },
+        "ident": "@@BROWSE_FILTER_RATING",
+        "pending": "COMPLETED"
+      }
+    },
+    "miniBrowse": {
+      "items": [
+        {
+          "id": 1,
+          "title": "Tasty Chili",
+          "pub_date": "2011-05-21",
+          "rating": 5,
+          "photo_thumbnail": "https://open-eats.github.io/images/steak.jpg",
+          "info": "This chili is requested every winter by friends and family. I have been  making this chili every since I was a small child and learned from my grandma"
+        },
+        {
+          "id": 2,
+          "title": "Tasty Chili 2",
+          "pub_date": "2011-05-21",
+          "rating": 3,
+          "photo_thumbnail": "https://open-eats.github.io/images/fish.jpg",
+          "info": "This chili is requested every winter by friends and family. I have been  making this chili every since I was a small child and learned from my grandma"
+        },
+        {
+          "id": 3,
+          "title": "Tasty Chili 3",
+          "pub_date": "2011-05-21",
+          "rating": 3,
+          "photo_thumbnail": "https://open-eats.github.io/images/pizza.jpg",
+          "info": "This chili is requested every winter by friends and family. I have been  making this chili every since I was a small child and learned from my grandma"
+        },
+        {
+          "id": 4,
+          "title": "Tasty Chili 4",
+          "pub_date": "2011-05-21",
+          "rating": 3,
+          "photo_thumbnail": "https://open-eats.github.io/images/soup.jpg",
+          "info": "This chili is requested every winter by friends and family. I have been  making this chili every since I was a small child and learned from my grandma"
+        }
+      ],
+      "ident": "@@browserMini",
+      "pending": "COMPLETED"
+    },
     "search": {
-      "results": {
+      "items": {
         "limit=12": {
           "recipes": [
             {
@@ -1258,2277 +3417,150 @@
           "totalRecipes": 2
         }
       },
-      "loading": false
-    },
-    "filters": {
-      "courses": {
-        "results": {
-          "limit=12": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 2,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "course=appetizer&limit=12": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 2,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "course=appetizer%2Cdessert&limit=12": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 2,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "course=appetizer%2Cdessert%2Centry&limit=12": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 2,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "course=dessert%2Centry&limit=12": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 2,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "course=entry&limit=12": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 2,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "course=entry%2Cappetizer&limit=12": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 2,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "cuisine=american&limit=12": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "cuisine=american%2Cfrench&limit=12": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 2,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "cuisine=french&limit=12": [
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "limit=12&rating=5": [
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "limit=12&rating=3": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "limit=12&rating=3%2C5": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 2,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "limit=4": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 2,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "limit=8": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 2,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "limit=16": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 2,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "limit=16&ordering=title": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 2,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "limit=12&ordering=title": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 2,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "limit=12&ordering=-pub_date": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 2,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "limit=12&ordering=-rating": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 2,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "limit=12&ordering=title&rating=5": [
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "course=entry&limit=12&ordering=title&rating=5": [
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "course=entry&cuisine=american&limit=12&ordering=title&rating=5": [
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "cuisine=american&limit=12&ordering=title&rating=5": [
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "limit=12&ordering=title&rating=3": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "course=entry&limit=12&ordering=title&rating=3": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "course=dessert&limit=12&ordering=title&rating=3": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "course=appetizer&limit=12&ordering=title&rating=3": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "course=appetizer%2Cdessert&limit=12&ordering=title&rating=3": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "course=appetizer%2Centry&limit=12&ordering=title&rating=3": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "course=appetizer%2Centry%2Cdessert&limit=12&ordering=title&rating=3": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "course=entry%2Cdessert&limit=12&ordering=title&rating=3": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "cuisine=french&limit=12&ordering=title&rating=3": [
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "cuisine=french%2Camerican&limit=12&ordering=title&rating=3": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "cuisine=american&limit=12&ordering=title&rating=3": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            }
-          ],
-          "cuisine=american&limit=12&ordering=title": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "course=dessert&limit=12&ordering=title": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 2,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "course=dessert&cuisine=american&limit=12&ordering=title&rating=3": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            }
-          ],
-          "cuisine=american&limit=12&rating=5": [
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "course=entry&cuisine=american&limit=12&rating=5": [
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "course=entry&limit=12&rating=5": [
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "cuisine=french&limit=12&rating=3": [
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "cuisine=french%2Camerican&limit=12&rating=3": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "course=entry&limit=12&rating=3": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "course=entry%2Cdessert&limit=12&rating=3": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "course=entry%2Cdessert%2Cappetizer&limit=12&rating=3": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "course=dessert%2Cappetizer&limit=12&rating=3": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "course=appetizer&limit=12&rating=3": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ],
-          "course=appetizer%2Centry&limit=12&rating=3": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "Appetizer",
-              "slug": "appetizer",
-              "author": 1
-            },
-            {
-              "id": 4,
-              "total": 1,
-              "title": "Dessert",
-              "slug": "dessert",
-              "author": 1
-            },
-            {
-              "id": 2,
-              "total": 1,
-              "title": "Entry",
-              "slug": "entry",
-              "author": 1
-            }
-          ]
-        },
-        "loading": false,
-        "error": false
-      },
-      "cuisines": {
-        "results": {
-          "limit=12": [
-            {
-              "id": 1,
-              "total": 3,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "course=appetizer&limit=12": [
-            {
-              "id": 1,
-              "total": 1,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            }
-          ],
-          "course=appetizer%2Cdessert&limit=12": [
-            {
-              "id": 1,
-              "total": 2,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            }
-          ],
-          "course=appetizer%2Cdessert%2Centry&limit=12": [
-            {
-              "id": 1,
-              "total": 3,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "course=dessert%2Centry&limit=12": [
-            {
-              "id": 1,
-              "total": 2,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "course=entry&limit=12": [
-            {
-              "id": 1,
-              "total": 1,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "course=entry%2Cappetizer&limit=12": [
-            {
-              "id": 1,
-              "total": 2,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "cuisine=american&limit=12": [
-            {
-              "id": 1,
-              "total": 3,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "cuisine=american%2Cfrench&limit=12": [
-            {
-              "id": 1,
-              "total": 3,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "cuisine=french&limit=12": [
-            {
-              "id": 1,
-              "total": 3,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "limit=12&rating=5": [
-            {
-              "id": 1,
-              "total": 1,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            }
-          ],
-          "limit=12&rating=3": [
-            {
-              "id": 1,
-              "total": 2,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "limit=12&rating=3%2C5": [
-            {
-              "id": 1,
-              "total": 3,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "limit=4": [
-            {
-              "id": 1,
-              "total": 3,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "limit=8": [
-            {
-              "id": 1,
-              "total": 3,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "limit=16": [
-            {
-              "id": 1,
-              "total": 3,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "limit=16&ordering=title": [
-            {
-              "id": 1,
-              "total": 3,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "limit=12&ordering=title": [
-            {
-              "id": 1,
-              "total": 3,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "limit=12&ordering=-pub_date": [
-            {
-              "id": 1,
-              "total": 3,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "limit=12&ordering=-rating": [
-            {
-              "id": 1,
-              "total": 3,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "limit=12&ordering=title&rating=5": [
-            {
-              "id": 1,
-              "total": 1,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            }
-          ],
-          "course=entry&limit=12&ordering=title&rating=5": [
-            {
-              "id": 1,
-              "total": 1,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            }
-          ],
-          "course=entry&cuisine=american&limit=12&ordering=title&rating=5": [
-            {
-              "id": 1,
-              "total": 1,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            }
-          ],
-          "cuisine=american&limit=12&ordering=title&rating=5": [
-            {
-              "id": 1,
-              "total": 1,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            }
-          ],
-          "limit=12&ordering=title&rating=3": [
-            {
-              "id": 1,
-              "total": 2,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "course=entry&limit=12&ordering=title&rating=3": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "course=dessert&limit=12&ordering=title&rating=3": [
-            {
-              "id": 1,
-              "total": 1,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            }
-          ],
-          "course=appetizer&limit=12&ordering=title&rating=3": [
-            {
-              "id": 1,
-              "total": 1,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            }
-          ],
-          "course=appetizer%2Cdessert&limit=12&ordering=title&rating=3": [
-            {
-              "id": 1,
-              "total": 2,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            }
-          ],
-          "course=appetizer%2Centry&limit=12&ordering=title&rating=3": [
-            {
-              "id": 1,
-              "total": 1,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "course=appetizer%2Centry%2Cdessert&limit=12&ordering=title&rating=3": [
-            {
-              "id": 1,
-              "total": 2,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "course=entry%2Cdessert&limit=12&ordering=title&rating=3": [
-            {
-              "id": 1,
-              "total": 1,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "cuisine=french&limit=12&ordering=title&rating=3": [
-            {
-              "id": 1,
-              "total": 2,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "cuisine=french%2Camerican&limit=12&ordering=title&rating=3": [
-            {
-              "id": 1,
-              "total": 2,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "cuisine=american&limit=12&ordering=title&rating=3": [
-            {
-              "id": 1,
-              "total": 2,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "cuisine=american&limit=12&ordering=title": [
-            {
-              "id": 1,
-              "total": 3,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "course=dessert&limit=12&ordering=title": [
-            {
-              "id": 1,
-              "total": 1,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            }
-          ],
-          "course=dessert&cuisine=american&limit=12&ordering=title&rating=3": [
-            {
-              "id": 1,
-              "total": 1,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            }
-          ],
-          "cuisine=american&limit=12&rating=5": [
-            {
-              "id": 1,
-              "total": 1,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            }
-          ],
-          "course=entry&cuisine=american&limit=12&rating=5": [
-            {
-              "id": 1,
-              "total": 1,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            }
-          ],
-          "course=entry&limit=12&rating=5": [
-            {
-              "id": 1,
-              "total": 1,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            }
-          ],
-          "cuisine=french&limit=12&rating=3": [
-            {
-              "id": 1,
-              "total": 2,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "cuisine=french%2Camerican&limit=12&rating=3": [
-            {
-              "id": 1,
-              "total": 2,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "course=entry&limit=12&rating=3": [
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "course=entry%2Cdessert&limit=12&rating=3": [
-            {
-              "id": 1,
-              "total": 1,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "course=entry%2Cdessert%2Cappetizer&limit=12&rating=3": [
-            {
-              "id": 1,
-              "total": 2,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ],
-          "course=dessert%2Cappetizer&limit=12&rating=3": [
-            {
-              "id": 1,
-              "total": 2,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            }
-          ],
-          "course=appetizer&limit=12&rating=3": [
-            {
-              "id": 1,
-              "total": 1,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            }
-          ],
-          "course=appetizer%2Centry&limit=12&rating=3": [
-            {
-              "id": 1,
-              "total": 1,
-              "title": "American",
-              "slug": "american",
-              "author": 1
-            },
-            {
-              "id": 3,
-              "total": 1,
-              "title": "French",
-              "slug": "french",
-              "author": 1
-            }
-          ]
-        },
-        "loading": false,
-        "error": false
-      },
-      "ratings": {
-        "results": {
-          "limit=12": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 3,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "course=appetizer&limit=12": [
-            {
-              "rating": 3,
-              "total": 1,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "course=appetizer%2Cdessert&limit=12": [
-            {
-              "rating": 3,
-              "total": 2,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "course=appetizer%2Cdessert%2Centry&limit=12": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 3,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "course=dessert%2Centry&limit=12": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 2,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "course=entry&limit=12": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 1,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "course=entry%2Cappetizer&limit=12": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 2,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "cuisine=american&limit=12": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 2,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "cuisine=american%2Cfrench&limit=12": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 3,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "cuisine=french&limit=12": [
-            {
-              "rating": 3,
-              "total": 1,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "limit=12&rating=5": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 3,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "limit=12&rating=3": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 3,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "limit=12&rating=3%2C5": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 3,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "limit=4": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 3,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "limit=8": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 3,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "limit=16": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 3,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "limit=16&ordering=title": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 3,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "limit=12&ordering=title": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 3,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "limit=12&ordering=-pub_date": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 3,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "limit=12&ordering=-rating": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 3,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "limit=12&ordering=title&rating=5": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 3,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "course=entry&limit=12&ordering=title&rating=5": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 1,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "course=entry&cuisine=american&limit=12&ordering=title&rating=5": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            }
-          ],
-          "cuisine=american&limit=12&ordering=title&rating=5": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 2,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "limit=12&ordering=title&rating=3": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 3,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "course=entry&limit=12&ordering=title&rating=3": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 1,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "course=dessert&limit=12&ordering=title&rating=3": [
-            {
-              "rating": 3,
-              "total": 1,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "course=appetizer&limit=12&ordering=title&rating=3": [
-            {
-              "rating": 3,
-              "total": 1,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "course=appetizer%2Cdessert&limit=12&ordering=title&rating=3": [
-            {
-              "rating": 3,
-              "total": 2,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "course=appetizer%2Centry&limit=12&ordering=title&rating=3": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 2,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "course=appetizer%2Centry%2Cdessert&limit=12&ordering=title&rating=3": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 3,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "course=entry%2Cdessert&limit=12&ordering=title&rating=3": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 2,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "cuisine=french&limit=12&ordering=title&rating=3": [
-            {
-              "rating": 3,
-              "total": 1,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "cuisine=french%2Camerican&limit=12&ordering=title&rating=3": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 3,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "cuisine=american&limit=12&ordering=title&rating=3": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 2,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "cuisine=american&limit=12&ordering=title": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 2,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "course=dessert&limit=12&ordering=title": [
-            {
-              "rating": 3,
-              "total": 1,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "course=dessert&cuisine=american&limit=12&ordering=title&rating=3": [
-            {
-              "rating": 3,
-              "total": 1,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "cuisine=american&limit=12&rating=5": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 2,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "course=entry&cuisine=american&limit=12&rating=5": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            }
-          ],
-          "course=entry&limit=12&rating=5": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 1,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "cuisine=french&limit=12&rating=3": [
-            {
-              "rating": 3,
-              "total": 1,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "cuisine=french%2Camerican&limit=12&rating=3": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 3,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "course=entry&limit=12&rating=3": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 1,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "course=entry%2Cdessert&limit=12&rating=3": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 2,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "course=entry%2Cdessert%2Cappetizer&limit=12&rating=3": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 3,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "course=dessert%2Cappetizer&limit=12&rating=3": [
-            {
-              "rating": 3,
-              "total": 2,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "course=appetizer&limit=12&rating=3": [
-            {
-              "rating": 3,
-              "total": 1,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ],
-          "course=appetizer%2Centry&limit=12&rating=3": [
-            {
-              "rating": 5,
-              "total": 1,
-              "slug": 5,
-              "title": "5 stars"
-            },
-            {
-              "rating": 3,
-              "total": 2,
-              "slug": 3,
-              "title": "3 stars"
-            }
-          ]
-        },
-        "loading": false,
-        "error": false
-      }
-    },
-    "miniBrowse": [
+      "ident": "@@browserSearch",
+      "pending": "COMPLETED"
+    }
+  },
+  "connection": {
+    "hasConnection": true
+  },
+  "internalError": {
+
+  },
+  "list": {
+    "lists": [
       {
         "id": 1,
-        "title": "Tasty Chili",
-        "pub_date": "2011-05-21",
-        "rating": 5,
-        "photo_thumbnail": "https://open-eats.github.io/images/steak.jpg",
-        "info": "This chili is requested every winter by friends and family. I have been  making this chili every since I was a small child and learned from my grandma"
-      },
-      {
-        "id": 2,
-        "title": "Tasty Chili 2",
-        "pub_date": "2011-05-21",
-        "rating": 3,
-        "photo_thumbnail": "https://open-eats.github.io/images/fish.jpg",
-        "info": "This chili is requested every winter by friends and family. I have been  making this chili every since I was a small child and learned from my grandma"
+        "title": "food",
+        "slug": "sdf",
+        "pub_date": "",
+        "author": "ryan",
+        "item_count": 9,
+        "items": [
+          {
+            "id": 126,
+            "list": 1,
+            "title": "1 pound ground pork",
+            "completed": false
+          },
+          {
+            "id": 127,
+            "list": 1,
+            "title": "1 pound ground sirloin",
+            "completed": false
+          },
+          {
+            "id": 145,
+            "list": 1,
+            "title": "1 cup Tasty Chili 2",
+            "completed": false
+          },
+          {
+            "id": 153,
+            "list": 1,
+            "title": "2 cans diced tomatos",
+            "completed": false
+          },
+          {
+            "id": 154,
+            "list": 1,
+            "title": "1 whole green bell pepper",
+            "completed": false
+          },
+          {
+            "id": 155,
+            "list": 1,
+            "title": "1 can light kidney beans",
+            "completed": false
+          },
+          {
+            "id": 156,
+            "list": 1,
+            "title": "1 whole serrano pepper",
+            "completed": false
+          },
+          {
+            "id": 160,
+            "list": 1,
+            "title": "1 whole white onion",
+            "completed": false
+          },
+          {
+            "id": 166,
+            "list": 1,
+            "title": "1 tablespoon cumin",
+            "completed": false
+          }
+        ]
       },
       {
         "id": 3,
-        "title": "Tasty Chili 3",
-        "pub_date": "2011-05-21",
-        "rating": 3,
-        "photo_thumbnail": "https://open-eats.github.io/images/pizza.jpg",
-        "info": "This chili is requested every winter by friends and family. I have been  making this chili every since I was a small child and learned from my grandma"
-      },
-      {
-        "id": 4,
-        "title": "Tasty Chili 4",
-        "pub_date": "2011-05-21",
-        "rating": 3,
-        "photo_thumbnail": "https://open-eats.github.io/images/soup.jpg",
-        "info": "This chili is requested every winter by friends and family. I have been  making this chili every since I was a small child and learned from my grandma"
+        "title": "more food",
+        "slug": "asdf",
+        "pub_date": "",
+        "author": "ryan",
+        "item_count": 5,
+        "items": [
+          {
+            "id": 161,
+            "list": 3,
+            "title": "1 whole serrano pepper",
+            "completed": true
+          },
+          {
+            "id": 162,
+            "list": 3,
+            "title": "1 whole white onion",
+            "completed": true
+          },
+          {
+            "id": 163,
+            "list": 3,
+            "title": "1 can light kidney beans",
+            "completed": true
+          },
+          {
+            "id": 164,
+            "list": 3,
+            "title": "1 whole serrano pepper",
+            "completed": false
+          },
+          {
+            "id": 165,
+            "list": 3,
+            "title": "1 whole white onion",
+            "completed": false
+          }
+        ]
       }
-    ]
+    ],
+    "ident": "@@list"
+  },
+  "news": {
+    "items": [
+      {
+        "id": 1,
+        "image": null,
+        "title": "OwnRecipes",
+        "content": "OwnRecipes is an open source recipe management site. You can share recipes with friends, rate recipes, store your favorite recipes to find easily, and more. If you want to run your own personal OwnRecipes site visit the <a href=\"https://github.com/ownrecipes/OwnRecipes\" target=\"_blank\">Github page</a>",
+        "frontpage": true
+      }
+    ],
+    "ident": "@@news",
+    "pending": "COMPLETED"
+  },
+  "ratings": {
+    "items": [],
+    "ident": "@@ratings",
+    "pending": "COMPLETED"
   },
   "recipe": {
-    "recipes": [
+    "item": {},
+    "ident": "@@recipe",
+    "pending": "COMPLETED"
+  },
+  "recipes": {
+    "items": [
       {
         "id": 2,
         "photo": "https://open-eats.github.io/images/fish.jpg",
@@ -3891,27 +3923,21 @@
         "course": 2
       }
     ],
-    "status": ""
+    "ident": "@@recipes",
+    "pending": "COMPLETED"
   },
   "recipeForm": {
-    "form": [
-      {
-        "id": 0,
-        "public": true,
-        "errors": []
-      },
-      {
-        "id": 0,
-        "public": true,
-        "errors": []
-      }
-    ],
-    "status": {
-      "message": "",
-      "alert": ""
+    "item": {
+      "id": 0,
+      "public": true,
+      "errors": []
     },
-    "recipeGroups": {
-      "courses": [
+    "ident": "@@recipeForm",
+    "pending": "COMPLETED"
+  },
+  "recipeGroups": {
+    "courses": {
+      "items": [
         {
           "id": 3,
           "title": "Appetizer",
@@ -3937,7 +3963,11 @@
           "author": 1
         }
       ],
-      "cuisines": [
+      "ident": "@@COURSES_STORE",
+      "pending": "COMPLETED"
+    },
+    "cuisines": {
+      "items": [
         {
           "id": 1,
           "title": "American",
@@ -3993,7 +4023,11 @@
           "author": 1
         }
       ],
-      "tags": [
+      "ident": "@@CUISINES_STORE",
+      "pending": "COMPLETED"
+    },
+    "tags": {
+      "items": [
         {
           "title": "1"
         },
@@ -4027,7 +4061,11 @@
         {
           "title": "Sfgsfsdfsdf"
         }
-      ]
+      ],
+      "ident": "@@TAGS_STORE",
+      "pending": "COMPLETED"
     }
+  },
+  "settings": {
   }
 }
