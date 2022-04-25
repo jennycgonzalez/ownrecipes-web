@@ -17,6 +17,9 @@ const NavLink = forwardRef<unknown, INavLinkProps>(({ id, as, to, children, ...r
       id = {id}
       as = {as ?? Link}
       to = {to ?? undefined}
+      // This seems redundant, but is needed for
+      // react bootstrap navbar collapseOnSelect to work.
+      href = {to ?? undefined}
       {...rest}
       ref = {ref}>
     {children}
