@@ -8,7 +8,7 @@ import RecipeFooter from '../components/RecipeFooter';
 import { PendingState } from '../../common/store/GenericReducerType';
 import { useMemo } from 'react';
 
-const RecipeView: React.FC = () => {
+const RecipePage: React.FC = () => {
   const recipeState  = useSelector((state: CombinedStore) => state.recipe);
 
   const ratings = useMemo(() => <Ratings />, [recipeState.item?.id, recipeState.pending]);
@@ -23,4 +23,4 @@ const RecipeView: React.FC = () => {
   );
 };
 
-export default RecipeView;
+export default RecipePage;

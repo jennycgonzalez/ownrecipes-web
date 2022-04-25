@@ -30,7 +30,7 @@ function mergeDefaultFilters(query: queryString.ParsedQuery<string | number | bo
   return filter;
 }
 
-const Browse: React.FC = () => {
+const BrowsePage: React.FC = () => {
   const dispatch = useDispatch();
   const intl = useIntl();
   const location = useLocation();
@@ -139,4 +139,4 @@ const Browse: React.FC = () => {
   );
 };
 
-export default Browse;
+export default BrowsePage;

@@ -9,7 +9,7 @@ import { CombinedStore } from '../../app/Store';
 import PageWrapper from '../../common/components/PageWrapper';
 import SignUpInfo from '../components/SignUpInfo';
 
-const Login: React.FC = () => {
+const LoginPage: React.FC = () => {
   const dispatch = useDispatch();
   const intl = useIntl();
 
@@ -38,4 +38,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default LoginPage;

@@ -6,7 +6,7 @@ import P from '../../common/components/P';
 import PageWrapper from '../../common/components/PageWrapper';
 import { getResourcePath } from '../../common/utility';
 
-const NotFound = () => {
+const NotFoundPage = () => {
   const { formatMessage } = useIntl();
 
   const messages = defineMessages({
@@ -36,4 +36,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default NotFoundPage;

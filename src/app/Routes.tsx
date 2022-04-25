@@ -3,17 +3,17 @@ import { useSelector } from 'react-redux';
 
 import { AnyComponent } from '../types/Types';
 import { getEnvAsBoolean, getResourcePath } from '../common/utility';
-
-import News from '../news/container/News';
-import Login from '../account/containers/Login';
-import Browse from '../browse/containers/Browse';
-import RecipeFormContainer from '../recipe_form/containers/RecipeFormContainer';
-import RecipeView from '../recipe/containers/RecipeView';
-// import List from '../../list/containers/List';
-// import Menu from '../../menu/containers/Menu';
-import NotFound from './components/NotFound';
 import { CombinedStore } from './Store';
 import UserRole from '../common/types/UserRole';
+
+import NewsPage from '../news/container/NewsPage';
+import LoginPage from '../account/containers/LoginPage';
+import BrowsePage from '../browse/containers/BrowsePage';
+import RecipeFormPage from '../recipe_form/containers/RecipeFormPage';
+import RecipePage from '../recipe/containers/RecipePage';
+// import List from '../../list/containers/List';
+// import Menu from '../../menu/containers/Menu';
+import NotFoundPage from './components/NotFoundPage';
 
 export type IRouteType = {
   /** URL path. Should start with a slash. */
@@ -26,20 +26,20 @@ export type IRouteType = {
 const PrivateRoutes: Array<IRouteType> = [
   {
     path:      '/home',
-    component: News,
+    component: NewsPage,
   },
   {
     path:      '/browser',
-    component: Browse,
+    component: BrowsePage,
   },
   {
     path:      '/recipe/edit/:recipe',
-    component: RecipeFormContainer,
+    component: RecipeFormPage,
     restriction: [UserRole.USER, UserRole.STAFF, UserRole.ADMIN],
   },
   {
     path:      '/recipe/:recipe',
-    component: RecipeView,
+    component: RecipePage,
   },
   /*
   {
@@ -56,41 +56,41 @@ const PrivateRoutes: Array<IRouteType> = [
   }, */
   {
     path:      '/login',
-    component: Login,
+    component: LoginPage,
   },
   {
     path:      '/NotFound',
-    component: NotFound,
+    component: NotFoundPage,
   },
 ];
 
 const PublicRoutes: Array<IRouteType> = [
   {
     path:      '/home',
-    component: News,
+    component: NewsPage,
   },
   {
     path:      '/browser',
-    component: Browse,
+    component: BrowsePage,
   },
   {
     path:      '/recipe/:recipe',
-    component: RecipeView,
+    component: RecipePage,
   },
   {
     path:      '/login',
-    component: Login,
+    component: LoginPage,
   },
   {
     path:      '/NotFound',
-    component: NotFound,
+    component: NotFoundPage,
   },
 ];
 
 const PublicRoutesIfRequireLogin: Array<IRouteType> = [
   {
     path:      '/login',
-    component: Login,
+    component: LoginPage,
   },
 ];
 

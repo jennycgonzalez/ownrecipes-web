@@ -14,7 +14,7 @@ import PageWrapper from '../../common/components/PageWrapper';
 import { PendingState } from '../../common/store/GenericReducerType';
 import useSingle from '../../common/hooks/useSingle';
 
-const RecipeFormContainer: React.FC = () => {
+const RecipeFormPage: React.FC = () => {
   const intl = useIntl();
   const messages = defineMessages({
     new_recipe: {
@@ -115,4 +115,4 @@ const RecipeFormContainer: React.FC = () => {
   );
 };
 
-export default RecipeFormContainer;
+export default RecipeFormPage;

@@ -9,7 +9,7 @@ import NewsCarousel from '../components/NewsList';
 import NewsBrowser from '../components/NewsBrowser';
 import { useIntl } from 'react-intl';
 
-const News: React.FC = () => {
+const NewsPage: React.FC = () => {
   const intl = useIntl();
   // const accountState = useSelector((state: CombinedStore) => state.account);
   // const user = accountState.item;
@@ -29,4 +29,4 @@ const News: React.FC = () => {
   );
 };
 
-export default News;
+export default NewsPage;
