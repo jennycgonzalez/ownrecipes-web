@@ -15,6 +15,7 @@ import { Recipe } from '../store/RecipeTypes';
 import Modal from '../../common/components/Modal';
 import WidthHeightRatio from '../../common/components/WidthHeightRatio';
 import Image from '../../common/components/Image';
+import Tooltip from '../../common/components/Tooltip';
 
 export interface IRecipeHeaderProps {
   recipe:       Recipe | undefined;
@@ -30,6 +31,21 @@ const RecipeHeader: React.FC<IRecipeHeaderProps> = ({ recipe, showEditLink, onEd
   const { formatMessage } = intl;
 
   const messages = defineMessages({
+    edit_tooltip: {
+      id: 'recipe.edit_tooltip',
+      description: 'Tooltip displayed when hovering the edit recipe icon button',
+      defaultMessage: 'Edit this recipe',
+    },
+    delete_tooltip: {
+      id: 'recipe.delete_tooltip',
+      description: 'Tooltip displayed when hovering the delete recipe icon button',
+      defaultMessage: 'Delete this recipe',
+    },
+    print_tooltip: {
+      id: 'recipe.print_tooltip',
+      description: 'Tooltip displayed when hovering the print icon button',
+      defaultMessage: 'Print this recipe',
+    },
     recipe_comments: {
       id: 'recipe.comments',
       description: 'Button to comments',
@@ -90,17 +106,21 @@ const RecipeHeader: React.FC<IRecipeHeaderProps> = ({ recipe, showEditLink, onEd
   const handleDeleteClose  = () => setShowDeleteConfirm(false);
 
   const editLink = showEditLink ? (
-    <Link to={getResourcePath(`/recipe/edit/${recipe?.slug}`)} onClick={handleEditClick}>
-      <Button variant='primary' size='sm'>
-        <i className='bi bi-pencil-fill' />
-      </Button>
-    </Link>
+    <Tooltip id='edit tooltip' tooltip={formatMessage(messages.edit_tooltip)}>
+      <Link to={getResourcePath(`/recipe/edit/${recipe?.slug}`)} onClick={handleEditClick}>
+        <Button variant='primary' size='sm'>
+          <i className='bi bi-pencil-fill' />
+        </Button>
+      </Link>
+    </Tooltip>
   ) : null;
 
   const deleteLink = showEditLink ? (
-    <Button variant='outline-danger' size='sm' onClick={handleDeleteClick}>
-      <Icon icon='trash' />
-    </Button>
+    <Tooltip id='trash tooltip' tooltip={formatMessage(messages.delete_tooltip)}>
+      <Button variant='outline-danger' size='sm' onClick={handleDeleteClick}>
+        <Icon icon='trash' />
+      </Button>
+    </Tooltip>
   ) : null;
 
   let hostname = '';
@@ -125,9 +145,11 @@ const RecipeHeader: React.FC<IRecipeHeaderProps> = ({ recipe, showEditLink, onEd
             <Icon icon='calendar' />
           </Button>
         */}
-        <Button variant='outline-primary' aria-label='Print receipt' onClick={window.print}>
-          <Icon icon='printer' />
-        </Button>
+        <Tooltip id='print tooltip' tooltip={formatMessage(messages.print_tooltip)}>
+          <Button variant='outline-primary' aria-label='Print receipt' onClick={window.print}>
+            <Icon icon='printer' />
+          </Button>
+        </Tooltip>
       </div>
     </div>
   );
