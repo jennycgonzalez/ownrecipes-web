@@ -30,7 +30,7 @@ export interface IIngredientGroupsBoxProps {
 function igStringify(intl: IntlShape, formatter: Record<string, string>, values: Array<IngredientGroup>): string {
   let tr = '';
   if (values) {
-    values.filter(ig => ig.title.length > 0 || ig.ingredients.length > 0).forEach(ig => {
+    values.filter(ig => ig.title.trim().length > 0 || ig.ingredients.length > 0).forEach(ig => {
       if (ig.title) {
         tr += `${ig.title}:\n`;
       }

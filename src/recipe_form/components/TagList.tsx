@@ -18,13 +18,13 @@ function stringify(value: Array<Tag>): string {
 }
 
 function arrayify(value: string): Array<Tag> {
-  const dict: Array<Tag> = [];
-
   const tagsArray = value.split(',');
-  tagsArray.forEach(title => {
-    // TODO This seems hackish, as the id will be lost.
-    dict.push({ title: title.trim() } as Tag);
-  });
+  const dict: Array<Tag> = tagsArray
+      .filter(title => title.trim().length > 0)
+      .map(title => (
+        // OPT This seems hackish, as the id is lost.
+         ({ title: title.trim() } as Tag)
+      ));
 
   return dict;
 }
