@@ -14,6 +14,10 @@ export default function initCuisines() {
       id: 'cuisine.Asian',
       defaultMessage: 'Asian',
     },
+    cuisine_czech: {
+      id: 'cuisine.Czech',
+      defaultMessage: 'Czech',
+    },
     cuisine_chinese: {
       id: 'cuisine.Chinese',
       defaultMessage: 'Chinese',

@@ -3,44 +3,44 @@ import { defineMessages } from 'react-intl';
 export default function initCourses() {
   defineMessages({
     course_appetizer: {
-      id: 'course.appetizer',
+      id: 'course.Appetizer',
       defaultMessage: 'Appetizer',
     },
     course_breakfast: {
-      id: 'course.breakfast',
+      id: 'course.Breakfast',
       defaultMessage: 'Breakfast',
     },
     course_cake: {
-      id: 'course.cake',
+      id: 'course.Cake',
       defaultMessage: 'Cake and Baking',
     },
     course_dessert: {
-      id: 'course.dessert',
-      defaultMessage: 'Desserts',
+      id: 'course.Dessert',
+      defaultMessage: 'Dessert',
     },
     course_drink: {
-      id: 'course.drink',
+      id: 'course.Drink',
       defaultMessage: 'Drinks and Cocktails',
     },
     course_entry: {
-      id: 'course.entry',
+      id: 'course.Entry',
       defaultMessage: 'Entry',
     },
     course_main: {
-      id: 'course.main',
+      id: 'course.Main',
       defaultMessage: 'Main Course',
     },
     course_salad: {
-      id: 'course.salad',
+      id: 'course.Salad',
       defaultMessage: 'Salad',
     },
     course_side: {
-      id: 'course.sidedish',
-      defaultMessage: 'Side Dishes',
+      id: 'course.Side Dish',
+      defaultMessage: 'Side Dish',
     },
     course_snacks: {
-      id: 'course.snack',
-      defaultMessage: 'Snacks',
+      id: 'course.Snack',
+      defaultMessage: 'Snack',
     },
   });
 }

@@ -1,14 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { defineMessages, useIntl } from 'react-intl';
+import { useSelector } from 'react-redux';
+import { CombinedStore } from '../../app/Store';
 
 import Toast from '../../common/components/Toast';
-import GenericReducerType, { PendingState } from '../../common/store/GenericReducerType';
+import { PendingState } from '../../common/store/GenericReducerType';
 
-export interface IStatusProps {
-  queryState: GenericReducerType;
-}
-
-const Status: React.FC<IStatusProps> = ({ queryState }: IStatusProps) => {
+const Status: React.FC = () => {
   const intl = useIntl();
   const { formatMessage } = intl;
   const messages = defineMessages({
@@ -19,11 +17,9 @@ const Status: React.FC<IStatusProps> = ({ queryState }: IStatusProps) => {
     },
   });
 
+  const pending = useSelector((state: CombinedStore) => state.recipeForm.pending);
   const prevPending = useRef<PendingState>();
-
   const [showSaveSuccess, setShowSaveSuccess] = useState<boolean>(false);
-
-  const { pending } = queryState;
 
   useEffect(() => {
     if (prevPending.current === PendingState.SAVING && pending === PendingState.COMPLETED) {

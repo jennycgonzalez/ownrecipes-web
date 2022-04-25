@@ -143,6 +143,7 @@ export default class ReduxHelper {
       ident: ident,
 
       item: undefined,
+      dirty: false,
 
       error: undefined,
       validation: undefined,
@@ -192,6 +193,7 @@ export default class ReduxHelper {
     newState.hasConnection = true;
 
     newState.item  = item;
+    newState.dirty = false;
 
     return newState;
   };

@@ -6,7 +6,7 @@ export interface ITagListProps {
   label:  string;
   tooltip?: string;
 
-  tags: Array<Tag>;
+  value: Array<Tag>;
   errors?:  string;
 
   className?: string;
@@ -31,9 +31,9 @@ function arrayify(value: string): Array<Tag> {
 
 const TagList: React.FC<ITagListProps> = ({
     name, label, tooltip,
-    tags, errors, className, onChange }: ITagListProps) => {
-  const handleChange = (inpName: string, value: string) => {
-    onChange(inpName, arrayify(value));
+    value, errors, className, onChange }: ITagListProps) => {
+  const handleChange = (inpName: string, newValue: string) => {
+    onChange(inpName, arrayify(newValue));
   };
 
   return (
@@ -41,7 +41,7 @@ const TagList: React.FC<ITagListProps> = ({
         name      = {name}
         label     = {label}
         tooltip   = {tooltip}
-        value     = {stringify(tags)}
+        value     = {stringify(value)}
         errors    = {errors}
         className = {className}
         onChange  = {handleChange}

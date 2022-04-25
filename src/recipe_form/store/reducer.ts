@@ -69,6 +69,7 @@ const reducer = (state = defaultState, action: RecipeFormAction): RecipeFormStat
           }
 
           newState.item   = newItem;
+          newState.dirty  = true;
           ReduxHelper.doSetValidation(newState, action.validation, 'merge');
 
           return newState;

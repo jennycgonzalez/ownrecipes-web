@@ -1,36 +1,31 @@
 import React, { useEffect, useRef } from 'react';
 import { defineMessages, useIntl } from 'react-intl';
-import { Link } from 'react-router-dom';
-import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { Col, Container, Form, Row } from 'react-bootstrap';
 
 import '../css/recipe_form.css';
 
 import Checkbox from '../../common/components/Checkbox';
 import FileSelect from '../../common/components/FileSelect';
 import Input from '../../common/components/Input';
-import RecipeGroupSelect from './RecipeGroupSelect';
 
 import IngredientGroupsBox from './IngredientGroupsBox';
 import DirectionBox from './DirectionBox';
-import TagList from './TagList';
-import Status from './Status';
-import { Course, Cuisine, Recipe } from '../../recipe/store/RecipeTypes';
-import { AutocompleteListItem, RecipeFormState } from '../store/types';
-import { getRecipeImage, getResourcePath } from '../../common/utility';
-import { formatValidation } from '../../common/store/Validation';
+import Status from '../containers/Status';
+import { Recipe } from '../../recipe/store/RecipeTypes';
+import { AutocompleteListItem } from '../store/types';
+import { getRecipeImage } from '../../common/utility';
+import { formatValidation, ValidationResult } from '../../common/store/Validation';
 import WidthHeightRatio from '../../common/components/WidthHeightRatio';
 import Image from '../../common/components/Image';
 import { IMAGE_PLACEHOLDER } from '../../common/constants';
-import { PendingState } from '../../common/store/GenericReducerType';
+import TagListContainer from '../containers/TagListContainer';
+import CourseSelectContainer from '../containers/CourseSelectContainer';
+import CuisineSelectContainer from '../containers/CuisineSelectContainer';
+import RecipeFormToolbar from '../containers/RecipeFormToolbar';
 
 export interface IRecipeFormProps {
   form:      Recipe | undefined;
-
-  formState: RecipeFormState;
-  isDirty:   boolean;
-
-  courses:   Array<Course> | undefined;
-  cuisines:  Array<Cuisine> | undefined;
+  validation: ValidationResult | undefined;
 
   fetchRecipeList: (searchTerm: string) => Promise<AutocompleteListItem[]>;
 
@@ -40,7 +35,7 @@ export interface IRecipeFormProps {
 }
 
 const RecipeForm: React.FC<IRecipeFormProps> = ({
-    form, formState, isDirty, courses, cuisines,
+    form, validation,
     fetchRecipeList, update, validate, save } : IRecipeFormProps) => {
   const intl = useIntl();
   const { formatMessage } = intl;
@@ -120,26 +115,9 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
       description: 'Recipe set public label',
       defaultMessage: 'Public Recipe',
     },
-    submit: {
-      id: 'recipe.create.submit',
-      description: 'Submit recipe button',
-      defaultMessage: 'Submit recipe',
-    },
-    save: {
-      id: 'recipe.create.save',
-      description: 'Save recipe button',
-      defaultMessage: 'Save',
-    },
-    view: {
-      id: 'recipe.create.view',
-      description: 'View recipe button',
-      defaultMessage: 'View',
-    },
   });
 
   const id = form?.id;
-  const isNew = id == null || id === 0;
-  const showViewButton = !isNew && !isDirty && form?.slug != null;
 
   const prevId = useRef<number | undefined>();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -167,7 +145,7 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
     <Form className='recipe-form' onSubmit={handleSubmit} onInvalid={handleInvalid}>
       <Container>
         <Row>
-          <Status queryState={formState} />
+          <Status />
         </Row>
         <Row>
           <Col id='recipe-meta' md={5} lg={4}>
@@ -178,7 +156,7 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
                     label    = {formatMessage(messages.name_label)}
                     value    = {form?.title ?? ''}
                     required
-                    errors   = {formatValidation(intl, formState.validation?.title)}
+                    errors   = {formatValidation(intl, validation?.title)}
                     onChange = {update} />
               </Col>
             </Row>
@@ -208,30 +186,28 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
 
             <Row>
               <Col xs={12} sm={6}>
-                <RecipeGroupSelect
+                <CourseSelectContainer
                     name     = 'course'
                     label    = {formatMessage(messages.course_label)}
-                    data     = {courses}
-                    value    = {form?.course ?? ''}
-                    errors   = {formatValidation(intl, formState.validation?.course)}
+                    value    = {form?.course?.title ?? ''}
+                    errors   = {formatValidation(intl, validation?.course)}
                     onChange = {update} />
               </Col>
               <Col xs={12} sm={6}>
-                <RecipeGroupSelect
+                <CuisineSelectContainer
                     name     = 'cuisine'
                     label    = {formatMessage(messages.cuisine_label)}
-                    data     = {cuisines}
-                    value    = {form?.cuisine ?? ''}
-                    errors   = {formatValidation(intl, formState.validation?.cuisine)}
+                    value    = {form?.cuisine?.title ?? ''}
+                    errors   = {formatValidation(intl, validation?.cuisine)}
                     onChange = {update} />
               </Col>
               <Col xs={12}>
-                <TagList
+                <TagListContainer
                     name     = 'tags'
                     label    = {formatMessage(messages.tags_label)}
                     tooltip  = {formatMessage(messages.tags_tooltip)}
-                    tags     = {form?.tags ?? []}
-                    errors   = {formatValidation(intl, formState.validation?.tags)}
+                    value    = {form?.tags ?? []}
+                    errors   = {formatValidation(intl, validation?.tags)}
                     onChange = {update} />
               </Col>
             </Row>
@@ -245,7 +221,7 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
                     value    = {form?.prepTime ?? ''}
                     min      = {1}
                     max      = {999}
-                    errors   = {formatValidation(intl, formState.validation?.prepTime)}
+                    errors   = {formatValidation(intl, validation?.prepTime)}
                     onChange = {update} />
               </Col>
               <Col xs={12} sm={6}>
@@ -254,7 +230,7 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
                     type     = 'number'
                     label    = {formatMessage(messages.cooking_time_label)}
                     value    = {form?.cookTime ?? ''}
-                    errors   = {formatValidation(intl, formState.validation?.cookTime)}
+                    errors   = {formatValidation(intl, validation?.cookTime)}
                     onChange = {update} />
               </Col>
             </Row>
@@ -268,7 +244,7 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
                     min      = {1}
                     max      = {999}
                     required
-                    errors   = {formatValidation(intl, formState.validation?.servings)}
+                    errors   = {formatValidation(intl, validation?.servings)}
                     onChange = {update} />
               </Col>
             </Row>
@@ -279,7 +255,7 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
                     label    = {formatMessage(messages.source_label)}
                     tooltip  = {formatMessage(messages.source_tooltip)}
                     value    = {form?.source ?? ''}
-                    errors   = {formatValidation(intl, formState.validation?.source)}
+                    errors   = {formatValidation(intl, validation?.source)}
                     onChange = {update} />
               </Col>
             </Row>
@@ -289,7 +265,7 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
                     name      = 'public'
                     label     = {formatMessage(messages.public_label)}
                     value     = {form?.public ?? false}
-                    errors    = {formatValidation(intl, formState.validation?.public)}
+                    errors    = {formatValidation(intl, validation?.public)}
                     onChange  = {update} />
               </Col>
             </Row>
@@ -302,11 +278,11 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
                 label    = {formatMessage(messages.information_label)}
                 placeholder = {formatMessage(messages.information_placeholder)}
                 value    = {form?.info ?? ''}
-                errors   = {formatValidation(intl, formState.validation?.info)}
+                errors   = {formatValidation(intl, validation?.info)}
                 onChange = {update} />
             <IngredientGroupsBox
                 name     = 'ingredientGroups'
-                errors   = {formatValidation(intl, formState.validation?.ingredientGroups) || formatValidation(intl, formState.validation?.subrecipes)}
+                errors   = {formatValidation(intl, validation?.ingredientGroups) || formatValidation(intl, validation?.subrecipes)}
                 groups   = {form?.ingredientGroups}
                 subrecipes = {form?.subrecipes}
                 fetchRecipeList = {fetchRecipeList}
@@ -314,17 +290,10 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
             <DirectionBox
                 name       = 'directions'
                 directions = {form?.directions ?? ''}
-                errors     = {formatValidation(intl, formState.validation?.directions)}
+                errors     = {formatValidation(intl, validation?.directions)}
                 onChange   = {update} />
 
-            <Button
-                variant = 'primary'
-                type    = 'submit'
-                disabled = {formState.pending === PendingState.SAVING}
-                as = {showViewButton ? Link as any : undefined}
-                to = {showViewButton ? getResourcePath(`/recipe/${form.slug}`) : null}>
-              {formatMessage(showViewButton ? messages.view : messages.submit)}
-            </Button>
+            <RecipeFormToolbar />
           </Col>
         </Row>
       </Container>
