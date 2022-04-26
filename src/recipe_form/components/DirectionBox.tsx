@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { defineMessages, useIntl } from 'react-intl';
+import { useLocation } from 'react-router';
 
 import Input from '../../common/components/Input';
 import Directions from '../../recipe/components/Directions';
@@ -34,10 +35,23 @@ const DirectionBox: React.FC<IDirectionBox> = ({
     },
   });
 
+  const location = useLocation();
+  const [activeTab, setActiveTab] = useState<string>('0');
+
+  useEffect(() => {
+    if (location.pathname.endsWith('/create')) {
+      setActiveTab('0');
+    }
+  }, [location.pathname]);
+
   return (
     <TabbedView
         id        = 'directions'
         labels    = {[formatMessage(messages.directions_label)]}
+
+        activeTab = {activeTab}
+        onSelect  = {setActiveTab}
+
         errors    = {errors}
         tooltips  = {[formatMessage(messages.directions_tooltip)]}>
       <Input

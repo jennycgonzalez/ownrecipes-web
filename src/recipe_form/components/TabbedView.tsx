@@ -10,15 +10,19 @@ export interface ITabbedViewProps {
   id:          string;
   labels:      Array<string>;
   tooltips?:   Array<string>;
-  initialTab?: number;
-  errors?:     string;
-  className?:  string;
 
+  initialTab?: string;
+  activeTab?:  string;
+  onSelect?:   (newActiveTab: string) => void;
+
+  errors?:     string;
   children:    Array<React.ReactNode>;
 }
 
 const TabbedView: React.FC<ITabbedViewProps> = ({
-    id, labels, errors, tooltips, children } : ITabbedViewProps) => {
+    id, labels, errors, tooltips,
+    initialTab, activeTab, onSelect,
+    children } : ITabbedViewProps) => {
   const intl = useIntl();
 
   const { formatMessage } = intl;
@@ -64,9 +68,20 @@ const TabbedView: React.FC<ITabbedViewProps> = ({
     </Tab>
   ));
 
+  const handleSelect = (selectedKey: string | null) => {
+    if (onSelect && selectedKey) {
+      onSelect(selectedKey);
+    }
+  };
+
   return (
     <div className='live-editor'>
-      <Tabs id={`${id}-tabs`} defaultActiveKey='0' className={navClassName}>
+      <Tabs
+          id = {`${id}-tabs`}
+          defaultActiveKey = {initialTab || '0'}
+          activeKey = {activeTab}
+          onSelect  = {handleSelect}
+          className = {navClassName}>
         {tabs}
         <Tab
             title = {formatMessage(messages.preview)}

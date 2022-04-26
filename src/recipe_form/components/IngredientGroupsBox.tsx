@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { defineMessages, IntlShape, useIntl } from 'react-intl';
+import { useLocation } from 'react-router';
 import ReactTextareaAutocomplete from '@webscopeio/react-textarea-autocomplete';
 
 import '../css/smart_text_box.css';
@@ -179,6 +180,15 @@ const IngredientGroupsBox: React.FC<IIngredientGroupsBoxProps> = ({
     },
   });
 
+  const location = useLocation();
+  const [activeTab, setActiveTab] = useState<string>('0');
+
+  useEffect(() => {
+    if (location.pathname.endsWith('/create')) {
+      setActiveTab('0');
+    }
+  }, [location.pathname]);
+
   const measurementsContext = useContext(MeasurementContext);
 
   const [igData, setIgData] = useState<Array<IngredientGroup>>(groups ?? []);
@@ -226,6 +236,10 @@ const IngredientGroupsBox: React.FC<IIngredientGroupsBoxProps> = ({
     <TabbedView
         id       = 'ingredients'
         labels   = {[formatMessage(messages.ingredients_label), formatMessage(messages.subrecipes_label)]}
+
+        activeTab = {activeTab}
+        onSelect  = {setActiveTab}
+
         errors   = {errors}
         tooltips = {[formatMessage(messages.ingredients_tooltip), formatMessage(messages.subrecipes_tooltip)]}>
       <Input
