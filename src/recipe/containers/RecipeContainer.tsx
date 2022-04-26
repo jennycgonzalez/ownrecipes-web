@@ -10,7 +10,6 @@ import Loading from '../../common/components/Loading';
 import RecipeScheme from '../components/RecipeScheme';
 import * as RecipeActions from '../store/RecipeActions';
 import * as RecipeFormActions from '../../recipe_form/store/actions';
-// import * as RecipesActions from '../store/RecipesActions';
 // import * as MenuItemActions from '../../menu/actions/MenuItemActions';
 // import { fetchRecipeList } from '../../menu/actions/RecipeListActions';
 // import { menuItemValidation } from '../../menu/actions/validation';

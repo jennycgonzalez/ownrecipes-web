@@ -351,11 +351,20 @@ export default class ReduxHelper {
         case ACTION.GET_SUCCESS:
           {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            if (itemAction.data == null || (itemAction.data as any).id == null) return state;
+            const itemId = (itemAction.data as any)?.id;
+            if (itemId == null) return state;
 
             const updState = { ...state };
             const updItems = state.items != null ? [...state.items] : [];
-            updItems.push(itemAction.data);
+
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const oldIndex = updItems.findIndex(updItem => (updItem as any).id === itemId);
+            if (oldIndex > -1) {
+              updItems.splice(oldIndex, 1, itemAction.data);
+            } else {
+              updItems.push(itemAction.data);
+            }
+
             updState.items = updItems;
             return updState;
           }

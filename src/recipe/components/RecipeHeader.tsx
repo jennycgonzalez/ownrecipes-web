@@ -258,6 +258,7 @@ const RecipeHeader: React.FC<IRecipeHeaderProps> = ({ recipe, showEditLink, onEd
           show        = {showDeleteConfirm}
           title       = {formatMessage(messages.confirm_delete_title)}
           acceptTitle = {formatMessage(messages.confirm_delete_accept)}
+          acceptButtonProps = {{ variant: 'danger' }}
           onAccept    = {handleDeleteAccept}
           onClose     = {handleDeleteClose}
           className   = 'delete'>

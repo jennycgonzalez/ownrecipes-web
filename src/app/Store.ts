@@ -14,8 +14,6 @@ import recipeForm from '../recipe_form/store/reducer';
 import { RecipeFormState } from '../recipe_form/store/types';
 import recipeGroups from '../recipe_groups/store/reducer';
 import { RecipeGroupsState } from '../recipe_groups/store/types';
-import recipes from '../recipe/store/RecipesReducer';
-import { RecipesState } from '../recipe/store/RecipesTypes';
 // import menu from '../../menu/reducers/reducer';
 import news from '../news/store/reducer';
 import { NewsState } from '../news/store/types';
@@ -36,7 +34,6 @@ export type CombinedStore = {
   recipe:     RecipeState;
   recipeGroups: RecipeGroupsState;
   recipeForm: RecipeFormState;
-  recipes:    RecipesState;
   settings:   SettingsState;
 }
 
@@ -52,7 +49,6 @@ const reducer = combineReducers({
   recipe,
   recipeForm,
   recipeGroups,
-  recipes,
   settings,
 });
 
