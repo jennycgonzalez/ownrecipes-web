@@ -151,6 +151,9 @@
 #header-navbar form .form-group.search:not(.expanded) .input-adornment-end {
   border-radius: .25rem;
 }
+#header-navbar form .form-group.search:not(.expanded) .input-adornment-end button {
+  height: unset;
+}
 #header-navbar form .form-group.search.expanded input {
   display: inline-block;
 }

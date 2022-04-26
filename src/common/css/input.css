@@ -36,6 +36,13 @@
   border: 1px solid var(--inputBorder);
 }
 
+.form-group .input-adornment-start.button, .form-group .input-adornment-end.button {
+  padding: 0;
+}
 .form-group .input-adornment-start button, .form-group .input-adornment-end button {
+  height: inherit;
+  margin-left: 0;
+  background-color: transparent;
+  border-color: transparent;
   min-height: unset;
 }

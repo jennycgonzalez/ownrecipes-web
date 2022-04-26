@@ -1,11 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { defineMessages, useIntl } from 'react-intl';
 import { Col, Container, Form, Row } from 'react-bootstrap';
 
 import '../css/recipe_form.css';
 
 import Checkbox from '../../common/components/Checkbox';
-import FileSelect from '../../common/components/FileSelect';
 import Input from '../../common/components/Input';
 
 import IngredientGroupsBox from './IngredientGroupsBox';
@@ -13,15 +12,12 @@ import DirectionBox from './DirectionBox';
 import Status from '../containers/Status';
 import { Recipe } from '../../recipe/store/RecipeTypes';
 import { AutocompleteListItem } from '../store/types';
-import { getRecipeImage } from '../../common/utility';
 import { formatValidation, ValidationResult } from '../../common/store/Validation';
-import WidthHeightRatio from '../../common/components/WidthHeightRatio';
-import Image from '../../common/components/Image';
-import { IMAGE_PLACEHOLDER } from '../../common/constants';
 import TagListContainer from '../containers/TagListContainer';
 import CourseSelectContainer from '../containers/CourseSelectContainer';
 import CuisineSelectContainer from '../containers/CuisineSelectContainer';
 import RecipeFormToolbar from '../containers/RecipeFormToolbar';
+import RecipeFormImageRow from './RecipeFormImageRow';
 
 export interface IRecipeFormProps {
   form:      Recipe | undefined;
@@ -100,35 +96,12 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
       description: 'Rating source tooltip',
       defaultMessage: 'Where the original recipe is from.',
     },
-    photo_label: {
-      id: 'recipe.create.photo_label',
-      description: 'Photo label',
-      defaultMessage: 'Photo',
-    },
-    photo_help_text: {
-      id: 'recipe.create.photo_help_text',
-      description: 'The photo must be smaller than 500 kB.',
-      defaultMessage: 'The photo must be smaller than 500 kB.',
-    },
     public_label: {
       id: 'recipe.create.public_label',
       description: 'Recipe set public label',
       defaultMessage: 'Public Recipe',
     },
   });
-
-  const id = form?.id;
-
-  const prevId = useRef<number | undefined>();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const photoInputRef = useRef<any>(null);
-
-  useEffect(() => {
-    if (photoInputRef.current) {
-      photoInputRef.current.clearValue();
-    }
-    prevId.current = id;
-  }, [id]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     if (form == null) return;
@@ -161,28 +134,10 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
               </Col>
             </Row>
 
-            <Row>
-              <Col xs={12} lg={11} xl={10} xxl={9} style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-                <WidthHeightRatio height={66.67} width={100}>
-                  <Image
-                      src   = {getRecipeImage(form?.photoThumbnail ?? IMAGE_PLACEHOLDER)}
-                      alt   = ''
-                      style = {{ objectFit: 'contain' }} />
-                </WidthHeightRatio>
-              </Col>
-            </Row>
-
-            <Row>
-              <Col xs={12}>
-                <FileSelect
-                    name     = 'photo'
-                    label    = {formatMessage(messages.photo_label)}
-                    helpText = {formatMessage(messages.photo_help_text)}
-                    accept   = 'image/*'
-                    onChange = {update}
-                    ref = {photoInputRef} />
-              </Col>
-            </Row>
+            <RecipeFormImageRow
+                form = {form}
+                update = {update}
+                />
 
             <Row>
               <Col xs={12} sm={6}>

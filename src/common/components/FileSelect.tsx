@@ -1,12 +1,14 @@
 import { createRef } from 'react';
-import { Form } from 'react-bootstrap';
+import { Button, Form, InputGroup } from 'react-bootstrap';
 
 import BaseComponent, { IBaseComponentProps } from './BaseComponent';
 import ConditionalWrapper from './ConditionalWrapper';
+import Icon from './Icon';
 import Tooltip from './Tooltip';
 
 interface IFileSelectProps extends IBaseComponentProps {
   accept?: string;
+  value?:  string;
 
   onChange?: (name: string, newValue: File | undefined) => void;
 }
@@ -35,6 +37,13 @@ class FileBase extends BaseComponent<IFileSelectProps> {
     }
   };
 
+  handleClear = () => {
+    if (this.props.onChange) {
+      this.props.onChange(this.props.name, '' as unknown as File);
+      this.clearValue();
+    }
+  };
+
   render() {
     return (
       <Form.Group
@@ -46,14 +55,22 @@ class FileBase extends BaseComponent<IFileSelectProps> {
           {this.getLabel()}
           {this.getHelpText()}
           {this.getErrorMessage()}
-          <Form.Control
-              type   = 'file'
-              name   = {this.props.name}
-              accept = {this.props.accept}
-              readOnly = {this.props.readOnly}
-              disabled = {this.props.disabled}
-              onChange = {this.handleChange}
-              ref = {this.ref} />
+          <InputGroup>
+            <Form.Control
+                type   = 'file'
+                name   = {this.props.name}
+                accept = {this.props.accept}
+                readOnly = {this.props.readOnly}
+                disabled = {this.props.disabled}
+                onChange = {this.handleChange}
+                ref = {this.ref} />
+            {!this.props.readOnly && !this.props.disabled && this.props.onChange
+                && (this.props.value != null || (this.ref.current != null && this.ref.current.value !== '')) && (
+                  <InputGroup.Text className='input-adornment-end button'>
+                    <Button onClick={this.handleClear}><Icon icon='x' variant='light' size='2x' /></Button>
+                  </InputGroup.Text>
+            )}
+          </InputGroup>
         </ConditionalWrapper>
       </Form.Group>
     );

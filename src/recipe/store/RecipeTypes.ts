@@ -300,6 +300,8 @@ export type RecipeRequest = {
   directions: string;
   info:       string;
 
+  photo?:     '';
+
   public:     boolean;
 };
 
@@ -333,6 +335,8 @@ export const toRecipeRequest = (obj: Recipe): RecipeRequest => ({
   ingredient_groups: obj.ingredientGroups?.filter(ig => ig.ingredients.length > 0).map(ig => toIngredientGroupDto(ig)),
   directions: ifNull(obj.directions, STRING_UNDEFINED),
   info:       obj.info,
+
+  photo:      obj.photo === '' ? '' : undefined,
 
   public:     obj.public,
 });
