@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
+import { useLocation, useParams } from 'react-router';
 import { defineMessages, useIntl } from 'react-intl';
 
 import * as RecipeFormActions from '../store/actions';
@@ -23,6 +23,7 @@ const RecipeFormPage: React.FC = () => {
 
   const dispatch = useDispatch();
   const params = useParams();
+  const location = useLocation();
 
   const fetchRecipeList = RecipeFormActions.fetchRecipeList;
 
@@ -46,7 +47,7 @@ const RecipeFormPage: React.FC = () => {
         dispatch(RecipeFormActions.load(paramsRecipe));
       }
     }
-  }, [paramsRecipe]);
+  }, [paramsRecipe, location.key]);
 
   // componentWillUnmount
   useEffect(() => () => {

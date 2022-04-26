@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { defineMessages, useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { CombinedStore } from '../../app/Store';
+import NavigationPrompt from '../../common/components/NavigationPrompt';
 
 import Toast from '../../common/components/Toast';
 import { PendingState } from '../../common/store/GenericReducerType';
@@ -17,6 +18,7 @@ const Status: React.FC = () => {
     },
   });
 
+  const isDirty = useSelector((state: CombinedStore) => state.recipeForm.dirty);
   const pending = useSelector((state: CombinedStore) => state.recipeForm.pending);
   const prevPending = useRef<PendingState>();
   const [showSaveSuccess, setShowSaveSuccess] = useState<boolean>(false);
@@ -34,13 +36,16 @@ const Status: React.FC = () => {
   };
 
   return (
-    <Toast
-        show = {showSaveSuccess}
-        variant = 'success'
-        anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
-        onClose = {handleCloseSaveSuccessToast}>
-      {formatMessage(messages.save_success)}
-    </Toast>
+    <>
+      <NavigationPrompt isDirty={isDirty} />
+      <Toast
+          show = {showSaveSuccess}
+          variant = 'success'
+          anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
+          onClose = {handleCloseSaveSuccessToast}>
+        {formatMessage(messages.save_success)}
+      </Toast>
+    </>
   );
 };
 
