@@ -40,7 +40,7 @@ const RecipeFormToolbar: React.FC = () => {
         variant = 'primary'
         type    = 'submit'
         disabled = {recipeFormState.pending === PendingState.SAVING}
-        as = {showViewButton ? Link as any : undefined}
+        as = {showViewButton ? Link as any : undefined} // eslint-disable-line @typescript-eslint/no-explicit-any
         to = {showViewButton ? getResourcePath(`/recipe/${recipeFormState.item?.slug}`) : null}>
       {formatMessage(showViewButton ? messages.view : messages.submit)}
     </Button>

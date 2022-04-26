@@ -40,6 +40,7 @@ const TabbedView: React.FC<ITabbedViewProps> = ({
 
   const tabs = children.slice(0, children.length - 1).map((childr, index) => (
     <Tab
+        // eslint-disable-next-line react/no-array-index-key
         key = {String(index)}
         title = {(
           <>
