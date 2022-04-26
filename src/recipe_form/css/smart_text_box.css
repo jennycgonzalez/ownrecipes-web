@@ -2,29 +2,34 @@
   position: relative;
 }
 .rta .loading {
-  border: solid 1px #ddd;
-  background: #eee;
-  padding: 5px 10px;
+  border: solid 1px var(--elevationBorder);
+  background: var(--midground);
+  padding: 5px 0.5em;
+  animation: fadeIn 1s;
+  animation-delay: 1s;
+}
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 .rta .rta__autocomplete {
   position: absolute;
-  margin-top: 10px;
-  margin-left: 3px;
+  margin-left: 10px;
 }
 .rta .rta__autocomplete ul {
   list-style-type: none;
-  border: solid 1px #ccc;
-  background: #eee;
+  border: solid 1px var(--elevationBorder);
+  background: var(--midground);
   padding: 0;
-  width: 200px;
+  width: 14rem;
 }
 .rta .rta__autocomplete ul .rta__entity {
-  padding: 2px;
-  border-bottom: solid 1px #ccc;
+  padding: 4px;
+  border-bottom: solid 1px var(--elevationBorder);
   width: 100%;
 }
 .rta .rta__autocomplete ul .rta__entity.rta__entity--selected {
-  color: white;
-  background: #4095bf;
+  color: var(--primaryMain);
+  background: var(--elevation);
   cursor: default;
 }

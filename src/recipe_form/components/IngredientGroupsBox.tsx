@@ -229,7 +229,7 @@ const IngredientGroupsBox: React.FC<IIngredientGroupsBoxProps> = ({
     setSrData(list);
     setSrText(val);
 
-    onChange(name, list);
+    onChange(event.target.name, list);
   };
 
   return (
@@ -251,12 +251,14 @@ const IngredientGroupsBox: React.FC<IIngredientGroupsBoxProps> = ({
           onChange = {handleIgChange} />
       <div className='form-group'>
         <ReactTextareaAutocomplete<AutocompleteListItem>
+            name = 'subrecipes'
             value = {srText}
             onChange = {handleSrChange}
             rows = {8}
             placeholder = {formatMessage(messages.subrecipes_placeholder)}
             loadingComponent = {Loading}
             className = 'form-control'
+            movePopupAsYouType
             trigger={{
             ':': {
               dataProvider: token => fetchRecipeList(token),
