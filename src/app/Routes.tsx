@@ -2,7 +2,7 @@ import { Route, Routes as RouterRoutes, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { AnyComponent } from '../types/Types';
-import { getEnvAsBoolean, getResourcePath } from '../common/utility';
+import { getEnvAsBoolean, getResourcePath, isDemoMode } from '../common/utility';
 import { CombinedStore } from './Store';
 import UserRole from '../common/types/UserRole';
 
@@ -118,7 +118,7 @@ const Routes: React.FC = () => {
       <Route path={getResourcePath('/')} key='/' element={<Navigate replace to={getResourcePath('/home')} />} />
     );
     routesList.push(
-      <Route path='*' key='*' element={<Navigate replace to={getResourcePath('/NotFound')} />} />
+      <Route path='*' key='*' element={<Navigate replace to={getResourcePath(isDemoMode() ? '/home' : '/NotFound')} />} />
     );
   } else if (isLoginRequired) {
     routesList = PublicRoutesIfRequireLogin.map(r => {

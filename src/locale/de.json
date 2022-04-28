@@ -36,6 +36,8 @@
   "cuisine.Nordic": "Nordisch",
   "cuisine.Thai": "Thai",
   "cuisine.Vietnamese": "Vietnamesisch",
+  "demo.alert.message": "Keine Schreibzugriffe möglich! Das ist eine Demo-Version von OwnRecipes.",
+  "demo.alert.title": "DEMO MODUS",
   "filter.filter_course": "Gänge",
   "filter.filter_cuisine": "Küchen",
   "filter.filter_limit": "Rezepte pro Seite",

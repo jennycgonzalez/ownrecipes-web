@@ -36,6 +36,8 @@
   "cuisine.Nordic": "Nordic",
   "cuisine.Thai": "Thai",
   "cuisine.Vietnamese": "Vietnamese",
+  "demo.alert.message": "Everything is Read-Only! This is a demo version of OwnRecipes and has no API connected to it.",
+  "demo.alert.title": "DEMO NOTICE",
   "filter.filter_course": "Courses",
   "filter.filter_cuisine": "Cuisines",
   "filter.filter_limit": "Recipes per Page",

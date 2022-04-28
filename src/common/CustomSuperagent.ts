@@ -66,6 +66,7 @@ export const refreshToken = (() => {
 export const request = (): SuperAgentStatic => {
   const customRequest = defaults();
 
+  if (!isDemoMode()) {
   // Add the user token if the user is logged in
   const accountState = store.getState().account;
   const account = accountState.item;
@@ -86,6 +87,7 @@ export const request = (): SuperAgentStatic => {
       refreshToken.instance(account.token);
     }
     customRequest.set('Authorization', `JWT ${account.token}`);
+    }
   }
 
   // Make sure every request we get is json

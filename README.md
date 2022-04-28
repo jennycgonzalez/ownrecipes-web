@@ -53,12 +53,14 @@ npm run locales
 
 #### Building the demo site
 
-The demo site is built using pure js and relies on populating the redux store when the app starts. If more data needs to be added be sure to update [the demo json](https://github.com/ownrecipes/ownrecipes-web/tree/master/modules/common/demo)
+The demo site is built using pure js and relies on populating the redux store when the app starts. If more data needs to be added be sure to update [the demo json](https://github.com/ownrecipes/ownrecipes-web/tree/master/modules/common/demo).
 
 Run:
 
 ```bash
-REACT_APP_ENV=demo npm run build:prod
+git checkout gh-pages-deploy
+npm install
+npm run deploy
 ```
 
-This will generate all the require files in the build folder. These files can be copied directly into the demo repo.
+This will generate all the require files in the build folder. These files will copied directly into the demo repo, thus the changes will be applied immediately.

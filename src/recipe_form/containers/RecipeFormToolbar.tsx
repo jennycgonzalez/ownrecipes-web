@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 import { defineMessages, useIntl } from 'react-intl';
 
 import { CombinedStore } from '../../app/Store';
-import { getResourcePath } from '../../common/utility';
+import { getResourcePath, isDemoMode } from '../../common/utility';
 import { PendingState } from '../../common/store/GenericReducerType';
 
 const RecipeFormToolbar: React.FC = () => {
@@ -39,7 +39,7 @@ const RecipeFormToolbar: React.FC = () => {
     <Button
         variant = 'primary'
         type    = 'submit'
-        disabled = {recipeFormState.pending === PendingState.SAVING}
+        disabled = {recipeFormState.pending === PendingState.SAVING || (isDemoMode() && !showViewButton)}
         as = {showViewButton ? Link as any : undefined} // eslint-disable-line @typescript-eslint/no-explicit-any
         to = {showViewButton ? getResourcePath(`/recipe/${recipeFormState.item?.slug}`) : null}>
       {formatMessage(showViewButton ? messages.view : messages.submit)}

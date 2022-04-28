@@ -5,6 +5,7 @@ import * as _ from 'lodash';
 
 import Icon from '../../common/components/Icon';
 import Input from '../../common/components/Input';
+import { isDemoMode } from '../../common/utility';
 
 export interface ISearchBarProps {
   value:  string;
@@ -71,7 +72,9 @@ const SearchBar: React.FC<ISearchBarProps> = ({ value, doSearch }: ISearchBarPro
         inputAdornmentEnd = {formData.value.length > 0 ? clearInput : undefined}
         onChange = {handleChange}
         debounceTimeout = {400}
-        className = 'search-bar' />
+        className = 'search-bar'
+        readOnly = {isDemoMode()}
+        tooltip = {isDemoMode() ? 'Not available in this demo' : undefined} />
   );
 };
 

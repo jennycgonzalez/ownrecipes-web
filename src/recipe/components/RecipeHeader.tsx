@@ -199,7 +199,7 @@ const RecipeHeader: React.FC<IRecipeHeaderProps> = ({ recipe, showEditLink, onEd
       {recipe.tags != null && recipe.tags.length > 0 && (
         <div className='recipe-header-chips'>
           {recipe.tags.map(t => (
-            <Chip key={String(t.id)} variant='secondary'>
+            <Chip key={String(t.title)} variant='secondary'>
               {optionallyFormatMessage(intl, 'tag.', t.title)}
             </Chip>
           ))}

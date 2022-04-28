@@ -1,4 +1,5 @@
-import { createStore, applyMiddleware } from 'redux';
+// eslint-disable-next-line camelcase
+import { applyMiddleware, legacy_createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
 import reducer from '../../app/Store';
@@ -10,7 +11,7 @@ if (isDemoMode()) {
   data = require('../demo/data.json');
 }
 
-const store = createStore(
+const store = legacy_createStore(
   reducer,
   data,
   applyMiddleware(

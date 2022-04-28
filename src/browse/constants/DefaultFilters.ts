@@ -6,7 +6,6 @@ export type PaginationProps = {
 
 const defaultFilters: Partial<PaginationProps> = {
   limit: 12,
-  offset: 0,
 };
 
 export default defaultFilters;
