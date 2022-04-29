@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/ownrecipes-web/static/css/main.e2c00299.css",
+    "main.js": "/ownrecipes-web/static/js/main.4ecc10f4.js",
+    "static/media/bootstrap-icons.woff?": "/ownrecipes-web/static/media/bootstrap-icons.c1d7432ee75fa194e499.woff",
+    "static/media/bootstrap-icons.woff2?": "/ownrecipes-web/static/media/bootstrap-icons.a13b815539b49de48d23.woff2",
+    "index.html": "/ownrecipes-web/index.html",
+    "main.e2c00299.css.map": "/ownrecipes-web/static/css/main.e2c00299.css.map",
+    "main.4ecc10f4.js.map": "/ownrecipes-web/static/js/main.4ecc10f4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e2c00299.css",
+    "static/js/main.4ecc10f4.js"
+  ]
+}
