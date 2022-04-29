@@ -81,7 +81,7 @@ const IntlProvider: React.FC<IIntlProviderProps> = (props: IIntlProviderProps) =
   }, []);
 
   useEffect(() => {
-    if (settings.language !== language) {
+    if (settings.language != null && settings.language !== language) {
       setLanguage(settings.language);
     }
   }, [settings.language]);
