@@ -11,6 +11,7 @@ import { ACTION } from './store/ReduxHelper';
 import * as InternalErrorActions from '../internal_error/store/actions';
 import { logUserOut } from '../account/store/actions';
 import { toValidationErrors, ValidationError } from './store/Validation';
+import { isDemoMode } from './utility';
 
 export type ResponseError = superRequest.ResponseError;
 export const isResponseError = (obj: unknown): obj is ResponseError => (

@@ -3,7 +3,6 @@ import Demo from './components/Demo';
 import Footer from './components/Footer';
 
 import ErrorBoundary from '../common/components/ErrorBoundary';
-import { isDemoMode } from '../common/utility';
 
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './css/core.css';
@@ -21,9 +20,9 @@ const App = () => {
       <AutoLogin />
       <div id='content'>
         <Header />
-        {isDemoMode() && <Demo />}
-        {!isDemoMode() && <ConnectionObserver />}
-        {!isDemoMode() && <IntlMessagesCreator />}
+        {process.env.REACT_APP_DEMO === 'demo' && <Demo />}
+        {process.env.REACT_APP_DEMO !== 'demo' && <ConnectionObserver />}
+        {process.env.REACT_APP_DEMO !== 'demo' && <IntlMessagesCreator />}
         <Routes />
       </div>
       <Footer />

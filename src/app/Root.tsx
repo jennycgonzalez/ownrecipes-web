@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 
 import Spinner from './components/Spinner';
 import store from '../common/store/store';
-import { isDemoMode } from '../common/utility';
 import ContextProvider from './components/ContextProvider';
 import ThemeProvider from './components/ThemeProvider';
 import App from './App';
@@ -14,8 +13,8 @@ const Root = () => (
     <Provider store={store}>
       <ThemeProvider />
       <ContextProvider>
-        {!isDemoMode() && <BrowserRouter><App /></BrowserRouter>}
-        {isDemoMode() && <HashRouter><App /></HashRouter>}
+        {process.env.REACT_APP_DEMO !== 'demo' && <BrowserRouter><App /></BrowserRouter>}
+        {process.env.REACT_APP_DEMO === 'demo' && <HashRouter><App /></HashRouter>}
       </ContextProvider>
     </Provider>
   </Suspense>
