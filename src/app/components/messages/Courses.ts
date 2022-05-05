@@ -42,5 +42,9 @@ export default function initCourses() {
       id: 'course.Snack',
       defaultMessage: 'Snack',
     },
+    course_soup: {
+      id: 'course.Soup',
+      defaultMessage: 'Soup',
+    },
   });
 }

@@ -2,6 +2,10 @@ import { defineMessages } from 'react-intl';
 
 export default function initCuisines() {
   defineMessages({
+    cuisine_african: {
+      id: 'cuisine.African',
+      defaultMessage: 'African',
+    },
     cuisine_american: {
       id: 'cuisine.American',
       defaultMessage: 'American',
@@ -42,6 +46,10 @@ export default function initCuisines() {
       id: 'cuisine.Hawaiian',
       defaultMessage: 'Hawaiian',
     },
+    cuisine_hungarian: {
+      id: 'cuisine.Hungarian',
+      defaultMessage: 'Hungarian',
+    },
     cuisine_indian: {
       id: 'cuisine.Indian',
       defaultMessage: 'Indian',
@@ -77,6 +85,10 @@ export default function initCuisines() {
     cuisine_nordic: {
       id: 'cuisine.Nordic',
       defaultMessage: 'Nordic',
+    },
+    cuisine_serbian: {
+      id: 'cuisine.Serbian',
+      defaultMessage: 'Serbian',
     },
     cuisine_thai: {
       id: 'cuisine.Thai',
