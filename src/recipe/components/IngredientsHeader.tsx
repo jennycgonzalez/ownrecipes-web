@@ -70,7 +70,8 @@ const IngredientsHeader: React.FC<IIngredientsHeaderProps> = ({ recipe, recipeSt
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    if (customServings === formData.servings) return;
+    if (typeof formData.servings === 'string'
+        || customServings === formData.servings) return;
     updateServings(formData.servings);
   };
 

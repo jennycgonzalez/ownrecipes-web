@@ -8,6 +8,7 @@ import '../css/input.css';
 import BaseComponent, { IBaseComponentProps } from './BaseComponent';
 import Tooltip from './Tooltip';
 import ConditionalWrapper from './ConditionalWrapper';
+import { isNumber } from '../utility';
 
 interface IInputProps extends IBaseComponentProps {
   label?: string;
@@ -104,18 +105,19 @@ export default class Input extends BaseComponent<IAnyInputProps, IInputState> {
 
   formatValue(value: string, trim = false): string | number {
     const type = this.props.type ?? 'text';
-    const valueTrimmed = value.trim();
+    let valueTrimmed = value.trim();
 
     if (type === 'number') {
       if (valueTrimmed.length === 0) {
         return valueTrimmed;
       } else {
-        const numberProps: INumberInputProps = this.props as INumberInputProps;
-        const isNumber = /^-?\d*\.?\d+$/.test(valueTrimmed);
-        if (!isNumber) {
+        valueTrimmed = valueTrimmed.replaceAll(',', '.');
+        const inpIsNumber = isNumber(valueTrimmed);
+        if (!inpIsNumber) {
           return valueTrimmed;
         } else {
-          let valNum = parseInt(value);
+          const numberProps: INumberInputProps = this.props as INumberInputProps;
+          let valNum = parseFloat(value);
           const min = numberProps.min ?? -2147483647;
           const max = numberProps.max ??  2147483647;
           if (valNum < min) {
@@ -181,7 +183,9 @@ export default class Input extends BaseComponent<IAnyInputProps, IInputState> {
       if (this.props.onChange && newVal != null && newVal !== value) {
         this.props.onChange(this.props.name, newVal);
       }
-    } else if (event.key === 'Enter' && !isTextArea) {
+    }
+
+    if (event.key === 'Enter' && !isTextArea) {
       const valueS = this.formatValue(String(value), true);
       this.pushChange(valueS);
     }

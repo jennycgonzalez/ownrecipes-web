@@ -21,6 +21,14 @@ export function getEnvAsBoolean(key: string, ifNull = false): boolean {
   return ['true', 'yes', '1'].includes(valLowerCase);
 }
 
+export function isNumber(str: string): boolean {
+  if (typeof str !== 'string') return false; // we only process strings!
+  const strTimmed = str.trim();
+  if (strTimmed.endsWith('.') || strTimmed.endsWith(',')) return false;
+  // eslint-disable-next-line no-restricted-globals
+  return !isNaN(str as unknown as number) && !isNaN(parseFloat(str));
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function updateFormData(prev: any, id: string, newValue: unknown): any {
   const updFormData = _.cloneDeep(prev);
