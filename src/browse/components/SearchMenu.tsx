@@ -18,11 +18,12 @@ export interface ISearchMenuProps {
   courses:  Array<CategoryCount> | undefined;
   cuisines: Array<CategoryCount> | undefined;
   ratings:  Array<RatingCount>   | undefined;
+  tags:     Array<CategoryCount> | undefined;
 
   buildUrl: (qsTitle: string, recipeSlug: string, multiSelect?: boolean) => string;
 }
 
-const SearchMenu: React.FC<ISearchMenuProps> = ({ qs, courses, cuisines, ratings, buildUrl }: ISearchMenuProps) => {
+const SearchMenu: React.FC<ISearchMenuProps> = ({ qs, courses, cuisines, ratings, tags, buildUrl }: ISearchMenuProps) => {
   const intl = useIntl();
 
   const messages = defineMessages({
@@ -45,6 +46,11 @@ const SearchMenu: React.FC<ISearchMenuProps> = ({ qs, courses, cuisines, ratings
       id: 'filter.filter_rating',
       description: 'Filter field rating',
       defaultMessage: 'Ratings',
+    },
+    filter_tag: {
+      id: 'filter.filter_tag',
+      description: 'Filter field tag',
+      defaultMessage: 'Tags',
     },
     filter_limit: {
       id: 'filter.filter_limit',
@@ -166,6 +172,13 @@ const SearchMenu: React.FC<ISearchMenuProps> = ({ qs, courses, cuisines, ratings
                   slug:   String(r.rating),
                   title:  intl.formatMessage(messages.x_stars, { rating: r.rating }),
               })) ?? []}
+              qs       = {qs}
+              multiSelect
+              buildUrl = {buildUrl} />
+          <Filter
+              title    = {intl.formatMessage(messages.filter_tag)}
+              qsTitle  = 'tag'
+              data     = {tags ?? []}
               qs       = {qs}
               multiSelect
               buildUrl = {buildUrl} />

@@ -19,6 +19,7 @@ export type RatingCount = {
 export const BROWSE_FILTER_COURSE_STORE  = '@@BROWSE_FILTER_COURSE';
 export const BROWSE_FILTER_CUISINE_STORE = '@@BROWSE_FILTER_CUISINE';
 export const BROWSE_FILTER_RATING_STORE  = '@@BROWSE_FILTER_RATING';
+export const BROWSE_FILTER_TAGS_STORE    = '@@BROWSE_FILTER_TAGS';
 
 export type CategoryCountState = MapReducerType<Array<CategoryCount>>;
 export type RatingCountState   = MapReducerType<Array<RatingCount>>;
@@ -29,4 +30,5 @@ export type FilterState    = {
   courses:  CategoryCountState,
   cuisines: CategoryCountState,
   ratings:  RatingCountState,
+  tags:     CategoryCountState,
 };

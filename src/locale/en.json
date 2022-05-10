@@ -47,6 +47,7 @@
   "filter.filter_limit": "Recipes per Page",
   "filter.filter_ordering": "Ordering",
   "filter.filter_rating": "Ratings",
+  "filter.filter_tag": "Tags",
   "filter.filters": "Filters",
   "filter.hide_filters": "Hide Filters",
   "filter.pub_date": "Created Date",

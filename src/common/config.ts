@@ -20,6 +20,7 @@ export const serverURLs = {
   ratings: `${apiUrl}/rating/rating/`,
   rating_count: `${apiUrl}/rating/rating-count/`,
   tag: `${apiUrl}/recipe_groups/tag/`,
+  tag_count: `${apiUrl}/recipe_groups/tag-count/`,
   ingredient: `${apiUrl}/ingredient/ingredient/`,
   direction: `${apiUrl}/recipe/direction/`,
   news: `${apiUrl}/news/entry/`,

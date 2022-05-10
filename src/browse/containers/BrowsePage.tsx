@@ -40,6 +40,7 @@ const BrowsePage: React.FC = () => {
   const courses  = useSelector((state: CombinedStore) => state.browse.filters.courses.items);
   const cuisines = useSelector((state: CombinedStore) => state.browse.filters.cuisines.items);
   const ratings  = useSelector((state: CombinedStore) => state.browse.filters.ratings.items);
+  const tags     = useSelector((state: CombinedStore) => state.browse.filters.tags.items);
 
   const locationSearch = location.search;
   const qs: Record<string, string> = queryString.parse(locationSearch) as Record<string, string>;
@@ -53,6 +54,7 @@ const BrowsePage: React.FC = () => {
       dispatch(FilterActions.loadCourses(qsMergedDefaults));
       dispatch(FilterActions.loadCuisines(qsMergedDefaults));
       dispatch(FilterActions.loadRatings(qsMergedDefaults));
+      dispatch(FilterActions.loadTags(qsMergedDefaults));
     } else {
       if (courses?.[qsMergedString] == null) {
         dispatch(FilterActions.loadCourses(qsMergedDefaults));
@@ -62,6 +64,9 @@ const BrowsePage: React.FC = () => {
       }
       if (ratings?.[qsMergedString] == null) {
         dispatch(FilterActions.loadRatings(qsMergedDefaults));
+      }
+      if (cuisines?.[qsMergedString] == null) {
+        dispatch(FilterActions.loadTags(qsMergedDefaults));
       }
     }
   };
@@ -134,7 +139,8 @@ const BrowsePage: React.FC = () => {
           search   = {search}
           courses  = {courses}
           cuisines = {cuisines}
-          ratings  = {ratings} />
+          ratings  = {ratings}
+          tags     = {tags} />
     </PageWrapper>
   );
 };

@@ -47,6 +47,7 @@
   "filter.filter_limit": "Rezepte pro Seite",
   "filter.filter_ordering": "Sortieren nach",
   "filter.filter_rating": "Bewertung",
+  "filter.filter_tag": "Kennungen",
   "filter.filters": "Filter",
   "filter.hide_filters": "Filter ausblenden",
   "filter.pub_date": "Veröffentlicht am",

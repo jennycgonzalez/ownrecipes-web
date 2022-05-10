@@ -11,7 +11,8 @@ export const loadRecipes = (filters: Record<string, string>) => (dispatch: Searc
 
   const map: Record<string, string> = {
     cuisine: 'cuisine__slug',
-    course: 'course__slug',
+    course:  'course__slug',
+    tag:     'tag__slug',
   };
 
   const parsedFilters: Record<string, string> = {};

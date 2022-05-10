@@ -14,6 +14,7 @@ export interface ISearchProps {
   courses:  Record<string, CategoryCount[]> | undefined;
   cuisines: Record<string, CategoryCount[]> | undefined;
   ratings:  Record<string, RatingCount[]> | undefined;
+  tags:     Record<string, CategoryCount[]> | undefined;
   qs:       Record<string, string>;
   qsString: string;
 
@@ -22,7 +23,9 @@ export interface ISearchProps {
   onOpenRecipe: (rec: RecipeList) => void;
 }
 
-const Search: React.FC<ISearchProps> = ({ search, courses, cuisines, ratings, qs, qsString, buildUrl, doSearch, onOpenRecipe }: ISearchProps) => {
+const Search: React.FC<ISearchProps> = ({
+    search, courses, cuisines, ratings, tags, qs, qsString,
+    buildUrl, doSearch, onOpenRecipe }: ISearchProps) => {
   const isInit  = search != null && Object.keys(search).length > 0;
   const qsSearchResult = search?.[qsString];
 
@@ -46,6 +49,7 @@ const Search: React.FC<ISearchProps> = ({ search, courses, cuisines, ratings, qs
                 courses  = {courses?.[qsString]}
                 cuisines = {cuisines?.[qsString]}
                 ratings  = {ratings?.[qsString]}
+                tags     = {tags?.[qsString]}
                 qs       = {qs}
                 buildUrl = {buildUrl}
             />
