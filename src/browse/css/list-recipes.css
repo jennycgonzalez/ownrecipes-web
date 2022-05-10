@@ -23,6 +23,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.recipes-list .recipe .card-title-tooltip {
+  max-width: 100%;
+}
 
 .recipes-list .recipe .ratings {
   color: var(--secondaryMain);

@@ -8,6 +8,7 @@ import Ratings from '../../rating/components/Ratings';
 import { RecipeList } from '../../recipe/store/RecipeTypes';
 import { IMAGE_PLACEHOLDER } from '../../common/constants';
 import { getResourcePath } from '../../common/utility';
+import Tooltip from '../../common/components/Tooltip';
 
 export interface IListRecipes {
   data:   Array<RecipeList> | undefined;
@@ -31,7 +32,7 @@ const ListRecipes: React.FC<IListRecipes> = ({ data, onOpenRecipe }: IListRecipe
         <Card className={classNames('recipe', 'print-hidden')}>
           <Link to={link} onClick={() => onOpenRecipe(recipe)}>
             <Card.Img variant='top' src={getRecipeImage(recipe)} alt='' placeholder={IMAGE_PLACEHOLDER} />
-            <Card.Title as='h3'>{recipe.title}</Card.Title>
+            <Tooltip id={recipe.slug} tooltip={recipe.title} placement='bottom' className='card-title-tooltip'><Card.Title as='h3'>{recipe.title}</Card.Title></Tooltip>
             <div><Ratings stars={recipe.rating} /></div>
             <Card.Text>{recipe.info}</Card.Text>
           </Link>
