@@ -68,7 +68,7 @@ function igArrayify(parser: Record<string, string>, value: string): Array<Ingred
         // Check if the line is an IG title
         // If line is IG title, update igTitle and continue
         // Else add ing to the current ig group
-        if (line.includes(':') && line.length > 1) {
+        if (line.endsWith(':') && line.length > 1) {
           igTitle = line.substring(0, line.length - 1);
           dict.push({ title: igTitle, ingredients: [] });
           ings = dict.find(t => t.title === igTitle)?.ingredients; // Should always exist, as we just pushed it.
