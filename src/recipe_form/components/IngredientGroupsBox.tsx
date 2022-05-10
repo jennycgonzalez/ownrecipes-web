@@ -139,7 +139,7 @@ function isSameSrData(oldSr: Array<SubRecipe> | undefined, newSr: Array<SubRecip
 interface IItemProps {
   entity: AutocompleteListItem;
 }
-const Item    = ({ entity: { name } }: IItemProps) => <div>{`${name}`}</div>;
+const Item = ({ entity: { char } }: IItemProps) => <div>{char}</div>;
 const Loading = () => <div className='loading'>Loading...</div>;
 
 const IngredientGroupsBox: React.FC<IIngredientGroupsBoxProps> = ({

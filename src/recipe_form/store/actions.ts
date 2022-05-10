@@ -118,8 +118,8 @@ export const save = (data: Recipe) => (dispatch: RecipeFormDispatch) => {
 };
 
 export const fetchRecipeList = (searchTerm: string): Promise<Array<AutocompleteListItem>> => request()
-    .get(`${serverURLs.recipe}?fields=id,title&limit=5&search=${searchTerm}`)
-    .then(res => res.body.results.map((recipe: RecipeDto) => ({ name: recipe.title, char: recipe.title } as AutocompleteListItem)))
+    .get(`${serverURLs.recipe}?fields=id,title,slug&limit=5&search=${searchTerm}`)
+    .then(res => res.body.results.map((recipe: RecipeDto) => ({ key: recipe.slug, name: recipe.slug, char: recipe.title } as AutocompleteListItem)))
     .catch(() => []);
 
 export const preload = (recipe: Partial<Recipe>) => (dispatch: RecipeFormDispatch) => {
