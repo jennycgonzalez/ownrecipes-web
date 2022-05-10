@@ -1,10 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
+import { useIntl } from 'react-intl';
 
 import Icon from '../../common/components/Icon';
 import { optionallyFormatMessage } from '../../common/utility';
-import { useIntl } from 'react-intl';
+import Tooltip from '../../common/components/Tooltip';
+import ConditionalWrapper from '../../common/components/ConditionalWrapper';
 
 export type RecipeFilter = {
   id:      number;
@@ -40,13 +42,19 @@ const Filter: React.FC<IFilterProps> = ({ title, qsTitle, data, qs, multiSelect,
         return undefined;
       }
 
+      const translatedTitle = optionallyFormatMessage(intl, `${qsTitle}.`, item.title);
+
       return (
         <li key={item.slug}>
-          <Link to={buildUrl(qsTitle, item.slug, multiSelect)} className={classNames({ 'list-group-item list-group-item-action': true, active: active })}>
-            {optionallyFormatMessage(intl, `${qsTitle}.`, item.title)}
-            <span className='count'>{`(${item.total})`}</span>
-            {active && <Icon icon='x-square' variant='light' />}
-          </Link>
+          <ConditionalWrapper
+              condition = {translatedTitle.length > 10}
+              render = {childr => <Tooltip id={item.title} tooltip={translatedTitle} placement='bottom' className='filter-title-tooltip'>{childr}</Tooltip>}>
+            <Link to={buildUrl(qsTitle, item.slug, multiSelect)} className={classNames({ 'list-group-item list-group-item-action': true, active: active })}>
+              <div className='name'>{translatedTitle}</div>
+              <span className='count'>{`(${item.total})`}</span>
+              {active && <Icon icon='x-square' variant='light' />}
+            </Link>
+          </ConditionalWrapper>
         </li>
       );
   }) ?? [];
