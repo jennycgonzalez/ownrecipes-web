@@ -118,7 +118,7 @@ function srStringify(intl: IntlShape, formatter: Record<string, string>, values:
 
 function srArrayify(parser: Record<string, string>, value: string): Array<SubRecipe> {
   const ings: Array<SubRecipe> = [];
-  const subRecipes = value.split('\n').map(line => normalizeLine(line)).filter(t => t.length > 1);
+  const subRecipes = value.split('\n').map(line => normalizeLine(line)).filter(t => t.length > 1 && !t.startsWith(':'));
   subRecipes.forEach(sr => {
     if (sr.length > 0) {
       ings.push(parseIngredient(parser, sr) as SubRecipe);
@@ -247,7 +247,7 @@ const IngredientGroupsBox: React.FC<IIngredientGroupsBoxProps> = ({
           value    = {igText}
           rows     = {8}
           placeholder = {formatMessage(messages.ingredients_placeholder)}
-          required
+          required = {srData.length === 0}
           onChange = {handleIgChange} />
       <div className='form-group'>
         <ReactTextareaAutocomplete<AutocompleteListItem>

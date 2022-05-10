@@ -72,7 +72,7 @@ export function createValidationResult(): ValidationResult {
 export const isValidationResult = (obj: unknown): obj is ValidationResult => (obj != null && typeof obj === 'object' && (obj as any).__isValidationResult === true); // eslint-disable-line no-underscore-dangle, @typescript-eslint/no-explicit-any
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type ValueValidatorFunction = (name: string, value: any) => ValidationErrorType | undefined;
+export type ValueValidatorFunction = (name: string, value: any, obj?: any) => ValidationErrorType | undefined;
 
 export type FieldValidatorType = {
   name: string;
@@ -97,11 +97,11 @@ export function formatValidation(intl: IntlShape, validation: ValidationError | 
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function runFieldValidator(result: ValidationResult, valueValidations: ValueValidatorFunction[], name: string, value: any) {
+export function runFieldValidator(result: ValidationResult, valueValidations: ValueValidatorFunction[], name: string, value: any, data?: any) {
   let hasError = false;
 
   valueValidations.forEach(f => {
-    const valResult: ValidationErrorType | undefined = f(name, value);
+    const valResult: ValidationErrorType | undefined = f(name, value, data);
     if (valResult) {
       hasError = true;
       _.set(result, name, valResult);
@@ -110,7 +110,7 @@ export function runFieldValidator(result: ValidationResult, valueValidations: Va
 
   if (!hasError) {
     // reset previous errors
-    _.set(result, name, undefined);
+    _.unset(result, name);
   }
 }
 
@@ -119,7 +119,7 @@ export function runValidators(validations: ValidatorsType, data: unknown): Valid
   validations.forEach(validator => {
     const name  = validator.name;
     const value = _.get(data, name);
-    runFieldValidator(result, validator.validators, name, value);
+    runFieldValidator(result, validator.validators, name, value, data);
   });
 
   return result;

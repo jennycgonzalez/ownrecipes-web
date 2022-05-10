@@ -269,7 +269,7 @@ export const toRecipe = (dto: RecipeDto): Recipe => ({
   photoThumbnail: dto.photo_thumbnail ?? undefined,
 
   subrecipes: dto.subrecipes.map(sr => toSubRecipe(sr)),
-  ingredientGroups: dto.ingredient_groups.filter(ig => ig.ingredients.length > 0).map(ig => toIngredientGroup(ig)),
+  ingredientGroups: dto.ingredient_groups.filter(ig => ig.title !== '-' && ig.ingredients.length > 0).map(ig => toIngredientGroup(ig)),
 
   directions: parseBackendString(dto.directions) ?? '',
   info: dto.info,
@@ -318,6 +318,18 @@ function parseBackendString(str: string): string | undefined {
   return str;
 }
 
+const toIngredientGroupsDto = (obj: Recipe): Array<IngredientGroupDto> => {
+  if (obj.ingredientGroups == null || obj.ingredientGroups.length === 0) {
+    if (obj.subrecipes.length > 0) {
+      return [{ title: '-', ingredients: [] }];
+    } else {
+      return [];
+    }
+  } else {
+    return obj.ingredientGroups.filter(ig => ig.ingredients.length > 0).map(ig => toIngredientGroupDto(ig));
+  }
+};
+
 export const toRecipeRequest = (obj: Recipe): RecipeRequest => ({
   title:      obj.title,
 
@@ -332,7 +344,7 @@ export const toRecipeRequest = (obj: Recipe): RecipeRequest => ({
   cuisine:    obj.cuisine ? toCuisineDto(obj.cuisine) : ({ title: '-' } as CuisineDto),
 
   subrecipes: obj.subrecipes?.map(sr => toSubRecipeDto(sr)) ?? [],
-  ingredient_groups: obj.ingredientGroups?.filter(ig => ig.ingredients.length > 0).map(ig => toIngredientGroupDto(ig)),
+  ingredient_groups: toIngredientGroupsDto(obj),
   directions: ifNull(obj.directions, STRING_UNDEFINED),
   info:       obj.info,
 

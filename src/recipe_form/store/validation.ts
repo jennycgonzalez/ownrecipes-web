@@ -1,8 +1,10 @@
 import { numberValidator, requiredValidator, ValidationErrorType, ValidatorsType } from '../../common/store/Validation';
-import { IngredientGroup } from '../../recipe/store/RecipeTypes';
+import { IngredientGroup, Recipe } from '../../recipe/store/RecipeTypes';
 import formatQuantity from '../../recipe/utilts/formatQuantity';
 
-const ingRequiredValidator = (name: string, val: Array<IngredientGroup>): ValidationErrorType | undefined => {
+const ingRequiredValidator = (name: string, val: Array<IngredientGroup>, obj?: Recipe): ValidationErrorType | undefined => {
+  if (obj != null && obj.subrecipes.length > 0) return undefined;
+
   let tr = '';
   if (val) {
     val.forEach(ig => {

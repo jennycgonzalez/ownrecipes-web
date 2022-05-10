@@ -67,12 +67,12 @@ export const save = (data: Recipe) => (dispatch: RecipeFormDispatch) => {
   };
 
   const valResult: ValidationResult = runValidators(validation, data);
+  dispatch({
+    store: RECIPE_FORM_STORE,
+    type:  ACTION.VALIDATION,
+    data:  valResult,
+  });
   if (hasValidationError(valResult)) {
-    dispatch({
-      store: RECIPE_FORM_STORE,
-      type:  ACTION.VALIDATION,
-      data:  valResult,
-    });
     return;
   }
 
