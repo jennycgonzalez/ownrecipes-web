@@ -52,7 +52,7 @@ const SearchSummary: React.FC<ISearchSummaryProps> = ({ search, qs, buildUrl }: 
     sort.startsWith('-') ? sort.substring(1) : sort
   );
 
-  const resultsCount: number | undefined = search?.totalRecipes;
+  const resultsCountD: number | undefined = search?.totalRecipes ?? 0;
   const offset: number = qs.offset != null ? parseInt(qs.offset) : 0;
   const limit: number  = qs.limit != null ? parseInt(qs.limit) : (DefaultFilters.limit ?? 12);
   const withPagination = search != null && search.totalRecipes > limit;
@@ -76,8 +76,8 @@ const SearchSummary: React.FC<ISearchSummaryProps> = ({ search, qs, buildUrl }: 
   return (
     <div className='search-summary'>
       <P className='results'>
-        {withPagination  && formatMessage(messages.search_summary_results_pagination, { offset: offset, offsetLast: offset + limit, resultsCount: resultsCount })}
-        {!withPagination && formatMessage(messages.search_summary_results, { resultsCount: resultsCount ?? 0 })}
+        {withPagination  && formatMessage(messages.search_summary_results_pagination, { offset: offset + 1, offsetLast: Math.min(offset + limit, resultsCountD), resultsCount: resultsCountD })}
+        {!withPagination && formatMessage(messages.search_summary_results, { resultsCount: resultsCountD })}
       </P>
       <Dropdown className='sort-by-dropdown'>
         <Dropdown.Toggle variant='outline-primary' id='sort-by-button' disabled={search == null}>
