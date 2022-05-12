@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { useIntl } from 'react-intl';
+import { Accordion } from 'react-bootstrap';
 
 import Icon from '../../common/components/Icon';
 import { optionallyFormatMessage } from '../../common/utility';
@@ -63,12 +64,12 @@ const Filter: React.FC<IFilterProps> = ({ title, qsTitle, data, qs, multiSelect,
   if (items.length === 0) return null;
 
   return (
-    <li className={classNames('filter-group', cssClass)}>
-      <div className='list-group-title'>{title}</div>
-      <ul className='filter-list'>
+    <Accordion.Item eventKey={qsTitle} className={classNames('filter-group', cssClass)}>
+      <Accordion.Header as='h3' className='list-group-title'>{title}</Accordion.Header>
+      <Accordion.Body as='ul' className='filter-list'>
         {items}
-      </ul>
-    </li>
+      </Accordion.Body>
+    </Accordion.Item>
   );
 };
 

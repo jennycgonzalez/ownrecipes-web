@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { defineMessages, useIntl } from 'react-intl';
-import { Button, Card } from 'react-bootstrap';
+import { Accordion, Button, Card } from 'react-bootstrap';
 import queryString from 'query-string';
 
 import '../css/filter.css';
@@ -147,7 +147,7 @@ const SearchMenu: React.FC<ISearchMenuProps> = ({ qs, courses, cuisines, ratings
         )}
       </Card.Header>
       <Card.Text as='div' className={classNames('sidebar', { 'hidden-xs': !showMenu })}>
-        <ul className='filter-group-list'>
+        <Accordion defaultActiveKey={['course', 'rating']} flush alwaysOpen className='filter-group-list'>
           <Filter
               title    = {intl.formatMessage(messages.filter_course)}
               qsTitle  = 'course'
@@ -182,7 +182,7 @@ const SearchMenu: React.FC<ISearchMenuProps> = ({ qs, courses, cuisines, ratings
               qs       = {qs}
               multiSelect
               buildUrl = {buildUrl} />
-        </ul>
+        </Accordion>
         {hasActiveFilter && (
           <div className='row reset-search-row hidden-xs'>
             <Link className='btn btn-outline-danger reset-search hidden-xs' to={getResetFilterUrl()}>
