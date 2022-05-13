@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { createRef } from 'react';
 import { Form } from 'react-bootstrap';
-import SelectReact, { SingleValue } from 'react-select';
+import SelectReact, { MultiValue, SingleValue } from 'react-select';
 import CreatableSelectReact from 'react-select/creatable';
 // import AsyncReact from 'react-select/async';
 
@@ -105,11 +105,12 @@ export class Select extends BaseComponent<ISelectProps> {
 }
 
 export interface ICreatableSelectValues extends IBaseComponentProps {
-  value?: string;
-  data?:  Array<SelectDataType>;
+  value?:   Array<string> | string;
+  data?:    Array<SelectDataType>;
+  isMulti?: boolean;
 }
 interface ICreatableSelectProps extends ICreatableSelectValues {
-  onChange?: (name: string, newValue: string | undefined) => void;
+  onChange?: (name: string, newValue: any | undefined) => void;
 }
 
 interface ICreatableSelectState {
@@ -117,6 +118,14 @@ interface ICreatableSelectState {
 }
 
 const isValidNewOption = (value: string): boolean => !!value;
+
+function findSelectedOptions(options: Array<SelectDataType>, value: Array<string> | string | undefined): Array<SelectDataType> | SelectDataType {
+  if (Array.isArray(value)) {
+    return options.filter(o => value.includes(o.value));
+  } else {
+    return options.find(o => o.value === value) ?? '' as unknown as SelectDataType;
+  }
+}
 
 export class CreatableSelect extends BaseComponent<ICreatableSelectProps, ICreatableSelectState> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -138,9 +147,12 @@ export class CreatableSelect extends BaseComponent<ICreatableSelectProps, ICreat
     return false;
   }
 
-  handleChange = (data: SingleValue<SelectDataType>) => {
+  handleChange = (data: MultiValue<SelectDataType> | SingleValue<SelectDataType>) => {
     if (this.props.onChange) {
-      this.props.onChange(this.props.name, data?.value);
+      this.props.onChange(
+        this.props.name,
+        data != null && Array.isArray(data) ? data.map(dat => dat.value) : (data as SingleValue<SelectDataType>)?.value
+      );
     }
   };
 
@@ -160,7 +172,7 @@ export class CreatableSelect extends BaseComponent<ICreatableSelectProps, ICreat
   render() {
     const dataOptions = this.props.data ?? [];
     const options = dataOptions.concat(this.state.options);
-    const selectedOption = options.find(o => o.value === this.props.value) ?? '' as unknown as SelectDataType;
+    const selectedOptions = findSelectedOptions(options, this.props.value);
 
     return (
       <Form.Group
@@ -181,7 +193,8 @@ export class CreatableSelect extends BaseComponent<ICreatableSelectProps, ICreat
               isValidNewOption = {isValidNewOption}
               onCreateOption = {this.handleCreate}
               isClearable
-              value = {selectedOption}
+              isMulti = {this.props.isMulti}
+              value = {selectedOptions}
               className = 'react-select-container'
               classNamePrefix = 'creatable-select'
               options = {options}

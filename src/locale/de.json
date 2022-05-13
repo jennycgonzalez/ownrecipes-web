@@ -184,7 +184,6 @@
   "recipe.create.subrecipes.tooltip": "Wenn dein Rezept aus mehreren Teilrezepten besteht, dann verknüpfe diese hier. Pro Zeile ein Teilrezept.",
   "recipe.create.subrecipes_label": "Unterrezepte",
   "recipe.create.tags_label": "Tags",
-  "recipe.create.tags_tooltip": "Komma-separierte Aufzählung.",
   "recipe.create.view": "Ansehen",
   "recipe.created_by": "Erstellt von",
   "recipe.delete_tooltip": "Rezept löschen",

@@ -56,11 +56,6 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
       description: 'Tags label',
       defaultMessage: 'Tags',
     },
-    tags_tooltip: {
-      id: 'recipe.create.tags_tooltip',
-      description: 'Tags tooltip',
-      defaultMessage: 'Separate each tag by comma.',
-    },
     prep_time_label: {
       id: 'recipe.create.prep_time_label',
       description: 'Prep time label',
@@ -160,8 +155,7 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
                 <TagListContainer
                     name     = 'tags'
                     label    = {formatMessage(messages.tags_label)}
-                    tooltip  = {formatMessage(messages.tags_tooltip)}
-                    value    = {form?.tags ?? []}
+                    value    = {form?.tags?.map(t => t.title) ?? []}
                     errors   = {formatValidation(intl, validation?.tags)}
                     onChange = {update} />
               </Col>

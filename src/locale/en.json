@@ -177,7 +177,6 @@
   "recipe.create.subrecipes.tooltip": "If the recipe is made of several subrecipes, then link them here. Each Recipe Link should be on its own line.",
   "recipe.create.subrecipes_label": "Recipe links",
   "recipe.create.tags_label": "Tags",
-  "recipe.create.tags_tooltip": "Separate each tag by comma.",
   "recipe.create.view": "View",
   "recipe.created_by": "Created by",
   "recipe.delete_tooltip": "Delete this recipe",
