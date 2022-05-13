@@ -26,12 +26,12 @@ const DirectionBox: React.FC<IDirectionBox> = ({
     directions_tooltip: {
       id: 'recipe.create.dir.tooltip',
       description: 'Directions Tooltip',
-      defaultMessage: 'Each Direction should be on its own line.',
+      defaultMessage: 'Each Direction should be on its own line. You can form chapters by ending the chapters heading with a colon (":").',
     },
     directions_placeholder: {
       id: 'recipe.create.dir.placeholder',
       description: 'Directions Placeholder',
-      defaultMessage: 'Prepare the dough.\nPrepare the dip.\n...',
+      defaultMessage: 'Dough:\nPrepare the dough.\n\nDip:\nPrepare the dip.\n...',
     },
   });
 

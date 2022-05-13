@@ -155,7 +155,7 @@ const IngredientGroupsBox: React.FC<IIngredientGroupsBoxProps> = ({
     ingredients_tooltip: {
       id: 'recipe.create.ing.info_desc',
       description: 'info_desc',
-      defaultMessage: 'Each Ingredient should be on its own line.',
+      defaultMessage: 'Each Ingredient should be on its own line. You can form groups by ending the groups first line with a colon (":").',
     },
     ingredients_placeholder: {
       id: 'recipe.create.ing.ingredients_placeholder',
