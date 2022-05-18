@@ -157,16 +157,22 @@ export class CreatableSelect extends BaseComponent<ICreatableSelectProps, ICreat
   };
 
   handleCreate = (inputValue: string) => {
-    const { options } = this.state;
     const newOption: SelectDataType = { value: inputValue, label: inputValue };
-    this.setState(
-      {
-        options: [...options, newOption],
-      },
+    this.setState(prev => (
+        {
+          options: [...prev.options, newOption],
+        }
+      ),
       () => {
-        this.handleChange(newOption);
-      }
-    );
+        if (!this.props.isMulti) {
+          this.handleChange(newOption);
+        } else {
+          const dataOptions = this.props.data ?? [];
+          const options = dataOptions.concat(this.state.options);
+          const selectedOptions = findSelectedOptions(options, [...(this.props.value as Array<string> | undefined ?? []), inputValue]);
+          this.handleChange(selectedOptions);
+        }
+      });
   };
 
   render() {

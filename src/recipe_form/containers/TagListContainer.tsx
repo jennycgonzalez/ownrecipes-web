@@ -23,14 +23,19 @@ const TagListContainer: React.FC<ITagSelectContainerProps> = (props: ITagSelectC
   const tags = useSelector((state: CombinedStore) => state.recipeGroups.tags.items);
   useSingle(fetchTags, tags);
 
-  const data = useMemo(() => tags?.filter(t => t.title.length > 0).map(t => ({ value: t.title, label: optionallyFormatMessage(intl, 'tag.', t.title) })), [tags]);
+  const data = useMemo(() => tags?.filter(t => t.title.length > 0).map(t => ({ value: t.title, label: optionallyFormatMessage(intl, 'tag.', t.title) })), [tags, intl.locale]);
 
   const handleChange = (name: string, newValue: Array<string> | undefined) => {
     if (props.onChange) {
       if (newValue == null) {
         props.onChange(name, undefined);
       } else {
-        const selected = tags?.filter(t => newValue.includes(t.title));
+        const selected: Array<Tag> = [];
+        newValue.forEach(v => {
+          const tag = tags?.find(t => t.title === v);
+          selected.push(tag ?? { title: v } as Tag);
+        });
+
         props.onChange(name, selected);
       }
     }
