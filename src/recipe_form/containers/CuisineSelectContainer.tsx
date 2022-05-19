@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
 
@@ -8,7 +8,7 @@ import * as RecipeGroupActions from '../../recipe_groups/store/actions';
 import { CombinedStore } from '../../app/Store';
 import useSingle from '../../common/hooks/useSingle';
 import { CreatableSelect, ICreatableSelectValues } from '../../common/components/Select';
-import { optionallyFormatMessage } from '../../common/utility';
+import { optionallyFormatMessage, sortByLabel } from '../../common/utility';
 import { Course, Cuisine } from '../../recipe/store/RecipeTypes';
 
 export interface ICuisineSelectContainerProps extends ICreatableSelectValues {
@@ -23,7 +23,9 @@ const CuisineSelectContainer: React.FC<ICuisineSelectContainerProps> = (props: I
   const cuisines = useSelector((state: CombinedStore) => state.recipeGroups.cuisines.items);
   useSingle(fetchCuisines, cuisines);
 
-  const data = cuisines?.map(c => ({ value: c.title, label: optionallyFormatMessage(intl, 'cuisine.', c.title) }));
+  const data = useMemo(() => cuisines
+      ?.map(c => ({ value: c.title, label: optionallyFormatMessage(intl, 'cuisine.', c.title) }))
+      .sort(sortByLabel), [cuisines, intl.locale]);
 
   const handleChange = (name: string, newValue: string | undefined) => {
     if (props.onChange) {

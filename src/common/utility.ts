@@ -49,3 +49,7 @@ export function optionallyFormatMessage(intl: IntlShape, baseMessageId: string, 
     return (intl as IntlShape).formatMessage({ id: fullMsgId }, values) as string;
   }
 }
+
+export function sortByLabel(a: { label: string }, b: { label: string}): number {
+  return a.label.localeCompare(b.label);
+}
