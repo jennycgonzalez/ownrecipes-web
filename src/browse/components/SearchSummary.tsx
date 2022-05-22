@@ -56,7 +56,7 @@ const SearchSummary: React.FC<ISearchSummaryProps> = ({ search, qs, buildUrl }: 
   const offset: number = qs.offset != null ? parseInt(qs.offset) : 0;
   const limit: number  = qs.limit != null ? parseInt(qs.limit) : (DefaultFilters.limit ?? 12);
   const withPagination = search != null && search.totalRecipes > limit;
-  const currentSort    = qs.ordering != null ? toSortSlug(qs.ordering) : 'title';
+  const currentSort    = qs.ordering != null ? toSortSlug(qs.ordering) : toSortSlug('-pub_date');
 
   const handleSortByClick = (event: React.MouseEvent<HTMLAnchorElement>, sortSlug: string) => {
     if (currentSort === sortSlug) {
@@ -67,7 +67,7 @@ const SearchSummary: React.FC<ISearchSummaryProps> = ({ search, qs, buildUrl }: 
   const dropdownItems = ['title', '-pub_date', '-rating'].map(sort => {
     const sortSlug = toSortSlug(sort);
     return (
-      <Dropdown.Item key={sort} as={Link} to={buildUrl('ordering', sortSlug)} active={currentSort === sortSlug} onClick={(event: React.MouseEvent<HTMLAnchorElement>) => handleSortByClick(event, sortSlug)}>
+      <Dropdown.Item key={sort} as={Link} to={buildUrl('ordering', sort)} active={currentSort === sortSlug} onClick={(event: React.MouseEvent<HTMLAnchorElement>) => handleSortByClick(event, sortSlug)}>
         {optionallyFormatMessage(intl, 'sort_by.', sortSlug)}
       </Dropdown.Item>
     );
