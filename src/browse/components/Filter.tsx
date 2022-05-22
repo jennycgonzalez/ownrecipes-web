@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 import { Accordion } from 'react-bootstrap';
 
 import Icon from '../../common/components/Icon';
-import { optionallyFormatMessage } from '../../common/utility';
+import { optionallyFormatMessage, sortByLabel } from '../../common/utility';
 import Tooltip from '../../common/components/Tooltip';
 import ConditionalWrapper from '../../common/components/ConditionalWrapper';
 
@@ -25,41 +25,64 @@ export interface IFilterProps {
   multiSelect?: boolean;
   buildUrl: (qsTitle: string, recipeSlug: string, multiSelect?: boolean) => string;
 
+  sort?: 'off' | 'on';
+
   cssClass?: string;
 }
 
-const Filter: React.FC<IFilterProps> = ({ title, qsTitle, data, qs, multiSelect, cssClass, buildUrl }: IFilterProps) => {
+type EnhancedFilterData = {
+  label: string;
+  active: boolean;
+} & RecipeFilter;
+
+const Filter: React.FC<IFilterProps> = ({ title, qsTitle, data, qs, multiSelect, cssClass, buildUrl, sort }: IFilterProps) => {
   const intl = useIntl();
-  let items = data
-    .map(item => {
-      let active = false;
-      if (qs[qsTitle]) {
-        if (qs[qsTitle].split(',').includes(item.slug)) {
-          active = true;
+
+  const dataFormatted: Array<EnhancedFilterData> = useMemo(() => {
+    let res = (data
+      .map(item => {
+        let active = false;
+        if (qs[qsTitle]) {
+          if (qs[qsTitle].split(',').includes(item.slug)) {
+            active = true;
+          }
         }
-      }
 
-      if (!active && (item.total == null || item.total === 0)) {
-        return undefined;
-      }
+        if (!active && (item.total == null || item.total === 0)) {
+          return undefined as unknown as EnhancedFilterData;
+        }
 
-      const translatedTitle = optionallyFormatMessage(intl, `${qsTitle}.`, item.title);
+        return ({
+          ...item,
+          label: optionallyFormatMessage(intl, `${qsTitle}.`, item.title),
+          active: active,
+        });
+    }) ?? [])
+    .filter(item => item != null);
 
-      return (
-        <li key={item.slug}>
-          <ConditionalWrapper
-              condition = {translatedTitle.length > 10}
-              render = {childr => <Tooltip id={item.title} tooltip={translatedTitle} placement='bottom' className='filter-title-tooltip'>{childr}</Tooltip>}>
-            <Link to={buildUrl(qsTitle, item.slug, multiSelect)} className={classNames({ 'list-group-item list-group-item-action': true, active: active })}>
-              <div className='name'>{translatedTitle}</div>
-              <span className='count'>{`(${item.total})`}</span>
-              {active && <Icon icon='x-square' variant='light' />}
-            </Link>
-          </ConditionalWrapper>
-        </li>
-      );
-  }) ?? [];
-  items = items.filter(it => it != null);
+    if (sort == null || sort === 'on') {
+      res = res.sort(sortByLabel);
+    }
+
+    return res;
+  }, [data, qs, qsTitle]);
+
+  const items = useMemo(() => (
+    dataFormatted
+    .map(item => (
+      <li key={item.slug}>
+        <ConditionalWrapper
+            condition = {item.label.length > 10}
+            render = {childr => <Tooltip id={item.title} tooltip={item.label} placement='bottom' className='filter-title-tooltip'>{childr}</Tooltip>}>
+          <Link to={buildUrl(qsTitle, item.slug, multiSelect)} className={classNames({ 'list-group-item list-group-item-action': true, active: item.active })}>
+            <div className='name'>{item.label}</div>
+            <span className='count'>{`(${item.total})`}</span>
+            {item.active && <Icon icon='x-square' variant='light' />}
+          </Link>
+        </ConditionalWrapper>
+      </li>
+    )) ?? []
+  ), [dataFormatted, qsTitle, multiSelect, buildUrl]);
 
   if (items.length === 0) return null;
 

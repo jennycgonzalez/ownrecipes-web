@@ -19,7 +19,7 @@ const TagListContainer: React.FC<ITagSelectContainerProps> = (props: ITagSelectC
   const intl = useIntl();
   const dispatch = useDispatch();
 
-  const fetchTags = useCallback(() => dispatch(RecipeGroupActions.fetchTags())    , [dispatch, RecipeFormActions]);
+  const fetchTags = useCallback(() => dispatch(RecipeGroupActions.fetchTags()), [dispatch, RecipeFormActions]);
   const tags = useSelector((state: CombinedStore) => state.recipeGroups.tags.items);
   useSingle(fetchTags, tags);
 

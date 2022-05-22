@@ -19,13 +19,6 @@ export interface IRatingCommentsProps {
   removeRating: (recipe: string, rating: number) => void;
 }
 
-function getReversedArray<T>(arr: Array<T> | undefined): Array<T> | undefined {
-  if (arr == null) return undefined;
-  const rev = [...arr];
-  rev.reverse();
-  return rev;
-}
-
 const RatingComments: React.FC<IRatingCommentsProps> = ({ recipeSlug, ratings, userId, pending, removeRating }: IRatingCommentsProps) => {
   const intl = useIntl();
 
@@ -47,8 +40,7 @@ const RatingComments: React.FC<IRatingCommentsProps> = ({ recipeSlug, ratings, u
   const handleDeleteAccept = () => removeRating(recipeSlug, showDeleteConfirm ?? 0);
   const handleDeleteClose  = () => setShowDeleteConfirm(undefined);
 
-  const ratingsReversed = getReversedArray(ratings);
-  const ratingsList = ratingsReversed?.map((rating, index) => (
+  const ratingsList = ratings?.map((rating, index) => (
     <React.Fragment key={rating.id}>
       <Row>
         {index > 0 && (

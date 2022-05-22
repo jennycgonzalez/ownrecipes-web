@@ -52,11 +52,6 @@ const SearchMenu: React.FC<ISearchMenuProps> = ({ qs, courses, cuisines, ratings
       description: 'Filter field tag',
       defaultMessage: 'Tags',
     },
-    filter_limit: {
-      id: 'filter.filter_limit',
-      description: 'Filter field limit',
-      defaultMessage: 'Recipes per Page',
-    },
     title: {
       id: 'filter.title',
       description: 'Title',
@@ -86,6 +81,11 @@ const SearchMenu: React.FC<ISearchMenuProps> = ({ qs, courses, cuisines, ratings
       id: 'filter.hide_filters',
       description: 'Hide Filters',
       defaultMessage: 'Hide Filters',
+    },
+    reset_filters: {
+      id: 'filter.reset_filters',
+      description: 'Reset Filters',
+      defaultMessage: 'Reset Filters',
     },
     filter_ordering: {
       id: 'filter.filter_ordering',
@@ -139,7 +139,7 @@ const SearchMenu: React.FC<ISearchMenuProps> = ({ qs, courses, cuisines, ratings
       <Card.Header className='hidden-xs filter-title'>
         {intl.formatMessage(messages.filters)}
         {hasActiveFilter && (
-          <Tooltip id='clear-tooltip' tooltip='Filter zurücksetzen' placement='bottom'>
+          <Tooltip id='clear-tooltip' tooltip={intl.formatMessage(messages.reset_filters)} placement='bottom'>
             <Link className='clear-filter-desktop btn btn-transparent' to={getResetFilterUrl()}>
               <Icon icon='arrow-counterclockwise' variant='light' />
             </Link>
@@ -174,7 +174,8 @@ const SearchMenu: React.FC<ISearchMenuProps> = ({ qs, courses, cuisines, ratings
               })) ?? []}
               qs       = {qs}
               multiSelect
-              buildUrl = {buildUrl} />
+              buildUrl = {buildUrl}
+              sort = 'off' />
           <Filter
               title    = {intl.formatMessage(messages.filter_tag)}
               qsTitle  = 'tag'
