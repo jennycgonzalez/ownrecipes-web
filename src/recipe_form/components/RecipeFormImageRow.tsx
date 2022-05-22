@@ -24,11 +24,6 @@ const RecipeFormImageRow: React.FC<IRecipeFormImageRowProps> = ({
       description: 'Photo label',
       defaultMessage: 'Photo',
     },
-    photo_help_text: {
-      id: 'recipe.create.photo_help_text',
-      description: 'The photo must be smaller than 500 kB.',
-      defaultMessage: 'The photo must be smaller than 500 kB.',
-    },
   });
 
   const { key } = useLocation();
@@ -75,7 +70,6 @@ const RecipeFormImageRow: React.FC<IRecipeFormImageRowProps> = ({
           <FileSelect
               name     = 'photo'
               label    = {formatMessage(messages.photo_label)}
-              helpText = {formatMessage(messages.photo_help_text)}
               accept   = 'image/*'
               value    = {form?.photo}
               onChange = {handleImageChange}

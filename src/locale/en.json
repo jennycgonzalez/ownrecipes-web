@@ -163,7 +163,6 @@
   "recipe.create.ing.ingredients_placeholder": "Dough:\n300 g flour\n100 ml milk\n\nDip:\n100 ml olive oil\n...",
   "recipe.create.ingredients_label": "Ingredients",
   "recipe.create.name_label": "Recipe name",
-  "recipe.create.photo_help_text": "The photo must be smaller than 500 kB.",
   "recipe.create.photo_label": "Photo",
   "recipe.create.prep_time_label": "Prep time (min)",
   "recipe.create.preview": "Preview",

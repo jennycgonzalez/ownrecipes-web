@@ -170,7 +170,6 @@
   "recipe.create.ing.ingredients_placeholder": "Für den Teig:\n300 g Mehl\n100 ml Milch\n\nFür den Dip:\n100 ml Olivenöl\n...",
   "recipe.create.ingredients_label": "Zutaten",
   "recipe.create.name_label": "Name des Rezeptes",
-  "recipe.create.photo_help_text": "Die Dateigröße darf das Maximum von 500 kB nicht überschreiten.",
   "recipe.create.photo_label": "Foto",
   "recipe.create.prep_time_label": "Vorbereitungszeit (min)",
   "recipe.create.preview": "Vorschau",
