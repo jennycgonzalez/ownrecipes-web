@@ -5,6 +5,7 @@ import { RECIPE_FORM_STORE, RecipeFormDispatch, RecipeFormActionTypes, Autocompl
 import { ACTION } from '../../common/store/ReduxHelper';
 import { Recipe, RecipeDto, toRecipe, toRecipeRequest } from '../../recipe/store/RecipeTypes';
 import { createValidationResult, hasValidationError, runFieldValidator, runValidators, ValidationResult } from '../../common/store/Validation';
+import { COURSES_STORE, CUISINES_STORE, TAGS_STORE } from '../../recipe_groups/store/types';
 
 export const load = (recipeSlug: string) => (dispatch: RecipeFormDispatch) => {
   dispatch({ store: RECIPE_FORM_STORE, type: ACTION.GET_START });
@@ -113,8 +114,24 @@ export const save = (data: Recipe) => (dispatch: RecipeFormDispatch) => {
           data:  monkeypatchPhotoUrls(toRecipe(res.body)),
         });
       }
+
+      // OPT HACK: Move this to recipe_groups
+      dispatch(invalidateCreatableLists(data, toRecipe(res.body)));
     })
     .catch(err => dispatch(handleError(err, RECIPE_FORM_STORE)));
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const invalidateCreatableLists = (oldRecipe: Recipe, savedRecipe: Recipe): any => (dispatch: any) => {
+  if (oldRecipe.course?.id !== savedRecipe.course?.id) {
+    dispatch({ store: COURSES_STORE, type: ACTION.RESET });
+  }
+  if (oldRecipe.cuisine?.id !== savedRecipe.cuisine?.id) {
+    dispatch({ store: CUISINES_STORE, type: ACTION.RESET });
+  }
+  if (oldRecipe.tags?.map(t => t.id).join('/') !== savedRecipe.tags?.map(t => t.id).join('/')) {
+    dispatch({ store: TAGS_STORE, type: ACTION.RESET });
+  }
 };
 
 export const fetchRecipeList = (searchTerm: string): Promise<Array<AutocompleteListItem>> => request()

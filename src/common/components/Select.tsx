@@ -139,6 +139,25 @@ export class CreatableSelect extends BaseComponent<ICreatableSelectProps, ICreat
     };
   }
 
+  static getDerivedStateFromProps(nextProps: ICreatableSelectProps, state: ICreatableSelectState) {
+    if (nextProps.data == null || nextProps.data.length === 0 || state.options.length === 0) return state;
+    const dataIdents = nextProps.data.map(d => d.value);
+    const nextOptions = [...state.options];
+
+    for (let index = nextOptions.length - 1; index >= 0; --index) {
+      if (dataIdents.includes(nextOptions[index].value)) {
+        nextOptions.splice(index, 1);
+      }
+    }
+
+    if (state.options.length === nextOptions.length) return state;
+
+    return {
+      ...state,
+      options: nextOptions,
+    };
+  }
+
   focus(): boolean { // eslint-disable-line react/no-unused-class-component-methods
     if (this.ref != null && this.ref.current) {
       this.ref.current.focus();
@@ -179,6 +198,7 @@ export class CreatableSelect extends BaseComponent<ICreatableSelectProps, ICreat
     const dataOptions = this.props.data ?? [];
     const options = dataOptions.concat(this.state.options);
     const selectedOptions = findSelectedOptions(options, this.props.value);
+    // TODO onReceiveProps remove provided state.options
 
     return (
       <Form.Group
