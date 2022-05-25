@@ -10,7 +10,7 @@ interface INavigationPromptProps {
   isDirty?: boolean | undefined;
 }
 
-const NavigationPrompt: React.FC<INavigationPromptProps> = (props: INavigationPromptProps) => {
+const NavigationPrompt: React.FC<INavigationPromptProps> = ({ isDirty }: INavigationPromptProps) => {
   const { formatMessage } = useIntl();
 
   const messages = defineMessages({
@@ -23,11 +23,11 @@ const NavigationPrompt: React.FC<INavigationPromptProps> = (props: INavigationPr
 
   const promptMsg = useMemo(() => formatMessage(messages.navigation_warning), [formatMessage]);
 
-  const dirtyBlocker = useBlocker(promptMsg, props.isDirty);
+  const dirtyBlocker = useBlocker(promptMsg, isDirty);
 
   return (
     <>
-      {props.isDirty && (
+      {isDirty && (
         <Beforeunload onBeforeunload={() => promptMsg} />
       )}
 

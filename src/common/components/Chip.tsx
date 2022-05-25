@@ -9,10 +9,10 @@ export interface IChipProps {
   children: React.ReactNode;
 }
 
-const Chip: React.FC<IChipProps> = (props: IChipProps) => (
+const Chip: React.FC<IChipProps> = ({ variant, className, children }: IChipProps) => (
   <span
-      className={classNames('chip', props.variant)}>
-    {props.children}
+      className={classNames('chip', variant, className)}>
+    {children}
   </span>
 );
 

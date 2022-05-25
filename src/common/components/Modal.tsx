@@ -23,7 +23,11 @@ export interface IModalProps {
   children: React.ReactNode;
 }
 
-const Modal: React.FC<IModalProps> = (props: IModalProps) => {
+const Modal: React.FC<IModalProps> = ({
+    show, title,
+    acceptTitle, closeTitle,
+    onAccept, onClose, noCloseButton,
+    size, className, acceptButtonProps, children }: IModalProps) => {
   const { formatMessage } = useIntl();
   const messages = defineMessages({
     accept: {
@@ -37,8 +41,6 @@ const Modal: React.FC<IModalProps> = (props: IModalProps) => {
       defaultMessage: 'Close',
     },
   });
-
-  const { show, title, acceptTitle, closeTitle, onAccept, onClose, noCloseButton, className, acceptButtonProps, children } = props;
 
   const handleClose = () => {
     if (onClose) {
@@ -61,7 +63,7 @@ const Modal: React.FC<IModalProps> = (props: IModalProps) => {
     <BootstrapModal
         show = {show}
         backdrop = 'static'
-        size = {props.size ?? 'lg'}
+        size = {size ?? 'lg'}
         centered
         onHide = {handleClose}
         keyboard = {false}

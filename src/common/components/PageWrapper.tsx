@@ -41,10 +41,9 @@ function toCleanLocationPath(path: string): string {
 /**
  * HOC to properly set the browser title to assure accessibilty.
  */
- const PageWrapper: React.FC<IPageWrapperProps> = (props: IPageWrapperProps) => {
+ const PageWrapper: React.FC<IPageWrapperProps> = ({ title, id, state, children }: IPageWrapperProps) => {
   const nav = useNavigate();
   const location = useLocation();
-  const { title, id, state } = props;
   const error = state?.error;
 
   useEffect(() => {
@@ -61,7 +60,7 @@ function toCleanLocationPath(path: string): string {
   return (
     <ErrorBoundary verbose printStack>
       <Container className={toCleanLocationPath(location.pathname)}>
-        {props.children}
+        {children}
       </Container>
     </ErrorBoundary>
   );
