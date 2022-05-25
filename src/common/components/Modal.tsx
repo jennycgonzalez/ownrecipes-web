@@ -4,6 +4,19 @@ import { Button, Modal as BootstrapModal } from 'react-bootstrap';
 import '../css/modal.css';
 
 import Icon from './Icon';
+import classNames from 'classnames';
+
+export interface IModalHeaderCloseButtonProps {
+  onClose: (event: React.MouseEvent) => void;
+  className?: string;
+}
+
+export const ModalHeaderCloseButton: React.FC<IModalHeaderCloseButtonProps> = ({
+  onClose, className, ...rest }: IModalHeaderCloseButtonProps) => (
+    <Button type='button' onClick={onClose} variant='transparent' className={classNames('close-button', className)} aria-label='Close' {...rest}>
+      <Icon icon='x' variant='light' size='2x' />
+    </Button>
+);
 
 export interface IModalProps {
   show: boolean;
@@ -71,9 +84,7 @@ const Modal: React.FC<IModalProps> = ({
       <BootstrapModal.Header>
         <BootstrapModal.Title>{title}</BootstrapModal.Title>
         {onClose != null && (
-          <Button type='button' onClick={handleClose} variant='transparent' className='close-button' aria-label='Close'>
-            <Icon icon='x' variant='light' size='2x' />
-          </Button>
+          <ModalHeaderCloseButton onClose={handleClose} />
         )}
       </BootstrapModal.Header>
 

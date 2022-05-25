@@ -1,0 +1,45 @@
+.image-viewer {
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+}
+
+.image-viewer > img {
+  width: 100%;
+  height: 100%;
+}
+
+.image-viewer-dialog .modal-content {
+  background-color: rgba(251, 252, 253, 0.9);
+}
+html[data-theme="dark"] .image-viewer-dialog .modal-content {
+  background-color: rgba(24, 28, 34, 0.9);
+}
+
+.image-viewer-dialog .modal-header .modal-title {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 1em;
+  font-size: 0.95rem;
+  font-weight: normal;
+}
+
+.image-viewer-dialog .modal-header .download-button {
+  margin-right: 0;
+}
+
+.image-viewer-dialog .modal-body img {
+  max-height: 100%;
+  max-width: 100%;
+  min-height: 66%;
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}

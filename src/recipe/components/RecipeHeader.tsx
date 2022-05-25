@@ -16,6 +16,7 @@ import Modal from '../../common/components/Modal';
 import WidthHeightRatio from '../../common/components/WidthHeightRatio';
 import Image from '../../common/components/Image';
 import Tooltip from '../../common/components/Tooltip';
+import ImageViewer from '../../common/components/ImageViewer';
 
 export interface IRecipeHeaderProps {
   recipe:       Recipe | undefined;
@@ -218,18 +219,22 @@ const RecipeHeader: React.FC<IRecipeHeaderProps> = ({ recipe, showEditLink, onEd
             <>
               <Col xl={6} lg={12} className='img-wrapper print-hidden'>
                 <WidthHeightRatio height={66.67} width={100}>
-                  <Image
-                      src = {recipe.photo}
-                      alt = ''
-                      className='img-responsive print-hidden' />
+                  <ImageViewer>
+                    <Image
+                        src = {recipe.photo}
+                        alt = ''
+                        className='img-responsive print-hidden' />
+                  </ImageViewer>
                 </WidthHeightRatio>
                 {optionButtons}
               </Col>
               <Col sm={7} xs={12} className='col-sm-push-5 print-only'>
                 <WidthHeightRatio height={66.67} width={100} className='print-only print-image'>
-                  <Image
-                      src = {recipe.photoThumbnail ?? recipe.photo}
-                      alt = '' />
+                  <ImageViewer>
+                    <Image
+                        src = {recipe.photoThumbnail ?? recipe.photo}
+                        alt = '' />
+                  </ImageViewer>
                 </WidthHeightRatio>
               </Col>
             </>
