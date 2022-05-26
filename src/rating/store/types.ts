@@ -10,6 +10,9 @@ export type RatingDto = {
   user_id:   number;
   username: string;
   rating:   number;
+
+  pub_date:    string; // ISO8601
+  update_date: string; // ISO8601
 }
 
 export type Rating = {
@@ -18,6 +21,9 @@ export type Rating = {
   userId:   number;
   userName: string;
   rating:   number;
+
+  pubDate:    string;
+  updateDate: string;
 }
 
 export type RatingCreate = {
@@ -32,6 +38,9 @@ export const toRating = (dto: RatingDto): Rating => ({
   userId:   dto.user_id,
   userName: dto.username,
   rating:   dto.rating,
+
+  pubDate:    dto.pub_date,
+  updateDate: dto.update_date,
 });
 
 export interface IRatingAddAction {

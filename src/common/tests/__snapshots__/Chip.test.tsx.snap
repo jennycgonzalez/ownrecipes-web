@@ -2,7 +2,7 @@
 
 exports[`Chip 1`] = `
 <span
-  className="chip secondary"
+  className="chip secondary some class"
 >
   Some string test
 </span>

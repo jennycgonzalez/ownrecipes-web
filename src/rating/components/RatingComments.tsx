@@ -19,6 +19,21 @@ export interface IRatingCommentsProps {
   removeRating: (recipe: string, rating: number) => void;
 }
 
+interface IRatingTimestampProps {
+  rating: Rating;
+}
+
+const RatingTimestamp: React.FC<IRatingTimestampProps> = ({ rating }: IRatingTimestampProps) => {
+  const intl = useIntl();
+  if (rating.updateDate && new Date(rating.updateDate).getTime() > 0) {
+    return <div className='rating-timestamp'>{new Date(rating.updateDate).toLocaleString(intl.locale)}</div>;
+  } else if (rating.pubDate && new Date(rating.pubDate).getTime() > 0) {
+    return <div className='rating-timestamp'>{new Date(rating.pubDate).toLocaleString(intl.locale)}</div>;
+  } else {
+    return null;
+  }
+};
+
 const RatingComments: React.FC<IRatingCommentsProps> = ({ recipeSlug, ratings, userId, pending, removeRating }: IRatingCommentsProps) => {
   const intl = useIntl();
 
@@ -52,19 +67,18 @@ const RatingComments: React.FC<IRatingCommentsProps> = ({ recipeSlug, ratings, u
       <Row>
         <Col xs>
           <Ratings stars={rating.rating || 0} />
+          <div className='rating-username'>{rating.userName}</div>
         </Col>
         <Col xs='auto'>
+          <RatingTimestamp rating={rating} />
           {rating.userId === userId && (
-            <Button variant='outline-danger' size='sm' onClick={() => handleDeleteClick(rating.id)}>
+            <Button variant='outline-danger' className='rating-delete-button' size='sm' onClick={() => handleDeleteClick(rating.id)}>
               <Icon icon='trash' />
             </Button>
           )}
         </Col>
       </Row>
       <Row>
-        <Col xs={12} className='rating-username'>
-          {rating.userName}
-        </Col>
         <Col xs={12}>
           <span>
             {rating.comment}

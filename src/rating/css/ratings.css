@@ -28,6 +28,15 @@
   margin-bottom: 5px;
 }
 
+.rating-panel .card-body .rating-timestamp {
+  color: var(--disabledText);
+  font-size: 0.92rem;
+}
+
+.rating-panel .card-body .rating-delete-button {
+  float: right;
+}
+
 .new-rating .rating-stars .btn {
   margin-top: 0;
 }
