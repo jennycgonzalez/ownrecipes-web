@@ -181,7 +181,7 @@ export type RecipeList = {
 
   info:     string;
   rating:   number;
-  pubDate:  Date; // 2011-05-20
+  pubDate:  string; // 2011-05-20
 }
 
 export const toRecipeList = (dto: RecipeListDto): RecipeList => ({
@@ -193,7 +193,7 @@ export const toRecipeList = (dto: RecipeListDto): RecipeList => ({
 
   info:    dto.info,
   rating:  dto.rating,
-  pubDate: new Date(dto.pub_date),
+  pubDate: dto.pub_date,
 });
 
 export type RecipeDto = {
@@ -243,7 +243,7 @@ export type Recipe = {
   directions: string;
 
   public: boolean;
-  updateDate: Date;
+  updateDate: string;
 
   customServings: number;
 } & RecipeList;
@@ -276,8 +276,8 @@ export const toRecipe = (dto: RecipeDto): Recipe => ({
 
   rating: dto.rating,
   public: dto.public,
-  pubDate: new Date(dto.pub_date),
-  updateDate: new Date(dto.update_date),
+  pubDate:    dto.pub_date,
+  updateDate: dto.update_date,
 
   customServings: dto.servings,
 });

@@ -190,7 +190,7 @@ const RecipeHeader: React.FC<IRecipeHeaderProps> = ({ recipe, showEditLink, onEd
       <div className='recipe-header-chips'>
         <Chip variant='secondary'>
           <Icon icon='calendar' />
-          {recipe?.updateDate?.toLocaleDateString(intl.locale)}
+          {recipe?.updateDate && new Date(recipe.updateDate).toLocaleDateString(intl.locale)}
         </Chip>
         <Chip variant='secondary'>
           <Icon icon='person' />
