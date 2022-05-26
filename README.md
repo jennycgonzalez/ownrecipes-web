@@ -7,24 +7,17 @@ This project was forked from OpenEats. See [the homepage](https://github.com/ope
 ## Main differences to OpenEats
 
 OwnRecipes was rewritten from scratch. The main goal was to keep compatibility to the OpenEats API, while providing a more modern solution.
-OwnRecipes comes with several, but not exclusively, improvements:
+You could run ownrecipes-web with openeats-api, though it doesn't make too much sense.
+
+ownRecipes-web comes with several, but not exclusively, improvements:
 
 * It is built with [CRA](https://create-react-app.dev/) and is not ejected. That makes upgrading to future releases easier. But it comes with costs of reduced customizability.
 * The code is typed with [TypeScript](https://www.typescriptlang.org/), reducing coding errors and increasing the maintainability.
-
-## TODO
-
-- [x] Reconfigure and build on latest CRA without ejecting.
-- [x] Rewrite with TypeScript
-- [x] Upgrade dependecies, especially Bootstrap
-- [x] Language and theme switcher
-- [x] Enable sub-path hosting of the web-app
-- [x] GUI redesign
-- [x] Responsive Design, including smartphone
-- [x] Propery parse and format measurements
-- [x] Optionally require login to avoid Copyright infringement
-- [ ] Grocery lists
-- [ ] Present some nice screenshots on GitHub wiki
+* The GUI is nice, modern and fully responsive.
+* Many smaller improvements, like enhanced parsing of measurements, auto-completion for tags and new filters for tags.
+* Support for sub-path hosting was added, making it a solid choice to run on a Raspberry Pi.
+* It can be switched into a private mode, where login is required to avoid Copyright infringement.
+* Much, much more.
 
 ## Dev Tips
 
@@ -50,6 +43,19 @@ After adding new `defineMessages` you'll need to update the locale files. Instea
 ```bash
 npm run locales
 ```
+
+**Adding new languages:**
+
+Adding a new language isn't straight forward.
+
+1. Add the new language code to the package.json script "locales".
+2. Add the new language code to the enum src/account/store/settings/types.ts#LanguageCode.
+3. Append the language code to the functions in src/app/components/IntlProvider.tsx
+    * toSupportedLanguage
+    * toLanguageName
+    * getMessageFromLang
+4. Generate the locale files (see command above).
+5. Define the messages in the just created language file.
 
 #### Building the demo site
 
