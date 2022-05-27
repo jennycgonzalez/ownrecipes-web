@@ -53,7 +53,7 @@ export function getMessagesFromLang(lang: LanguageCode): any {
   }
 }
 
-const IntlProvider: React.FC<IIntlProviderProps> = (props: IIntlProviderProps) => {
+const IntlProvider: React.FC<IIntlProviderProps> = ({ children }: IIntlProviderProps) => {
   const DEFAULT_LANGUAGE = toSupportedLanguage(process.env.REACT_APP_LOCALE);
 
   const settings = useSelector((state: CombinedStore) => state.settings);
@@ -88,7 +88,7 @@ const IntlProvider: React.FC<IIntlProviderProps> = (props: IIntlProviderProps) =
 
   return (
     <ReactIntlProvider locale={language} defaultLocale={DEFAULT_LANGUAGE} messages={getMessagesFromLang(language)}>
-      {props.children}
+      {children}
     </ReactIntlProvider>
   );
 };

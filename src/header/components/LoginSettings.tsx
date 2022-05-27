@@ -14,7 +14,7 @@ export interface ILoginSettingsProps {
   onChangeTheme: (theme: ThemeMode) => void;
 }
 
-const LoginSettings: React.FC<ILoginSettingsProps> = (props: ILoginSettingsProps) => {
+const LoginSettings: React.FC<ILoginSettingsProps> = ({ settings, onChangeLanguage, onChangeTheme }: ILoginSettingsProps) => {
   const intl = useIntl();
 
   const [showLanguageDialog, setShowLanguageDialog] = useState<boolean>(false);
@@ -27,12 +27,12 @@ const LoginSettings: React.FC<ILoginSettingsProps> = (props: ILoginSettingsProps
 
   const handleChangeLanguage = (lang: LanguageCode) => {
     handleLanguageDialogClose();
-    props.onChangeLanguage(lang);
+    onChangeLanguage(lang);
   };
 
   const handleChangeTheme = (theme: ThemeMode) => {
     handleThemeDialogClose();
-    props.onChangeTheme(theme);
+    onChangeTheme(theme);
   };
 
   return (
@@ -47,13 +47,13 @@ const LoginSettings: React.FC<ILoginSettingsProps> = (props: ILoginSettingsProps
 
       <LanguageDialog
           show     = {showLanguageDialog}
-          settings = {props.settings}
+          settings = {settings}
           onChangeLanguage = {handleChangeLanguage}
           onClose = {handleLanguageDialogClose} />
 
       <ThemeDialog
           show     = {showThemeDialog}
-          settings = {props.settings}
+          settings = {settings}
           onChangeTheme = {handleChangeTheme}
           onClose = {handleThemeDialogClose} />
     </>

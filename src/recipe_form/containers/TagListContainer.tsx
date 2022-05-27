@@ -15,7 +15,7 @@ export interface ITagSelectContainerProps extends ICreatableSelectValues {
   onChange?: (name: string, newValue: Array<Tag> | undefined) => void;
 }
 
-const TagListContainer: React.FC<ITagSelectContainerProps> = (props: ITagSelectContainerProps) => {
+const TagListContainer: React.FC<ITagSelectContainerProps> = ({ onChange, ...rest }: ITagSelectContainerProps) => {
   const intl = useIntl();
   const dispatch = useDispatch();
 
@@ -29,9 +29,9 @@ const TagListContainer: React.FC<ITagSelectContainerProps> = (props: ITagSelectC
       .sort(sortByLabel), [tags, intl.locale]);
 
   const handleChange = (name: string, newValue: Array<string> | undefined) => {
-    if (props.onChange) {
+    if (onChange) {
       if (newValue == null) {
-        props.onChange(name, undefined);
+        onChange(name, undefined);
       } else {
         const selected: Array<Tag> = [];
         newValue.forEach(v => {
@@ -39,14 +39,14 @@ const TagListContainer: React.FC<ITagSelectContainerProps> = (props: ITagSelectC
           selected.push(tag ?? { title: v } as Tag);
         });
 
-        props.onChange(name, selected);
+        onChange(name, selected);
       }
     }
   };
 
   return (
     <CreatableSelect
-        {...props}
+        {...rest}
         data = {data}
         onChange = {handleChange}
         isMulti

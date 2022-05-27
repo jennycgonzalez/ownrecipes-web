@@ -9,6 +9,7 @@ import { AccountState } from '../store/types';
 import Icon from '../../common/components/Icon';
 import Input from '../../common/components/Input';
 import Alert from './Alert';
+import { PendingState } from '../../common/store/GenericReducerType';
 
 export interface ILoginFormProps {
   accountState: AccountState;
@@ -21,7 +22,7 @@ interface ILoginFormData {
   password: string;
 }
 
-const LoginForm: React.FC<ILoginFormProps> = (props: ILoginFormProps) => {
+const LoginForm: React.FC<ILoginFormProps> = ({ accountState, onLogin }: ILoginFormProps) => {
   const intl = useIntl();
 
   const { formatMessage } = intl;
@@ -60,12 +61,12 @@ const LoginForm: React.FC<ILoginFormProps> = (props: ILoginFormProps) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    props.onLogin(formData.username, formData.password);
+    onLogin(formData.username, formData.password);
   };
 
   return (
     <Form className='form-signin' onSubmit={handleSubmit}>
-      <Alert reducerState={props.accountState} />
+      <Alert reducerState={accountState} />
 
       <h2 className='form-signin-heading'>{formatMessage(messages.please_sign_in)}</h2>
       <Input
@@ -87,7 +88,7 @@ const LoginForm: React.FC<ILoginFormProps> = (props: ILoginFormProps) => {
           inputAdornmentStart = {<Icon icon='key' size='2x' />}
           onChange = {handleChange} />
 
-      <Button variant='primary' type='submit'>
+      <Button variant='primary' type='submit' disabled={accountState.pending === PendingState.LOADING}>
         {formatMessage(messages.sign_in)}
       </Button>
     </Form>

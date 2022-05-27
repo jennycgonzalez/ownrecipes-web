@@ -15,7 +15,7 @@ interface IMeasurementContextProviderProps {
  *
  * @param props - {@link IMeasurementContextProviderProps}.
  */
-const MeasurementContextProvider: React.FC<IMeasurementContextProviderProps> = (props: IMeasurementContextProviderProps) => {
+const MeasurementContextProvider: React.FC<IMeasurementContextProviderProps> = ({ children }: IMeasurementContextProviderProps) => {
   const intl = useIntl();
 
   const [SupportedMeasurements] = useState(readSupportedMeasurements());
@@ -48,7 +48,7 @@ const MeasurementContextProvider: React.FC<IMeasurementContextProviderProps> = (
 
   return (
     <MeasurementContext.Provider value={value}>
-      {props.children}
+      {children}
     </MeasurementContext.Provider>
    );
 };

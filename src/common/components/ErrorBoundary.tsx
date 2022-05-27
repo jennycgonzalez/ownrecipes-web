@@ -19,9 +19,9 @@ interface IErrorBoundaryContainerProps {
   children: AnyComponent;
 }
 
-const ErrorBoundaryContainer: React.FC<IErrorBoundaryContainerProps> = (props: IErrorBoundaryContainerProps) => (
+const ErrorBoundaryContainer: React.FC<IErrorBoundaryContainerProps> = ({ children }: IErrorBoundaryContainerProps) => (
   <div>
-    {props.children}
+    {children}
   </div>
 );
 

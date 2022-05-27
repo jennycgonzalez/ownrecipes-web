@@ -5,10 +5,10 @@ interface IContextProviderProps {
   children: React.ReactNode;
 }
 
-const ContextProvider: React.FC<IContextProviderProps> = (props: IContextProviderProps) => (
+const ContextProvider: React.FC<IContextProviderProps> = ({ children }: IContextProviderProps) => (
   <IntlProvider>
     <MeasurementContextProvider>
-      {props.children}
+      {children}
     </MeasurementContextProvider>
   </IntlProvider>
 );

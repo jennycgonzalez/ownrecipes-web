@@ -24,7 +24,10 @@ export const tryAutoLogin = () => (dispatch: AccountDispatch) => {
   dispatch({ store: ACCOUNT_STORE, type: ACTION.GET_START });
 
   const storageItem = localStorage.getItem(ACCOUNT_TOKEN_STORAGE_KEY);
-  if (storageItem == null) return;
+  if (storageItem == null) {
+    dispatch({ store: ACCOUNT_STORE, type: ACTION.SOFT_RESET });
+    return;
+  }
   const user: UserAccount = JSON.parse(storageItem);
   const decodedToken: JwtPayload | undefined = user.token ? jwtDecode<JwtPayload>(user.token) : undefined;
 
@@ -34,6 +37,8 @@ export const tryAutoLogin = () => (dispatch: AccountDispatch) => {
     } else {
       dispatch({ store: ACCOUNT_STORE, type: AccountActionTypes.LOGIN, user: user });
     }
+  } else {
+    dispatch({ store: ACCOUNT_STORE, type: ACTION.SOFT_RESET });
   }
 };
 

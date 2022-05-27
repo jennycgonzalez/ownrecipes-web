@@ -7,7 +7,7 @@ export interface ILoginAlert {
   reducerState: GenericReducerType;
 }
 
-const LoginAlert: React.FC<ILoginAlert> = (props: ILoginAlert) => {
+const LoginAlert: React.FC<ILoginAlert> = ({ reducerState }: ILoginAlert) => {
   const { formatMessage } = useIntl();
 
   const messages = defineMessages({
@@ -23,7 +23,6 @@ const LoginAlert: React.FC<ILoginAlert> = (props: ILoginAlert) => {
     },
   });
 
-  const { reducerState } = props;
   const { error } = reducerState;
 
   return (

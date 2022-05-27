@@ -15,7 +15,7 @@ export interface ICuisineSelectContainerProps extends ICreatableSelectValues {
   onChange?: (name: string, newValue: Course | undefined) => void;
 }
 
-const CuisineSelectContainer: React.FC<ICuisineSelectContainerProps> = (props: ICuisineSelectContainerProps) => {
+const CuisineSelectContainer: React.FC<ICuisineSelectContainerProps> = ({ onChange, ...rest }: ICuisineSelectContainerProps) => {
   const intl = useIntl();
   const dispatch = useDispatch();
 
@@ -28,18 +28,18 @@ const CuisineSelectContainer: React.FC<ICuisineSelectContainerProps> = (props: I
       .sort(sortByLabel), [cuisines, intl.locale]);
 
   const handleChange = (name: string, newValue: string | undefined) => {
-    if (props.onChange) {
+    if (onChange) {
       if (newValue == null) {
-        props.onChange(name, undefined);
+        onChange(name, undefined);
       } else {
-        props.onChange(name, cuisines?.find(c => c.title === newValue) ?? { title: newValue ?? '' } as Cuisine);
+        onChange(name, cuisines?.find(c => c.title === newValue) ?? { title: newValue ?? '' } as Cuisine);
       }
     }
   };
 
   return (
     <CreatableSelect
-        {...props}
+        {...rest}
         data = {data}
         onChange = {handleChange}
         />
