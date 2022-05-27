@@ -258,3 +258,6 @@ html[data-theme="dark"] .accordion.accordion-flush .accordion-button.collapsed::
 html[data-theme="dark"] img {
   opacity: 0.875;
 }
+html[data-theme="dark"] img:hover {
+  opacity: 1.0;
+}

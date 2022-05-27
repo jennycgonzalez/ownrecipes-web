@@ -3,6 +3,11 @@
   padding: 0;
   border: none;
   border-radius: 0;
+
+  background-color: transparent;
+}
+.image-viewer:hover {
+  background-color: transparent;
 }
 
 .image-viewer > img {
@@ -33,7 +38,6 @@ html[data-theme="dark"] .image-viewer-dialog .modal-content {
 .image-viewer-dialog .modal-body img {
   max-height: 100%;
   max-width: 100%;
-  min-height: 66%;
 
   display: block;
   margin-left: auto;
@@ -42,4 +46,10 @@ html[data-theme="dark"] .image-viewer-dialog .modal-content {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
+}
+
+@media (orientation: landscape) {
+  .image-viewer-dialog .modal-body img {
+    min-height: 66%;
+  }
 }
