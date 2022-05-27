@@ -46,14 +46,10 @@ npm run locales
 
 **Adding new languages:**
 
-Adding a new language isn't straight forward.
-
-1. Add the new language code to the package.json script "locales".
-2. Add the new language code to the enum src/account/store/settings/types.ts#LanguageCode.
-3. Append the language code to the functions in src/app/components/IntlProvider.tsx
-    * toSupportedLanguage
-    * toLanguageName
-    * getMessageFromLang
+1. Add the new language code to the package.json, script "locales".
+2. Add the new language code to src/common/language.ts:
+    * enum LanguageCode
+    * function getMessageFromLang
 4. Generate the locale files (see command above).
 5. Define the messages in the just created language file.
 

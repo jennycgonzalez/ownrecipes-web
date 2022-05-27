@@ -1,7 +1,7 @@
 import { defineMessages, IntlShape } from 'react-intl';
-import { LanguageCode } from '../../../account/store/settings/types';
+
+import { createIntlInstance, getMessagesFromLang, LanguageCode } from '../../../common/language';
 import { optionallyFormatMessage } from '../../../common/utility';
-import { createIntlInstance, getMessagesFromLang } from '../IntlProvider';
 
 /**
  * Dynamically builds a list for all supported measurements.

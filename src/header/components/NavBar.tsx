@@ -13,10 +13,11 @@ import CreateRecipeMenuItem from './CreateRecipeMenuItem';
 import { AccountMenuMenuItem, AccountLoginMenuItem } from './MyAccountMenuItem';
 import { getEnvAsBoolean, getResourcePath } from '../../common/utility';
 import { UserAccount } from '../../account/store/types';
-import { LanguageCode, Settings, ThemeMode } from '../../account/store/settings/types';
+import { Settings, ThemeMode } from '../../account/store/settings/types';
 import LoginSettings from './LoginSettings';
 import NavSearch from './NavSearch';
 import NavLink from './NavLink';
+import { LanguageCode } from '../../common/language';
 
 export interface INavBarProps {
   account:  UserAccount | undefined;

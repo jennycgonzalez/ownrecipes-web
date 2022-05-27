@@ -1,60 +1,17 @@
 import { useEffect, useState } from 'react';
-import { createIntl, createIntlCache, IntlProvider as ReactIntlProvider, IntlShape } from 'react-intl';
+import { IntlProvider as ReactIntlProvider } from 'react-intl';
 import { useSelector } from 'react-redux';
-import { LanguageCode, parseLanguage, SETTING_LANGUAGE_STORAGE_KEY } from '../../account/store/settings/types';
+import { SETTING_LANGUAGE_STORAGE_KEY } from '../../account/store/settings/types';
+import { getMessagesFromLang, LanguageCode, toLanguageCode } from '../../common/language';
 
-import localeDe from '../../locale/de.json';
-import localeEn from '../../locale/en.json';
 import { CombinedStore } from '../Store';
 
 export interface IIntlProviderProps {
   children: React.ReactNode;
 }
 
-function toSupportedLanguage(lang: string | undefined): LanguageCode {
-  if (lang == null) return LanguageCode.EN;
-
-  const langg = lang.toLocaleLowerCase();
-  switch (langg) {
-    case 'de':
-    case 'en':
-      return (langg as LanguageCode);
-    default: return LanguageCode.EN;
-  }
-}
-
-export function toLanguageName(lang: LanguageCode): string {
-  switch (lang) {
-    case LanguageCode.DE: return 'Deutsch';
-    case LanguageCode.EN: return 'English';
-    default: throw new Error(`Invalid argument: lang "${lang}" is not supported.`);
-  }
-}
-
-export function createIntlInstance(languageCode: LanguageCode): IntlShape {
-  const cache = createIntlCache();
-  const intl = createIntl(
-    {
-      locale: languageCode,
-      messages: getMessagesFromLang(languageCode),
-    },
-    cache
-  );
-
-  return intl;
-}
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function getMessagesFromLang(lang: LanguageCode): any {
-  switch (lang) {
-    case LanguageCode.DE: return localeDe;
-    case LanguageCode.EN: return localeEn;
-    default: return localeEn;
-  }
-}
-
 const IntlProvider: React.FC<IIntlProviderProps> = ({ children }: IIntlProviderProps) => {
-  const DEFAULT_LANGUAGE = toSupportedLanguage(process.env.REACT_APP_LOCALE);
+  const DEFAULT_LANGUAGE = toLanguageCode(process.env.REACT_APP_LOCALE, LanguageCode.EN);
 
   const settings = useSelector((state: CombinedStore) => state.settings);
 
@@ -65,7 +22,7 @@ const IntlProvider: React.FC<IIntlProviderProps> = ({ children }: IIntlProviderP
 
     const userLanguageKey = localStorage.getItem(SETTING_LANGUAGE_STORAGE_KEY);
     if (userLanguageKey != null) {
-      newLanguage = parseLanguage(userLanguageKey, DEFAULT_LANGUAGE);
+      newLanguage = toLanguageCode(userLanguageKey, DEFAULT_LANGUAGE);
     } else {
       const browserLanguage = (navigator.languages && navigator.languages[0]) || navigator.language;
       let browserLanguageWithoutRegionCode: LanguageCode = browserLanguage.toLowerCase().split(/[-_]/)[0] as unknown as LanguageCode;

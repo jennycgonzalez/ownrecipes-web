@@ -9,7 +9,8 @@ import * as RandomRecipeActions from '../actions/RandomRecipeActions';
 import * as SettingsActions from '../../account/store/settings/actions';
 import { CombinedStore } from '../../app/Store';
 // import { ListItemType } from '../components/GroceryListMenuItem';
-import { LanguageCode, ThemeMode } from '../../account/store/settings/types';
+import { ThemeMode } from '../../account/store/settings/types';
+import { LanguageCode } from '../../common/language';
 
 const Header: React.FC = () => {
   const dispatch = useDispatch();

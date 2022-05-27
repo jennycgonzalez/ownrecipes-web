@@ -1,8 +1,9 @@
 import { defineMessages, useIntl } from 'react-intl';
 import { ListGroup } from 'react-bootstrap';
+
 import Modal from '../../common/components/Modal';
-import { LanguageCode, Settings } from '../../account/store/settings/types';
-import { toLanguageName } from '../../app/components/IntlProvider';
+import { Settings } from '../../account/store/settings/types';
+import { getMessagesFromLang, LanguageCode } from '../../common/language';
 
 export interface ILanguageDialogProps {
   show:     boolean;
@@ -29,7 +30,7 @@ export const LanguageDialog: React.FC<ILanguageDialogProps> = ({
   };
 
   const languageButtons = Object.values(LanguageCode).map(l => (
-    <ListGroup.Item key={l} action disabled={settings.language === l} onClick={() => handleChangeLanguage(l)}>{toLanguageName(l)}</ListGroup.Item>
+    <ListGroup.Item key={l} action disabled={settings.language === l} onClick={() => handleChangeLanguage(l)}>{getMessagesFromLang(l)['1.display_name']}</ListGroup.Item>
   ));
 
   return (

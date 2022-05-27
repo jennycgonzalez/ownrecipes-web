@@ -1,10 +1,11 @@
 import * as _ from 'lodash';
 
-import { ISettingsAction, LanguageCode, parseLanguage, parseTheme, SettingsAction, SettingsActionTypes, SettingsState, SETTINGS_STORE, SETTING_LANGUAGE_STORAGE_KEY, SETTING_THEME_STORAGE_KEY, ThemeMode } from './types';
+import { LanguageCode, toLanguageCode } from '../../../common/language';
+import { ISettingsAction, parseTheme, SettingsAction, SettingsActionTypes, SettingsState, SETTINGS_STORE, SETTING_LANGUAGE_STORAGE_KEY, SETTING_THEME_STORAGE_KEY, ThemeMode } from './types';
 
 const defaultState: SettingsState = {
   themeMode: parseTheme(localStorage.getItem(SETTING_THEME_STORAGE_KEY), ThemeMode.LIGHT),
-  language:  parseLanguage(localStorage.getItem(SETTING_LANGUAGE_STORAGE_KEY), LanguageCode.EN),
+  language:  toLanguageCode(localStorage.getItem(SETTING_LANGUAGE_STORAGE_KEY), LanguageCode.EN),
 };
 
 function setLanguage(state: SettingsState, action: ISettingsAction): SettingsState {

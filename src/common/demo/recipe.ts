@@ -1,7 +1,5 @@
 /* eslint-disable func-names */
 
-// TODO ingredients and subrecipes have to use numerator + denominator, not quantity.
-
 /* eslint-disable quotes, quote-props, comma-dangle */
 const items = [
   {

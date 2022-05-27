@@ -4,10 +4,11 @@ import { NavDropdown, Button } from 'react-bootstrap';
 
 import { getResourcePath } from '../../common/utility';
 import { UserAccount } from '../../account/store/types';
-import { LanguageCode, Settings, ThemeMode } from '../../account/store/settings/types';
+import { Settings, ThemeMode } from '../../account/store/settings/types';
 import Icon from '../../common/components/Icon';
 import { LanguageDialog } from './LanguageDialog';
 import { ThemeDialog } from './ThemeDialog';
+import { LanguageCode } from '../../common/language';
 
 export const AccountLoginMenuItem: React.FC = () => {
   const { formatMessage } = useIntl();

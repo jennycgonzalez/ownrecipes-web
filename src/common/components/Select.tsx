@@ -198,7 +198,6 @@ export class CreatableSelect extends BaseComponent<ICreatableSelectProps, ICreat
     const dataOptions = this.props.data ?? [];
     const options = dataOptions.concat(this.state.options);
     const selectedOptions = findSelectedOptions(options, this.props.value);
-    // TODO onReceiveProps remove provided state.options
 
     return (
       <Form.Group
