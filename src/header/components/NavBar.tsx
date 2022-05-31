@@ -1,11 +1,14 @@
 import { defineMessages, useIntl } from 'react-intl';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Image, Navbar, Nav, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 import '../css/header.css';
 
+import { LanguageCode } from '../../common/language';
+import DynamicHeightContext from '../../common/context/DynamicHeightContext';
+import useWindowSize from '../../common/hooks/useWindowSize';
 import Icon from '../../common/components/Icon';
 import CreateRecipeMenuItem from './CreateRecipeMenuItem';
 // import GroceryListMenuItem, { ListItemType } from './GroceryListMenuItem';
@@ -17,7 +20,6 @@ import { Settings, ThemeMode } from '../../account/store/settings/types';
 import LoginSettings from './LoginSettings';
 import NavSearch from './NavSearch';
 import NavLink from './NavLink';
-import { LanguageCode } from '../../common/language';
 
 export interface INavBarProps {
   account:  UserAccount | undefined;
@@ -53,6 +55,21 @@ const NavBar: React.FC<INavBarProps> = ({
       defaultMessage: 'Random',
     },
   });
+
+  const navbarRef = useRef<HTMLDivElement>(null);
+  const dynamicHeightContext = useContext(DynamicHeightContext);
+
+  const [width] = useWindowSize();
+  useLayoutEffect(() => {
+    if (dynamicHeightContext == null) return;
+    dynamicHeightContext.setToolbarHeight(navbarRef.current?.clientHeight ?? 0);
+  }, [dynamicHeightContext, width]);
+
+  // componentWillUnmount
+  useEffect(() => () => {
+    if (dynamicHeightContext == null) return;
+    dynamicHeightContext.setToolbarHeight(0);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const [isScreenMdUp, setIsScreenMdUp] = useState<boolean>(false);
   useEffect(() => {
@@ -92,7 +109,7 @@ const NavBar: React.FC<INavBarProps> = ({
   );
 
   return (
-    <Navbar collapseOnSelect className='header' expand='md' id='header-navbar'>
+    <Navbar id='header-navbar' collapseOnSelect className='header' expand='md' fixed='top' ref={navbarRef}>
       <Container className={classNames({ 'search-expanded': isSearchExpanded })}>
         <Navbar.Toggle><Icon icon='list' variant='light' size='2x' /></Navbar.Toggle>
         <Navbar.Brand>
@@ -116,7 +133,12 @@ const NavBar: React.FC<INavBarProps> = ({
         )}
         <Navbar.Collapse>
           <Nav className={classNames('header-nav', { 'collapse-d-lg': isSearchExpanded })}>
-            {(!isLoginRequired || isAuthenticated) && <NavLink to={getResourcePath('/browser')}>{formatMessage(messages.recipes)}</NavLink>}
+            {(!isLoginRequired || isAuthenticated) && (!isScreenMdUp || locationPath.endsWith('/browser')) && (
+              <NavLink to={getResourcePath('/browser')} active={locationPath.endsWith('/browser')}>
+                <Icon icon='search' variant='light' className='d-md-inline-block d-none' />
+                <span className='d-inline-block d-md-none'>{formatMessage(messages.recipes)}</span>
+              </NavLink>
+            )}
             {(!isLoginRequired || isAuthenticated) && <NavLink as='button' onClick={onRandomRecipeClick}>{formatMessage(messages.randomRecipe)}</NavLink>}
             {/* isAuthenticated && <MenuMenuItem /> */}
             {isAuthenticated && isPrivilegedUser && <CreateRecipeMenuItem />}

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 export interface INavLinkProps {
   id?: string;
   to?: string;
+  active?: boolean;
 
   as?: ElementType;
   onClick?: () => void;
@@ -12,7 +13,7 @@ export interface INavLinkProps {
   children: React.ReactNode;
 }
 
-const NavLink = forwardRef<unknown, INavLinkProps>(({ id, as, to, children, ...rest }: INavLinkProps, ref) => (
+const NavLink = forwardRef<unknown, INavLinkProps>(({ id, as, to, active, children, ...rest }: INavLinkProps, ref) => (
   <Nav.Link
       id = {id}
       as = {as ?? Link}
@@ -20,6 +21,7 @@ const NavLink = forwardRef<unknown, INavLinkProps>(({ id, as, to, children, ...r
       // This seems redundant, but is needed for
       // react bootstrap navbar collapseOnSelect to work.
       href = {to ?? undefined}
+      active = {active}
       {...rest}
       ref = {ref}>
     {children}

@@ -12,7 +12,6 @@
   }
 }
 .recipe-header .options {
-  margin-top: 0.5em;
   margin-left: auto;
   display: flex;
   flex-direction: row-reverse;

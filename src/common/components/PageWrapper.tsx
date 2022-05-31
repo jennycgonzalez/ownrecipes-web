@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router';
 
 import { AnyComponent } from '../../types/Types';
+import DynamicHeightContext from '../context/DynamicHeightContext';
 import ArrayReducerType from '../store/ArrayReducerType';
 import ItemReducerType from '../store/ItemReducerType';
 import { getResourcePath } from '../utility';
@@ -46,6 +47,8 @@ function toCleanLocationPath(path: string): string {
   const location = useLocation();
   const error = state?.error;
 
+  const dynamicHeightContext = useContext(DynamicHeightContext);
+
   useEffect(() => {
     // ARIA: Titles should contain the application name and page title.
     document.title = (`${title != null && title.length > 0 ? `${title} | ` : ''}OwnRecipes`);
@@ -59,7 +62,7 @@ function toCleanLocationPath(path: string): string {
 
   return (
     <ErrorBoundary verbose printStack>
-      <Container className={toCleanLocationPath(location.pathname)}>
+      <Container className={toCleanLocationPath(location.pathname)} style={{ marginTop: `${dynamicHeightContext?.toolbarHeight ?? 0}px` }}>
         {children}
       </Container>
     </ErrorBoundary>

@@ -4,6 +4,7 @@
   padding-bottom: 0 !important;
 }
 #header-navbar {
+  min-height: 3rem;
   padding: 0;
   background-color: var(--primaryMain);
 }
@@ -18,7 +19,6 @@
   height: 100%;
 }
 #header-navbar > .container > .navbar-collapse > .header-nav {
-  height: 100%;
   align-items: center;
 }
 
@@ -45,6 +45,12 @@
   color: var(--primaryContrast);
   border-radius: .25rem;
 }
+#header-navbar .nav-link.active {
+  box-shadow: 0 -2px 0 0 var(--primaryContrast) inset;
+}
+#header-navbar .nav-link.active:focus {
+  box-shadow: 0 -2px 0 0 var(--primaryContrast) inset, 0 0 0 2px var(--primaryText) inset;
+}
 #header-navbar .navbar-brand a:hover,
 #header-navbar button:hover,
 #header-navbar a:hover {
@@ -59,6 +65,12 @@
   }
   #header-navbar .nav-link {
     color: inherit;
+  }
+  #header-navbar .nav-link.active {
+    box-shadow: 0 -2px 0 0 var(--primaryMain) inset;
+  }
+  #header-navbar .nav-link.active:focus {
+    box-shadow: 0 -2px 0 0 var(--primaryMain) inset, 0 0 0 2px var(--primaryText) inset;
   }
 }
 #header-navbar .header-nav .nav-link.active,
@@ -83,11 +95,20 @@
   float: right;
   display: flex;
   flex-direction: row;
+  align-self: stretch;
+}
+
+#header-navbar #my-account-dropdown {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 @media screen and (max-width: 767px) {
   #header-navbar #my-account-dropdown {
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    color: var(--primaryContrast);
   }
   #header-navbar #my-account-dropdown:hover {
     color: var(--primaryContrast);
@@ -97,6 +118,10 @@
   #header-navbar .my-account-nav {
     margin-left: auto;
     float: unset;
+  }
+  #header-navbar #my-account-dropdown {
+    padding-top: 3px;
+    padding-bottom: 0;
   }
 }
 #header-navbar #my-account-dropdown::after,
@@ -187,7 +212,7 @@
     display: none;
   }
   #header-navbar .container.search-expanded .my-account-nav {
-    height: 3.25rem;
+    height: 3rem;
     align-items: center;
   }
 }

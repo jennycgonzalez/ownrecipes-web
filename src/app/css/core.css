@@ -18,7 +18,7 @@ body {
   flex: 1;
   background-color: var(--midground);
 
-  padding-top: 20px;
+  padding-top: 15px;
   padding-bottom: 20px;
 }
 @media screen and (max-width: 81rem) {
