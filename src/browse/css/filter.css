@@ -146,3 +146,7 @@
     display: none;
   }
 }
+
+.container.browser .results-panel .rating-stars {
+  font-size: 0.875rem;
+}
