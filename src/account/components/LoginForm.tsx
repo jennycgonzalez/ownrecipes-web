@@ -74,7 +74,6 @@ const LoginForm: React.FC<ILoginFormProps> = ({ accountState, onLogin }: ILoginF
           value = {formData.username}
           placeholder = {formatMessage(messages.username)}
           autoComplete = 'username'
-          autoFocus
           required
           inputAdornmentStart = {<Icon icon='person' size='2x' />}
           onChange = {handleChange} />
