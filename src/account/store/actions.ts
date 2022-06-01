@@ -5,6 +5,7 @@ import { handleError, refreshToken, request } from '../../common/CustomSuperagen
 import { serverURLs } from '../../common/config';
 import { AccountActionTypes, ACCOUNT_STORE, AccountDispatch, ACCOUNT_TOKEN_STORAGE_KEY, UserAccount, LoginDto, toUserAccount } from './types';
 import { ACTION } from '../../common/store/ReduxHelper';
+import LocalStorageHelper from '../../common/LocalStorageHelper';
 
 export const getToken = (username: string, pass: string) => (dispatch: AccountDispatch) => {
   dispatch({ store: ACCOUNT_STORE, type: ACTION.GET_START });
@@ -23,7 +24,7 @@ export const getToken = (username: string, pass: string) => (dispatch: AccountDi
 export const tryAutoLogin = () => (dispatch: AccountDispatch) => {
   dispatch({ store: ACCOUNT_STORE, type: ACTION.GET_START });
 
-  const storageItem = localStorage.getItem(ACCOUNT_TOKEN_STORAGE_KEY);
+  const storageItem = LocalStorageHelper.getItem(ACCOUNT_TOKEN_STORAGE_KEY);
   if (storageItem == null) {
     dispatch({ store: ACCOUNT_STORE, type: ACTION.SOFT_RESET });
     return;

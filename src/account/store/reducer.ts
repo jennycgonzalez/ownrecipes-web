@@ -1,3 +1,4 @@
+import LocalStorageHelper from '../../common/LocalStorageHelper';
 import ReduxHelper from '../../common/store/ReduxHelper';
 import { AccountAction, AccountActionTypes, AccountState, ACCOUNT_STORE, ACCOUNT_TOKEN_STORAGE_KEY } from './types';
 
@@ -9,12 +10,14 @@ const reducer = (state = defaultState, action: AccountAction): AccountState => {
       case AccountActionTypes.LOGIN:
         {
           const user = action.user;
-          localStorage.setItem(ACCOUNT_TOKEN_STORAGE_KEY, JSON.stringify(user));
-          return ReduxHelper.setItem(state, action.user);
+          LocalStorageHelper.setItem(ACCOUNT_TOKEN_STORAGE_KEY, JSON.stringify(user));
+          return ReduxHelper.setItem(state, user);
         }
       case AccountActionTypes.LOGOUT:
-        localStorage.removeItem(ACCOUNT_TOKEN_STORAGE_KEY);
-        return defaultState;
+        {
+          LocalStorageHelper.removeItem(ACCOUNT_TOKEN_STORAGE_KEY);
+          return defaultState;
+        }
       default:
         break;
     }

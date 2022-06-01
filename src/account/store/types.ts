@@ -56,7 +56,7 @@ export enum AccountActionTypes {
 }
 
 export const ACCOUNT_STORE = '@@account';
-export const ACCOUNT_TOKEN_STORAGE_KEY = 'ownrecipes-token';
+export const ACCOUNT_TOKEN_STORAGE_KEY = 'token';
 
 export interface IAccountLoginAction {
   store: typeof ACCOUNT_STORE;

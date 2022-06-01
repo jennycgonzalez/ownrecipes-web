@@ -1,13 +1,18 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import '../css/theme.css';
 
 import { ThemeMode } from '../../account/store/settings/types';
+import * as SettingsActions from '../../account/store/settings/actions';
 import { CombinedStore } from '../Store';
 
 const ThemeProvider: React.FC = () => {
+  const dispatch = useDispatch();
+
+  const token    = useSelector((state: CombinedStore) => state.account.item);
   const settings = useSelector((state: CombinedStore) => state.settings);
+  const tokenId = token?.username;
 
   const [theme, setTheme] = useState<ThemeMode>();
 
@@ -28,6 +33,10 @@ const ThemeProvider: React.FC = () => {
       }, 1000);
     }
   }, [settings.themeMode]);
+
+  useEffect(() => {
+    dispatch(SettingsActions.init(tokenId));
+  }, [dispatch, tokenId]);
 
   return null;
 };

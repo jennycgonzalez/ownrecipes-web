@@ -3543,7 +3543,14 @@
         "id": 1,
         "image": null,
         "title": "OwnRecipes",
-        "content": "OwnRecipes is an open source recipe management site. You can share recipes with friends, rate recipes, store your favorite recipes to find easily, and more. If you want to run your own personal OwnRecipes site visit the <a href=\"https://github.com/ownrecipes/OwnRecipes\" target=\"_blank\">Github page</a>",
+        "content": "%introduction%",
+        "frontpage": true
+      },
+      {
+        "id": 2,
+        "image": null,
+        "title": "Features",
+        "content": "%features%",
         "frontpage": true
       }
     ],

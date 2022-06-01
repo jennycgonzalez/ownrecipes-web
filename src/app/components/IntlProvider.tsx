@@ -3,6 +3,7 @@ import { IntlProvider as ReactIntlProvider } from 'react-intl';
 import { useSelector } from 'react-redux';
 import { SETTING_LANGUAGE_STORAGE_KEY } from '../../account/store/settings/types';
 import { getMessagesFromLang, LanguageCode, toLanguageCode } from '../../common/language';
+import LocalStorageHelper from '../../common/LocalStorageHelper';
 
 import { CombinedStore } from '../Store';
 
@@ -20,7 +21,7 @@ const IntlProvider: React.FC<IIntlProviderProps> = ({ children }: IIntlProviderP
   useEffect(() => {
     let newLanguage: LanguageCode;
 
-    const userLanguageKey = localStorage.getItem(SETTING_LANGUAGE_STORAGE_KEY);
+    const userLanguageKey = LocalStorageHelper.getItem(SETTING_LANGUAGE_STORAGE_KEY);
     if (userLanguageKey != null) {
       newLanguage = toLanguageCode(userLanguageKey, DEFAULT_LANGUAGE);
     } else {
