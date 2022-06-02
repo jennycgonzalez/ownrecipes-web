@@ -25,8 +25,7 @@ const NewsBrowser: React.FC = () => {
 
   return (
     <div>
-      <h2 className='page-header'>{formatMessage(messages.recommendedRecipes)}</h2>
-      <MiniBrowse qs='?limit=4' />
+      <MiniBrowse heading={formatMessage(messages.recommendedRecipes)} count={4} />
     </div>
   );
 };

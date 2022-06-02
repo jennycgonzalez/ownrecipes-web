@@ -4,6 +4,7 @@
   "404.message": "The page you're looking for does not exist.",
   "404.title": "Not Found",
   "browse.no_results": "There are no results for your search.",
+  "browse.shuffle_suggestions_button_title": "Shuffle suggestions",
   "connection.no_connection_message": "Connection to the server failed. Please try again later.",
   "connection.no_connection_title": "Bad connection",
   "course.Appetizer": "Appetizer",

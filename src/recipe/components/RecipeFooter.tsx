@@ -16,8 +16,7 @@ const RecipeFooter: React.FC = () => {
     <>
       <hr />
       <article className='recipe-footer'>
-        <h2 className='page-header'>{intl.messages['nav.home.recommended_recipes_title'] as string}</h2>
-        <MiniBrowse qs='?limit=4' />
+        <MiniBrowse heading={intl.messages['nav.home.recommended_recipes_title'] as string} count={4} />
       </article>
     </>
   );

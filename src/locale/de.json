@@ -4,6 +4,7 @@
   "404.message": "Die von Ihnen gesuchte Seite wurde nicht gefunden.",
   "404.title": "Nicht gefunden",
   "browse.no_results": "Deine Suche lieferte keine Ergebnisse.\nÜberprüfe die Schreibweise aller Suchbegriffe, oder probiere andere Suchbegriffe.",
+  "browse.shuffle_suggestions_button_title": "Neue Vorschläge",
   "connection.no_connection_message": "Die Verbindung zum Server von OwnRecipes ist fehlgeschlagen. Bitte versuchen Sie es in wenigen Minuten erneut.",
   "connection.no_connection_title": "Verbindungsfehler",
   "course.Appetizer": "Appetitanreger",

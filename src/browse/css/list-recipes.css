@@ -1,3 +1,11 @@
+#suggestions-heading {
+  display: inline-block;
+}
+#shuffle-suggestions-button {
+  margin-top: -0.5em;
+  margin-left: 1em;
+}
+
 .recipes-list .recipe {
   border: 0;
 }
