@@ -7,9 +7,12 @@ export const RATING_STORE  = '@@rating';
 export type RatingDto = {
   id:       number;
   comment:  string;
-  user_id:   number;
+  user_id:  number;
   username: string;
   rating:   number;
+
+  recipe?:  string;
+  author?:  number;
 
   pub_date:    string; // ISO8601
   update_date: string; // ISO8601

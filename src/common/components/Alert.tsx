@@ -20,7 +20,7 @@ const Alert: React.FC<IAlertProps> = ({ severity, title, className, children }: 
       {severity === 'danger' && <Icon icon='exclamation-diamond' size='2x' className='alert-icon' />}
       {title}
     </BootstrapAlert.Heading>
-    {typeof children === 'string' && (
+    {typeof children === 'string' && children.length > 0 && (
       <P className='alert-message mb-0'>{children}</P>
     )}
     {typeof children !== 'string' && (

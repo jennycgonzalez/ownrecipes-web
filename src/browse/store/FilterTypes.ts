@@ -8,7 +8,6 @@ export type CategoryCount = {
   total:  number;
   title:  string; // Category title, e. g. "Entry".
   slug:   string; // Category title slug, e.g. "entry".
-  author: number;
 }
 
 export type RatingCount = {

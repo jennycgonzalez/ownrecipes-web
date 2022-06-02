@@ -1,9 +1,10 @@
 /* eslint-disable func-names */
 
-import { randomInt } from './utils';
+import { RatingDto } from '../../rating/store/types';
+import { ObjectIterator, randomInt } from './utils';
 
 /* eslint-disable quotes, quote-props, comma-dangle */
-const item = {
+const item: ObjectIterator<RatingDto> = {
   "count": 1,
   "next": null,
   "previous": null,
@@ -15,7 +16,9 @@ const item = {
       "recipe": "tasty-chili",
       "user_id": 0,
       "username": "roy",
-      "author": 2
+      "author": 2,
+      "pub_date": "2022-05-20T13:45:04.322238-05:00",
+      "update_date": "2022-05-20T13:45:04.322238-05:00"
     }
   ]
 };
@@ -24,7 +27,7 @@ const item = {
 const config = {
   pattern: '(.*)/rating/rating/(.*)',
   fixtures: function (_match: Array<string>, data: Record<string, string | number | boolean>) {
-    // console.log(`fixtures running for recipe. match=${JSON.stringify(match)}. data=${JSON.stringify(data)}. headers=${JSON.stringify(headers)}`);
+    // console.log(`fixtures running for ratings. match=${JSON.stringify(_match)}. data=${JSON.stringify(data)}`);
 
     return data ?? item;
   },

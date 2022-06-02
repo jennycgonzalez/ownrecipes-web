@@ -1,3 +1,10 @@
+export type ObjectIterator<T> = {
+  count: number;
+  next:  null;
+  previous: null;
+  results: Array<T>;
+}
+
 export function toQueryParams(match: string): URLSearchParams {
   const queryString = match.length > 1 && match.startsWith('?') ? match.substring(1) : match;
   return new URLSearchParams(queryString);

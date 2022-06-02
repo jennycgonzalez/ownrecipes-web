@@ -1,8 +1,10 @@
+import { useContext } from 'react';
 import { defineMessages, useIntl } from 'react-intl';
 
 import '../css/demo.css';
 
 import Alert from '../../common/components/Alert';
+import DynamicHeightContext from '../../common/context/DynamicHeightContext';
 
 const Demo = () => {
   const { formatMessage } = useIntl();
@@ -10,19 +12,19 @@ const Demo = () => {
     demoAlertTitle: {
       id: 'demo.alert.title',
       description: 'DEMO NOTICE',
-      defaultMessage: 'DEMO NOTICE',
-    },
-    demoAlertMessage: {
-      id: 'demo.alert.message',
-      description: 'Info text that the app is deployed as demo site.',
-      defaultMessage: 'Everything is Read-Only! This is a demo version of OwnRecipes and has no API connected to it.',
+      defaultMessage: 'DEMO NOTICE: Everything is Read-Only!',
     },
   });
 
+  const dynamicHeightContext = useContext(DynamicHeightContext);
+
   return (
-    <div className='list-error demo-no-margin'>
+    <div
+        className = 'list-error'
+        style = {{ marginTop: `${(dynamicHeightContext?.toolbarHeight ?? 0) + 5}px`, marginBottom: `-${dynamicHeightContext?.toolbarHeight ?? 0}px` }}>
       <Alert severity='info' className='demo-alert demo-no-margin' title={formatMessage(messages.demoAlertTitle)}>
-        {formatMessage(messages.demoAlertMessage)}
+        {/* eslint-disable-next-line react/jsx-curly-brace-presence */}
+        {''}
       </Alert>
     </div>
   );

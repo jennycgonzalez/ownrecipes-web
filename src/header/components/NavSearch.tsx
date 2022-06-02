@@ -6,7 +6,7 @@ import classNames from 'classnames';
 
 import Icon from '../../common/components/Icon';
 import Input from '../../common/components/Input';
-import { getResourcePath, isDemoMode } from '../../common/utility';
+import { getResourcePath } from '../../common/utility';
 import NavLink from './NavLink';
 
 export interface INavSearchProps {
@@ -107,8 +107,6 @@ const NavSearch: React.FC<INavSearchProps> = ({ onExpandSearch }: INavSearchProp
           aria-label = {formatMessage(messages.search_placeholder)}
           inputAdornmentEnd = {searchButton}
           onChange = {handleChange}
-          readOnly = {isDemoMode()}
-          tooltip = {isDemoMode() ? 'Not available in this demo' : undefined}
           ref = {searchRef}
       />
     </Form>

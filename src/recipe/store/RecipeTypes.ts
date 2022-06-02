@@ -145,19 +145,16 @@ export const toCuisineDto = (obj: Cuisine): CuisineDto => ({
 export type TagDto = {
   id:    number;
   title: string;
-  slug:  string;
 }
 
 export type Tag = {
   id:    number;
   title: string;
-  slug:  string;
 }
 
 export const toTag = (dto: TagDto): Tag => ({
   id:    dto.id,
   title: dto.title,
-  slug:  dto.slug,
 });
 
 export type RecipeListDto = {
@@ -218,8 +215,6 @@ export type RecipeDto = {
 
   public: boolean;
   update_date: string;
-
-  customServings: number;
 } & RecipeListDto;
 
 export type Recipe = {
