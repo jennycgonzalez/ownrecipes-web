@@ -50,9 +50,9 @@ type INumberInputProps = {
 } & IBaseComponentProps & IInputProps;
 
 interface IInputState {
-  initValue: string | number | undefined;
-  saveValue: string | number | undefined;
-  value:     string | number | undefined;
+  initValue: string | number;
+  saveValue: string | number;
+  value:     string | number;
 
   isChanged: boolean;
 }
@@ -69,20 +69,20 @@ export default class Input extends BaseComponent<IAnyInputProps, IInputState> {
     super(props);
 
     this.state = {
-      initValue: props.value,
-      saveValue: props.value,
-      value:     props.value,
+      initValue: props.value ?? '',
+      saveValue: props.value ?? '',
+      value:     props.value ?? '',
 
       isChanged: false,
     };
   }
 
-  static getDerivedStateFromProps(nextProps: IAnyInputProps, currentState: IInputState) { // eslint-disable-line react/sort-comp
-    if (nextProps.value !== currentState.initValue) {
+  static getDerivedStateFromProps(nextProps: IAnyInputProps, currentState: IInputState): Partial<IInputState> | null { // eslint-disable-line react/sort-comp
+    if ((nextProps.value ?? '') !== currentState.initValue) {
       return {
-        saveValue: (currentState.saveValue == null || currentState.saveValue === '') && !currentState.isChanged ? nextProps.value : currentState.saveValue,
-        initValue: nextProps.value,
-        value:     nextProps.value,
+        saveValue: (currentState.saveValue == null || currentState.saveValue === '') && !currentState.isChanged ? (nextProps.value ?? '') : currentState.saveValue,
+        initValue: nextProps.value ?? '',
+        value:     nextProps.value ?? '',
       };
     }
     return null;
@@ -152,7 +152,7 @@ export default class Input extends BaseComponent<IAnyInputProps, IInputState> {
   handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.defaultPrevented || event.ctrlKey || event.shiftKey) return;
 
-    const value = this.state.value;
+    const value = this.formatValue((event.target as HTMLInputElement).value, true);
     const type  = this.props.type ?? 'text';
     const rows  = (this.props as ITextInputProps).rows ?? 1;
     const isTextArea = type === 'text' && rows > 1;
