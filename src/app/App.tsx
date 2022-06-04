@@ -1,5 +1,5 @@
 import Header from '../header/containers/Header';
-import Demo from './components/Demo';
+import DemoAlert from '../demo/components/DemoAlert';
 import Footer from './components/Footer';
 
 import ErrorBoundary from '../common/components/ErrorBoundary';
@@ -20,7 +20,7 @@ const App = () => {
       <AutoLogin />
       <div id='content'>
         <Header />
-        {process.env.REACT_APP_DEMO === 'demo' && <Demo />}
+        {process.env.REACT_APP_DEMO === 'demo' && <DemoAlert />}
         {process.env.REACT_APP_DEMO !== 'demo' && <ConnectionObserver />}
         {process.env.REACT_APP_DEMO !== 'demo' && <IntlMessagesCreator />}
         <Routes />

@@ -7,7 +7,7 @@ import reducer from '../../app/Store';
 let data;
 if (process.env.REACT_APP_DEMO === 'demo') {
   // eslint-disable-next-line global-require
-  data = require('../demo/data.json');
+  data = require('../../demo/store/data.json');
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
