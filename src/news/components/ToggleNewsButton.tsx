@@ -27,9 +27,13 @@ const ToggleNewsButton: React.FC<IToggleNewsButtonProps> = ({ showNews, onClick 
     },
   });
 
+  const connection = useSelector((state: CombinedStore) => state.connection);
   const news = useSelector((state: CombinedStore) => state.news);
   const newsList = news.items;
 
+  if (!connection.hasConnection) {
+    return null;
+  }
   if (news.pending === PendingState.COMPLETED && newsList != null && newsList.filter(entry => entry.frontpage !== false).length === 0) {
     return null;
   }
