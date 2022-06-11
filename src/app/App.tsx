@@ -13,7 +13,7 @@ import AutoLogin from './AutoLogin';
 import ConnectionObserver from './components/ConnectionObserver';
 import InternalErrorDialog from './components/InternalErrorDialog';
 import IntlMessagesCreator from './components/IntlMessagesCreator';
-import { getEnv } from '../common/utility';
+import { isDemoMode } from '../common/utility';
 
 const App = () => {
   const main = (
@@ -21,7 +21,7 @@ const App = () => {
       <AutoLogin />
       <div id='content'>
         <Header />
-        {getEnv('REACT_APP_DEMO') === 'demo' && <DemoAlert />}
+        {isDemoMode() && <DemoAlert />}
         <ConnectionObserver />
         <IntlMessagesCreator />
         <Routes />
