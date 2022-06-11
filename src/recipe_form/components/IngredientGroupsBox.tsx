@@ -58,6 +58,7 @@ function normalizeLine(line: string): string {
 }
 
 function igArrayify(parser: Record<string, string>, value: string): Array<IngredientGroup> {
+  if (!value) return [];
   const dict = [{ title: '', ingredients: [] }];
   let igTitle = '';
   let ings: Array<IngredientInput> | undefined = dict.find(t => t.title === '')?.ingredients; // Should always exist, as it is the init group.

@@ -3,7 +3,7 @@ import { IngredientGroup, Recipe } from '../../recipe/store/RecipeTypes';
 import formatQuantity from '../../recipe/utilts/formatQuantity';
 
 const ingRequiredValidator = (name: string, val: Array<IngredientGroup>, obj?: Recipe): ValidationErrorType | undefined => {
-  if (obj != null && obj.subrecipes != null && obj.subrecipes.length > 0) return undefined;
+  if (obj == null || (obj.subrecipes != null && obj.subrecipes.length > 0)) return undefined;
 
   let tr = '';
   if (val) {
