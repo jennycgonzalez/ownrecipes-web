@@ -126,7 +126,7 @@ const ModalAboutContent: React.FC = () => {
             description='Footer credit for OpenEats'
             defaultMessage='OwnRecipes is a fork of {link} by Ryan Noelk.'
             values={{
-              link: <a href='https://github.com/open-eats/OpenEats'>OpenEats</a>,
+              link: <a href='https://github.com/open-eats/OpenEats' target='_blank' rel='noreferrer'>OpenEats</a>,
             }} />
       </P>
       <P variant='body2'>
@@ -135,8 +135,8 @@ const ModalAboutContent: React.FC = () => {
             description='Footer icons credit'
             defaultMessage='Icons by {link} ({ccLink}).'
             values={{
-              link: <a href='http://www.flaticon.com/authors/nikita-golubev' title='Nikita Golubev'>Nikita Golubev</a>,
-              ccLink: <a href='http://creativecommons.org/licenses/by/3.0/' title='Creative Commons'>CC BY 3.0</a>,
+              link: <a href='http://www.flaticon.com/authors/nikita-golubev' title='Nikita Golubev' target='_blank' rel='noreferrer'>Nikita Golubev</a>,
+              ccLink: <a href='http://creativecommons.org/licenses/by/3.0/' title='Creative Commons' target='_blank' rel='noreferrer'>CC BY 3.0</a>,
             }} />
       </P>
     </>
@@ -179,7 +179,7 @@ const UserCard = ({ userName, userUrl, imageSrc, roles }: IUserCardProps) => {
       <Card>
         <Card.Img variant='top' src={imageSrc} />
         <Card.Body>
-          <Card.Title><a href={userUrl}>{userName}</a></Card.Title>
+          <Card.Title><a href={userUrl} target='_blank' rel='noreferrer'>{userName}</a></Card.Title>
           <Card.Text>{roles.map(role => optionallyFormatMessage(intl, 'footer.role.', role)).join(', ')}</Card.Text>
         </Card.Body>
       </Card>

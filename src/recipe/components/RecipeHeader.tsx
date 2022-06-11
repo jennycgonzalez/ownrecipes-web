@@ -251,7 +251,7 @@ const RecipeHeader: React.FC<IRecipeHeaderProps> = ({ recipe, showEditLink, onEd
             {recipe?.source && (
               <div>
                 {`${formatMessage(messages.source)}: `}
-                {hostname.length > 0 && <a href={recipe.source}>{hostname}</a>}
+                {hostname.length > 0 && <a href={recipe.source} target='_blank' rel='noreferrer'>{hostname}</a>}
                 {hostname.length === 0 && recipe.source}
               </div>
             )}
