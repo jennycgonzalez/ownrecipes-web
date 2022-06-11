@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { defineMessages, useIntl } from 'react-intl';
 import { NavDropdown, Button } from 'react-bootstrap';
 
-import { getResourcePath } from '../../common/utility';
+import { getEnv, getResourcePath } from '../../common/utility';
 import { UserAccount } from '../../account/store/types';
 import { Settings, ThemeMode } from '../../account/store/settings/types';
 import Icon from '../../common/components/Icon';
@@ -76,10 +76,10 @@ export const AccountMenuMenuItem: React.FC<IAccountMenuMenuItemProps> = ({
   const [showLanguageDialog, setShowLanguageDialog] = useState<boolean>(false);
   const [showThemeDialog, setShowThemeDialog] = useState<boolean>(false);
 
-  const handleChangeLanguageClick = () => setShowLanguageDialog(true);
-  const handleLanguageDialogClose = () => setShowLanguageDialog(false);
-  const handleChangeThemeClick    = () => setShowThemeDialog(true);
-  const handleThemeDialogClose    = () => setShowThemeDialog(false);
+  const handleChangeLanguageClick = () => { setShowLanguageDialog(true); };
+  const handleLanguageDialogClose = () => { setShowLanguageDialog(false); };
+  const handleChangeThemeClick    = () => { setShowThemeDialog(true); };
+  const handleThemeDialogClose    = () => { setShowThemeDialog(false); };
 
   const handleChangeLanguage = (lang: LanguageCode) => {
     handleLanguageDialogClose();
@@ -106,7 +106,7 @@ export const AccountMenuMenuItem: React.FC<IAccountMenuMenuItemProps> = ({
         <NavDropdown.Item onClick={handleChangeLanguageClick}>{`${formatMessage(messages.language)} …`}</NavDropdown.Item>
         <NavDropdown.Item onClick={handleChangeThemeClick}>{`${formatMessage(messages.theme)} …`}</NavDropdown.Item>
         <NavDropdown.Divider />
-        {account.role === 'admin' && <NavDropdown.Item href={process.env.REACT_APP_ADMIN_URL ?? '/admin'}>{`➝ ${formatMessage(messages.admin)}`}</NavDropdown.Item>}
+        {account.role === 'admin' && <NavDropdown.Item href={getEnv('REACT_APP_ADMIN_URL', '/admin')}>{`➝ ${formatMessage(messages.admin)}`}</NavDropdown.Item>}
         {account.role === 'admin' && <NavDropdown.Divider />}
         <NavDropdown.Item onClick={onLogoutClick}>{formatMessage(messages.logout)}</NavDropdown.Item>
       </NavDropdown>

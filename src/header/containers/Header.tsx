@@ -1,5 +1,5 @@
 // import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router';
 
 import NavBar from '../components/NavBar';
@@ -7,12 +7,20 @@ import * as AuthActions from '../../account/store/actions';
 // import * as ListActions from '../../list/store/actions';
 import * as RandomRecipeActions from '../actions/RandomRecipeActions';
 import * as SettingsActions from '../../account/store/settings/actions';
+import useDispatch from '../../common/hooks/useDispatch';
 import { CombinedStore } from '../../app/Store';
 // import { ListItemType } from '../components/GroceryListMenuItem';
 import { ThemeMode } from '../../account/store/settings/types';
 import { LanguageCode } from '../../common/language';
+import ErrorBoundary from '../../common/components/ErrorBoundary';
 
-const Header: React.FC = () => {
+const Header: React.FC = () => (
+  <ErrorBoundary verbose printStack={false}>
+    <HeaderContent />
+  </ErrorBoundary>
+);
+
+const HeaderContent: React.FC = () => {
   const dispatch = useDispatch();
   const nav = useNavigate();
   const location = useLocation();

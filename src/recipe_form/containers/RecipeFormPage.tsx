@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router';
 import { defineMessages, useIntl } from 'react-intl';
 
 import * as RecipeFormActions from '../store/actions';
+import useDispatch from '../../common/hooks/useDispatch';
+import { CombinedStore } from '../../app/Store';
 
 import RecipeForm from '../components/RecipeForm';
-import { CombinedStore } from '../../app/Store';
 import { Recipe } from '../../recipe/store/RecipeTypes';
 import PageWrapper from '../../common/components/PageWrapper';
 import EditGuard from '../components/EditGuard';

@@ -3,7 +3,7 @@ import { IntlShape } from 'react-intl';
 import { IMAGE_PLACEHOLDER } from './constants';
 
 export function isDemoMode(): boolean {
-  return process.env.REACT_APP_DEMO === 'demo';
+  return getEnv('REACT_APP_DEMO') === 'demo';
 }
 
 export function getRecipeImage(photoThumbnail: string | undefined, loadingError = false) {
@@ -14,11 +14,23 @@ export function getResourcePath(path: string): string {
   return `${process.env.PUBLIC_URL}${path}`;
 }
 
-export function getEnvAsBoolean(key: string, ifNull = false): boolean {
-  const val = process.env[key];
+export function getEnv(env: string, ifNull?: string): string | undefined {
+  return process.env[env] ?? ifNull;
+}
+
+export function getEnvAsBoolean(env: string, ifNull = false): boolean {
+  const val = getEnv(env);
   if (val == null) return ifNull;
   const valLowerCase = val.toLocaleLowerCase();
   return ['true', 'yes', '1'].includes(valLowerCase);
+}
+
+export function requireEnv(env: string): string {
+  const val = getEnv(env);
+  if (val == null || val.length === 0) {
+    throw new Error(`Invalid setup: The .env-variable "${env}" is missing. Please check your .env-files and rebuild.`);
+  }
+  return val;
 }
 
 export function isNumber(str: string): boolean {

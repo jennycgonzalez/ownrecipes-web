@@ -18,6 +18,7 @@ import CourseSelectContainer from '../containers/CourseSelectContainer';
 import CuisineSelectContainer from '../containers/CuisineSelectContainer';
 import RecipeFormToolbar from '../containers/RecipeFormToolbar';
 import RecipeFormImageRow from './RecipeFormImageRow';
+import useCrash from '../../common/hooks/useCrash';
 
 export interface IRecipeFormProps {
   form:      Recipe | undefined;
@@ -98,14 +99,16 @@ const RecipeForm: React.FC<IRecipeFormProps> = ({
     },
   });
 
+  const crash = useCrash();
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    if (form == null) return;
+    if (form == null) { crash('Invalid state: form may not be undefined.'); return; }
     e.preventDefault();
     save(form);
   };
 
   const handleInvalid = () => {
-    if (form == null) return;
+    if (form == null) { crash('Invalid state: form may not be undefined.'); return; }
     validate(form);
   };
 

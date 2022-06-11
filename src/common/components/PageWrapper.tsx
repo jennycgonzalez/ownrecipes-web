@@ -61,11 +61,11 @@ function toCleanLocationPath(path: string): string {
   }, [id, error]);
 
   return (
-    <ErrorBoundary verbose printStack>
-      <Container className={toCleanLocationPath(location.pathname)} style={{ marginTop: `${dynamicHeightContext?.toolbarHeight ?? 0}px` }}>
+    <Container className={toCleanLocationPath(location.pathname)} style={{ marginTop: `${dynamicHeightContext?.toolbarHeight ?? 0}px` }}>
+      <ErrorBoundary verbose printStack>
         {children}
-      </Container>
-    </ErrorBoundary>
+      </ErrorBoundary>
+    </Container>
   );
 };
 

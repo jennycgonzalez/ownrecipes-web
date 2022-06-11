@@ -1,10 +1,12 @@
 import { useCallback, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import RatingsWrapper from '../components/RatingsWrapper';
 import * as RatingsActions from '../store/actions';
 import { RatingCreate } from '../store/types';
 import { CombinedStore } from '../../app/Store';
+import useDispatch from '../../common/hooks/useDispatch';
+import ErrorBoundary from '../../common/components/ErrorBoundary';
 
 const Ratings: React.FC = () => {
   const dispatch = useDispatch();
@@ -28,15 +30,17 @@ const Ratings: React.FC = () => {
   const ratings = recipeSlug != null && ratingsState.items != null ? ratingsState.items[recipeSlug] : undefined;
 
   return (
-    <RatingsWrapper
-        recipeSlug = {recipeSlug}
-        userId     = {account?.id}
-        userRole   = {account?.role}
-        ratings    = {ratings}
-        pending    = {ratingsState.pending}
+    <ErrorBoundary verbose printStack>
+      <RatingsWrapper
+          recipeSlug = {recipeSlug}
+          userId     = {account?.id}
+          userRole   = {account?.role}
+          ratings    = {ratings}
+          pending    = {ratingsState.pending}
 
-        addRating  = {addRatingCallback}
-        removeRating = {removeRatingCallback} />
+          addRating  = {addRatingCallback}
+          removeRating = {removeRatingCallback} />
+    </ErrorBoundary>
   );
 };
 

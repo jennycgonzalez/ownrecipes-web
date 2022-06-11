@@ -1,3 +1,5 @@
+import { requireEnv } from './utility';
+
 export default class LocalStorageHelper {
   static getItem(key: string, tokenId?: string): string | undefined {
     return localStorage.getItem(LocalStorageHelperPrivate.toItemKey(key, tokenId)) ?? undefined;
@@ -15,7 +17,7 @@ export default class LocalStorageHelper {
   }
 
   static getKeys(tokenId: string | undefined): Array<string> {
-    const appPrefix  = `${process.env.REACT_APP_NAME ?? 'ownrecipes'}--`;
+    const appPrefix  = `${requireEnv('REACT_APP_NAME')}--`;
     const tokenPrefix = tokenId ? `${LocalStorageHelperPrivate.hashCode(tokenId)}$$` : '';
     const keyPrefix = `${appPrefix}${tokenPrefix}`;
     return Object.keys(localStorage)
@@ -27,7 +29,7 @@ export default class LocalStorageHelper {
 
 class LocalStorageHelperPrivate {
   static toItemKey(key: string, tokenId?: string) {
-    const appPrefix  = `${process.env.REACT_APP_NAME ?? 'ownrecipes'}--`;
+    const appPrefix  = `${requireEnv('REACT_APP_NAME')}--`;
     const tokenPrefix = tokenId ? `${LocalStorageHelperPrivate.hashCode(tokenId)}$$` : '';
     return `${appPrefix}${tokenPrefix}${key}`;
   }

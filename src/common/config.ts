@@ -1,11 +1,6 @@
-let apiHost = window.location.origin;
-if (process.env.NODE_API_URL) {
-  apiHost = process.env.NODE_API_URL;
-}
-if (process.env.REACT_APP_API_URL) {
-  apiHost = process.env.REACT_APP_API_URL;
-}
+import { getEnv } from './utility';
 
+const apiHost = getEnv('REACT_APP_API_URL', window.location.origin);
 const apiUrl = `${apiHost}/api/v1`;
 
 export const serverURLs = {

@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { defineMessages, IntlShape, useIntl } from 'react-intl';
 import classNames from 'classnames';
 
@@ -7,6 +7,7 @@ import { Carousel } from 'react-bootstrap';
 
 import { CombinedStore } from '../../app/Store';
 import * as NewsActions from '../store/actions';
+import useDispatch from '../../common/hooks/useDispatch';
 
 import P from '../../common/components/P';
 import { PendingState } from '../../common/store/GenericReducerType';
@@ -15,7 +16,6 @@ import { optionallyFormatMessage } from '../../common/utility';
 
 const NewsCarousel: React.FC = () => {
   const intl = useIntl();
-  const dispatch = useDispatch();
   defineMessages({
     news_placeholder_introduction: {
       id: 'news.placeholder.introduction',
@@ -23,6 +23,7 @@ const NewsCarousel: React.FC = () => {
     },
   });
 
+  const dispatch = useDispatch();
   const news = useSelector((state: CombinedStore) => state.news);
   const newsList = news.items;
 

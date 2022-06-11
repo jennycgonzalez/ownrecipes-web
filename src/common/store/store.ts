@@ -3,9 +3,10 @@ import { applyMiddleware, compose, legacy_createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
 import reducer from '../../app/Store';
+import { getEnv } from '../utility';
 
 let data;
-if (process.env.REACT_APP_DEMO === 'demo') {
+if (getEnv('REACT_APP_DEMO') === 'demo') {
   // eslint-disable-next-line global-require
   data = require('../../demo/store/data.json');
 }

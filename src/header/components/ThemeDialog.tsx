@@ -21,6 +21,41 @@ export const ThemeDialog: React.FC<IThemeDialogProps> = ({
       description: 'Change theme mode dialog title',
       defaultMessage: 'Choose theme',
     },
+  });
+
+  const handleCloseClick = () => { onClose(); };
+
+  return (
+    <Modal
+        show = {show}
+        title = {formatMessage(messages.theme_modal_title)}
+        onClose = {handleCloseClick}
+        size = 'sm'
+        noCloseButton>
+      <ThemeDialogContent
+          settings = {settings}
+          onChangeTheme = {onChangeTheme}
+          onClose = {handleCloseClick} />
+    </Modal>
+  );
+};
+
+interface IThemeDialogContentProps {
+  settings: Settings;
+
+  onChangeTheme: (theme: ThemeMode) => void;
+  onClose: () => void;
+}
+
+const ThemeDialogContent: React.FC<IThemeDialogContentProps> = ({
+    settings, onChangeTheme, onClose }: IThemeDialogContentProps) => {
+  const { formatMessage } = useIntl();
+  const messages = defineMessages({
+    theme_modal_title: {
+      id: 'nav.accountmenu.theme_modal_title',
+      description: 'Change theme mode dialog title',
+      defaultMessage: 'Choose theme',
+    },
     theme_mode_dark: {
       id: 'theme.mode.dark',
       description: 'Dark mode',
@@ -33,7 +68,6 @@ export const ThemeDialog: React.FC<IThemeDialogProps> = ({
     },
   });
 
-  const handleCloseClick = () => onClose();
   const handleChangeTheme = (theme: ThemeMode) => {
     onChangeTheme(theme);
     onClose();
@@ -44,15 +78,8 @@ export const ThemeDialog: React.FC<IThemeDialogProps> = ({
   ));
 
   return (
-    <Modal
-        show = {show}
-        title = {formatMessage(messages.theme_modal_title)}
-        onClose = {handleCloseClick}
-        size = 'sm'
-        noCloseButton>
-      <ListGroup>
-        {themeButtons}
-      </ListGroup>
-    </Modal>
+    <ListGroup>
+      {themeButtons}
+    </ListGroup>
   );
 };

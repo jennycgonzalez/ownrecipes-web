@@ -8,6 +8,7 @@ import { CombinedStore } from '../../app/Store';
 import NewsCarousel from './NewsList';
 import FeaturesOverview from './FeaturesOverview';
 import ToggleNewsButton from './ToggleNewsButton';
+import ErrorBoundary from '../../common/components/ErrorBoundary';
 
 const SHOW_NEWS_STORAGE_KEY = 'show_news';
 
@@ -32,7 +33,7 @@ const NewsOverview: React.FC = () => {
   };
 
   return (
-    <>
+    <ErrorBoundary verbose printStack>
       {showNews && (
         <>
           <NewsCarousel />
@@ -40,7 +41,7 @@ const NewsOverview: React.FC = () => {
         </>
       )}
       <ToggleNewsButton showNews={showNews} onClick={handleToggleNewsClick} />
-    </>
+    </ErrorBoundary>
   );
 };
 

@@ -99,12 +99,12 @@ const RecipeHeader: React.FC<IRecipeHeaderProps> = ({ recipe, showEditLink, onEd
     },
   });
 
-  const handleEditClick    = () => onEditRecipe();
+  const handleEditClick    = () => { onEditRecipe(); };
 
   const [showDeleteConfirm, setShowDeleteConfirm] = useState<boolean>(false);
-  const handleDeleteClick  = () => setShowDeleteConfirm(true);
-  const handleDeleteAccept = () => deleteRecipe();
-  const handleDeleteClose  = () => setShowDeleteConfirm(false);
+  const handleDeleteClick  = () => { setShowDeleteConfirm(true); };
+  const handleDeleteAccept = () => { deleteRecipe(); };
+  const handleDeleteClose  = () => { setShowDeleteConfirm(false); };
 
   const editLink = showEditLink ? (
     <Tooltip id='edit tooltip' tooltip={formatMessage(messages.edit_tooltip)}>

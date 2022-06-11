@@ -51,9 +51,9 @@ const RatingComments: React.FC<IRatingCommentsProps> = ({ recipeSlug, ratings, u
   });
 
   const [showDeleteConfirm, setShowDeleteConfirm] = useState<number | undefined>();
-  const handleDeleteClick  = (rating: number) => setShowDeleteConfirm(rating);
-  const handleDeleteAccept = () => removeRating(recipeSlug, showDeleteConfirm ?? 0);
-  const handleDeleteClose  = () => setShowDeleteConfirm(undefined);
+  const handleDeleteClick  = (rating: number) => { setShowDeleteConfirm(rating); };
+  const handleDeleteAccept = () => { removeRating(recipeSlug, showDeleteConfirm ?? 0); };
+  const handleDeleteClose  = () => { setShowDeleteConfirm(undefined); };
 
   const ratingsList = ratings?.map((rating, index) => (
     <React.Fragment key={rating.id}>

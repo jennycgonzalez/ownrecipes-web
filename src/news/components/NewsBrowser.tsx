@@ -7,6 +7,7 @@ import '../css/news.css';
 import { CombinedStore } from '../../app/Store';
 
 import MiniBrowse from '../../browse/containers/MiniBrowse';
+import ErrorBoundary from '../../common/components/ErrorBoundary';
 
 const NewsBrowser: React.FC = () => {
   const intl = useIntl();
@@ -24,9 +25,11 @@ const NewsBrowser: React.FC = () => {
   if (!miniBrowseState.hasConnection || miniBrowseState.error != null) return null;
 
   return (
-    <div>
-      <MiniBrowse heading={formatMessage(messages.recommendedRecipes)} count={4} />
-    </div>
+    <ErrorBoundary verbose printStack>
+      <div>
+        <MiniBrowse heading={formatMessage(messages.recommendedRecipes)} count={4} />
+      </div>
+    </ErrorBoundary>
   );
 };
 

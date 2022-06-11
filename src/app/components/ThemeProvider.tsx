@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import '../css/theme.css';
 
 import { ThemeMode } from '../../account/store/settings/types';
 import * as SettingsActions from '../../account/store/settings/actions';
+import useDispatch from '../../common/hooks/useDispatch';
 import { CombinedStore } from '../Store';
 
 const ThemeProvider: React.FC = () => {

@@ -6,7 +6,8 @@ import '../css/footer.css';
 
 import P from '../../common/components/P';
 import Modal from '../../common/components/Modal';
-import { isDemoMode, optionallyFormatMessage } from '../../common/utility';
+import { getEnv, isDemoMode, optionallyFormatMessage, requireEnv } from '../../common/utility';
+import ErrorBoundary from '../../common/components/ErrorBoundary';
 
 interface IModalAboutProps {
   show: boolean;
@@ -20,6 +21,23 @@ const ModalAbout = ({ show, onClose }: IModalAboutProps) => {
       description: 'Title of the about dialog.',
       defaultMessage: 'About OwnRecipes',
     },
+  });
+
+  return (
+    <Modal
+        show = {show}
+        title = {formatMessage(messages.about_title)}
+        onClose = {onClose}
+        noCloseButton
+        className = 'modal-about'>
+      <ModalAboutContent />
+    </Modal>
+  );
+};
+
+const ModalAboutContent: React.FC = () => {
+  const { formatMessage } = useIntl();
+  const messages = defineMessages({
     about_developers: {
       id: 'footer.about.developers',
       description: 'Developers heading.',
@@ -43,12 +61,7 @@ const ModalAbout = ({ show, onClose }: IModalAboutProps) => {
   });
 
   return (
-    <Modal
-        show = {show}
-        title = {formatMessage(messages.about_title)}
-        onClose = {onClose}
-        noCloseButton
-        className='modal-about'>
+    <>
       <P variant='body1'>
         <FormattedMessage
             id='footer.credit'
@@ -87,7 +100,7 @@ const ModalAbout = ({ show, onClose }: IModalAboutProps) => {
             description='Version of OwnRecipes'
             defaultMessage='OwnRecipes: v{version}'
             values={{
-              version: process.env.REACT_APP_VERSION,
+              version: requireEnv('REACT_APP_VERSION'),
             }} />
       </P>
       <P variant='body2'>
@@ -96,7 +109,7 @@ const ModalAbout = ({ show, onClose }: IModalAboutProps) => {
             description='Api url'
             defaultMessage='Api url: {url}'
             values={{
-              url: process.env.REACT_APP_API_URL,
+              url: getEnv('REACT_APP_API_URL', window.location.origin),
             }} />
       </P>
       {isDemoMode() && (
@@ -126,7 +139,7 @@ const ModalAbout = ({ show, onClose }: IModalAboutProps) => {
               ccLink: <a href='http://creativecommons.org/licenses/by/3.0/' title='Creative Commons'>CC BY 3.0</a>,
             }} />
       </P>
-    </Modal>
+    </>
   );
 };
 
@@ -174,7 +187,17 @@ const UserCard = ({ userName, userUrl, imageSrc, roles }: IUserCardProps) => {
   );
 };
 
-const Footer = () => {
+const Footer: React.FC = () => (
+  <footer className='footer print-hidden'>
+    <Container>
+      <ErrorBoundary verbose printStack={false}>
+        <FooterContent />
+      </ErrorBoundary>
+    </Container>
+  </footer>
+);
+
+const FooterContent: React.FC = () => {
   const { formatMessage } = useIntl();
   const messages = defineMessages({
     about_link: {
@@ -194,25 +217,21 @@ const Footer = () => {
     },
   });
 
-  const legalUrl = process.env.REACT_APP_LEGAL_URL;
-  const privacyUrl = process.env.REACT_APP_PRIVACY_URL;
+  const legalUrl = getEnv('REACT_APP_LEGAL_URL');
+  const privacyUrl = getEnv('REACT_APP_PRIVACY_URL');
 
   const [openAbout, setOpenAbout] = useState<boolean>(false);
 
-  const handleOpenAboutClick  = () => setOpenAbout(true);
-  const handleCloseAbout = () => setOpenAbout(false);
+  const handleOpenAboutClick  = () => { setOpenAbout(true); };
+  const handleCloseAbout = () => { setOpenAbout(false); };
 
   return (
     <>
-      <footer className='footer print-hidden'>
-        <Container>
-          <div className='footer-container-inner'>
-            <Button variant='link' onClick={handleOpenAboutClick}>{formatMessage(messages.about_link)}</Button>
-            {legalUrl && <NavLink className='btn btn-link' href={legalUrl}>{formatMessage(messages.legal_link)}</NavLink>}
-            {privacyUrl && <NavLink className='btn btn-link' href={privacyUrl}>{formatMessage(messages.privacy_link)}</NavLink>}
-          </div>
-        </Container>
-      </footer>
+      <div className='footer-container-inner'>
+        <Button variant='link' onClick={handleOpenAboutClick}>{formatMessage(messages.about_link)}</Button>
+        {legalUrl && <NavLink className='btn btn-link' href={legalUrl}>{formatMessage(messages.legal_link)}</NavLink>}
+        {privacyUrl && <NavLink className='btn btn-link' href={privacyUrl}>{formatMessage(messages.privacy_link)}</NavLink>}
+      </div>
 
       <ModalAbout show={openAbout} onClose={handleCloseAbout} />
     </>

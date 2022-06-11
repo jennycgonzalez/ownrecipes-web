@@ -14,6 +14,7 @@ import { Ingredient, IngredientGroup, IngredientInput, SubRecipe } from '../../r
 import SubRecipes from '../../recipe/components/SubRecipes';
 import { AutocompleteListItem } from '../store/types';
 import MeasurementContext from '../../common/context/MeasurementContext';
+import useCrash from '../../common/hooks/useCrash';
 
 export interface IIngredientGroupsBoxProps {
   name:     string;
@@ -181,6 +182,7 @@ const IngredientGroupsBox: React.FC<IIngredientGroupsBoxProps> = ({
   });
 
   const location = useLocation();
+  const crash = useCrash();
   const [activeTab, setActiveTab] = useState<string>('0');
 
   useEffect(() => {
@@ -205,7 +207,13 @@ const IngredientGroupsBox: React.FC<IIngredientGroupsBoxProps> = ({
   }, [groups, measurementsContext?.formatter]);
 
   const handleIgChange = (key: string, value: string) => {
-    const list = igArrayify(measurementsContext?.parser ?? {}, value);
+    let list: Array<IngredientGroup>;
+    try {
+      list = igArrayify(measurementsContext?.parser ?? {}, value);
+    } catch (err) {
+      crash(err);
+      return;
+    }
 
     setIgData(list);
     const text = igStringify(intl, measurementsContext?.formatter ?? {}, list);

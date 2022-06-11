@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import queryString from 'query-string';
 import { useIntl } from 'react-intl';
 import { useLocation, useNavigate } from 'react-router';
@@ -10,6 +10,7 @@ import Search from '../components/Search';
 import * as RecipeActions from '../../recipe/store/RecipeActions';
 import * as SearchActions from '../store/SearchActions';
 import * as FilterActions from '../store/FilterActions';
+import useDispatch from '../../common/hooks/useDispatch';
 import DefaultFilters from '../constants/DefaultFilters';
 import PageWrapper from '../../common/components/PageWrapper';
 import { CombinedStore } from '../../app/Store';

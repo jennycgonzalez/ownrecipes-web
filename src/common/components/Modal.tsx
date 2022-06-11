@@ -5,6 +5,7 @@ import '../css/modal.css';
 
 import Icon from './Icon';
 import classNames from 'classnames';
+import ErrorBoundary from './ErrorBoundary';
 
 export interface IModalHeaderCloseButtonProps {
   onClose: (event: React.MouseEvent) => void;
@@ -89,7 +90,9 @@ const Modal: React.FC<IModalProps> = ({
       </BootstrapModal.Header>
 
       <BootstrapModal.Body>
-        {children}
+        <ErrorBoundary verbose printStack>
+          {children}
+        </ErrorBoundary>
       </BootstrapModal.Body>
 
       {hasButton && (

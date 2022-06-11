@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { SETTING_LANGUAGE_STORAGE_KEY } from '../../account/store/settings/types';
 import { getMessagesFromLang, LanguageCode, toLanguageCode } from '../../common/language';
 import LocalStorageHelper from '../../common/LocalStorageHelper';
+import { getEnv } from '../../common/utility';
 
 import { CombinedStore } from '../Store';
 
@@ -12,7 +13,7 @@ export interface IIntlProviderProps {
 }
 
 const IntlProvider: React.FC<IIntlProviderProps> = ({ children }: IIntlProviderProps) => {
-  const DEFAULT_LANGUAGE = toLanguageCode(process.env.REACT_APP_LOCALE, LanguageCode.EN);
+  const DEFAULT_LANGUAGE = toLanguageCode(getEnv('REACT_APP_LOCALE'), LanguageCode.EN);
 
   const settings = useSelector((state: CombinedStore) => state.settings);
 

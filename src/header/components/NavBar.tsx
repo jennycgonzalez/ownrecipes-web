@@ -20,6 +20,7 @@ import { Settings, ThemeMode } from '../../account/store/settings/types';
 import LoginSettings from './LoginSettings';
 import NavSearch from './NavSearch';
 import NavLink from './NavLink';
+import useCrash from '../../common/hooks/useCrash';
 
 export interface INavBarProps {
   account:  UserAccount | undefined;
@@ -56,18 +57,19 @@ const NavBar: React.FC<INavBarProps> = ({
     },
   });
 
+  const crash = useCrash();
   const navbarRef = useRef<HTMLDivElement>(null);
   const dynamicHeightContext = useContext(DynamicHeightContext);
 
   const [width] = useWindowSize();
   useLayoutEffect(() => {
-    if (dynamicHeightContext == null) return;
+    if (dynamicHeightContext == null) { crash('Invalid state: DynamicHeightContext may not be undefined.'); return; }
     dynamicHeightContext.setToolbarHeight(navbarRef.current?.clientHeight ?? 0);
   }, [dynamicHeightContext, width]);
 
   // componentWillUnmount
   useEffect(() => () => {
-    if (dynamicHeightContext == null) return;
+    if (dynamicHeightContext == null) { crash('Invalid state: DynamicHeightContext may not be undefined.'); return; }
     dynamicHeightContext.setToolbarHeight(0);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -79,7 +81,7 @@ const NavBar: React.FC<INavBarProps> = ({
     setIsScreenMdUp(window.matchMedia('(min-width: 768px)').matches);
   }, []);
   const [isSearchExpanded, setIsSearchExpanded] = useState<boolean>(false);
-  const handleExpandSearch = (expanded: boolean) => setIsSearchExpanded(expanded);
+  const handleExpandSearch = (expanded: boolean) => { setIsSearchExpanded(expanded); };
 
   const isAuthenticated = account != null && account.id !== 0;
   const isPrivilegedUser = account != null && ['user', 'staff', 'admin'].includes(account.role);

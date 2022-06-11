@@ -31,22 +31,6 @@ const InternalErrorDialog = () => {
       id: 'internal_error.dialog_title',
       defaultMessage: 'Error',
     },
-    heading_general: {
-      id: 'internal_error.heading.general',
-      defaultMessage: 'General',
-    },
-    heading_information: {
-      id: 'internal_error.heading.information',
-      defaultMessage: 'Extended information',
-    },
-    request: {
-      id: 'internal_error.request',
-      defaultMessage: 'Request',
-    },
-    response: {
-      id: 'internal_error.response',
-      defaultMessage: 'Response',
-    },
   });
 
   const internalError = useSelector((state: CombinedStore) => state.internalError.item);
@@ -65,8 +49,6 @@ const InternalErrorDialog = () => {
     setOpen(false);
   };
 
-  const responseText = getResponseText(internalError);
-
   return (
     <Modal
         show = {open}
@@ -75,48 +57,81 @@ const InternalErrorDialog = () => {
         noCloseButton
         size  = 'xl'
         className = 'internalError'>
-      <Accordion defaultActiveKey='0' flush alwaysOpen>
-        <Accordion.Item eventKey='0'>
-          <Accordion.Header>{formatMessage(messages.heading_general)}</Accordion.Header>
-          <Accordion.Body>
+      <InternalErrorDialogContent internalError={internalError} />
+    </Modal>
+  );
+};
+
+interface IInternalErrorDialogContentProps {
+  internalError: InternalError | undefined;
+}
+
+const InternalErrorDialogContent: React.FC<IInternalErrorDialogContentProps> = ({
+    internalError }: IInternalErrorDialogContentProps) => {
+  const { formatMessage } = useIntl();
+  const messages = defineMessages({
+    heading_general: {
+      id: 'internal_error.heading.general',
+      defaultMessage: 'General',
+    },
+    heading_information: {
+      id: 'internal_error.heading.information',
+      defaultMessage: 'Extended information',
+    },
+    request: {
+      id: 'internal_error.request',
+      defaultMessage: 'Request',
+    },
+    response: {
+      id: 'internal_error.response',
+      defaultMessage: 'Response',
+    },
+  });
+
+  const responseText = getResponseText(internalError);
+
+  return (
+    <Accordion defaultActiveKey='0' flush alwaysOpen>
+      <Accordion.Item eventKey='0'>
+        <Accordion.Header>{formatMessage(messages.heading_general)}</Accordion.Header>
+        <Accordion.Body>
+          <>
+            <P className='caption name'>{`${internalError?.name}:`}</P>
+            <P className='text message'>{internalError?.message}</P>
+          </>
+          {internalError?.response == null && internalError?.url != null && (
             <>
-              <P className='caption name'>{`${internalError?.name}:`}</P>
-              <P className='text message'>{internalError?.message}</P>
+              <P className='caption request'>{`${formatMessage(messages.request)}:`}</P>
+              <P className='text request'>{`${internalError?.method} ${internalError?.url}`}</P>
             </>
-            {internalError?.response == null && internalError?.url != null && (
+          )}
+        </Accordion.Body>
+      </Accordion.Item>
+
+      {internalError?.response != null && (
+        <Accordion.Item eventKey='1'>
+          <Accordion.Header>{formatMessage(messages.heading_information)}</Accordion.Header>
+          <Accordion.Body>
+            {internalError?.url != null && (
               <>
                 <P className='caption request'>{`${formatMessage(messages.request)}:`}</P>
                 <P className='text request'>{`${internalError?.method} ${internalError?.url}`}</P>
               </>
             )}
+            {responseText != null && (
+              <>
+                <P className='caption response'>{`${formatMessage(messages.response)}:`}</P>
+                <Input
+                    name  = 'response-text'
+                    readOnly
+                    rows  = {responseText == null || responseText.length < 300 ? 4 : 10}
+                    value = {responseText} />
+              </>
+            )}
           </Accordion.Body>
         </Accordion.Item>
-
-        {internalError?.response != null && (
-          <Accordion.Item eventKey='1'>
-            <Accordion.Header>{formatMessage(messages.heading_information)}</Accordion.Header>
-            <Accordion.Body>
-              {internalError?.url != null && (
-                <>
-                  <P className='caption request'>{`${formatMessage(messages.request)}:`}</P>
-                  <P className='text request'>{`${internalError?.method} ${internalError?.url}`}</P>
-                </>
-              )}
-              {responseText != null && (
-                <>
-                  <P className='caption response'>{`${formatMessage(messages.response)}:`}</P>
-                  <Input
-                      name  = 'response-text'
-                      readOnly
-                      rows  = {responseText == null || responseText.length < 300 ? 4 : 10}
-                      value = {responseText} />
-                </>
-              )}
-            </Accordion.Body>
-          </Accordion.Item>
-        )}
-      </Accordion>
-    </Modal>
+      )}
+    </Accordion>
   );
 };
 

@@ -21,10 +21,10 @@ const LoginSettings: React.FC<ILoginSettingsProps> = ({ settings, onChangeLangua
   const [showLanguageDialog, setShowLanguageDialog] = useState<boolean>(false);
   const [showThemeDialog, setShowThemeDialog] = useState<boolean>(false);
 
-  const handleChangeLanguageClick = () => setShowLanguageDialog(true);
-  const handleLanguageDialogClose = () => setShowLanguageDialog(false);
-  const handleChangeThemeClick    = () => setShowThemeDialog(true);
-  const handleThemeDialogClose    = () => setShowThemeDialog(false);
+  const handleChangeLanguageClick = () => { setShowLanguageDialog(true); };
+  const handleLanguageDialogClose = () => { setShowLanguageDialog(false); };
+  const handleChangeThemeClick    = () => { setShowThemeDialog(true); };
+  const handleThemeDialogClose    = () => { setShowThemeDialog(false); };
 
   const handleChangeLanguage = (lang: LanguageCode) => {
     handleLanguageDialogClose();

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
 import * as _ from 'lodash';
 
@@ -8,6 +8,7 @@ import '../css/recipe.css';
 import Loading from '../../common/components/Loading';
 // import MenuItemModal from '../../menu/components/modals/MenuItemModal';
 import RecipeScheme from '../components/RecipeScheme';
+import useDispatch from '../../common/hooks/useDispatch';
 import * as RecipeActions from '../store/RecipeActions';
 import * as RecipeFormActions from '../../recipe_form/store/actions';
 // import * as MenuItemActions from '../../menu/actions/MenuItemActions';
@@ -16,11 +17,13 @@ import * as RecipeFormActions from '../../recipe_form/store/actions';
 import { CombinedStore } from '../../app/Store';
 import { Recipe } from '../store/RecipeTypes';
 import { getResourcePath } from '../../common/utility';
+import useCrash from '../../common/hooks/useCrash';
 
 const RecipeContainer: React.FC = () => {
   const dispatch = useDispatch();
   const nav = useNavigate();
   const params = useParams();
+  const crash = useCrash();
 
   const paramsRecipe = params.recipe;
   // Load Recipe
@@ -54,7 +57,7 @@ const RecipeContainer: React.FC = () => {
   const showEditLink = (account != null && account.id === recipe?.author);
 
   const handlePreloadRecipe = () => {
-    if (recipe == null) throw new Error('Invalid state: recipe may not be null');
+    if (recipe == null) { crash('Invalid state: recipe may not be null'); return; }
     dispatch(RecipeFormActions.preload(recipe));
   };
 

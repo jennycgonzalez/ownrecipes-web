@@ -1,11 +1,12 @@
 import React, { useCallback, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
 
 import * as RecipeFormActions from '../store/actions';
 import * as RecipeGroupActions from '../../recipe_groups/store/actions';
-
+import useDispatch from '../../common/hooks/useDispatch';
 import { CombinedStore } from '../../app/Store';
+
 import useSingle from '../../common/hooks/useSingle';
 import { CreatableSelect, ICreatableSelectValues } from '../../common/components/Select';
 import { optionallyFormatMessage, sortByLabel } from '../../common/utility';

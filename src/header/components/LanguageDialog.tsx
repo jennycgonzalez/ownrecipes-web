@@ -23,7 +23,31 @@ export const LanguageDialog: React.FC<ILanguageDialogProps> = ({
     },
   });
 
-  const handleCloseClick = () => onClose();
+  const handleCloseClick = () => { onClose(); };
+
+  return (
+    <Modal
+        show = {show}
+        title = {formatMessage(messages.language_modal_title)}
+        onClose = {handleCloseClick}
+        size = 'sm'
+        noCloseButton>
+      <LanguageDialogContent
+          settings = {settings}
+          onChangeLanguage = {onChangeLanguage}
+          onClose = {handleCloseClick} />
+    </Modal>
+  );
+};
+
+interface ILanguageDialogContentProps {
+  settings: Settings;
+  onChangeLanguage: (language: LanguageCode) => void;
+  onClose: () => void;
+}
+
+const LanguageDialogContent: React.FC<ILanguageDialogContentProps> = ({
+    settings, onChangeLanguage, onClose }: ILanguageDialogContentProps) => {
   const handleChangeLanguage = (lang: LanguageCode) => {
     onChangeLanguage(lang);
     onClose();
@@ -34,15 +58,8 @@ export const LanguageDialog: React.FC<ILanguageDialogProps> = ({
   ));
 
   return (
-    <Modal
-        show = {show}
-        title = {formatMessage(messages.language_modal_title)}
-        onClose = {handleCloseClick}
-        size = 'sm'
-        noCloseButton>
-      <ListGroup>
-        {languageButtons}
-      </ListGroup>
-    </Modal>
+    <ListGroup>
+      {languageButtons}
+    </ListGroup>
   );
 };
