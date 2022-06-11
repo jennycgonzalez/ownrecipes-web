@@ -13,6 +13,11 @@ import { logUserOut } from '../account/store/actions';
 import { toValidationErrors, ValidationError } from './store/Validation';
 import { isDemoMode } from './utility';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import mock from 'superagent-mock';
+import mockConfig from '../demo/store/config';
+
 export type ResponseError = superRequest.ResponseError;
 export const isResponseError = (obj: unknown): obj is ResponseError => (
   obj != null
@@ -68,26 +73,26 @@ export const request = (): SuperAgentStatic => {
   const customRequest = defaults();
 
   if (!isDemoMode()) {
-  // Add the user token if the user is logged in
-  const accountState = store.getState().account;
-  const account = accountState.item;
-  if (account && account.id) {
-    const decodedToken: JwtPayload | undefined = account.token ? jwtDecode<JwtPayload>(account.token) : undefined;
+    // Add the user token if the user is logged in
+    const accountState = store.getState().account;
+    const account = accountState.item;
+    if (account && account.id) {
+      const decodedToken: JwtPayload | undefined = account.token ? jwtDecode<JwtPayload>(account.token) : undefined;
 
-    // Check if the user's token is outdated.
-    // The token expired after 14 days.
-    // See: https://github.com/open-eats/openeats-api/blob/master/base/settings.py#L174
-    if (decodedToken == null || decodedToken.exp == null) {
-      // If the token is undefined.
-      // Log the user out and direct them to the login page.
-      store.dispatch({ store: ACCOUNT_STORE, type: AccountActionTypes.LOGOUT });
-    } else if (moment(new Date()).add(2, 'days') > moment.unix(decodedToken.exp)) {
-      // If it is then call for a refreshed token.
-      // If the token is to old, the request will fail and
-      // the user will be logged-out and redirect to the login screen.
-      refreshToken.instance(account.token);
-    }
-    customRequest.set('Authorization', `JWT ${account.token}`);
+      // Check if the user's token is outdated.
+      // The token expired after 14 days.
+      // See: https://github.com/open-eats/openeats-api/blob/master/base/settings.py#L174
+      if (decodedToken == null || decodedToken.exp == null) {
+        // If the token is undefined.
+        // Log the user out and direct them to the login page.
+        store.dispatch({ store: ACCOUNT_STORE, type: AccountActionTypes.LOGOUT });
+      } else if (moment(new Date()).add(2, 'days') > moment.unix(decodedToken.exp)) {
+        // If it is then call for a refreshed token.
+        // If the token is to old, the request will fail and
+        // the user will be logged-out and redirect to the login screen.
+        refreshToken.instance(account.token);
+      }
+      customRequest.set('Authorization', `JWT ${account.token}`);
     }
   }
 
@@ -97,6 +102,10 @@ export const request = (): SuperAgentStatic => {
     response: 30000, // 30 s
     deadline: 60000, // 60 s
   });
+
+  if (isDemoMode()) {
+    mock(customRequest.request, mockConfig);
+  }
 
   return customRequest;
 };
