@@ -1,14 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation } from 'react-router';
 import { Col, Row } from 'react-bootstrap';
 import { defineMessages, useIntl } from 'react-intl';
 
 import { Recipe } from '../../recipe/store/RecipeTypes';
 import FileSelect from '../../common/components/FileSelect';
-import { getRecipeImage } from '../../common/utility';
+import { getRecipeImage, getRecipeImagePlaceholder } from '../../common/utility';
 import WidthHeightRatio from '../../common/components/WidthHeightRatio';
 import Image from '../../common/components/Image';
-import { IMAGE_PLACEHOLDER } from '../../common/constants';
 
 export interface IRecipeFormImageRowProps {
   form:     Recipe | undefined;
@@ -31,6 +30,7 @@ const RecipeFormImageRow: React.FC<IRecipeFormImageRowProps> = ({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const photoInputRef = useRef<any>(null);
   const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
+  const IMAGE_PLACEHOLDER = useMemo(() => getRecipeImagePlaceholder(), []);
 
   useEffect(() => {
     if (photoInputRef.current) {
@@ -46,7 +46,7 @@ const RecipeFormImageRow: React.FC<IRecipeFormImageRowProps> = ({
 
   const getDisplayImage = () => {
     if (imageUrl != null) {
-      return imageUrl.length > 0 ? imageUrl : IMAGE_PLACEHOLDER;
+      return imageUrl.length > 0 ? imageUrl : getRecipeImagePlaceholder();
     } else {
       return getRecipeImage(form?.photoThumbnail ?? IMAGE_PLACEHOLDER);
     }
