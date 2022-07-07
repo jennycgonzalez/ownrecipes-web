@@ -34,7 +34,7 @@ const RecipePage: React.FC = () => {
   const recipeState  = useSelector((state: CombinedStore) => state.recipe);
 
   const ratings = useMemo(() => <Ratings />, [recipeState.item?.id, recipeState.pending]);
-  const footer  = useMemo(() => <RecipeFooter />, [recipeState.item?.id]);
+  const footer  = useMemo(() => <RecipeFooter recipe={recipeState.item} />, [recipeState.item?.id, recipeState.item?.author]);
 
   return (
     <PageWrapper title={recipeState.item?.title}>

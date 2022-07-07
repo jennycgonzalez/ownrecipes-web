@@ -2,22 +2,42 @@ import { useIntl } from 'react-intl';
 import { useSelector } from 'react-redux';
 
 import { CombinedStore } from '../../app/Store';
+import { Recipe } from '../store/RecipeTypes';
 
 import MiniBrowse from '../../browse/containers/MiniBrowse';
 import ErrorBoundary from '../../common/components/ErrorBoundary';
 
-const RecipeFooter: React.FC = () => {
+export interface IRecipeFooterProps {
+  recipe?: Recipe;
+}
+
+function getFilters(recipe: Recipe): Array<string> | undefined {
+  const res: Array<string> = [];
+  if (recipe.course) {
+    res.push(`course__slug=${recipe.course.title}`);
+  }
+  if (recipe.cuisine) {
+    res.push(`cuisine__slug=${recipe.cuisine.title}`);
+  }
+  return res.length > 0 ? res : undefined;
+}
+
+const RecipeFooter: React.FC<IRecipeFooterProps> = ({ recipe }: IRecipeFooterProps) => {
   const intl = useIntl();
 
   const miniBrowseState = useSelector((state: CombinedStore) => state.browse.miniBrowse);
 
-  if (!miniBrowseState.hasConnection || miniBrowseState.error) return null;
+  if (!miniBrowseState.hasConnection || miniBrowseState.error
+      || !recipe?.author) return null;
 
   return (
     <ErrorBoundary verbose printStack>
       <hr />
       <article className='recipe-footer'>
-        <MiniBrowse heading={intl.messages['nav.home.recommended_recipes_title'] as string} count={4} />
+        <MiniBrowse
+            heading = {intl.messages['nav.home.recommended_recipes_title'] as string}
+            count = {4}
+            filters = {getFilters(recipe)} />
       </article>
     </ErrorBoundary>
   );

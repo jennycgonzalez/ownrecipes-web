@@ -18,9 +18,19 @@ import Tooltip from '../../common/components/Tooltip';
 interface IMiniBrowseProps {
   heading: string;
   count: number;
+  filters?: Array<string>;
 }
 
-const MiniBrowse: React.FC<IMiniBrowseProps> = ({ heading, count }: IMiniBrowseProps) => {
+function buildUrlFilter(count: number, filters: Array<string> | undefined): string {
+  const res: Array<string> = [];
+  res.push(`limit=${String(count)}`);
+  if (filters) {
+    res.push(...filters);
+  }
+  return `?${res.join('&')}`;
+}
+
+const MiniBrowse: React.FC<IMiniBrowseProps> = ({ heading, count, filters }: IMiniBrowseProps) => {
   const { formatMessage }  = useIntl();
   const messages = defineMessages({
     shuffleSuggestionsButton: {
@@ -37,11 +47,11 @@ const MiniBrowse: React.FC<IMiniBrowseProps> = ({ heading, count }: IMiniBrowseP
   const miniBrowseItems = useSelector((state: CombinedStore) => state.browse.miniBrowse.items);
 
   useEffect(() => {
-    dispatch(MiniBrowseActions.loadMiniBrowse(`?limit=${String(count)}`));
+    dispatch(MiniBrowseActions.loadMiniBrowse(buildUrlFilter(count, filters)));
   }, [location]);
 
   const handleShuffleClick = () => {
-    dispatch(MiniBrowseActions.loadMiniBrowse(`?limit=${String(count)}`));
+    dispatch(MiniBrowseActions.loadMiniBrowse(buildUrlFilter(count, filters)));
   };
 
   const handleOpenRecipe = (rec: RecipeList) => {
