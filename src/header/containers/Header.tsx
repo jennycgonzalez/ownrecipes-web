@@ -1,11 +1,10 @@
 // import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router';
+import { useLocation } from 'react-router';
 
 import NavBar from '../components/NavBar';
 import * as AuthActions from '../../account/store/actions';
 // import * as ListActions from '../../list/store/actions';
-import * as RandomRecipeActions from '../actions/RandomRecipeActions';
 import * as SettingsActions from '../../account/store/settings/actions';
 import useDispatch from '../../common/hooks/useDispatch';
 import { CombinedStore } from '../../app/Store';
@@ -22,7 +21,6 @@ const Header: React.FC = () => (
 
 const HeaderContent: React.FC = () => {
   const dispatch = useDispatch();
-  const nav = useNavigate();
   const location = useLocation();
 
   const accountState = useSelector((state: CombinedStore) => state.account);
@@ -47,10 +45,6 @@ const HeaderContent: React.FC = () => {
     dispatch(AuthActions.logUserOut());
   };
 
-  const handleRandomRecipe = () => {
-    dispatch(RandomRecipeActions.randomRecipe(nav));
-  };
-
   return (
     <NavBar
         account  = {accountState.item}
@@ -61,8 +55,7 @@ const HeaderContent: React.FC = () => {
 
         onChangeLanguage={handleChangeLanguage}
         onChangeTheme={handleChangeTheme}
-        onLogoutClick={handleLogoutClick}
-        onRandomRecipeClick={handleRandomRecipe} />
+        onLogoutClick={handleLogoutClick} />
   );
 };
 

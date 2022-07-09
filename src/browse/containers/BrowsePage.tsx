@@ -17,11 +17,14 @@ import { CombinedStore } from '../../app/Store';
 import { RecipeList } from '../../recipe/store/RecipeTypes';
 import { getResourcePath } from '../../common/utility';
 
-function mergeDefaultFilters(query: queryString.ParsedQuery<string | number | boolean>) {
+export function mergeDefaultFilters(
+    query: queryString.ParsedQuery<string | number | boolean>,
+    defaultFilters: Record<string, unknown>
+  ) {
   const filter: Record<string, unknown> = {};
 
-  Object.keys(DefaultFilters).forEach(key => {
-    filter[key] = _.get(DefaultFilters, key);
+  Object.keys(defaultFilters).forEach(key => {
+    filter[key] = _.get(defaultFilters, key);
   });
 
   Object.keys(query).forEach(key => {
@@ -29,6 +32,54 @@ function mergeDefaultFilters(query: queryString.ParsedQuery<string | number | bo
   });
 
   return filter;
+}
+
+export function buildSearchString(route: string, qs: Record<string, string>, value: string): string {
+  const qsBuilder = _.cloneDeep(qs);
+
+  delete qsBuilder.offset;
+  if (value !== '') {
+    qsBuilder.search = value;
+  } else {
+    delete qsBuilder.search;
+  }
+
+  let str = queryString.stringify(qsBuilder);
+  str = getResourcePath(str ? `/${route}?${str}` : `/${route}`);
+  return str;
+}
+
+export function buildSearchUrl(route: string, qs: Record<string, string>, name: string, value: string, multiSelect = false): string {
+  if (!name) return getResourcePath(`/${route}`);
+
+  const qsBuilder = _.cloneDeep(qs);
+
+  delete qsBuilder.offset;
+
+  if (value !== '') {
+    if (qsBuilder[name] && multiSelect) {
+      const query = qsBuilder[name].split(',');
+      if (query.includes(value.toString())) {
+        if (query.length === 1) {
+          delete qsBuilder[name];
+        } else {
+          let str = '';
+          // eslint-disable-next-line
+          query.map(val => { val != value ? str += val + ',' : ''});
+          qsBuilder[name] = str.substring(0, str.length - 1);
+        }
+      } else {
+        qsBuilder[name] = `${qsBuilder[name]},${value}`;
+      }
+    } else {
+      qsBuilder[name] = value;
+    }
+  } else {
+    delete qsBuilder[name];
+  }
+
+  const str = queryString.stringify(qsBuilder);
+  return getResourcePath(str ? `/${route}?${str}` : `/${route}`);
 }
 
 const BrowsePage: React.FC = () => {
@@ -45,7 +96,7 @@ const BrowsePage: React.FC = () => {
 
   const locationSearch = location.search;
   const qs: Record<string, string> = queryString.parse(locationSearch) as Record<string, string>;
-  const qsMergedDefaults = mergeDefaultFilters(qs) as Record<string, string>;
+  const qsMergedDefaults = mergeDefaultFilters(qs, DefaultFilters) as Record<string, string>;
   const qsMergedString = queryString.stringify(qsMergedDefaults);
 
   const reloadData = () => {
@@ -66,7 +117,7 @@ const BrowsePage: React.FC = () => {
       if (ratings?.[qsMergedString] == null) {
         dispatch(FilterActions.loadRatings(qsMergedDefaults));
       }
-      if (cuisines?.[qsMergedString] == null) {
+      if (tags?.[qsMergedString] == null) {
         dispatch(FilterActions.loadTags(qsMergedDefaults));
       }
     }
@@ -76,51 +127,12 @@ const BrowsePage: React.FC = () => {
     reloadData();
   }, [locationSearch]);
 
-  const buildUrl = useCallback((name: string, value: string, multiSelect = false) => {
-    if (!name) return getResourcePath('/browser');
-
-    const qsBuilder = _.cloneDeep(qs);
-
-    delete qsBuilder.offset;
-
-    if (value !== '') {
-      if (qsBuilder[name] && multiSelect) {
-        const query = qsBuilder[name].split(',');
-        if (query.includes(value.toString())) {
-          if (query.length === 1) {
-            delete qsBuilder[name];
-          } else {
-            let str = '';
-            // eslint-disable-next-line
-            query.map(val => { val != value ? str += val + ',' : ''});
-            qsBuilder[name] = str.substring(0, str.length - 1);
-          }
-        } else {
-          qsBuilder[name] = `${qsBuilder[name]},${value}`;
-        }
-      } else {
-        qsBuilder[name] = value;
-      }
-    } else {
-      delete qsBuilder[name];
-    }
-
-    const str = queryString.stringify(qsBuilder);
-    return getResourcePath(str ? `/browser?${str}` : '/browser');
-  }, [qs]);
+  const handleBuildUrl = useCallback((name: string, value: string, multiSelect = false) => (
+    buildSearchUrl('browser', qs, name, value, multiSelect)
+  ), [qs]);
 
   const doSearch = useCallback((value: string) => {
-    const qsBuilder = _.cloneDeep(qs);
-
-    delete qsBuilder.offset;
-    if (value !== '') {
-      qsBuilder.search = value;
-    } else {
-      delete qsBuilder.search;
-    }
-
-    let str = queryString.stringify(qsBuilder);
-    str = getResourcePath(str ? `/browser?${str}` : '/browser');
+    const str = buildSearchString('browser', qs, value);
     nav(str);
   }, [qs, nav]);
 
@@ -133,7 +145,7 @@ const BrowsePage: React.FC = () => {
       <Search
           qs = {qs}
           qsString = {qsMergedString}
-          buildUrl = {buildUrl}
+          buildUrl = {handleBuildUrl}
           doSearch = {doSearch}
           onOpenRecipe = {handleOpenRecipe}
 

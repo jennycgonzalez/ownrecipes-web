@@ -7,6 +7,8 @@ import Loading from '../components/Loading';
 import { PendingState } from '../../common/store/GenericReducerType';
 import { RecipeList } from '../../recipe/store/RecipeTypes';
 import { CombinedStore } from '../../app/Store';
+import { useEffect, useState } from 'react';
+import { SearchResult } from '../store/SearchTypes';
 
 export interface ISearchResultsProps {
   qs:       Record<string, string>;
@@ -19,15 +21,30 @@ export interface ISearchResultsProps {
 const SearchResults: React.FC<ISearchResultsProps> = ({ qs, qsString, buildUrl, onOpenRecipe }: ISearchResultsProps) => {
   const searchState = useSelector((state: CombinedStore) => state.browse.search);
   const pending = searchState.pending === PendingState.LOADING;
-  const qsSearchResult = searchState.items?.[qsString];
+
+  const [searchResults, setSearchResults] = useState<SearchResult | undefined>(undefined);
+
+  useEffect(() => {
+    if (searchState.pending === PendingState.COMPLETED) {
+      setSearchResults(searchState.items?.[qsString]);
+    }
+  }, [searchState.pending, searchState.items]);
+
+  useEffect(() => {
+    const res = searchState.items?.[qsString];
+    if (res) {
+      setSearchResults(res);
+    }
+  }, [qsString]);
 
   return (
     <>
-      {pending && <Loading />}
-      {!pending && (qsSearchResult == null || qsSearchResult.recipes.length === 0) && <NoResults />}
-      {!pending && qsSearchResult != null && qsSearchResult.recipes.length > 0 && (
+      {pending && !searchResults && <Loading />}
+      {!pending && (searchResults == null || searchResults.recipes.length === 0) && <NoResults />}
+      {searchResults != null && searchResults.recipes.length > 0 && (
         <Results
-            search   = {qsSearchResult}
+            pending  = {pending}
+            search   = {searchResults}
             qs       = {qs}
             defaults = {DefaultFilters}
             buildUrl = {buildUrl}

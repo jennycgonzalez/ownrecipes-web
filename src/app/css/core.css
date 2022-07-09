@@ -88,6 +88,8 @@ html[data-theme="dark"] .accordion.accordion-flush .accordion-button.collapsed::
 
 .dropdown-menu.show {
   background-color: var(--elevation);
+  max-height: 66vh;
+  overflow-y: auto;
 }
 .dropdown-item {
   color: var(--primaryText);

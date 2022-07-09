@@ -2,6 +2,7 @@
 
 import { RecipeDto, RecipeListDto } from '../../recipe/store/RecipeTypes';
 import { demoRecipes, toRecipeListDto } from './recipe';
+import { demoFindSearchRecipes } from './search';
 import { ObjectIterator, randomInt, toQueryParams } from './utils';
 
 const config = {
@@ -10,25 +11,30 @@ const config = {
     // console.log(`fixtures running for miniBrowse. match=${JSON.stringify(match)}`);
 
     if (match.length < 3) return {};
-    const queryParams = toQueryParams(match[2]);
+    const queryParams: URLSearchParams = toQueryParams(match[2]);
     let limit = parseInt(queryParams.get('limit') ?? '1');
     if (Number.isNaN(limit)) {
       limit = 1;
     }
     limit = Math.max(limit, 1);
-    limit = Math.min(limit, demoRecipes.length);
+    queryParams.delete('limit');
+
+    const searchRecipes = demoFindSearchRecipes(demoRecipes, queryParams);
+    limit = Math.min(limit, searchRecipes.length);
 
     const resultSlugs: Array<string> = [];
     const resultRecipes: Array<RecipeDto> = [];
-    do {
-      const randomIndex = randomInt(0, demoRecipes.length);
-      const nextRecipe = demoRecipes[randomIndex];
-      const nextSlug = demoRecipes[randomIndex].slug;
-      if (!resultSlugs.includes(nextSlug)) {
-        resultSlugs.push(nextSlug);
-        resultRecipes.push(nextRecipe);
-      }
-    } while (resultSlugs.length < limit);
+    if (limit > 0) {
+      do {
+        const randomIndex = randomInt(0, searchRecipes.length);
+        const nextRecipe = searchRecipes[randomIndex];
+        const nextSlug = searchRecipes[randomIndex].slug;
+        if (!resultSlugs.includes(nextSlug)) {
+          resultSlugs.push(nextSlug);
+          resultRecipes.push(nextRecipe);
+        }
+      } while (resultSlugs.length < limit);
+    }
 
     const result: ObjectIterator<RecipeListDto> = {
       count: resultRecipes.length,

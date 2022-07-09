@@ -7,7 +7,7 @@ export const serverURLs = {
   refresh_token: `${apiUrl}/accounts/refresh-auth-token/`,
   auth_token: `${apiUrl}/accounts/obtain-auth-token/`,
   browse: `${apiUrl}/recipe/recipes/?fields=id,slug,title,pub_date,rating,photo_thumbnail,info`,
-  mini_browse: `${apiUrl}/recipe/mini-browse/`,
+  mini_browse: `${apiUrl}/recipe/mini-browse/?fields=id,slug,title,pub_date,rating,photo_thumbnail,info`,
   cuisine_count: `${apiUrl}/recipe_groups/cuisine-count/`,
   cuisine: `${apiUrl}/recipe_groups/cuisine/`,
   course_count: `${apiUrl}/recipe_groups/course-count/`,

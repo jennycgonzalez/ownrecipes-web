@@ -14,6 +14,7 @@ import RecipePage from '../recipe/containers/RecipePage';
 // import List from '../../list/containers/List';
 // import Menu from '../../menu/containers/Menu';
 import NotFoundPage from './components/NotFoundPage';
+import RandomPage from '../random/containers/RandomPage';
 
 export type IRouteType = {
   /** URL path. Should start with a slash. */
@@ -31,6 +32,10 @@ const PrivateRoutes: Array<IRouteType> = [
   {
     path:      '/browser',
     component: BrowsePage,
+  },
+  {
+    path:      '/random',
+    component: RandomPage,
   },
   {
     path:      '/recipe/edit/:recipe',
@@ -72,6 +77,10 @@ const PublicRoutes: Array<IRouteType> = [
   {
     path:      '/browser',
     component: BrowsePage,
+  },
+  {
+    path:      '/random',
+    component: RandomPage,
   },
   {
     path:      '/recipe/:recipe',

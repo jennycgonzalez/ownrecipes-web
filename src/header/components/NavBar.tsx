@@ -32,12 +32,11 @@ export interface INavBarProps {
   onChangeLanguage: (language: LanguageCode) => void;
   onChangeTheme: (theme: ThemeMode) => void;
   onLogoutClick: () => void;
-  onRandomRecipeClick: () => void;
 }
 
 const NavBar: React.FC<INavBarProps> = ({
     account, settings, locationPath,
-    onChangeLanguage,  onChangeTheme, onLogoutClick, onRandomRecipeClick }: INavBarProps) => {
+    onChangeLanguage,  onChangeTheme, onLogoutClick }: INavBarProps) => {
   const { formatMessage } = useIntl();
   const messages = defineMessages({
     home: {
@@ -141,7 +140,7 @@ const NavBar: React.FC<INavBarProps> = ({
                 <span className='d-inline-block d-md-none'>{formatMessage(messages.recipes)}</span>
               </NavLink>
             )}
-            {(!isLoginRequired || isAuthenticated) && <NavLink as='button' onClick={onRandomRecipeClick}>{formatMessage(messages.randomRecipe)}</NavLink>}
+            {(!isLoginRequired || isAuthenticated) && <NavLink to={`${getResourcePath('/random')}?course__slug=Main`} active={locationPath.endsWith('/random')}>{formatMessage(messages.randomRecipe)}</NavLink>}
             {/* isAuthenticated && <MenuMenuItem /> */}
             {isAuthenticated && isPrivilegedUser && <CreateRecipeMenuItem />}
             {/* isAuthenticated && <GroceryListMenuItem data={props.lists} /> */}

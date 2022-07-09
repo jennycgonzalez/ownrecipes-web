@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useMemo } from 'react';
 import { RecipeList } from '../../recipe/store/RecipeTypes';
 import { PaginationProps } from '../constants/DefaultFilters';
@@ -6,6 +7,7 @@ import ListRecipes from './ListRecipes';
 import Pagination from './Pagination';
 
 export interface IResultsProps {
+  pending:  boolean;
   search:   SearchResult;
   qs:       Record<string, string>;
   defaults: Partial<PaginationProps>;
@@ -27,7 +29,7 @@ function toNumberDefault(val: string | undefined, defIfNull: number): number {
   }
 }
 
-const Results: React.FC<IResultsProps> = ({ search, qs, defaults, buildUrl, onOpenRecipe }: IResultsProps) => {
+const Results: React.FC<IResultsProps> = ({ pending, search, qs, defaults, buildUrl, onOpenRecipe }: IResultsProps) => {
   const listJsx = useMemo(() => (
     <ListRecipes
         data = {search.recipes}
@@ -43,10 +45,10 @@ const Results: React.FC<IResultsProps> = ({ search, qs, defaults, buildUrl, onOp
   ), [search.totalRecipes, qs, defaults, buildUrl, onOpenRecipe]);
 
   return (
-    <>
+    <div className={classNames('results-container', { pending: pending })}>
       {listJsx}
       {paginationJsx}
-    </>
+    </div>
   );
 };
 

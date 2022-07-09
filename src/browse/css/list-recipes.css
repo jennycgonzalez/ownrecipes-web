@@ -58,3 +58,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.results-panel .results-container.pending {
+  opacity: 0.5;
+}
