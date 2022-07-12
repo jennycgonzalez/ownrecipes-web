@@ -2,10 +2,12 @@ import { createIntl, createIntlCache, defineMessages, IntlShape } from 'react-in
 
 import localeDe from '../locale/de.json';
 import localeEn from '../locale/en.json';
+import localeEs from '../locale/es.json';
 
 export enum LanguageCode {
   DE = 'de',
   EN = 'en',
+  ES = 'es',
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -13,6 +15,7 @@ export function getMessagesFromLang(lang: LanguageCode): any {
   switch (lang) {
     case LanguageCode.DE: return localeDe;
     case LanguageCode.EN: return localeEn;
+    case LanguageCode.ES: return localeEs;
     default: return localeEn;
   }
 }
