@@ -144,7 +144,7 @@
   "nav.accountmenu.admin": "Administration",
   "nav.accountmenu.hello": "Hallo, {name}",
   "nav.accountmenu.language": "Sprache",
-  "nav.accountmenu.language_modal_title": " Sprache auswählen",
+  "nav.accountmenu.language_modal_title": "Sprache auswählen",
   "nav.accountmenu.logout": "Ausloggen",
   "nav.accountmenu.theme": "Helligkeitsmodus",
   "nav.accountmenu.theme_modal_title": "Helligkeitsmodus auswählen",
