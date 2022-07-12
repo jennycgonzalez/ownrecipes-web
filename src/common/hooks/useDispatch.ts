@@ -11,7 +11,7 @@ export default function useDispatch() {
     try {
       return dispatch(disp);
     } catch (err) {
-      crash(err);
+      crash(err as Error);
       return null;
     }
   }, []);
