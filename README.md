@@ -2,6 +2,8 @@
 
 This is the official web frontend for OwnRecipes. OwnRecipes is an open source recipe management site. You can share recipes with friends, rate recipes, store your favorite recipes to find easily, and more!
 
+See [the homepage](https://github.com/ownrecipes/OwnRecipes) for more information about OwnRecipes.
+
 This project was forked from OpenEats. See [the homepage](https://github.com/open-eats/OpenEats) for more information about OpenEats!
 
 ## Main differences to OpenEats
@@ -9,7 +11,7 @@ This project was forked from OpenEats. See [the homepage](https://github.com/ope
 OwnRecipes was rewritten from scratch. The main goal was to keep compatibility to the OpenEats API, while providing a more modern solution.
 You could run ownrecipes-web with openeats-api, though it doesn't make too much sense.
 
-ownRecipes-web comes with several, but not exclusively, improvements:
+ownrecipes-web comes with several, but not exclusively, improvements:
 
 * It is built with [CRA](https://create-react-app.dev/) and is not ejected. That makes upgrading to future releases easier. But it comes with costs of reduced customizability.
 * The code is typed with [TypeScript](https://www.typescriptlang.org/), reducing coding errors and increasing the maintainability.
