@@ -2,7 +2,7 @@ FROM node:16.15-slim
 
 WORKDIR /code
 
-COPY build ./
+COPY build ./public
 RUN npm install --save-dev react-inject-env@2.1.0
 
-ENTRYPOINT npx react-inject-env set
+ENTRYPOINT npx react-inject-env set -d ./public
