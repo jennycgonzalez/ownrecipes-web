@@ -92,7 +92,7 @@ const NavSearch: React.FC<INavSearchProps> = ({ onExpandSearch }: INavSearchProp
   const buildUrl = (): string => (getResourcePath(formData.search ? `/browser?search=${formData.search}` : '/browser'));
 
   const searchButton = (
-    <NavLink id='search-button' as={isExpanded ? undefined : 'button'} to={isExpanded ? buildUrl() : undefined} onClick={isExpanded ? handleSearchClick : handleExpandClick} ref={urlRef}>
+    <NavLink id='search-button' as={isExpanded ? undefined : 'button'} to={isExpanded ? buildUrl() : undefined} onClick={isExpanded ? handleSearchClick : handleExpandClick} accessKey='b' ref={urlRef}>
       <Icon icon='search' variant='light' size='2x' />
     </NavLink>
   );

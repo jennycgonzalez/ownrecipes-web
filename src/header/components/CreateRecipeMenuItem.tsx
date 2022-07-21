@@ -17,7 +17,7 @@ const CreateRecipeMenuItem: React.FC = () => {
   const location = useLocation();
 
   return (
-    <NavLink to={getResourcePath('/recipe/edit/create')} active={location.pathname.endsWith('/recipe/edit/create')}>{formatMessage(messages.create_recipe)}</NavLink>
+    <NavLink to={getResourcePath('/recipe/edit/create')} active={location.pathname.endsWith('/recipe/edit/create')} accessKey='n'>{formatMessage(messages.create_recipe)}</NavLink>
   );
 };
 

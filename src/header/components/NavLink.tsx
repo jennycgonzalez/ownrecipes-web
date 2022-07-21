@@ -10,6 +10,8 @@ export interface INavLinkProps {
   as?: ElementType;
   onClick?: () => void;
 
+  accessKey?: string;
+
   children: React.ReactNode;
 }
 

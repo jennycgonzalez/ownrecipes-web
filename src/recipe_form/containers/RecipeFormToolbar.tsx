@@ -37,11 +37,12 @@ const RecipeFormToolbar: React.FC = () => {
 
   return (
     <Button
-        variant = 'primary'
-        type    = 'submit'
+        variant  = 'primary'
+        type     = {showViewButton ? 'button' : 'submit'}
         disabled = {recipeFormState.pending === PendingState.SAVING || (isDemoMode() && !showViewButton)}
         as = {showViewButton ? Link as any : undefined} // eslint-disable-line @typescript-eslint/no-explicit-any
-        to = {showViewButton ? getResourcePath(`/recipe/${recipeFormState.item?.slug}`) : null}>
+        to = {showViewButton ? getResourcePath(`/recipe/${recipeFormState.item?.slug}`) : null}
+        accessKey = {showViewButton ? undefined : 's'}>
       {formatMessage(showViewButton ? messages.view : messages.submit)}
     </Button>
   );
