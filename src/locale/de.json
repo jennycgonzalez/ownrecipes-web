@@ -63,7 +63,7 @@
   "footer.about.technical info.demo alert": "Demo Modus.",
   "footer.about.title": "Über diese App",
   "footer.about_link": "Über OwnRecipes",
-  "footer.credit": "Erstellt mit {link}, einer Open-Source Software zur Verwaltung von Rezepten. Ermöglicht das Teile von Rezepten mit Freunden, Rezepte bewerten, Einkaufslisten erstellen und mehr.",
+  "footer.credit": "Erstellt mit {link}, einer Open-Source Software zur Verwaltung von Rezepten. Ermöglicht das Teilen von Rezepten mit Freunden, Rezepte bewerten, Einkaufslisten erstellen und mehr.",
   "footer.credit_openeats": "OwnRecipes baut auf {link} von Ryan Noelk auf.",
   "footer.icon_credit": "Symbole von {link} ({ccLink}).",
   "footer.legal_link": "Impressum",
