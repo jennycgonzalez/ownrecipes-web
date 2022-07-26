@@ -9,7 +9,7 @@ export function isDemoMode(): boolean {
 
 export function getRecipeImagePlaceholder(): string {
   const publicUrl = getEnv('PUBLIC_URL') ?? '.';
-  return publicUrl.length > 1 ? `${getEnv('PUBLIC_URL')}/images/fried-eggs.jpg` : '/images/fried-eggs.jpg';
+  return publicUrl.length > 1 ? `${publicUrl}/images/fried-eggs.jpg` : '/images/fried-eggs.jpg';
 }
 
 export function getRecipeImage(photoThumbnail: string | undefined, loadingError = false) {
@@ -18,7 +18,7 @@ export function getRecipeImage(photoThumbnail: string | undefined, loadingError 
 
 export function getResourcePath(path: string): string {
   const publicUrl = getEnv('PUBLIC_URL') ?? '.';
-  return publicUrl.length > 1 ? `${getEnv('PUBLIC_URL')}${path}` : path;
+  return publicUrl.length > 1 ? `${publicUrl}${path}` : path;
 }
 
 export function getEnv(key: keyof EnvType, ifNull?: string): string | undefined {
@@ -29,7 +29,7 @@ export function getEnvAsBoolean(key: keyof EnvType, ifNull = false): boolean {
   const val = getEnv(key);
   if (val == null) return ifNull;
   const valLowerCase = val.toLocaleLowerCase();
-  return ['true', 'yes', '1'].includes(valLowerCase);
+  return ['true', 'y', 'yes', '1'].includes(valLowerCase);
 }
 
 export function requireEnv(key: keyof EnvType): string {
