@@ -1,13 +1,14 @@
 /* eslint-disable func-names */
 
+import { getEnv } from '../../common/utility';
 import { RecipeDto, RecipeListDto } from '../../recipe/store/RecipeTypes';
 
 /* eslint-disable quotes, quote-props, comma-dangle */
 export const demoRecipes: Array<RecipeDto> = [
   {
     "id": 1,
-    "photo": `${process.env.PUBLIC_URL}/images/steak.jpg`,
-    "photo_thumbnail": `${process.env.PUBLIC_URL}/images/steak.jpg`,
+    "photo": `${getEnv('PUBLIC_URL')}/images/steak.jpg`,
+    "photo_thumbnail": `${getEnv('PUBLIC_URL')}/images/steak.jpg`,
     "ingredient_groups": [
       {
         "title": "",
@@ -115,8 +116,8 @@ export const demoRecipes: Array<RecipeDto> = [
   },
   {
     "id": 4,
-    "photo": `${process.env.PUBLIC_URL}/images/soup.jpg`,
-    "photo_thumbnail": `${process.env.PUBLIC_URL}/images/soup.jpg`,
+    "photo": `${getEnv('PUBLIC_URL')}/images/soup.jpg`,
+    "photo_thumbnail": `${getEnv('PUBLIC_URL')}/images/soup.jpg`,
     "ingredient_groups": [
       {
         "title": "",
@@ -219,8 +220,8 @@ export const demoRecipes: Array<RecipeDto> = [
   },
   {
     "id": 508,
-    "photo": `${process.env.PUBLIC_URL}/images/demo/tomato-chili-potato-rosti.jpg`,
-    "photo_thumbnail": `${process.env.PUBLIC_URL}/images/demo/tomato-chili-potato-rosti.jpg`,
+    "photo": `${getEnv('PUBLIC_URL')}/images/demo/tomato-chili-potato-rosti.jpg`,
+    "photo_thumbnail": `${getEnv('PUBLIC_URL')}/images/demo/tomato-chili-potato-rosti.jpg`,
     "ingredient_groups": [
       {
         "title": "Potato rosti",
@@ -492,8 +493,8 @@ export const demoRecipes: Array<RecipeDto> = [
   },
   {
     "id": 510,
-    "photo": `${process.env.PUBLIC_URL}/images/demo/vegan-banana-bread.jpg`,
-    "photo_thumbnail": `${process.env.PUBLIC_URL}/images/demo/vegan-banana-bread.jpg`,
+    "photo": `${getEnv('PUBLIC_URL')}/images/demo/vegan-banana-bread.jpg`,
+    "photo_thumbnail": `${getEnv('PUBLIC_URL')}/images/demo/vegan-banana-bread.jpg`,
     "ingredient_groups": [
       {
         "title": "",
@@ -623,8 +624,8 @@ export const demoRecipes: Array<RecipeDto> = [
   },
   {
     "id": 511,
-    "photo": `${process.env.PUBLIC_URL}/images/demo/beef-on-prunes.jpg`,
-    "photo_thumbnail": `${process.env.PUBLIC_URL}/images/demo/beef-on-prunes.jpg`,
+    "photo": `${getEnv('PUBLIC_URL')}/images/demo/beef-on-prunes.jpg`,
+    "photo_thumbnail": `${getEnv('PUBLIC_URL')}/images/demo/beef-on-prunes.jpg`,
     "ingredient_groups": [
       {
         "title": "",
@@ -766,8 +767,8 @@ export const demoRecipes: Array<RecipeDto> = [
   },
   {
     "id": 512,
-    "photo": `${process.env.PUBLIC_URL}/images/demo/creamy-apple-pie.jpg`,
-    "photo_thumbnail": `${process.env.PUBLIC_URL}/images/demo/creamy-apple-pie.jpg`,
+    "photo": `${getEnv('PUBLIC_URL')}/images/demo/creamy-apple-pie.jpg`,
+    "photo_thumbnail": `${getEnv('PUBLIC_URL')}/images/demo/creamy-apple-pie.jpg`,
     "ingredient_groups": [
       {
         "title": "For the yeast dough",
@@ -931,8 +932,8 @@ export const demoRecipes: Array<RecipeDto> = [
   },
   {
     "id": 513,
-    "photo": `${process.env.PUBLIC_URL}/images/demo/crunchy-muesli.jpg`,
-    "photo_thumbnail": `${process.env.PUBLIC_URL}/images/demo/crunchy-muesli.jpg`,
+    "photo": `${getEnv('PUBLIC_URL')}/images/demo/crunchy-muesli.jpg`,
+    "photo_thumbnail": `${getEnv('PUBLIC_URL')}/images/demo/crunchy-muesli.jpg`,
     "ingredient_groups": [
       {
         "title": "",
@@ -1047,8 +1048,8 @@ export const demoRecipes: Array<RecipeDto> = [
   },
   {
     "id": 514,
-    "photo": `${process.env.PUBLIC_URL}/images/demo/chicken-roulade-with-dried-plums.jpg`,
-    "photo_thumbnail": `${process.env.PUBLIC_URL}/images/demo/chicken-roulade-with-dried-plums.jpg`,
+    "photo": `${getEnv('PUBLIC_URL')}/images/demo/chicken-roulade-with-dried-plums.jpg`,
+    "photo_thumbnail": `${getEnv('PUBLIC_URL')}/images/demo/chicken-roulade-with-dried-plums.jpg`,
     "ingredient_groups": [
       {
         "title": "",
@@ -1166,8 +1167,8 @@ export const demoRecipes: Array<RecipeDto> = [
   },
   {
     "id": 515,
-    "photo": `${process.env.PUBLIC_URL}/images/demo/tortilla-couscous-rolls.jpg`,
-    "photo_thumbnail": `${process.env.PUBLIC_URL}/images/demo/tortilla-couscous-rolls.jpg`,
+    "photo": `${getEnv('PUBLIC_URL')}/images/demo/tortilla-couscous-rolls.jpg`,
+    "photo_thumbnail": `${getEnv('PUBLIC_URL')}/images/demo/tortilla-couscous-rolls.jpg`,
     "ingredient_groups": [
       {
         "title": "",
@@ -1270,8 +1271,8 @@ export const demoRecipes: Array<RecipeDto> = [
   } ,
   {
     "id": 516,
-    "photo": `${process.env.PUBLIC_URL}/images/demo/simsalabim-cheescake-with-pudding.jpg`,
-    "photo_thumbnail": `${process.env.PUBLIC_URL}/images/demo/simsalabim-cheescake-with-pudding.jpg`,
+    "photo": `${getEnv('PUBLIC_URL')}/images/demo/simsalabim-cheescake-with-pudding.jpg`,
+    "photo_thumbnail": `${getEnv('PUBLIC_URL')}/images/demo/simsalabim-cheescake-with-pudding.jpg`,
     "ingredient_groups": [
       {
         "title": "",
@@ -1386,8 +1387,8 @@ export const demoRecipes: Array<RecipeDto> = [
   },
   {
     "id": 517,
-    "photo": `${process.env.PUBLIC_URL}/images/demo/gorgonzola-asparagus.jpg`,
-    "photo_thumbnail": `${process.env.PUBLIC_URL}/images/demo/gorgonzola-asparagus.jpg`,
+    "photo": `${getEnv('PUBLIC_URL')}/images/demo/gorgonzola-asparagus.jpg`,
+    "photo_thumbnail": `${getEnv('PUBLIC_URL')}/images/demo/gorgonzola-asparagus.jpg`,
     "ingredient_groups": [
       {
         "title": "",
@@ -1850,8 +1851,8 @@ export const demoRecipes: Array<RecipeDto> = [
   },
   {
     "id": 522,
-    "photo": `${process.env.PUBLIC_URL}/images/demo/beetroot-cream-soup-with-croutons.jpg`,
-    "photo_thumbnail": `${process.env.PUBLIC_URL}/images/demo/beetroot-cream-soup-with-croutons.jpg`,
+    "photo": `${getEnv('PUBLIC_URL')}/images/demo/beetroot-cream-soup-with-croutons.jpg`,
+    "photo_thumbnail": `${getEnv('PUBLIC_URL')}/images/demo/beetroot-cream-soup-with-croutons.jpg`,
     "ingredient_groups": [
       {
         "title": "",

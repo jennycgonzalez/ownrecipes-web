@@ -142,13 +142,19 @@ const Routes: React.FC = () => {
     routesList = PublicRoutes.map(r => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const PageComponent = r.component as any;
-      return <Route path={getResourcePath(r.path)} key={r.path} element={<PageComponent />} />;
+      const path = getResourcePath(r.path);
+      // console.log(`[Routes] registering "${path}"`);
+      return <Route path={path} key={r.path} element={<PageComponent />} />;
     });
+    const defaultPath = getResourcePath('/home');
+    // console.log(`[Routes] registering default path as "${defaultPath}"`);
     routesList.push(
-      <Route path={getResourcePath('/')} key='/' element={<Navigate replace to={getResourcePath('/home')} />} />
+      <Route path={getResourcePath('/')} key='/' element={<Navigate replace to={defaultPath} />} />
     );
+    const fallbackPath = getResourcePath('/login');
+    // console.log(`[Routes] registering fallback path as "${fallbackPath}"`);
     routesList.push(
-      <Route path='*' key='*' element={<Navigate replace to={getResourcePath('/login')} />} />
+      <Route path='*' key='*' element={<Navigate replace to={fallbackPath} />} />
     );
   }
 

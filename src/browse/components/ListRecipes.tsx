@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Col, Row } from 'react-bootstrap';
 import classNames from 'classnames';
@@ -6,8 +7,7 @@ import '../css/list-recipes.css';
 
 import Ratings from '../../rating/components/Ratings';
 import { RecipeList } from '../../recipe/store/RecipeTypes';
-import { IMAGE_PLACEHOLDER } from '../../common/constants';
-import { getResourcePath } from '../../common/utility';
+import { getRecipeImagePlaceholder, getResourcePath } from '../../common/utility';
 import Tooltip from '../../common/components/Tooltip';
 
 export interface IListRecipes {
@@ -16,6 +16,8 @@ export interface IListRecipes {
 }
 
 const ListRecipes: React.FC<IListRecipes> = ({ data, onOpenRecipe }: IListRecipes) => {
+  const IMAGE_PLACEHOLDER = useMemo(() => getRecipeImagePlaceholder(), []);
+
   const getRecipeImage = (recipe: RecipeList) => {
     if (recipe.photoThumbnail) {
       return recipe.photoThumbnail;

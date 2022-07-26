@@ -1,35 +1,41 @@
 import * as _ from 'lodash';
 import { IntlShape } from 'react-intl';
 
-import { IMAGE_PLACEHOLDER } from './constants';
+import env, { EnvType } from '../env';
 
 export function isDemoMode(): boolean {
   return getEnvAsBoolean('REACT_APP_DEMO', false);
 }
 
+export function getRecipeImagePlaceholder(): string {
+  const publicUrl = getEnv('PUBLIC_URL') ?? '.';
+  return publicUrl.length > 1 ? `${publicUrl}/images/fried-eggs.jpg` : '/images/fried-eggs.jpg';
+}
+
 export function getRecipeImage(photoThumbnail: string | undefined, loadingError = false) {
-  return !loadingError ? (photoThumbnail ?? '') : IMAGE_PLACEHOLDER;
+  return !loadingError ? (photoThumbnail ?? '') : getRecipeImagePlaceholder();
 }
 
 export function getResourcePath(path: string): string {
-  return `${process.env.PUBLIC_URL}${path}`;
+  const publicUrl = getEnv('PUBLIC_URL') ?? '.';
+  return publicUrl.length > 1 ? `${publicUrl}${path}` : path;
 }
 
-export function getEnv(env: string, ifNull?: string): string | undefined {
-  return process.env[env] ?? ifNull;
+export function getEnv(key: keyof EnvType, ifNull?: string): string | undefined {
+  return env[key] ?? ifNull;
 }
 
-export function getEnvAsBoolean(env: string, ifNull = false): boolean {
-  const val = getEnv(env);
+export function getEnvAsBoolean(key: keyof EnvType, ifNull = false): boolean {
+  const val = getEnv(key);
   if (val == null) return ifNull;
   const valLowerCase = val.toLocaleLowerCase();
-  return ['true', 'yes', '1'].includes(valLowerCase);
+  return ['true', 'y', 'yes', '1'].includes(valLowerCase);
 }
 
-export function requireEnv(env: string): string {
-  const val = getEnv(env);
+export function requireEnv(key: keyof EnvType): string {
+  const val = getEnv(key);
   if (val == null || val.length === 0) {
-    throw new Error(`Invalid setup: The .env-variable "${env}" is missing. Please check your .env-files and rebuild.`);
+    throw new Error(`Invalid setup: The .env-variable "${key}" is missing. Please check your .env-files and rebuild.`);
   }
   return val;
 }
