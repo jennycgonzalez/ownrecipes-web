@@ -105,8 +105,12 @@ const BrowsePage: React.FC = () => {
       dispatch(SearchActions.loadRecipes(qsMergedDefaults));
       dispatch(FilterActions.loadCourses(qsMergedDefaults));
       dispatch(FilterActions.loadCuisines(qsMergedDefaults));
-      dispatch(FilterActions.loadRatings(qsMergedDefaults));
-      dispatch(FilterActions.loadTags(qsMergedDefaults));
+      setTimeout(() => {
+        dispatch(FilterActions.loadRatings(qsMergedDefaults));
+      }, 100);
+      setTimeout(() => {
+        dispatch(FilterActions.loadTags(qsMergedDefaults));
+      }, 200);
     } else {
       if (courses?.[qsMergedString] == null) {
         dispatch(FilterActions.loadCourses(qsMergedDefaults));
@@ -115,10 +119,14 @@ const BrowsePage: React.FC = () => {
         dispatch(FilterActions.loadCuisines(qsMergedDefaults));
       }
       if (ratings?.[qsMergedString] == null) {
-        dispatch(FilterActions.loadRatings(qsMergedDefaults));
+        setTimeout(() => {
+          dispatch(FilterActions.loadRatings(qsMergedDefaults));
+        }, 100);
       }
       if (tags?.[qsMergedString] == null) {
-        dispatch(FilterActions.loadTags(qsMergedDefaults));
+        setTimeout(() => {
+          dispatch(FilterActions.loadTags(qsMergedDefaults));
+        }, 200);
       }
     }
   };
