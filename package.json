@@ -1,6 +1,6 @@
 {
   "name": "ownrecipes-web",
-  "version": "3.0.0-SNAPSHOT",
+  "version": "3.0.0",
   "private": false,
   "homepage": ".",
   "scripts": {
