@@ -1,0 +1,107 @@
+.container.browser .search-bar {
+  max-width: 50rem;
+  margin-left: auto;
+  margin-right: auto;
+
+  margin-bottom: 1rem;
+}
+.container.browser .search-bar .input-adornment-start {
+  width: 3em;
+  justify-content: center;
+}
+.container.browser .search-bar input.adorned-end {
+  border-right: none;
+}
+.container.browser .search-bar .input-adornment-end {
+  background-color: transparent;
+  border-left: none;
+  padding: 0;
+}
+.container.browser .search-bar .input-adornment-end .search-clear {
+  border: none;
+  background-color: transparent;
+  color: var(--secondaryText);
+  padding-top:    0;
+  padding-bottom: 0;
+}
+.container.browser .search-bar .input-adornment-end .search-clear:hover {
+  background-color: var(--midground);
+}
+.container.browser .search-bar .input-adornment-end .search-clear:hover {
+  background-color: var(--hoverBg);
+  color: var(--primaryText);
+  box-shadow: 0 0 0 .05rem var(--primaryText);
+  cursor: pointer;
+}
+.container.browser .search-bar .input-adornment-end .search-clear:focus {
+  box-shadow: 0 0 0 .1rem var(--primaryText);
+}
+
+.container.browser .search-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.container.browser .search-summary p {
+  margin-bottom: 0;
+  padding-left: 10px;
+}
+
+.container.browser .search-summary .sort-by-dropdown {
+  padding-right: 4px;
+}
+.container.browser .search-summary #sort-by-button {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-color: var(--inputBorder);
+}
+@media screen and (min-width: 768px) {
+  .container.browser .search-summary #sort-by-button {
+    min-height: unset;
+  }
+}
+
+.container.browser .search-summary #sort-by-button:hover, .container.browser .search-summary #sort-by-button:focus {
+  border-color: var(--primaryMain);
+}
+
+
+.container.browser .pagination {
+  justify-content: center;
+  margin-top: 1rem;
+}
+.container.browser .pagination .page-item.next,
+.container.browser .pagination .page-item.skipper-near,
+.container.browser .pagination .page-item.skipper-far {
+  display: none;
+}
+@media screen and (min-width: 43rem) {
+  .container.browser .pagination .page-item.next,
+  .container.browser .pagination .page-item.skipper-near {
+    display: list-item;
+  }
+}
+
+@media screen and (min-width: 50rem) {
+  .container.browser .pagination .page-item.skipper-near,
+  .container.browser .pagination .page-item.skipper-far {
+    display: list-item;
+  }
+}
+
+.container.browser .no-results {
+  margin-top: 20px;
+  text-align: center;
+}
+.container.browser .spinner {
+  text-align: center;
+}
+.container.browser .spinner .spinner-obj {
+  height: 100px !important;
+  width: 100px !important;
+  margin-top: 30px;
+  display: inline-block;
+}
+

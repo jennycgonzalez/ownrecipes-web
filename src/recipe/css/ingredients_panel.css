@@ -1,0 +1,109 @@
+.ingredients-panel h2 {
+  display: inline-block;
+  margin-bottom: 0;
+}
+
+.recipe-details .ingredients-panel .ingredients-for-servings-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.ingredients-panel .custom-servings {
+  margin-left: 10px;
+  display: inline-block;
+}
+
+.ingredients-panel .custom-servings form {
+  display: flex;
+}
+.ingredients-panel .custom-servings form .form-group {
+  margin-top:    0;
+  margin-bottom: 0;
+}
+.ingredients-panel .custom-servings form input {
+  max-width: 5rem;
+  border-top-left-radius: 1em;
+  border-bottom-left-radius: 1em;
+
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.ingredients-panel .custom-servings form button {
+  height:      3rem;
+  line-height: 3rem;
+  padding-top:    0;
+  padding-bottom: 0;
+
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+
+  border-top-right-radius: 1em;
+  border-bottom-right-radius: 1em;
+
+  min-width: min-content;
+  white-space: nowrap;
+}
+@media screen and (min-width: 768px) {
+  .ingredients-panel .custom-servings form button {
+    height:      2.5em;
+    line-height: 2.5em;
+  }
+}
+.ingredients-panel .custom-servings form button .bi {
+  margin-right: 5px;
+}
+
+.ingredients-panel .ingredient-groups {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  margin-left: calc(var(--bs-gutter-x) * -.5);
+  margin-right: calc(var(--bs-gutter-x) * -.5);
+}
+.ingredients-panel .ingredient-groups .subgroup {
+  margin: 20px;
+  min-width: 18rem;
+}
+.ingredients-panel .ingredient-groups .ingredient-group {
+  flex: 1;
+}
+@media print {
+  .ingredients-panel .ingredient-groups .subgroup {
+    margin: 10px;
+    min-width: 18rem;
+  }
+}
+@media screen and (min-width: 70rem) {
+  .ingredients-panel .ingredient-groups .subgroup {
+    min-width: 20rem;
+  }
+}
+.ingredients-panel .ingredients-table caption {
+  caption-side: top;
+  margin-left: 33%;
+  color: var(--primaryText);
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0.7rem;
+}
+.ingredients-panel .ingredients-table {
+  border-color: transparent;
+}
+.ingredients-panel .ingredients-table > tbody > tr > td {
+  padding: 0 10px;
+}
+.ingredients-panel .ingredients-table > tbody > tr > td:first-of-type {
+  width: 33%;
+  text-align: right;
+}
+.ingredients-panel .ingredients-table > tbody > tr > td:last-of-type {
+  width: 66%;
+  text-align: left;
+}
+.ingredients-panel .ingredients-table > tbody > tr > td > span {
+  padding: 5px 0;
+  display: inline-block;
+}

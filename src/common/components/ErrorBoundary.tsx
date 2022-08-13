@@ -1,4 +1,5 @@
 import { Component } from 'react';
+
 import { AnyComponent } from '../../types/Types';
 import P from './P';
 
@@ -19,9 +20,9 @@ interface IErrorBoundaryContainerProps {
   children: AnyComponent;
 }
 
-const ErrorBoundaryContainer: React.FC<IErrorBoundaryContainerProps> = (props: IErrorBoundaryContainerProps) => (
-  <div>
-    {props.children}
+const ErrorBoundaryContainer: React.FC<IErrorBoundaryContainerProps> = ({ children }: IErrorBoundaryContainerProps) => (
+  <div style={{ margin: '0.5rem' }}>
+    {children}
   </div>
 );
 

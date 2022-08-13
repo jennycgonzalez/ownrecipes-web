@@ -3,6 +3,22 @@ import { Button, Modal as BootstrapModal } from 'react-bootstrap';
 
 import '../css/modal.css';
 
+import Icon from './Icon';
+import classNames from 'classnames';
+import ErrorBoundary from './ErrorBoundary';
+
+export interface IModalHeaderCloseButtonProps {
+  onClose: (event: React.MouseEvent) => void;
+  className?: string;
+}
+
+export const ModalHeaderCloseButton: React.FC<IModalHeaderCloseButtonProps> = ({
+  onClose, className, ...rest }: IModalHeaderCloseButtonProps) => (
+    <Button type='button' onClick={onClose} variant='transparent' className={classNames('close-button', className)} aria-label='Close' {...rest}>
+      <Icon icon='x' variant='light' size='2x' />
+    </Button>
+);
+
 export interface IModalProps {
   show: boolean;
   title: string;
@@ -11,15 +27,21 @@ export interface IModalProps {
   closeTitle?: React.ReactNode;
 
   onAccept?: () => void;
-  onClose?: () => void;
+  onClose?: (autoClose: boolean) => void;
   noCloseButton?: boolean;
 
-  size?: 'sm' | 'lg';
+  size?: 'sm' | 'lg' | 'xl';
 
+  className?: string;
+  acceptButtonProps?: Partial<unknown>;
   children: React.ReactNode;
 }
 
-const Modal: React.FC<IModalProps> = (props: IModalProps) => {
+const Modal: React.FC<IModalProps> = ({
+    show, title,
+    acceptTitle, closeTitle,
+    onAccept, onClose, noCloseButton,
+    size, className, acceptButtonProps, children }: IModalProps) => {
   const { formatMessage } = useIntl();
   const messages = defineMessages({
     accept: {
@@ -34,15 +56,16 @@ const Modal: React.FC<IModalProps> = (props: IModalProps) => {
     },
   });
 
-  const { show, title, acceptTitle, closeTitle, onAccept, onClose, noCloseButton, children } = props;
-
   const handleClose = () => {
     if (onClose) {
-      onClose();
+      onClose(false);
     }
   };
 
   const handleAccept = () => {
+    if (onClose) {
+      onClose(true);
+    }
     if (onAccept) {
       onAccept();
     }
@@ -54,27 +77,33 @@ const Modal: React.FC<IModalProps> = (props: IModalProps) => {
     <BootstrapModal
         show = {show}
         backdrop = 'static'
-        size = {props.size ?? 'lg'}
+        size = {size ?? 'lg'}
         centered
-        onHide = {onClose}
-        keyboard = {false}>
-      <BootstrapModal.Header closeButton={onClose != null}>
+        onHide = {handleClose}
+        keyboard = {false}
+        className = {className}>
+      <BootstrapModal.Header>
         <BootstrapModal.Title>{title}</BootstrapModal.Title>
+        {onClose != null && (
+          <ModalHeaderCloseButton onClose={handleClose} />
+        )}
       </BootstrapModal.Header>
 
       <BootstrapModal.Body>
-        {children}
+        <ErrorBoundary verbose printStack>
+          {children}
+        </ErrorBoundary>
       </BootstrapModal.Body>
 
       {hasButton && (
         <BootstrapModal.Footer>
           {onClose != null && !noCloseButton && (
-            <Button variant='secondary' onClick={handleClose}>
+            <Button variant='outline-primary' onClick={handleClose}>
               {closeTitle ?? formatMessage(messages.close)}
             </Button>
           )}
           {onAccept != null && (
-            <Button variant='primary' onClick={handleAccept}>
+            <Button variant='primary' onClick={handleAccept} {...acceptButtonProps}>
               {acceptTitle ?? formatMessage(messages.accept)}
             </Button>
           )}

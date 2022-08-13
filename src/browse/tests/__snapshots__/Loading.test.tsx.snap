@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loading component test 1`] = `
+<div
+  className="row"
+>
+  <div
+    className="col-12"
+  >
+    <div
+      className="row"
+      id="browse"
+    >
+      <div
+        className="spinner"
+      >
+        <div
+          className="sk-spinner spinner-obj sk-circle"
+        >
+          <div />
+          <div />
+          <div />
+          <div />
+          <div />
+          <div />
+          <div />
+          <div />
+          <div />
+          <div />
+          <div />
+          <div />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

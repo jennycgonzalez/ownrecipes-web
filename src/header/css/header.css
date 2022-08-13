@@ -1,62 +1,227 @@
 .navbar {
-  /* Margin bottom by footer height */
   margin-bottom: 0px;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
-.navbar-brand {
-  padding: 5px 15px;
-}
-.navbar-brand img {
-  height: 100%;
-}
-nav.header {
+#header-navbar {
+  min-height: 3rem;
   padding: 0;
-  height: 3.75rem;
-  border-bottom: 5px solid var(--primaryMain);
   background-color: var(--primaryMain);
 }
-@media screen and (min-width:720px) {
-  nav.header {
+@media screen and (min-width: 768px) {
+  #header-navbar {
     background-color: var(--elevation);
+    border-bottom: 5px solid var(--primaryMain);
     box-shadow: 0 0 5px 1px var(--primaryMain);
   }
 }
-nav.header > .container {
+#header-navbar > .container > .navbar-collapse {
   height: 100%;
 }
-nav.header > .container > .navbar-collapse {
-  height: 100%;
-}
-nav.header > .container > .navbar-collapse > .navbar-nav {
-  height: 100%;
+#header-navbar > .container > .navbar-collapse > .header-nav {
   align-items: center;
 }
 
-nav.header .navbar-nav .nav-link {
+#header-navbar .navbar-toggler {
+  color: var(--primaryContrast);
+  border: 0;
+  align-self: stretch;
+}
+.navbar-brand {
+  padding: 0;
+}
+.navbar-brand a {
+  display: inline-block;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+}
+
+#header-navbar button {
+  border: 0;
+  background-color: transparent;
+}
+#header-navbar .nav-link {
+  line-height: 1.5;
   color: var(--primaryContrast);
   border-radius: .25rem;
 }
-@media screen and (min-width:720px) {
-  nav.header .navbar-nav .nav-link {
+#header-navbar .nav-link.active {
+  box-shadow: 0 -2px 0 0 var(--primaryContrast) inset;
+}
+#header-navbar .nav-link.active:focus {
+  box-shadow: 0 -2px 0 0 var(--primaryContrast) inset, 0 0 0 2px var(--primaryText) inset;
+}
+#header-navbar .navbar-brand a:hover,
+#header-navbar button:hover,
+#header-navbar a:hover {
+  background-color: var(--primaryLight) !important;
+}
+@media screen and (min-width: 768px) {
+  #header-navbar .navbar-brand a:hover,
+  #header-navbar button:hover,
+  #header-navbar a:hover {
+    background-color: transparent !important;
+    color: var(--primaryMain) !important;
+  }
+  #header-navbar .nav-link {
     color: inherit;
   }
+  #header-navbar .nav-link.active {
+    box-shadow: 0 -2px 0 0 var(--primaryMain) inset;
+  }
+  #header-navbar .nav-link.active:focus {
+    box-shadow: 0 -2px 0 0 var(--primaryMain) inset, 0 0 0 2px var(--primaryText) inset;
+  }
 }
-.navbar-light .navbar-nav .nav-link.active,
-.navbar-light .navbar-nav .show > .nav-link,
-.navbar-light .navbar-nav .nav-link:focus,
-.navbar-light .navbar-nav .nav-link:hover {
+#header-navbar .header-nav .nav-link.active,
+#header-navbar .header-nav .show > .nav-link,
+#header-navbar .header-nav .nav-link:focus,
+#header-navbar .header-nav .nav-link:hover,
+#header-navbar .header-nav .btn:hover,
+#header-navbar .header-nav .btn:focus {
   color: var(--hoverText);
 }
-nav.header .navbar-nav .nav-link:hover {
+#header-navbar .nav-link:hover {
   color: var(--hoverText);
   background-color: var(--hoverBg);
 }
-nav.header .navbar-nav .nav-link:focus {
+#header-navbar a:focus,
+#header-navbar button:focus {
   outline: 0;
   box-shadow: 0 0 0 .1rem var(--primaryText) inset;
 }
-nav.header .subtitle {
+
+#header-navbar .my-account-nav {
+  float: right;
+  display: flex;
+  flex-direction: row;
+  align-self: stretch;
+}
+
+#header-navbar #my-account-dropdown {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+@media screen and (max-width: 767px) {
+  #header-navbar #my-account-dropdown {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    color: var(--primaryContrast);
+  }
+  #header-navbar #my-account-dropdown:hover {
+    color: var(--primaryContrast);
+  }
+}
+@media screen and (min-width: 768px) {
+  #header-navbar .my-account-nav {
+    margin-left: auto;
+    float: unset;
+  }
+  #header-navbar #my-account-dropdown {
+    padding-top: 3px;
+    padding-bottom: 0;
+  }
+}
+#header-navbar #my-account-dropdown::after,
+#header-navbar #settings-dropdown::after {
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  #header-navbar #my-account-dropdown::after {
+    display: inline-block;
+  }
+}
+#header-navbar .subtitle {
   font-size: 0.875em;
 }
-nav.header .my-account-nav {
-  margin-left: auto;
+
+#header-navbar form .form-group {
+  margin-top:    0;
+  margin-bottom: 0;
+}
+#header-navbar form .form-control {
+  height: 2.5rem;
+  line-height: 2.5rem;
+}
+#header-navbar form .input-adornment-end {
+  padding: 0;
+  height: 2.5rem;
+}
+
+@media screen and (max-width: 64rem) {
+  #header-navbar .navbar-nav.collapse-d-lg {
+    display: none;
+  }
+  #header-navbar .container.search-expanded .my-account-nav {
+    width: 100%;
+    display: flex;
+  }
+  #header-navbar .container.search-expanded .my-account-nav form {
+    flex: 1;
+  }
+}
+#header-navbar form .form-group.search:not(.expanded) .input-adornment-end {
+  background-color: transparent;
+  border-color: transparent;
+}
+#header-navbar form .form-group.search:not(.expanded) button {
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+}
+#header-navbar form .form-group.search:not(.expanded) input {
+  display: none;
+}
+#header-navbar form .form-group.search:not(.expanded) .input-adornment-end {
+  border-radius: .25rem;
+}
+#header-navbar form .form-group.search:not(.expanded) .input-adornment-end button {
+  height: unset;
+}
+#header-navbar form .form-group.search.expanded input {
+  display: inline-block;
+}
+#header-navbar form .form-group.search.expanded input {
+  display: inline-block;
+}
+#header-navbar form .form-group .input-adornment-end:hover {
+  border-color: white;
+}
+#header-navbar form .form-group .input-adornment-end .nav-link {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+#header-navbar form .form-group .input-adornment-end .nav-link:hover {
+  color: white;
+}
+#header-navbar form .form-group .input-adornment-end .nav-link .bi {
+  font-size: 1.25rem;
+}
+@media screen and (max-width: 767px) {
+  #header-navbar form > .form-group:not(.expanded),
+  #header-navbar form > .form-group:not(.expanded) > .input-group,
+  #header-navbar form > .form-group:not(.expanded) > .input-group > .input-adornment-end,
+  #header-navbar form > .form-group:not(.expanded) > .input-group > .input-adornment-end > button {
+    height: 100%;
+  }
+  #header-navbar .container.search-expanded .navbar-toggler,
+  #header-navbar .container.search-expanded .navbar-brand,
+  #header-navbar .container.search-expanded .nav-item,
+  #header-navbar .container.search-expanded #login-button {
+    display: none;
+  }
+  #header-navbar .container.search-expanded .my-account-nav {
+    height: 3rem;
+    align-items: center;
+  }
+}
+@media screen and (min-width: 768px) {
+  #header-navbar form .form-group .input-adornment-end:hover {
+    border-color: var(--primaryMain);
+  }
+
+  #header-navbar #login-button {
+    color: var(--primaryContrast);
+  }
 }

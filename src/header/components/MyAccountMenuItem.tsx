@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import { defineMessages, useIntl } from 'react-intl';
-import { NavDropdown, ListGroup, Button } from 'react-bootstrap';
-import { getResourcePath } from '../../common/utility';
+import { NavDropdown, Button } from 'react-bootstrap';
+
+import { getEnv, getResourcePath } from '../../common/utility';
 import { UserAccount } from '../../account/store/types';
-import Modal from '../../common/components/Modal';
-import { LanguageCode, Settings, ThemeMode } from '../../account/store/settings/types';
+import { Settings, ThemeMode } from '../../account/store/settings/types';
+import Icon from '../../common/components/Icon';
+import { LanguageDialog } from './LanguageDialog';
+import { ThemeDialog } from './ThemeDialog';
+import { LanguageCode } from '../../common/language';
 
 export const AccountLoginMenuItem: React.FC = () => {
   const { formatMessage } = useIntl();
@@ -17,7 +21,10 @@ export const AccountLoginMenuItem: React.FC = () => {
   });
 
   return (
-    <Button variant='primary' href={getResourcePath('/login')}>{formatMessage(messages.label)}</Button>
+    <Button id='login-button' variant='primary' href={getResourcePath('/login')} className='nav-link'>
+      <Icon icon='box-arrow-in-right' variant='light' size='2x' className='visible-xs' />
+      <span className='hidden-xs'>{formatMessage(messages.label)}</span>
+    </Button>
   );
 };
 
@@ -30,7 +37,8 @@ export interface IAccountMenuMenuItemProps {
   onLogoutClick: () => void;
 }
 
-export const AccountMenuMenuItem: React.FC<IAccountMenuMenuItemProps> = (props: IAccountMenuMenuItemProps) => {
+export const AccountMenuMenuItem: React.FC<IAccountMenuMenuItemProps> = ({
+    account, settings, onChangeLanguage, onChangeTheme, onLogoutClick }: IAccountMenuMenuItemProps) => {
   const { formatMessage } = useIntl();
   const messages = defineMessages({
     hello: {
@@ -48,40 +56,10 @@ export const AccountMenuMenuItem: React.FC<IAccountMenuMenuItemProps> = (props: 
       description: 'Item to open the language change dialog',
       defaultMessage: 'Language',
     },
-    language_modal_title: {
-      id: 'nav.accountmenu.language_modal_title',
-      description: 'Change language dialog title',
-      defaultMessage: 'Choose language',
-    },
-    language_de: {
-      id: 'language.code.de',
-      description: 'German',
-      defaultMessage: 'Deutsch (German)',
-    },
-    language_en: {
-      id: 'language.code.en',
-      description: 'English',
-      defaultMessage: 'English',
-    },
     theme: {
       id: 'nav.accountmenu.theme',
       description: 'Item to open the theme change dialog',
       defaultMessage: 'Theme',
-    },
-    theme_modal_title: {
-      id: 'nav.accountmenu.theme_modal_title',
-      description: 'Change theme mode dialog title',
-      defaultMessage: 'Choose theme',
-    },
-    theme_mode_dark: {
-      id: 'theme.mode.dark',
-      description: 'Dark mode',
-      defaultMessage: 'Dark',
-    },
-    theme_mode_light: {
-      id: 'theme.mode.light',
-      description: 'Light mode',
-      defaultMessage: 'Light',
     },
     admin: {
       id: 'nav.accountmenu.admin',
@@ -98,69 +76,52 @@ export const AccountMenuMenuItem: React.FC<IAccountMenuMenuItemProps> = (props: 
   const [showLanguageDialog, setShowLanguageDialog] = useState<boolean>(false);
   const [showThemeDialog, setShowThemeDialog] = useState<boolean>(false);
 
-  const handleChangeLanguageClick = () => setShowLanguageDialog(true);
-  const handleLanguageDialogClose = () => setShowLanguageDialog(false);
-  const handleChangeThemeClick    = () => setShowThemeDialog(true);
-  const handleThemeDialogClose    = () => setShowThemeDialog(false);
+  const handleChangeLanguageClick = () => { setShowLanguageDialog(true); };
+  const handleLanguageDialogClose = () => { setShowLanguageDialog(false); };
+  const handleChangeThemeClick    = () => { setShowThemeDialog(true); };
+  const handleThemeDialogClose    = () => { setShowThemeDialog(false); };
 
   const handleChangeLanguage = (lang: LanguageCode) => {
     handleLanguageDialogClose();
-    props.onChangeLanguage(lang);
+    onChangeLanguage(lang);
   };
 
   const handleChangeTheme = (theme: ThemeMode) => {
     handleThemeDialogClose();
-    props.onChangeTheme(theme);
+    onChangeTheme(theme);
   };
-
-  const languageButtons = Object.values(LanguageCode).map(l => (
-    <ListGroup.Item key={l} action disabled={props.settings.language === l} onClick={() => handleChangeLanguage(l)}>{formatMessage(messages[`language_${l}`])}</ListGroup.Item>
-  ));
-
-  const themeButtons = Object.values(ThemeMode).map(t => (
-    <ListGroup.Item key={t} action disabled={props.settings.themeMode === t} onClick={() => handleChangeTheme(t)}>{formatMessage(messages[`theme_mode_${t}`])}</ListGroup.Item>
-  ));
 
   return (
     <>
       <NavDropdown
           title={(
             <>
-              <div className='subtitle'>{formatMessage(messages.hello, { name: props.account.username })}</div>
-              <span>{formatMessage(messages.title)}</span>
+              <Icon icon='person-circle' variant='light' size='2x' className='visible-xs' />
+              <div  className='hidden-xs subtitle'>{formatMessage(messages.hello, { name: account.username })}</div>
+              <span className='hidden-xs'>{formatMessage(messages.title)}</span>
             </>
           )}
           align = 'end'
-          id='basic-nav-dropdown'>
+          id='my-account-dropdown'>
         <NavDropdown.Item onClick={handleChangeLanguageClick}>{`${formatMessage(messages.language)} …`}</NavDropdown.Item>
         <NavDropdown.Item onClick={handleChangeThemeClick}>{`${formatMessage(messages.theme)} …`}</NavDropdown.Item>
         <NavDropdown.Divider />
-        <NavDropdown.Item href={process.env.REACT_APP_ADMIN_URL ?? '/admin'}>{`➝ ${formatMessage(messages.admin)}`}</NavDropdown.Item>
-        <NavDropdown.Divider />
-        <NavDropdown.Item onClick={props.onLogoutClick}>{formatMessage(messages.logout)}</NavDropdown.Item>
+        {account.role === 'admin' && <NavDropdown.Item href={getEnv('REACT_APP_ADMIN_URL', '/admin')}>{`➝ ${formatMessage(messages.admin)}`}</NavDropdown.Item>}
+        {account.role === 'admin' && <NavDropdown.Divider />}
+        <NavDropdown.Item onClick={onLogoutClick}>{formatMessage(messages.logout)}</NavDropdown.Item>
       </NavDropdown>
 
-      <Modal
-          show = {showLanguageDialog}
-          title = {formatMessage(messages.language_modal_title)}
-          onClose = {handleLanguageDialogClose}
-          size = 'sm'
-          noCloseButton>
-        <ListGroup>
-          {languageButtons}
-        </ListGroup>
-      </Modal>
+      <LanguageDialog
+          show     = {showLanguageDialog}
+          settings = {settings}
+          onChangeLanguage = {handleChangeLanguage}
+          onClose = {handleLanguageDialogClose} />
 
-      <Modal
-          show = {showThemeDialog}
-          title = {formatMessage(messages.theme_modal_title)}
-          onClose = {handleThemeDialogClose}
-          size = 'sm'
-          noCloseButton>
-        <ListGroup>
-          {themeButtons}
-        </ListGroup>
-      </Modal>
+      <ThemeDialog
+          show     = {showThemeDialog}
+          settings = {settings}
+          onChangeTheme = {handleChangeTheme}
+          onClose = {handleThemeDialogClose} />
     </>
   );
 };

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chip 1`] = `
+<span
+  className="chip secondary some class"
+>
+  Some string test
+</span>
+`;

@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PaginationLink 1`] = `
+<li
+  className="page-item active"
+>
+  <a
+    className="page-link btn-outline-primary active"
+    href="/http://localhost:8080"
+    onClick={[Function]}
+  >
+    17
+  </a>
+</li>
+`;
+
+exports[`PaginationLink disabled 1`] = `
+<li
+  className="page-item disabled"
+>
+  <a
+    className="page-link btn-outline-primary disabled"
+    href="/"
+    onClick={[Function]}
+  >
+    &lt;-
+  </a>
+</li>
+`;

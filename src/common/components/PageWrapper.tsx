@@ -1,11 +1,12 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { useLocation, useNavigate } from 'react-router';
 
 import { AnyComponent } from '../../types/Types';
+import DynamicHeightContext from '../context/DynamicHeightContext';
 import ArrayReducerType from '../store/ArrayReducerType';
 import ItemReducerType from '../store/ItemReducerType';
-import { getResourcePath } from '../utility';
+import { getEnv, getResourcePath } from '../utility';
 import ErrorBoundary from './ErrorBoundary';
 
 /** {@link PageTitleFixer} Props. */
@@ -19,13 +20,34 @@ interface IPageWrapperProps {
 }
 
 /**
+ * Strips slashes etc. of the path.
+ *
+ * Example:
+ * location.pathname = /browse/
+ * toCleanLocationPath = browse
+ *
+ * @param path - location.pathname
+ *
+ * @return Nice path without gibberish.
+ */
+function toCleanLocationPath(path: string): string {
+  const pathNoHost      = path.startsWith(getEnv('PUBLIC_URL') ?? '') ? path.substring((getEnv('PUBLIC_URL') ?? '').length) : path;
+  const startsWithSlash = pathNoHost.startsWith('/');
+  const endsWithSlash   = pathNoHost.endsWith('/');
+  const pathNoSlashes   = pathNoHost.substring(startsWithSlash ? 1 : 0, endsWithSlash ? pathNoHost.length - 1 : undefined);
+
+  return pathNoSlashes;
+}
+
+/**
  * HOC to properly set the browser title to assure accessibilty.
  */
- const PageWrapper: React.FC<IPageWrapperProps> = (props: IPageWrapperProps) => {
+ const PageWrapper: React.FC<IPageWrapperProps> = ({ title, id, state, children }: IPageWrapperProps) => {
   const nav = useNavigate();
   const location = useLocation();
-  const { title, id, state } = props;
   const error = state?.error;
+
+  const dynamicHeightContext = useContext(DynamicHeightContext);
 
   useEffect(() => {
     // ARIA: Titles should contain the application name and page title.
@@ -39,11 +61,11 @@ interface IPageWrapperProps {
   }, [id, error]);
 
   return (
-    <ErrorBoundary verbose printStack>
-      <Container className={location.pathname.substring(1)}>
-        {props.children}
-      </Container>
-    </ErrorBoundary>
+    <Container className={toCleanLocationPath(location.pathname)} style={{ marginTop: `${dynamicHeightContext?.toolbarHeight ?? 0}px` }}>
+      <ErrorBoundary verbose printStack>
+        {children}
+      </ErrorBoundary>
+    </Container>
   );
 };
 

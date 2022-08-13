@@ -1,23 +1,22 @@
 import { Suspense } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter, HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import Spinner from './components/Spinner';
 import store from '../common/store/store';
-import IntlProvider from './components/IntlProvider';
+import ContextProvider from './components/ContextProvider';
 import ThemeProvider from './components/ThemeProvider';
 import App from './App';
+import { isDemoMode } from '../common/utility';
 
 const Root = () => (
   <Suspense fallback={<Spinner />}>
     <Provider store={store}>
-      <IntlProvider>
-        <ThemeProvider>
-          <Router>
-            <App />
-          </Router>
-        </ThemeProvider>
-      </IntlProvider>
+      <ThemeProvider />
+      <ContextProvider>
+        {!isDemoMode() && <BrowserRouter><App /></BrowserRouter>}
+        { isDemoMode() && <HashRouter><App /></HashRouter>}
+      </ContextProvider>
     </Provider>
   </Suspense>
 );

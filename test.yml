@@ -3,6 +3,3 @@ services:
   web:
     build: .
     command: sh tests.sh
-    environment:
-      - NODE_ENV=development
-      - NODE_LOCALE=en

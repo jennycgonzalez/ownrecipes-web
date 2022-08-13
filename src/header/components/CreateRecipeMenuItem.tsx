@@ -1,6 +1,8 @@
 import { defineMessages, useIntl } from 'react-intl';
-import { Nav } from 'react-bootstrap';
+import { useLocation } from 'react-router';
+
 import { getResourcePath } from '../../common/utility';
+import NavLink from './NavLink';
 
 const CreateRecipeMenuItem: React.FC = () => {
   const { formatMessage } = useIntl();
@@ -12,8 +14,10 @@ const CreateRecipeMenuItem: React.FC = () => {
     },
   });
 
+  const location = useLocation();
+
   return (
-    <Nav.Link href={getResourcePath('/recipe/create')}>{formatMessage(messages.create_recipe)}</Nav.Link>
+    <NavLink to={getResourcePath('/recipe/edit/create')} active={location.pathname.endsWith('/recipe/edit/create')} accessKey='n'>{formatMessage(messages.create_recipe)}</NavLink>
   );
 };
 

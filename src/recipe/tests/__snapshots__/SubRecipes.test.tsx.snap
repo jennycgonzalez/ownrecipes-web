@@ -1,86 +1,88 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Test Sub Recipes 1`] = `
-<ul
-  className="ingredients"
+<div
+  className="subgroup ingredient-group"
 >
-  <li
-    className="ingredient"
+  <table
+    className="table ingredients-table table table-sm table-striped"
   >
-    <div>
-      <label
-        className="check-container"
-        htmlFor="1"
+    <caption
+      className="subheading h3"
+    >
+      Subrecipes
+      :
+    </caption>
+    <thead
+      className="hideme"
+    >
+      <tr>
+        <th>
+          <span>
+            Quantity
+          </span>
+        </th>
+        <th>
+          <span>
+            Subrecipe
+          </span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        className="ingredient"
       >
-        <input
-          checked={false}
-          name="1"
-          onChange={[Function]}
-          type="checkbox"
-        />
-        <span
-          className="checkmark"
-        />
-      </label>
-    </div>
-    <span
-      className="quantity"
-    >
-      1
-       
-    </span>
-    <span
-      className="measurement"
-    >
-      dash
-       
-    </span>
-    <a
-      className="title"
-      href="/recipe/undefined"
-      onClick={[Function]}
-    >
-      black pepper
-    </a>
-  </li>
-  <li
-    className="ingredient"
-  >
-    <div>
-      <label
-        className="check-container"
-        htmlFor="2"
+        <td
+          className="quantity first-col"
+        >
+          <span>
+            1
+             
+            dash
+          </span>
+        </td>
+        <td
+          className="ingredient last-col first-col"
+        >
+          <span>
+            <a
+              className="title"
+              href="/recipe/undefined"
+              onClick={[Function]}
+            >
+              black pepper
+            </a>
+          </span>
+        </td>
+      </tr>
+      <tr
+        className="ingredient"
       >
-        <input
-          checked={false}
-          name="2"
-          onChange={[Function]}
-          type="checkbox"
-        />
-        <span
-          className="checkmark"
-        />
-      </label>
-    </div>
-    <span
-      className="quantity"
-    >
-      4
-       
-    </span>
-    <span
-      className="measurement"
-    >
-      tablespoons
-       
-    </span>
-    <a
-      className="title"
-      href="/recipe/undefined"
-      onClick={[Function]}
-    >
-      chili powder
-    </a>
-  </li>
-</ul>
+        <td
+          className="quantity first-col"
+        >
+          <span>
+            4
+             
+            tablespoons
+          </span>
+        </td>
+        <td
+          className="ingredient last-col first-col"
+        >
+          <span>
+            <a
+              className="title"
+              href="/recipe/undefined"
+              onClick={[Function]}
+            >
+              chili powder
+            </a>
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 `;

@@ -1,15 +1,21 @@
 import { Dispatch as ReduxDispatch } from 'redux';
 import MapReducerType from '../../common/store/MapReducerType';
-import { GenericReducerAction } from '../../common/store/ReduxHelper';
+import { ACTION, GenericItemReducerAction, GenericMapReducerAction } from '../../common/store/ReduxHelper';
 
-export const RATINGS_STORE = '@@ratings';
+export const RATING_STORE  = '@@rating';
 
 export type RatingDto = {
   id:       number;
   comment:  string;
-  user_id:   number;
+  user_id:  number;
   username: string;
   rating:   number;
+
+  recipe?:  string;
+  author?:  number;
+
+  pub_date:    string; // ISO8601
+  update_date: string; // ISO8601
 }
 
 export type Rating = {
@@ -18,6 +24,9 @@ export type Rating = {
   userId:   number;
   userName: string;
   rating:   number;
+
+  pubDate:    string;
+  updateDate: string;
 }
 
 export type RatingCreate = {
@@ -32,36 +41,30 @@ export const toRating = (dto: RatingDto): Rating => ({
   userId:   dto.user_id,
   userName: dto.username,
   rating:   dto.rating,
+
+  pubDate:    dto.pub_date,
+  updateDate: dto.update_date,
 });
 
-export enum RatingsActionTypes {
-  ADD    = 'RATINGS_ADD',
-  LOAD   = 'RATINGS_LOAD',
-  DELETE = 'RATINGS_DELETE',
-  UPDATE = 'RATINGS_UPDATE',
-}
-
-export interface IRatingsLoadAction {
-  store:  typeof RATINGS_STORE;
-  type:   typeof RatingsActionTypes.LOAD;
-  recipe: string;
-  data:   Array<Rating>;
-}
-
-export interface IRatingsAddAction {
-  store:  typeof RATINGS_STORE;
-  type:   typeof RatingsActionTypes.ADD;
+export interface IRatingAddAction {
+  store:  typeof RATING_STORE;
+  type:   ACTION.CREATE_SUCCESS;
   recipe: string;
   data:   Rating;
 }
 
-export interface IRatingsDeleteAction {
-  store:    typeof RATINGS_STORE;
-  type:     typeof RatingsActionTypes.DELETE;
+export interface IRatingDeleteAction {
+  store:    typeof RATING_STORE;
+  type:     ACTION.DELETE_SUCCESS;
   recipe:   string;
   ratingId: number;
 }
 
+export type RatingAction   = IRatingAddAction | IRatingDeleteAction | GenericItemReducerAction<Rating>;
+export type RatingDispatch = ReduxDispatch<RatingAction>;
+
+export const RATINGS_STORE = '@@ratings';
+
 export type RatingsState    = MapReducerType<Rating[]>;
-export type RatingsAction   = IRatingsLoadAction | IRatingsAddAction | IRatingsDeleteAction | GenericReducerAction;
+export type RatingsAction   = GenericMapReducerAction<Rating[]>;
 export type RatingsDispatch = ReduxDispatch<RatingsAction>;

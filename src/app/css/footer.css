@@ -17,6 +17,32 @@
   align-items: center;
   justify-content: center;
 }
-.footer > .container p {
-  margin: 0
+.footer > .container > .footer-container-inner {
+  display: flex;
+  align-items: center;
+}
+.footer > .container > .footer-container-inner p {
+  margin: 0;
+}
+
+.footer > .container a, .footer > .container button {
+  color: inherit;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border: none;
+}
+.footer > .container a:hover,
+.footer > .container a:focus,
+.footer > .container button:hover,
+.footer > .container button:focus {
+  text-decoration: underline;
+  border: none;
+}
+
+
+.modal-about h2 {
+  font-size: 1.2rem;
+}
+.modal-about .credits-people .card {
+  height: 100%;
 }

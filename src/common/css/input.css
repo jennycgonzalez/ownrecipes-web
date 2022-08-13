@@ -1,22 +1,48 @@
+.form-group.required:not(.readonly) .form-control {
+  background-color: var(--primaryShadow);
+}
+
 .form-control {
   background-color: var(--midground);
   border-color: var(--inputBorder);
   color: var(--primaryText);
 }
-.form-control:hover {
-  border-color: var(--primaryText);
-  box-shadow: 0 0 0 .05rem var(--primaryText);
-}
 .form-control:focus {
-  background-color: var(--inputBgActive);
   border-color: var(--primaryText);
-  box-shadow: 0 0 0 .05rem var(--primaryText);
+  box-shadow: 0 0 0 1px var(--primaryText);
   color: var(--primaryText);
 }
+.form-group.readonly .form-control {
+  background-color: var(--inputBgDisabled);
+  color: var(--secondaryText);
+  border: 1px dotted var(--inputBorder);
+}
+.form-group.readonly .form-control:hover {
+  cursor: not-allowed;
+  border-color: var(--primaryText);
+}
+.form-group:not(.readonly) .form-control:focus {
+  background-color: var(--inputBgActive);
+}
+.form-group:not(.readonly) .form-control:hover {
+  border-color: var(--primaryMain);
+}
+
 .input-group-text {
   background-color: var(--hoverBg);
   color: var(--primaryText);
-  padding: .35em;
+  padding: .35em .75em;
   line-height: 1;
   border: 1px solid var(--inputBorder);
+}
+
+.form-group .input-adornment-start.button, .form-group .input-adornment-end.button {
+  padding: 0;
+}
+.form-group .input-adornment-start button, .form-group .input-adornment-end button {
+  height: inherit;
+  margin-left: 0;
+  background-color: transparent;
+  border-color: transparent;
+  min-height: unset;
 }

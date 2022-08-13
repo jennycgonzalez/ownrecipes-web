@@ -1,44 +1,83 @@
 /* Carousel base class */
 /* Declare heights because of positioning of img element */
-.carousel {
+.news-carousel {
+  margin-bottom: 0.5em;
+}
+.news-carousel .carousel-item img {
+  height: 16rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.news-carousel.with-controls {
+  height: 16rem;
+  background-color: var(--background);
+}
+.news-carousel.with-controls .carousel-item {
   height: 16rem;
 }
-.carousel .carousel-item {
-  height: 16rem;
-}
-.carousel .carousel-item img {
+.news-carousel.with-controls .carousel-item img {
   position: absolute;
   top: 0;
-  left: 0;
-  min-width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
   height: 16rem;
 }
-.carousel .carousel-item .carousel-caption {
-  z-index: 10;
-  color: var(--primaryText);
- /* Bump up size of carousel content */
+
+.news-carousel .carousel-item .carousel-caption.with-image h2 {
+  color: var(--primaryContrast);
 }
-.carousel .carousel-item .carousel-caption p {
+.news-carousel .carousel-item .carousel-caption:not(.with-image) {
+  top: 0;
+
+  color: var(--primaryText);
+}
+.news-carousel .carousel-item .carousel-caption p {
   line-height: 1.4;
   margin-bottom: 20px;
-}
-.home-buttons {
-  margin-bottom: 20px;
-}
-.home-buttons .home-browse-button {
-  width: 100%;
-  font-size: 18px !important;
 }
 .menu-items .recipe-card-news-footer {
   width: 100%;
 }
 @media (max-width: 767px) {
-  .carousel .carousel-item .carousel-caption {
+  .news-carousel .carousel-item .carousel-caption {
     padding-bottom: 10px !important;
     left: 0%;
     right: 0%;
   }
-  .carousel .carousel-control-prev, .carousel .carousel-control-next {
+  .news-carousel .carousel-control-prev, .news-carousel .carousel-control-next {
     align-items: start;
+  }
+}
+
+.news-carousel:not(.with-controls) .carousel-item .carousel-caption:not(.with-image) {
+  position: relative;
+  right: 0;
+  left: 0;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+@media (min-width: 768px) {
+  .news-carousel:not(.with-controls) .carousel-item .carousel-caption:not(.with-image) {
+    margin-left: 15%;
+    margin-right: 15%;
+  }
+}
+
+#toggle-news-button {
+  display: block;
+}
+#toggle-news-button.show {
+  margin-bottom: 0.5rem;
+}
+#toggle-news-button.hide {
+  display: block;
+  margin-left: auto;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+@media (min-width: 768px) {
+  #toggle-news-button.show {
+    margin-left: auto;
+    margin-bottom: -2rem;
   }
 }

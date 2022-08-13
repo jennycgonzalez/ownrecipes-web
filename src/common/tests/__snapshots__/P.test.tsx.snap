@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`P jsx 1`] = `
+<p
+  className="body1"
+>
+  <div
+    className="foo jsx"
+  >
+    <span>
+      Some string test
+    </span>
+  </div>
+</p>
+`;
+
+exports[`P string 1`] = `
+<p
+  className="body1"
+>
+  Some string test
+</p>
+`;
+
+exports[`P variant body1 1`] = `
+<p
+  className="body1"
+>
+  Some string test
+</p>
+`;
+
+exports[`P variant body2 1`] = `
+<p
+  className="body2"
+>
+  Some string test
+</p>
+`;

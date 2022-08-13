@@ -1,21 +1,26 @@
 import { handleError, request } from '../../common/CustomSuperagent';
 import { serverURLs } from '../../common/config';
-import { Ingredient, Recipe, RecipeActionTypes, RecipeDispatch, RECIPE_STORE } from './types';
+import { Recipe, RecipeActionTypes, RecipeDispatch, RECIPE_STORE, toRecipe } from './RecipeTypes';
+import { ACTION } from '../../common/store/ReduxHelper';
 
 export const load = (recipeSlug: string) => (dispatch: RecipeDispatch) => {
+  dispatch({ store: RECIPE_STORE, type: ACTION.GET_START });
   request()
     .get(`${serverURLs.recipe}${recipeSlug}/`)
-    .then(res => dispatch({ store: RECIPE_STORE, type: RecipeActionTypes.RECIPE_LOAD, data: res.body }))
-    .catch(err => handleError(err, RECIPE_STORE));
+    .then(res => {
+      dispatch({ store: RECIPE_STORE, type: ACTION.GET_SUCCESS, data: toRecipe(res.body) });
+    })
+    .catch(err => dispatch(handleError(err, RECIPE_STORE)));
 };
 
 export const deleteRecipe = (recipeSlug: string) => (dispatch: RecipeDispatch) => {
+  dispatch({ store: RECIPE_STORE, type: ACTION.DELETE_START });
   request()
-    .get(`${serverURLs.recipe}${recipeSlug}/`)
+    .delete(`${serverURLs.recipe}${recipeSlug}/`)
     .then(() => {
-      dispatch({ store: RECIPE_STORE, type: RecipeActionTypes.RECIPE_DELETE, data: recipeSlug });
+      dispatch({ store: RECIPE_STORE, type: RecipeActionTypes.RECIPE_DELETE, data: { slug: recipeSlug } });
     })
-    .catch(err => handleError(err, RECIPE_STORE));
+    .catch(err => dispatch(handleError(err, RECIPE_STORE)));
 };
 
 export const updateServings = (recipeSlug: string, value: number) => (dispatch: RecipeDispatch) => {
@@ -111,3 +116,11 @@ export const bulkAdd = (recipeState: Recipe, list: string) => (dispatch: RecipeD
   }
 };
 */
+
+export const preload = (recipe: Partial<Recipe>) => (dispatch: RecipeDispatch) => {
+  dispatch({ store: RECIPE_STORE, type: ACTION.PRELOAD, data: recipe });
+};
+
+export const reset = () => (dispatch: RecipeDispatch) => {
+  dispatch({ store: RECIPE_STORE, type: ACTION.RESET });
+};

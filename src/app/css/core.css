@@ -18,7 +18,7 @@ body {
   flex: 1;
   background-color: var(--midground);
 
-  padding-top: 20px;
+  padding-top: 15px;
   padding-bottom: 20px;
 }
 @media screen and (max-width: 81rem) {
@@ -28,21 +28,31 @@ body {
   }
 }
 
+@media (min-width: 87rem) {
+  .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    max-width: 83rem;
+  }
+}
+
 /* Custom page CSS -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
-.container .text-muted {
-  margin: 20px 0;
-}
 code {
   font-size: 80%;
 }
 
 
+a {
+  color: var(--primaryMain);
+}
+a:hover {
+  color: var(--primaryLight);
+}
+
 h1, .h1 {
-  font-size:     2.4rem;
+  font-size:     1.8rem;
 }
 h2, .h2 {
-  font-size:     1.8rem;
+  font-size:     1.6rem;
   margin-bottom: 0.5em;
 }
 h3, .h3 {
@@ -60,29 +70,86 @@ h4, .h4 {
 }
 
 
+.accordion.accordion-flush .accordion-item {
+  background-color: transparent;
+  border-color: var(--inputBorder);
+}
+.accordion.accordion-flush .accordion-button {
+  background-color: var(--elevation);
+  color: var(--primaryText);
+}
+.accordion.accordion-flush .accordion-button:focus {
+  box-shadow: 0 0 0 1px var(--primaryText) inset;
+}
+html[data-theme="dark"] .accordion.accordion-flush .accordion-button.collapsed::after {
+  filter: invert(100%);
+}
+
+
 .dropdown-menu.show {
   background-color: var(--elevation);
+  max-height: 66vh;
+  overflow-y: auto;
 }
 .dropdown-item {
   color: var(--primaryText);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-radius: 4px;
 }
-.dropdown-item:hover {
-  background-color: var(--hoverBg);
+.dropdown-item:not(.disabled):hover {
   color: var(--hoverText);
+  background-color: var(--hoverBg);
 }
-
+.dropdown-item:focus {
+  color: var(--hoverText);
+  background-color: var(--hoverBg);
+  box-shadow: 0 0 0 2px var(--primaryText) inset;
+  outline: 0;
+}
+.dropdown-item:active {
+  color: var(--hoverText);
+  background-color: var(--hoverBg);
+  box-shadow: 0 0 0 2px var(--primaryText) inset;
+  outline: 0;
+}
+.dropdown-item.active {
+  color: var(--primaryContrast);
+  background-color: var(--primaryMain);
+  border-radius: 0;
+}
+.dropdown-item.active:hover {
+  color: var(--primaryContrast);
+  background-color: var(--primaryLight);
+}
 
 .list-group-item {
-  background-color: var(--midground);
   color: var(--primaryText);
+  background-color: var(--midground);
+  padding-top: 0;
+  padding-bottom: 0;
+  height:      3em;
+  line-height: 3em;
+}
+@media screen and (min-width: 768px) {
+  .list-group-item {
+    height:      2.5em;
+    line-height: 2.5em;
+  }
 }
 .list-group-item:not(.disabled):hover {
-  background-color: var(--hoverBg);
   color: var(--hoverText);
+  background-color: var(--hoverBg);
+}
+.list-group-item-action:focus, .list-group-item-action:focus-visible {
+  color: var(--hoverText);
+  background-color: var(--hoverBg);
+  box-shadow: 0 0 0 2px var(--primaryText);
+  outline: 0;
 }
 .list-group-item.disabled, .list-group-item:disabled {
-  background-color: var(--inputBgDisabled);
   color: var(--disabledText);
+  background-color: var(--inputBgDisabled);
 }
 
 
@@ -98,6 +165,101 @@ h4, .h4 {
   color: var(--secondaryText);
 }
 
+.sk-spinner.sk-circle {
+  color: var(--disabledText);
+}
+
+
+.nav-link {
+  color: var(--primaryMain);
+}
+@media screen and (max-width: 767px) {
+  .nav-link {
+    padding-top:    0.75em;
+    padding-bottom: 0.75em;
+    padding-right:  1em;
+    padding-left:   1em;
+  }
+}
+.nav-link:hover, .nav-link:focus {
+  color: var(--primaryLight);
+}
+
+.nav-tabs {
+  border-color: var(--inputBorder);
+}
+.nav-tabs .nav-link {
+  color: var(--secondaryText);
+}
+.nav-tabs .nav-link.active {
+  color: var(--primaryText);
+  background-color: var(--inputBgActive);
+  border-color: var(--inputBorder);
+  border-bottom: 0;
+}
+.nav-tabs .nav-link:not(.active):hover {
+  background-color: var(--hoverBg);
+}
+.nav-tabs .nav-link.active:hover {
+  cursor: default;
+}
+
+
 .table {
   color: var(--primaryText);
+  height: '1px'; /* HACK: Fix height issues in older browser. */
+}
+.table > thead.hideme {
+  height: 1px;
+}
+.table > thead.hideme {
+  height: 1px;
+  border: none;
+}
+.table > thead.hideme > tr {
+  height: 1px;
+  border: none !important;
+}
+.table > thead.hideme > tr > th {
+  height: 1px;
+  border: none !important;
+  width: 1px;
+  position: absolute;
+  overflow: hidden;
+  top: -10px;
+  left: -10px;
+}
+.table-striped > tbody > tr:nth-of-type(2n+1) {
+  color: var(--hoverText);
+}
+.table-striped > tbody > tr:nth-of-type(2n+1) > td {
+  background-color: var(--hoverBg);
+  box-shadow: none;
+}
+.table-striped > tbody > tr:nth-of-type(2n+1) > td:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+
+}
+.table-striped > tbody > tr:nth-of-type(2n+1) > td:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+@media (max-width: 767px) {
+  .hidden-xs {
+    display: none;
+  };
+}
+@media (min-width: 768px) {
+  .visible-xs {
+    display: none;
+  };
+}
+
+html[data-theme="dark"] img {
+  opacity: 0.875;
+}
+html[data-theme="dark"] img:hover {
+  opacity: 1.0;
 }

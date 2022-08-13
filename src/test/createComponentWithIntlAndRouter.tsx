@@ -2,8 +2,7 @@ import renderer from 'react-test-renderer';
 import { IntlProvider } from 'react-intl';
 import { MemoryRouter } from 'react-router-dom';
 
-const createComponentWithIntl = (children: React.ReactNode, props = { locale: 'en' }) => renderer.create(
-  // eslint-disable-next-line react/jsx-props-no-spreading
+const createComponentWithIntlAndRouter = (children: React.ReactNode, props = { locale: 'en' }) => renderer.create(
   <IntlProvider {...props}>
     <MemoryRouter>
       { children }
@@ -11,4 +10,4 @@ const createComponentWithIntl = (children: React.ReactNode, props = { locale: 'e
   </IntlProvider>
 );
 
-export default createComponentWithIntl;
+export default createComponentWithIntlAndRouter;

@@ -1,65 +1,100 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router';
 import * as _ from 'lodash';
+
+import '../css/recipe.css';
 
 import Loading from '../../common/components/Loading';
 // import MenuItemModal from '../../menu/components/modals/MenuItemModal';
 import RecipeScheme from '../components/RecipeScheme';
+import useDispatch from '../../common/hooks/useDispatch';
 import * as RecipeActions from '../store/RecipeActions';
-import * as RecipesActions from '../store/RecipesActions';
+import * as RecipeFormActions from '../../recipe_form/store/actions';
 // import * as MenuItemActions from '../../menu/actions/MenuItemActions';
 // import { fetchRecipeList } from '../../menu/actions/RecipeListActions';
 // import { menuItemValidation } from '../../menu/actions/validation';
-
-import '../css/recipe.css';
-import { useParams } from 'react-router';
-import PageWrapper from '../../common/components/PageWrapper';
 import { CombinedStore } from '../../app/Store';
+import { Recipe } from '../store/RecipeTypes';
+import { getResourcePath } from '../../common/utility';
+import useCrash from '../../common/hooks/useCrash';
 
 const RecipeContainer: React.FC = () => {
   const dispatch = useDispatch();
+  const nav = useNavigate();
   const params = useParams();
+  const crash = useCrash();
 
-  const [showItemModal, setShowItemModal] = useState<boolean>(false);
-
+  const paramsRecipe = params.recipe;
+  // Load Recipe
   useEffect(() => {
-    const rec = _.get(params, 'recipe');
-    if (rec) {
-      dispatch(RecipeActions.load(rec));
+    if (paramsRecipe) {
+      dispatch(RecipeActions.load(paramsRecipe));
       window.scrollTo(0, 0);
     }
-  }, [params]);
+  }, [paramsRecipe]);
 
   const accountState = useSelector((state: CombinedStore) => state.account);
-  // TODO
-  // const listsState   = useSelector((state: CombinedStore) => state.lists);
-  const recipeState  = useSelector((state: CombinedStore) => state.recipe);
   const account = accountState.item;
-  // TODO
-  const lists: Array<any> = []; // listsState.items;
-  const recipe  = recipeState.item;
+  // TODO Lists
+  // const listsState   = useSelector((state: CombinedStore) => state.lists);
+  // const lists: listsState.items;
+  const recipeState  = useSelector((state: CombinedStore) => state.recipe);
+  const recipe = recipeState.item;
+  const prevRecipe = useRef<Recipe | undefined>();
+
+  // const [showItemModal, setShowItemModal] = useState<boolean>(false);
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
+
+  // If recipe not found, redirect to NotFound-Page
+  useEffect(() => {
+    if (_.get(recipeState.error, 'status') === 404) {
+      nav(getResourcePath('/NotFound'));
+    }
+  }, [recipeState.error]);
 
   const recipeSlug = params.recipe ?? '';
   const showEditLink = (account != null && account.id === recipe?.author);
 
-  const menuItemSave = useCallback(() => { /* dispatch(MenuItemActions.save() */ }, [dispatch]);
-  const deleteRecipe = useCallback(() => dispatch(RecipeActions.deleteRecipe(recipeSlug)), [dispatch]);
+  const handlePreloadRecipe = () => {
+    if (recipe == null) { crash('Invalid state: recipe may not be null'); return; }
+    dispatch(RecipeFormActions.preload(recipe));
+  };
 
-  // TODO
-  const bulkAdd = useCallback((listId: number) => { /* RecipeActions.bulkAdd(recipe, listId) */ }, [dispatch]);
-  const checkAllIngredients = useCallback(() => RecipeActions.checkAll(recipeSlug), [dispatch]);
-  const uncheckAllIngredients = useCallback(() => RecipeActions.unCheckAll(recipeSlug), [dispatch]);
+  // const menuItemSave = useCallback(() => { /* dispatch(MenuItemActions.save() */ }, [dispatch]);
+  const deleteRecipe = useCallback(() => {
+    setIsDeleting(true);
+    dispatch(RecipeActions.deleteRecipe(recipeSlug));
+  }, [dispatch]);
 
-  const checkIngredient = useCallback((id: number, checked: boolean) => RecipeActions.checkIngredient(recipeSlug, id, checked), [dispatch]);
-  const checkSubRecipe  = useCallback((id: number, checked: boolean) => RecipeActions.checkSubRecipe(recipeSlug, id, checked), [dispatch]);
+  // Handle deletion
+  useEffect(() => {
+    if (prevRecipe.current == null) {
+      prevRecipe.current = recipe;
+    } else if (isDeleting && prevRecipe.current != null && recipe == null) {
+      nav(getResourcePath('/browser'));
+    }
+  }, [recipe]);
 
-  const updateServings = useCallback((servings: number) => RecipeActions.updateServings(recipeSlug, servings), [dispatch]);
-  const resetServings  = useCallback(() => RecipeActions.resetServings(recipeSlug) , [dispatch]);
+  // componentWillUnmount
+  useEffect(() => () => {
+    dispatch(RecipeActions.reset());
+  }, []);
 
-  if (recipe) {
+  // TODO Lists
+  // const bulkAdd = useCallback((listId: number) => { /* RecipeActions.bulkAdd(recipe, listId) */ }, [dispatch]);
+  // const checkAllIngredients = useCallback(() => RecipeActions.checkAll(recipeSlug), [dispatch]);
+  // const uncheckAllIngredients = useCallback(() => RecipeActions.unCheckAll(recipeSlug), [dispatch]);
+
+  // const checkIngredient = useCallback((id: number, checked: boolean) => RecipeActions.checkIngredient(recipeSlug, id, checked), [dispatch]);
+  // const checkSubRecipe  = useCallback((id: number, checked: boolean) => RecipeActions.checkSubRecipe(recipeSlug, id, checked), [dispatch]);
+
+  const updateServings = useCallback((servings: number) => dispatch(RecipeActions.updateServings(recipeSlug, servings)), [dispatch]);
+
+  if (recipe != null) {
     return (
       <>
-        {/* TODO
+        {/* TODO Lists
         <MenuItemModal
             id={0}
             show={showItemModal}
@@ -70,26 +105,24 @@ const RecipeContainer: React.FC = () => {
             fetchRecipeList={fetchRecipeList}
             validation={menuItemValidation} /> */}
         <RecipeScheme
-            // eslint-disable-next-line react/jsx-props-no-spreading
-            recipe={recipe}
-            // recipesState={listsState.pending} // TODO
-            recipesState={recipeState}
-            lists={lists}
+            recipe       = {recipe}
+            recipeState  = {recipeState}
 
-            showEditLink={showEditLink}
+            showEditLink = {showEditLink}
 
-            onAddToMenuClick={() => setShowItemModal(true)}
-            deleteRecipe={deleteRecipe}
+            onEditRecipe = {handlePreloadRecipe}
+            deleteRecipe = {deleteRecipe}
 
-            bulkAdd={bulkAdd}
-            checkAllIngredients={checkAllIngredients}
-            uncheckAllIngredients={uncheckAllIngredients}
+            // lists={lists}
+            // onAddToMenuClick={() => setShowItemModal(true)}
+            // bulkAdd={bulkAdd}
+            // checkAllIngredients={checkAllIngredients}
+            // uncheckAllIngredients={uncheckAllIngredients}
 
-            checkIngredient={checkIngredient}
-            checkSubRecipe={checkSubRecipe}
+            // checkIngredient={checkIngredient}
+            // checkSubRecipe={checkSubRecipe}
 
-            updateServings={updateServings}
-            resetServings={resetServings} />
+            updateServings = {updateServings} />
       </>
     );
   } else {

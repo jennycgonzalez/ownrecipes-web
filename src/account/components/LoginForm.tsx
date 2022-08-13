@@ -1,14 +1,15 @@
+import { useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
 import { defineMessages, useIntl } from 'react-intl';
 import * as _ from 'lodash';
 
-import Alert from './Alert';
-
 import '../css/login.css';
+
 import { AccountState } from '../store/types';
-import { useState } from 'react';
-import { Button } from 'react-bootstrap';
 import Icon from '../../common/components/Icon';
 import Input from '../../common/components/Input';
+import Alert from './Alert';
+import { PendingState } from '../../common/store/GenericReducerType';
 
 export interface ILoginFormProps {
   accountState: AccountState;
@@ -21,23 +22,8 @@ interface ILoginFormData {
   password: string;
 }
 
-const LoginForm: React.FC<ILoginFormProps> = (props: ILoginFormProps) => {
+const LoginForm: React.FC<ILoginFormProps> = ({ accountState, onLogin }: ILoginFormProps) => {
   const intl = useIntl();
-
-  const [formData, setFormData] = useState<ILoginFormData>({ username: '', password: '' });
-
-  const handleChange = (attr: string, value: string) => {
-    setFormData(prev => {
-      const newState = _.cloneDeep(prev);
-      _.set(newState, attr, value);
-      return newState;
-    });
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    props.onLogin(formData.username, formData.password);
-  };
 
   const { formatMessage } = intl;
   const messages = defineMessages({
@@ -63,19 +49,34 @@ const LoginForm: React.FC<ILoginFormProps> = (props: ILoginFormProps) => {
     },
   });
 
+  const [formData, setFormData] = useState<ILoginFormData>({ username: '', password: '' });
+
+  const handleChange = (attr: string, value: string) => {
+    setFormData(prev => {
+      const newState = _.cloneDeep(prev);
+      _.set(newState, attr, value);
+      return newState;
+    });
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    onLogin(formData.username, formData.password);
+  };
+
   return (
-    <form className='form-signin' onSubmit={handleSubmit}>
-      <Alert reducerState={props.accountState} />
+    <Form className='form-signin' onSubmit={handleSubmit}>
+      <Alert reducerState={accountState} />
+
       <h2 className='form-signin-heading'>{formatMessage(messages.please_sign_in)}</h2>
       <Input
           name  = 'username'
           value = {formData.username}
           placeholder = {formatMessage(messages.username)}
           autoComplete = 'username'
-          autoFocus
           required
           inputAdornmentStart = {<Icon icon='person' size='2x' />}
-          change = {handleChange} />
+          onChange = {handleChange} />
       <Input
           name  = 'password'
           value = {formData.password}
@@ -84,12 +85,12 @@ const LoginForm: React.FC<ILoginFormProps> = (props: ILoginFormProps) => {
           autoComplete = 'password'
           required
           inputAdornmentStart = {<Icon icon='key' size='2x' />}
-          change = {handleChange} />
+          onChange = {handleChange} />
 
-      <Button variant='primary' type='submit'>
+      <Button variant='primary' type='submit' disabled={accountState.pending === PendingState.LOADING}>
         {formatMessage(messages.sign_in)}
       </Button>
-    </form>
+    </Form>
   );
 };
 

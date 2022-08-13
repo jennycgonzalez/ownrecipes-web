@@ -1,0 +1,35 @@
+{
+  "account": {
+    "item": {
+      "id": 99,
+      "token": "fghjfghj",
+      "username": "Demo User",
+      "email": "demo@user.web",
+      "role": "user"
+    },
+    "ident": "@@account",
+    "pending": "COMPLETED",
+    "hasConnection": true
+  },
+  "news": {
+    "items": [
+      {
+        "id": 1,
+        "image": null,
+        "title": "OwnRecipes",
+        "content": "%introduction%",
+        "frontpage": true
+      },
+      {
+        "id": 2,
+        "image": null,
+        "title": "Features",
+        "content": "%features%",
+        "frontpage": true
+      }
+    ],
+    "ident": "@@news",
+    "pending": "COMPLETED",
+    "hasConnection": true
+  }
+}

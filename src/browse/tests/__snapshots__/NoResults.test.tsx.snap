@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoResults component test 1`] = `
+<p
+  className="body1 no-results placeholder"
+>
+  There are no results for your search.
+</p>
+`;

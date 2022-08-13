@@ -1,56 +1,71 @@
 html {
   /* light */
-  --primaryLight: #3cb42a;
-  --primaryMain: #349b25;
-  --primaryShadow: rgba(49, 253, 132, .5);
+  --primaryLight: #65b425;
+  --primaryMain: #448112;
+  --primaryShadow: rgba(89, 192, 49, 0.25);
   --primaryContrast: #fff;
-  --disabledTheme: #727f8b;
 
-  --background: #eaeaea;
-  --midground: #fafafa;
+  --secondaryMain: #da6575;
+  --secondaryLight: #f17f8e;
+  --secondaryContrast: #fff;
+
+  --actionDisabled: #b9c1c5;
+
+  --background: #efefef;
+  --midground: #fbfcfd;
   --elevation: #fff;
 
   --elevationShadow: rgba(33, 33, 33, 0.75);
   --elevationBorder: rgba(0, 0, 0, 0.2);
 
   --primaryText: #1f1f1f;
-  --secondaryText: #3f3f3f;
-  --disabledText: #7b7b7b;
+  --secondaryText: #444;
+  --disabledText: #777;
   --hoverText: #000;
-  --errorText: #d40c0c;
+  --errorText: #b60d0d;
+  --infoText: #0d0db6;
+  --successText: #349b25;
 
   --inputBgActive: #fff;
-  --inputBgDisabled: #d5d5d5;
-  --inputBorder: #777;
+  --inputBgRequired: rgba(89, 192, 49, 0.13);
+  --inputBgDisabled: #e2e2e2;
+  --inputBorder: #aaa;
 
   --hoverBg: rgba(110, 135, 150, 0.15);
 }
 
 html[data-theme="dark"] {
   /* dark */
-  --primaryLight: #3cb42a;
-  --primaryMain: #349b25;
-  --primaryShadow: rgba(49, 253, 132, .5);
+  --primaryLight: #2faa49;
+  --primaryMain: #4f9615;
+  --primaryShadow: rgba(74, 151, 38, 0.25);
   --primaryContrast: #fff;
 
-  --disabledTheme: #8b8d8e;
+  --secondaryMain: #da6575;
+  --secondaryLight: #f17f8e;
+  --secondaryContrast: #fff;
 
-  --background: #1a1a1d;
-  --midground: #20242c;
+  --actionDisabled: #303336;
+
+  --background: #151518;
+  --midground: #181c22;
   --elevation: #33373d;
 
-  --elevationShadow: rgba(33, 33, 33, 0.75);
+  --elevationShadow: rgba(96, 96, 110, 0.4);
   --elevationBorder: rgba(255, 255, 255, 0.2);
 
   --primaryText: #ededed;
   --secondaryText: #d0d0d0;
   --disabledText: #bababa;
   --hoverText: #fff;
-  --errorText: #d40c0c;
+  --errorText: #f01616;
+  --infoText: #3676ff;
+  --successText: #349b25;
 
-  --inputBgActive: #2a333a;
-  --inputBgDisabled: #2a2d30;
-  --inputBorder: #bababa;
+  --inputBgActive: #1d2430;
+  --inputBgRequired: rgba(74, 151, 0, 0.15);
+  --inputBgDisabled: #303336;
+  --inputBorder: #bbb;
 
   --hoverBg: rgba(105, 130, 150, 0.15);
 }

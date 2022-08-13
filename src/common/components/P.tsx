@@ -8,8 +8,8 @@ export interface IPProps {
   children: React.ReactNode;
 }
 
-const P: React.FC<IPProps> = (props: IPProps) => (
-  <p className={classNames(props.variant ?? 'body1', props.className)}>{props.children}</p>
+const P: React.FC<IPProps> = ({ variant, className, children }: IPProps) => (
+  <p className={classNames(variant ?? 'body1', className)}>{children}</p>
 );
 
 export default P;

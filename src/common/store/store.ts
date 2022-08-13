@@ -1,20 +1,24 @@
-import { createStore, applyMiddleware } from 'redux';
+// eslint-disable-next-line camelcase
+import { applyMiddleware, compose, legacy_createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
+
 import reducer from '../../app/Store';
+import { isDemoMode } from '../utility';
 
 let data;
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-if (process.env.NODE_ENV === 'demo') {
+if (isDemoMode()) {
   // eslint-disable-next-line global-require
-  data = require('../demo/data.json');
+  data = require('../../demo/store/data.json');
 }
 
-const store = createStore(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = legacy_createStore(
   reducer,
   data,
-  applyMiddleware(
-    thunkMiddleware // lets us dispatch() functions
+  composeEnhancers(
+    applyMiddleware(thunkMiddleware)
   )
 );
 

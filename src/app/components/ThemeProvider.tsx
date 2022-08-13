@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { ThemeMode } from '../../account/store/settings/types';
-import { CombinedStore } from '../Store';
-
 import '../css/theme.css';
 
-export interface IThemeProviderProps {
-  children: React.ReactNode;
-}
+import { ThemeMode } from '../../account/store/settings/types';
+import * as SettingsActions from '../../account/store/settings/actions';
+import useDispatch from '../../common/hooks/useDispatch';
+import { CombinedStore } from '../Store';
 
-const ThemeProvider: React.FC<IThemeProviderProps> = (props: IThemeProviderProps) => {
+const ThemeProvider: React.FC = () => {
+  const dispatch = useDispatch();
+
+  const token    = useSelector((state: CombinedStore) => state.account.item);
   const settings = useSelector((state: CombinedStore) => state.settings);
+  const tokenId = token?.username;
 
   const [theme, setTheme] = useState<ThemeMode>();
 
@@ -33,7 +35,11 @@ const ThemeProvider: React.FC<IThemeProviderProps> = (props: IThemeProviderProps
     }
   }, [settings.themeMode]);
 
-  return <>{props.children}</>;
+  useEffect(() => {
+    dispatch(SettingsActions.init(tokenId));
+  }, [dispatch, tokenId]);
+
+  return null;
 };
 
 export default ThemeProvider;

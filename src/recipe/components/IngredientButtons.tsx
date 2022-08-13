@@ -1,5 +1,6 @@
 import { DropdownButton, Dropdown, ButtonGroup, Button } from 'react-bootstrap';
 import { defineMessages, useIntl } from 'react-intl';
+
 import { PendingState } from '../../common/store/GenericReducerType';
 
 export type IListsListType = {
@@ -8,15 +9,15 @@ export type IListsListType = {
 }
 
 export interface IIngredientButtonsProps {
-  lists: Array<IListsListType>;
   pending: PendingState;
+  lists: Array<IListsListType>;
 
   bulkAdd: (listId: number) => void;
   checkAll: () => void;
   unCheckAll: () => void;
 }
 
-const IngredientButtons: React.FC<IIngredientButtonsProps> = ({ lists, pending, bulkAdd, checkAll, unCheckAll }: IIngredientButtonsProps) => {
+const IngredientButtons: React.FC<IIngredientButtonsProps> = ({ lists /* , pending */, bulkAdd, checkAll, unCheckAll }: IIngredientButtonsProps) => {
   const { formatMessage } = useIntl();
 
   const messages = defineMessages({
@@ -56,15 +57,15 @@ const IngredientButtons: React.FC<IIngredientButtonsProps> = ({ lists, pending, 
   let checkmark = '';
   if (pending === PendingState.LOADING) {
     checkmark = (
-      <Spinner spinnerName="circle" className="recipe-list-spinner" noFadeIn />
+      <Loading />
     )
   } else if (pending === PendingState.COMPLETED) {
     checkmark = (
-      <div className="glyphicon glyphicon-ok"/>
+      <Icon icon='check' variant='light />
     );
   } else if (pending === PendingState.ABORTED) {
     checkmark = (
-      <div className="glyphicon glyphicon-remove"/>
+      <Icon icon='x-square' variant='light />
     );
   } */
 

@@ -4,8 +4,17 @@
   color: var(--primaryText);
 }
 .alert-danger .alert-heading {
-  color: var(--primaryText);
+  color: var(--errorText);
 }
 .alert .alert-icon {
   margin-right: 1rem;
+}
+
+.alert-info {
+  background-color: rgba(92, 92, 250, 0.2);
+  border-color: var(--infoText);
+  color: var(--primaryText);
+}
+.alert-info .alert-heading {
+  color: var(--infoText);
 }

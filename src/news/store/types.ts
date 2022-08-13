@@ -1,26 +1,34 @@
 import { Dispatch as ReduxDispatch } from 'redux';
+
 import ArrayReducerType from '../../common/store/ArrayReducerType';
-import { GenericReducerAction } from '../../common/store/ReduxHelper';
+import { GenericArrayReducerAction } from '../../common/store/ReduxHelper';
+
+export type NewsItemDto = {
+  id:        number;
+  image:     string;
+  title:     string;
+  content:   string;
+  frontpage: boolean;
+}
 
 export type NewsItem = {
-  id: number;
-  image: any;
-  title: string;
-  content: any;
+  id:        number;
+  image:     string;
+  title:     string;
+  content:   string;
+  frontpage: boolean;
 }
 
-export enum NewsActionTypes {
-  NEWS_LOAD  = 'NEWS_LOAD',
-}
+export const toNewsItem = (dto: NewsItemDto): NewsItem => ({
+  id:        dto.id,
+  image:     dto.image,
+  title:     dto.title,
+  content:   dto.content,
+  frontpage: dto.frontpage,
+});
 
-export const NEWS_STORE = '@@account';
-
-export interface INewsLoadAction {
-  store: typeof NEWS_STORE;
-  type: typeof NewsActionTypes.NEWS_LOAD;
-  data: Array<NewsItem>;
-}
+export const NEWS_STORE = '@@news';
 
 export type NewsState    = ArrayReducerType<NewsItem>;
-export type NewsAction   = INewsLoadAction | GenericReducerAction;
+export type NewsAction   = GenericArrayReducerAction<NewsItem>;
 export type NewsDispatch = ReduxDispatch<NewsAction>;

@@ -1,99 +1,45 @@
-import { Link } from 'react-router-dom';
-import { defineMessages, useIntl } from 'react-intl';
-import { Button, ButtonGroup, Card, Col, Row } from 'react-bootstrap';
-import { getResourcePath } from '../../common/utility';
-import Icon from '../../common/components/Icon';
-import P from '../../common/components/P';
+import { useIntl } from 'react-intl';
+import { useSelector } from 'react-redux';
+
+import { CombinedStore } from '../../app/Store';
+import { Recipe } from '../store/RecipeTypes';
+
+import MiniBrowse from '../../browse/containers/MiniBrowse';
+import ErrorBoundary from '../../common/components/ErrorBoundary';
 
 export interface IRecipeFooterProps {
-  slug:         string,
-  source:       string,
-  username:     string,
-  updateDate:   string,
-  showEditLink: boolean,
-  deleteRecipe: (slug: string) => void;
+  recipe?: Recipe;
 }
 
-const RecipeFooter: React.FC<IRecipeFooterProps> = ({ slug, source, username, updateDate, showEditLink, deleteRecipe }: IRecipeFooterProps) => {
-  const { formatMessage } = useIntl();
-
-  const messages = defineMessages({
-    source: {
-      id: 'recipe.source',
-      description: 'Source of the recipe',
-      defaultMessage: 'Source',
-    },
-    created_by: {
-      id: 'recipe.created_by',
-      description: 'Created by',
-      defaultMessage: 'Created by',
-    },
-    last_updated: {
-      id: 'recipe.last_updated',
-      description: 'Last Updated',
-      defaultMessage: 'Last Updated',
-    },
-    confirm_delete: {
-      id: 'recipe.confirm_delete',
-      description: 'Are you sure you want to delete this recipe?',
-      defaultMessage: 'Are you sure you want to delete this recipe?',
-    },
-  });
-
-  let hostname = '';
-  if (source) {
-    // Get Host name of a URL
-    const a = document.createElement('a');
-    a.href = source;
-    hostname = a.hostname;
+function getFilters(recipe: Recipe): Record<string, string> | undefined {
+  const res: Record<string, string> = {};
+  if (recipe.course) {
+    res.course__slug = recipe.course.title;
   }
+  if (recipe.cuisine) {
+    res.cuisine__slug = recipe.cuisine.title;
+  }
+  return Object.keys(res).length > 0 ? res : undefined;
+}
 
-  const handleDelete = () => {
-    if (window.confirm(formatMessage(messages.confirm_delete))) {
-      deleteRecipe(slug);
-      // TODO navigate to /browse
-    }
-  };
+const RecipeFooter: React.FC<IRecipeFooterProps> = ({ recipe }: IRecipeFooterProps) => {
+  const intl = useIntl();
 
-  const sourceLink = (
-    <div>
-      {`${formatMessage(messages.source)}: `}
-      <a href={source}>{hostname}</a>
-    </div>
-  );
+  const miniBrowseState = useSelector((state: CombinedStore) => state.browse.miniBrowse);
 
-  const editLink = showEditLink ? (
-    <Link to={getResourcePath(`/recipe/edit/${slug}`)}>
-      <Button variant='primary' size='sm'>
-        <i className='bi bi-pencil-fill' />
-      </Button>
-    </Link>
-  ) : null;
-
-  const deleteLink = showEditLink ? (
-    <Button variant='danger' size='sm' onClick={handleDelete}>
-      <Icon icon='trash' />
-    </Button>
-  ) : null;
+  if (!miniBrowseState.hasConnection || miniBrowseState.error
+      || !recipe?.author) return null;
 
   return (
-    <Card.Footer>
-      <Row>
-        <Col>
-          {source && sourceLink}
-          <P variant='body2'>{`${formatMessage(messages.created_by)}: ${username}`}</P>
-          <P variant='body2'>{`${formatMessage(messages.last_updated)}: ${updateDate}`}</P>
-        </Col>
-        {showEditLink && (
-          <Col xs='auto'>
-            <ButtonGroup>
-              {editLink}
-              {deleteLink}
-            </ButtonGroup>
-          </Col>
-        )}
-      </Row>
-    </Card.Footer>
+    <ErrorBoundary verbose printStack>
+      <hr />
+      <article className='recipe-footer'>
+        <MiniBrowse
+            heading = {intl.messages['nav.home.recommended_recipes_title'] as string}
+            count = {4}
+            filters = {getFilters(recipe)} />
+      </article>
+    </ErrorBoundary>
   );
 };
 

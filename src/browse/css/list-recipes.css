@@ -1,0 +1,64 @@
+#suggestions-heading {
+  display: inline-block;
+}
+#shuffle-suggestions-button {
+  margin-top: -0.5em;
+  margin-left: 1em;
+}
+
+.recipes-list .recipe {
+  border: 0;
+}
+
+.recipes-list .recipe > a {
+  text-decoration: none;
+  color: unset;
+  padding: 4px;
+}
+.recipes-list .recipe > a:focus {
+  box-shadow: 0 0 0 2px var(--primaryText);
+}
+.recipes-list .recipe > a:hover .card-title, .recipes-list .recipe > a:focus .card-title {
+  text-decoration: underline;
+  color: var(--primaryMain);
+}
+.recipes-list .recipe .card-title {
+  font-size: 1rem;
+  margin-top: 0.5em;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.recipes-list .recipe .card-title-tooltip {
+  max-width: 100%;
+}
+
+.recipes-list .recipe .ratings {
+  color: var(--secondaryMain);
+  margin-bottom: 0.5em;
+}
+
+.recipes-list .recipe .card-img-top {
+  height: 15rem;
+  width:  100%;
+  object-fit: cover;
+}
+@media screen and (min-width: 768px) {
+  .recipes-list .recipe .card-img-top {
+    height: 10rem;
+  }
+}
+.recipes-list .recipe .card-text {
+  font-size: 0.92rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.results-panel .results-container.pending {
+  opacity: 0.5;
+}

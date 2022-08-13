@@ -1,13 +1,9 @@
 import { Dispatch as ReduxDispatch } from 'redux';
+import { LanguageCode } from '../../../common/language';
 
 export enum ThemeMode {
   DARK = 'dark',
   LIGHT = 'light',
-}
-
-export enum LanguageCode {
-  DE = 'de',
-  EN = 'en',
 }
 
 export function parseTheme(theme: string | undefined | null, def: ThemeMode): ThemeMode {
@@ -19,35 +15,35 @@ export function parseTheme(theme: string | undefined | null, def: ThemeMode): Th
   }
 }
 
-export function parseLanguage(lang: string | undefined | null, def: LanguageCode): LanguageCode {
-  if (lang == null) return def;
-  if (Object.values(LanguageCode).includes(lang as LanguageCode)) {
-    return (lang as LanguageCode);
-  } else {
-    return def;
-  }
-}
-
 export enum SettingsActionTypes {
+  INIT       = 'INIT',
   THEME_MODE = 'THEME_MODE',
   LANGUAGE   = 'LANGUAGE',
 }
 
 export type Settings = {
+  // CAREFUL: Keys have to match the SETTING_XXX_STORAGE_KEY's value
   themeMode: ThemeMode;
   language:  LanguageCode;
 }
 
 export const SETTINGS_STORE = '@@settings';
-export const SETTING_THEME_STORAGE_KEY = 'ownrecipes-theme';
-export const SETTING_LANGUAGE_STORAGE_KEY = 'ownrecipes-lang';
+export const SETTING_THEME_STORAGE_KEY = 'themeMode';
+export const SETTING_LANGUAGE_STORAGE_KEY = 'language';
 
-export interface ISettingsAction {
+export interface ISettingsInitAction {
   store: typeof SETTINGS_STORE;
-  type: keyof typeof SettingsActionTypes;
+  type: SettingsActionTypes.INIT;
+  tokenId: string | undefined;
+}
+
+export interface ISettingsDataAction {
+  store: typeof SETTINGS_STORE;
+  type: typeof SettingsActionTypes.THEME_MODE | typeof SettingsActionTypes.LANGUAGE;
   data: string;
+  tokenId: string | undefined;
 }
 
 export type SettingsState    = Settings;
-export type SettingsAction   = ISettingsAction;
+export type SettingsAction   = ISettingsInitAction | ISettingsDataAction;
 export type SettingsDispatch = ReduxDispatch<SettingsAction>;

@@ -1,3 +1,83 @@
-.has-error .Select .Select-control {
-  border-color: #a94442;
+.react-select-container .creatable-select__control  {
+  background-color: var(--midground);
+  color: var(--primaryText);
+  min-height: 2rem;
+}
+.react-select-container .creatable-select__single-value {
+  color: var(--primaryText);
+}
+.react-select-container .creatable-select__control  {
+  border-color: var(--inputBorder);
+  border-radius: 0;
+}
+.react-select-container .creatable-select__control--is-focused {
+  background-color: var(--inputBgActive);
+  border-color: var(--primaryText);
+  box-shadow: 0 0 0 1px var(--primaryText);
+}
+.react-select-container .creatable-select__control:hover  {
+  border-color: var(--primaryMain);
+}
+.react-select-container .creatable-select__indicators .creatable-select__indicator {
+  color: var(--disabledText);
+  height: 2em;
+  line-height: 2em;
+  padding-top: 0;
+  padding-bottom: 0;
+  align-items: center;
+}
+.react-select-container .creatable-select__indicators .creatable-select__indicator:hover {
+  color: var(--primaryText);
+}
+.react-select-container .creatable-select__menu {
+  background-color: var(--elevation);
+}
+.react-select-container .creatable-select__menu .creatable-select__option.creatable-select__option--is-selected {
+  background-color: var(--inputBgDisabled);
+  color: var(--primaryText);
+}
+.react-select-container .creatable-select__option.creatable-select__option--is-focused {
+  background-color: var(--hoverBg);
+}
+
+.form-group.required:not(.readonly):not(.error) .creatable-select__control {
+  background-color: var(--inputBgRequired);
+}
+.form-group.error:not(.readonly) .creatable-select__control{
+  background-color: rgba(225, 128, 128, 0.15);
+  border-color: var(--errorText);
+}
+
+.react-select-container .creatable-select__control .creatable-select__value-container {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.react-select-container .creatable-select__control .creatable-select__input-container {
+  margin: 0;
+  padding: 0;
+  color: var(--primaryText);
+}
+.react-select-container .creatable-select__control .creatable-select__input-container .creatable-select__input {
+  height: 2em;
+  line-height: 2em;
+}
+
+.react-select-container .creatable-select__value-container--is-multi {
+  line-height: normal;
+  padding: 0 5px;
+}
+.react-select-container .creatable-select__multi-value {
+  background-color: var(--inputBgDisabled);
+  margin: 2px 4px 4px 4px;
+}
+.react-select-container .creatable-select__multi-value__label {
+  color: var(--primaryText);
+  font-size: 0.92rem;
+}
+.react-select-container .creatable-select__multi-value__remove:hover {
+  color: var(--secondaryText);
+}
+.react-select-container .creatable-select__multi-value__remove:hover {
+  background-color: var(--primaryShadow);
+  color: var(--primaryContrast);
 }

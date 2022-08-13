@@ -1,7 +1,9 @@
 import jwtDecode, { JwtPayload } from 'jwt-decode';
 import { Dispatch as ReduxDispatch } from 'redux';
+
 import ItemReducerType from '../../common/store/ItemReducerType';
-import { GenericReducerAction } from '../../common/store/ReduxHelper';
+import { GenericItemReducerAction } from '../../common/store/ReduxHelper';
+import UserRole from '../../common/types/UserRole';
 
 export type LoginDto = {
   id:    number;
@@ -13,6 +15,7 @@ export type UserAccount = {
   token:    string;
   username: string;
   email:    string;
+  role:     UserRole;
 }
 
 export type OwnrecipesPayload = {
@@ -20,6 +23,15 @@ export type OwnrecipesPayload = {
   email:    string;
   user_id:  number;
 } & JwtPayload;
+
+function getRole(decodedToken: OwnrecipesPayload): UserRole {
+  const username = decodedToken.username?.toLocaleLowerCase();
+  if (username == null) return UserRole.GUEST;
+
+  if (username.startsWith('guest') || username.startsWith('gast')) return UserRole.GUEST;
+  else if (['admin'].includes(username)) return UserRole.ADMIN;
+  else return UserRole.USER;
+}
 
 export const toUserAccount = (loginDto: LoginDto): UserAccount => {
   const { token } = loginDto;
@@ -34,6 +46,7 @@ export const toUserAccount = (loginDto: LoginDto): UserAccount => {
     token:    token,
     username: decodedToken.username,
     email:    decodedToken.email,
+    role:     getRole(decodedToken),
   };
 };
 
@@ -43,19 +56,19 @@ export enum AccountActionTypes {
 }
 
 export const ACCOUNT_STORE = '@@account';
-export const ACCOUNT_TOKEN_STORAGE_KEY = 'ownrecipes-token';
+export const ACCOUNT_TOKEN_STORAGE_KEY = 'token';
 
 export interface IAccountLoginAction {
   store: typeof ACCOUNT_STORE;
-  type: typeof AccountActionTypes.LOGIN;
-  user: UserAccount;
+  type:  typeof AccountActionTypes.LOGIN;
+  user:  UserAccount;
 }
 
 export interface IAccountLogoutAction {
   store: typeof ACCOUNT_STORE;
-  type: typeof AccountActionTypes.LOGOUT;
+  type:  typeof AccountActionTypes.LOGOUT;
 }
 
 export type AccountState    = ItemReducerType<UserAccount>;
-export type AccountAction   = IAccountLoginAction | IAccountLogoutAction | GenericReducerAction;
+export type AccountAction   = IAccountLoginAction | IAccountLogoutAction | GenericItemReducerAction<UserAccount>;
 export type AccountDispatch = ReduxDispatch<AccountAction>;

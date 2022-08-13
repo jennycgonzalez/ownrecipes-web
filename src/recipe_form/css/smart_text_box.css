@@ -1,0 +1,35 @@
+.rta {
+  position: relative;
+}
+.rta .loading {
+  border: solid 1px var(--elevationBorder);
+  background: var(--midground);
+  padding: 5px 0.5em;
+  animation: fadeIn 1s;
+  animation-delay: 1s;
+}
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+.rta .rta__autocomplete {
+  position: absolute;
+  margin-left: 10px;
+}
+.rta .rta__autocomplete ul {
+  list-style-type: none;
+  border: solid 1px var(--elevationBorder);
+  background: var(--midground);
+  padding: 0;
+  width: 14rem;
+}
+.rta .rta__autocomplete ul .rta__entity {
+  padding: 4px;
+  border-bottom: solid 1px var(--elevationBorder);
+  width: 100%;
+}
+.rta .rta__autocomplete ul .rta__entity.rta__entity--selected {
+  color: var(--primaryMain);
+  background: var(--elevation);
+  cursor: default;
+}

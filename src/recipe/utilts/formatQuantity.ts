@@ -1,15 +1,15 @@
 /* eslint-disable no-param-reassign */
 import { GCD } from './gcd';
 
-export default (servings: number, customServings: number, numerator: number, denominator: number): string => {
+export default (servings: number, customServings: number, numerator: number | undefined, denominator: number): string => {
+  if (numerator == null) return '';
+
   // If there isn't a denominator.
   // We can assume the user wants to display
   // the recipe ings as decimals.
   if (denominator <= 1) { return parseFloat((numerator * (customServings / servings)).toFixed(3)).toString(); }
 
-  // Check if there is a custom serving.
-  // If there is, we multiple the numerator by the custom servings amount
-  // and multiple the denominator by the servings amount.
+  // Multiply the custom serving.
   if (servings !== customServings) {
     numerator *= customServings;
     denominator *= servings;
@@ -20,23 +20,18 @@ export default (servings: number, customServings: number, numerator: number, den
   const quotient = Math.floor(numerator / denominator);
 
   // The remainder from what is left over.
-  // Set is as the new numerator.
+  // Set it as the new numerator.
   numerator %= denominator;
 
-  // If the numerator zero then return just the quotient
+  // If the numerator zero then return just the quotient.
   if (numerator === 0) { return quotient.toString(); }
 
-  // Get the GCD and reduce the fraction.1
+  // Get the GCD and reduce the fraction.
   const gcd = GCD(numerator, denominator);
   numerator /= gcd;
   denominator /= gcd;
 
-  // OPT: We should do some math to try and
-  // round weird fractions to smaller ones.
-  // For Example, 23/64 -> 3/8
-
-  // If the denominator is greater than 8.
-  // Display as a decimal.
+  // If things get weird, display as a decimal.
   if (denominator > 12) { return parseFloat((quotient + (numerator / denominator)).toFixed(3)).toString(); }
 
   const quotientString = quotient > 0 ? `${quotient.toString()} ` : '';

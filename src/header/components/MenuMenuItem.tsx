@@ -1,6 +1,7 @@
 import { defineMessages, useIntl } from 'react-intl';
-import { Nav } from 'react-bootstrap';
+
 import { getResourcePath } from '../../common/utility';
+import NavLink from './NavLink';
 
 const MenuMenuItem: React.FC = () => {
   const { formatMessage } = useIntl();
@@ -13,7 +14,7 @@ const MenuMenuItem: React.FC = () => {
   });
 
   return (
-    <Nav.Link href={getResourcePath('/menu')}>{formatMessage(messages.menu)}</Nav.Link>
+    <NavLink to={getResourcePath('/menu')}>{formatMessage(messages.menu)}</NavLink>
   );
 };
 

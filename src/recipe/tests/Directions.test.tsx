@@ -1,10 +1,10 @@
 import Directions from '../components/Directions';
-import renderer from 'react-test-renderer';
+import createComponentWithIntlAndRouter from '../../test/createComponentWithIntlAndRouter';
 
 import data from './data';
 
 test('Direction component test', () => {
-  const component = renderer.create(
+  const component = createComponentWithIntlAndRouter(
     <Directions data={data.directions} />
   );
   const tree = component.toJSON();

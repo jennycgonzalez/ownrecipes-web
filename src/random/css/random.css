@@ -1,0 +1,31 @@
+.container.random .random-header-container {
+  align-items: flex-end;
+}
+
+.container.random .search-menu {
+  margin-bottom: 1rem;
+}
+.container.random .search-menu > * {
+  margin-top: 10px;
+}
+
+.container.random .reload-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.container.random .search-reload {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  padding: 1rem;
+}
+.container.random .search-reload .search-reload-box p {
+  margin-bottom: 0;
+}
+.container.random .search-reload .search-reload-button-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 2rem;
+}

@@ -1,0 +1,18 @@
+.tooltip.show {
+  opacity: 1;
+}
+
+.tooltip .tooltip-arrow {
+  display: none;
+}
+
+.tooltip-inner {
+  max-width: 18.75em;
+  background-color: var(--elevation);
+  color: var(--primaryText);
+  box-shadow: 0 0 5px 1px var(--primaryMain);
+}
+
+.tooltip-inline-block {
+  display: inline-block;
+}

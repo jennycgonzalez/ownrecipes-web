@@ -1,0 +1,36 @@
+.recipe-details .directions h2 {
+  height: 2.5rem;
+  line-height: 2.5rem;
+}
+.recipe-details .directions .subgroup {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.recipe-details .directions .subgroup:not(:first-of-type) {
+  margin-top: 40px;
+}
+.recipe-details .directions ol {
+  display: block;
+}
+.directions ol {
+  list-style: none;
+  counter-reset: cupcake;
+  padding-left: 0.5rem;
+}
+.directions ol li {
+  counter-increment: cupcake;
+  margin-bottom: 1.25rem;
+}
+.directions ol li:before {
+  content: counters(cupcake, '.') ' ';
+  /* Whatever custom styles you want here */
+  color: var(--secondaryContrast);
+  background-color: var(--secondaryMain);
+  border-radius: 50%;
+  font-weight: bold;
+
+  display: inline-block;
+  width: 1.5em;
+  margin-right: 10px;
+  text-align: center;
+}

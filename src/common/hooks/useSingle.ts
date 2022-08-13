@@ -5,5 +5,5 @@ export default function useSingle(getFunction: () => void, obj: unknown) {
     if (obj == null) {
       getFunction();
     }
-  }, [getFunction]);
+  }, [getFunction, obj]);
 }
