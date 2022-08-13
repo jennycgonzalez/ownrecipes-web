@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/ownrecipes-web/static/css/main.5582f474.css",
-    "main.js": "/ownrecipes-web/static/js/main.5ad2194d.js",
-    "static/media/bootstrap-icons.woff?": "/ownrecipes-web/static/media/bootstrap-icons.c1d7432ee75fa194e499.woff",
-    "static/media/bootstrap-icons.woff2?": "/ownrecipes-web/static/media/bootstrap-icons.a13b815539b49de48d23.woff2",
+    "main.css": "/ownrecipes-web/static/css/main.40306dbf.css",
+    "main.js": "/ownrecipes-web/static/js/main.882f05a4.js",
+    "static/media/bootstrap-icons.woff?": "/ownrecipes-web/static/media/bootstrap-icons.e559bf06bc84fd9525e6.woff",
+    "static/media/bootstrap-icons.woff2?": "/ownrecipes-web/static/media/bootstrap-icons.ea98e12d2d58747f9fc5.woff2",
     "index.html": "/ownrecipes-web/index.html",
-    "main.5582f474.css.map": "/ownrecipes-web/static/css/main.5582f474.css.map",
-    "main.5ad2194d.js.map": "/ownrecipes-web/static/js/main.5ad2194d.js.map"
+    "main.40306dbf.css.map": "/ownrecipes-web/static/css/main.40306dbf.css.map",
+    "main.882f05a4.js.map": "/ownrecipes-web/static/js/main.882f05a4.js.map"
   },
   "entrypoints": [
-    "static/css/main.5582f474.css",
-    "static/js/main.5ad2194d.js"
+    "static/css/main.40306dbf.css",
+    "static/js/main.882f05a4.js"
   ]
 }
