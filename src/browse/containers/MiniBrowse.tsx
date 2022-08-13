@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router';
 import { defineMessages, useIntl } from 'react-intl';
@@ -41,7 +41,10 @@ const MiniBrowse: React.FC<IMiniBrowseProps> = ({ heading, count, filters }: IMi
   const location = useLocation();
   const params = useParams();
 
+  const slug = params.recipe;
+
   const miniBrowseItems = useSelector((state: CombinedStore) => state.browse.miniBrowse.items);
+  const differentMiniBrowseItems = useMemo(() => miniBrowseItems?.filter(itm => itm.slug !== slug), [slug, miniBrowseItems]);
 
   useEffect(() => {
     dispatch(MiniBrowseActions.loadMiniBrowse(buildUrlFilter(count, filters)));
@@ -58,6 +61,8 @@ const MiniBrowse: React.FC<IMiniBrowseProps> = ({ heading, count, filters }: IMi
     }
   };
 
+  if (differentMiniBrowseItems != null && differentMiniBrowseItems.length === 0) return null;
+
   return (
     <>
       <h2 id='suggestions-heading'>{heading}</h2>
@@ -66,7 +71,7 @@ const MiniBrowse: React.FC<IMiniBrowseProps> = ({ heading, count, filters }: IMi
           <Icon icon='arrow-repeat' variant='light' />
         </Button>
       </Tooltip>
-      <ListRecipes data={miniBrowseItems} onOpenRecipe={handleOpenRecipe} />
+      <ListRecipes data={differentMiniBrowseItems} onOpenRecipe={handleOpenRecipe} />
     </>
   );
 };
