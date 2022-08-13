@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { defineMessages, useIntl } from 'react-intl';
 import { Accordion, Button, Card } from 'react-bootstrap';
-import queryString from 'query-string';
 
 import '../css/filter.css';
 
@@ -106,11 +105,12 @@ const SearchMenu: React.FC<ISearchMenuProps> = ({ qs, courses, cuisines, ratings
   };
 
   const getResetFilterUrl = () => {
-    const qsBuilder = {
-      search: qs.search,
-    };
-    const str = queryString.stringify(qsBuilder);
-    return getResourcePath(str ? `/browser?${str}` : '/browser');
+    if (!qs.search) {
+      return getResourcePath('/browser');
+    } else {
+      const searchString = new URLSearchParams({ search: qs.search }).toString();
+      return getResourcePath(`/browser?${searchString}`);
+    }
   };
 
   const hasActiveFilter = Object.keys(qs).filter(key => !['limit', 'offset', 'search'].includes(key)).length !== 0;

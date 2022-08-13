@@ -11,15 +11,15 @@ export interface IRecipeFooterProps {
   recipe?: Recipe;
 }
 
-function getFilters(recipe: Recipe): Array<string> | undefined {
-  const res: Array<string> = [];
+function getFilters(recipe: Recipe): Record<string, string> | undefined {
+  const res: Record<string, string> = {};
   if (recipe.course) {
-    res.push(`course__slug=${recipe.course.title}`);
+    res.course__slug = recipe.course.title;
   }
   if (recipe.cuisine) {
-    res.push(`cuisine__slug=${recipe.cuisine.title}`);
+    res.cuisine__slug = recipe.cuisine.title;
   }
-  return res.length > 0 ? res : undefined;
+  return Object.keys(res).length > 0 ? res : undefined;
 }
 
 const RecipeFooter: React.FC<IRecipeFooterProps> = ({ recipe }: IRecipeFooterProps) => {

@@ -8,7 +8,7 @@ import { RecipeListDto, toRecipeList } from '../../recipe/store/RecipeTypes';
 export const loadMiniBrowse = (filter: string) => (dispatch: MiniBrowseDispatch) => {
   dispatch({ store: MINI_BROWSE_STORE, type: ACTION.GET_START });
   request()
-    .get(`${serverURLs.mini_browse}${filter}`)
+    .get(`${serverURLs.mini_browse}${filter ? `&${filter}` : ''}`)
     .then(res => {
         dispatch({
           store: MINI_BROWSE_STORE,

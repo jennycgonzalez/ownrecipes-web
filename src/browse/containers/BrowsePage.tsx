@@ -20,18 +20,9 @@ import { getResourcePath } from '../../common/utility';
 export function mergeDefaultFilters(
     query: queryString.ParsedQuery<string | number | boolean>,
     defaultFilters: Record<string, unknown>
-  ) {
-  const filter: Record<string, unknown> = {};
-
-  Object.keys(defaultFilters).forEach(key => {
-    filter[key] = _.get(defaultFilters, key);
-  });
-
-  Object.keys(query).forEach(key => {
-    filter[key] = query[key];
-  });
-
-  return filter;
+  ): Record<string, unknown> {
+  const filter = { ...defaultFilters };
+  return _.merge(filter, query);
 }
 
 export function buildSearchString(route: string, qs: Record<string, string>, value: string): string {

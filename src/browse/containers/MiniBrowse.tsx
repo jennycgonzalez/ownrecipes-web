@@ -18,16 +18,13 @@ import Tooltip from '../../common/components/Tooltip';
 interface IMiniBrowseProps {
   heading: string;
   count: number;
-  filters?: Array<string>;
+  filters?: Record<string, string>;
 }
 
-function buildUrlFilter(count: number, filters: Array<string> | undefined): string {
-  const res: Array<string> = [];
-  res.push(`limit=${String(count)}`);
-  if (filters) {
-    res.push(...filters);
-  }
-  return `?${res.join('&')}`;
+function buildUrlFilter(count: number, filters: Record<string, string> | undefined): string {
+  const searchParams = new URLSearchParams(filters);
+  searchParams.append('limit', String(count));
+  return searchParams.toString();
 }
 
 const MiniBrowse: React.FC<IMiniBrowseProps> = ({ heading, count, filters }: IMiniBrowseProps) => {
