@@ -64,6 +64,7 @@ Run:
 ```bash
 git checkout gh-pages-deploy
 npm install
+git rebase development
 npm run deploy
 ```
 
